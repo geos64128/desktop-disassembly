@@ -1,0 +1,7581 @@
+;
+; **** ZP FIELDS **** 
+;
+f00 = $00
+f01 = $01
+r0L = $02
+fC9 = $C9
+;
+; **** ZP ABSOLUTE ADRESSES **** 
+;
+a01 = $01
+r0L = $02
+r0H = $03
+r1L = $04
+r1H = $05
+r2L = $06
+r2H = $07
+r3L = $08
+r3H = $09
+r4L = $0A
+r4H = $0B
+r5L = $0C
+r5H = $0D
+r6L = $0E
+r6H = $0F
+r7L = $10
+r7H = $11
+r8L = $12
+r8H = $13
+r9L = $14
+r9H = $15
+r10L = $16
+r10H = $17
+r11L = $18
+r11H = $19
+r12L = $1A
+r13L = $1C
+r13H = $1D
+r14L = $1E
+r14H = $1F
+r15L = $20
+r15H = $21
+a29 = $29
+a2F = $2F
+a35 = $35
+a36 = $36
+a37 = $37
+a38 = $38
+a3A = $3A
+a3B = $3B
+a3C = $3C
+a3D = $3D
+a3E = $3E
+a70 = $70
+a71 = $71
+a72 = $72
+a73 = $73
+a74 = $74
+a75 = $75
+a76 = $76
+a77 = $77
+a78 = $78
+a79 = $79
+a7A = $7A
+a7B = $7B
+a7D = $7D
+a7E = $7E
+a7F = $7F
+aFB = $FB
+aFC = $FC
+aFD = $FD
+aFE = $FE
+;
+; **** ZP POINTERS **** 
+;
+p00 = $00
+r0L = $02
+r1L = $04
+r2L = $06
+r3L = $08
+r4L = $0A
+r5L = $0C
+r6L = $0E
+r7L = $10
+r9L = $14
+r10L = $16
+r11L = $18
+r14L = $1E
+r15L = $20
+p2F = $2F
+p3D = $3D
+p52 = $52
+p60 = $60
+p80 = $80
+p84 = $84
+;
+; **** FIELDS **** 
+;
+f0000 = $0000
+f0070 = $0070
+f00FB = $00FB
+f01FF = $01FF
+f0333 = $0333
+f03C3 = $03C3
+f03C4 = $03C4
+f0406 = $0406
+f0423 = $0423
+f0428 = $0428
+f04F7 = $04F7
+f1876 = $1876
+f18B2 = $18B2
+f18B3 = $18B3
+f1942 = $1942
+f194C = $194C
+f6D00 = $6D00
+f6D25 = $6D25
+f7D02 = $7D02
+f7D03 = $7D03
+f7E00 = $7E00
+f7EFF = $7EFF
+f7F00 = $7F00
+f8008 = $8008
+f8486 = $8486
+f84C1 = $84C1
+f8FE8 = $8FE8
+f9C80 = $9C80
+;
+; **** ABSOLUTE ADRESSES **** 
+;
+a0184 = $0184
+a0200 = $0200
+a0248 = $0248
+a0249 = $0249
+a024A = $024A
+a024B = $024B
+a024C = $024C
+a024D = $024D
+a024E = $024E
+a024F = $024F
+a0250 = $0250
+a0251 = $0251
+a0252 = $0252
+a0253 = $0253
+a0254 = $0254
+a0255 = $0255
+a0256 = $0256
+a0257 = $0257
+a0258 = $0258
+a02A0 = $02A0
+a02A9 = $02A9
+a03A0 = $03A0
+a03E6 = $03E6
+a03E7 = $03E7
+a03F2 = $03F2
+a03F3 = $03F3
+a03F4 = $03F4
+a03F5 = $03F5
+a03F6 = $03F6
+a03F7 = $03F7
+a03F8 = $03F8
+a03F9 = $03F9
+a03FA = $03FA
+a03FB = $03FB
+a03FC = $03FC
+a03FD = $03FD
+a03FE = $03FE
+a03FF = $03FF
+a0407 = $0407
+a0408 = $0408
+a0419 = $0419
+a041A = $041A
+a041B = $041B
+a0424 = $0424
+a04A0 = $04A0
+a04E0 = $04E0
+a04E1 = $04E1
+a04E2 = $04E2
+a04E3 = $04E3
+a04E4 = $04E4
+a04E5 = $04E5
+a04E6 = $04E6
+a04E7 = $04E7
+a04E8 = $04E8
+a04E9 = $04E9
+a04EA = $04EA
+a04EB = $04EB
+a04EC = $04EC
+a04ED = $04ED
+a04EE = $04EE
+a04EF = $04EF
+a04F0 = $04F0
+a04F1 = $04F1
+a04F2 = $04F2
+a04F3 = $04F3
+a04F4 = $04F4
+a04F5 = $04F5
+a04F6 = $04F6
+a0520 = $0520
+a0521 = $0521
+a0522 = $0522
+a0523 = $0523
+a0524 = $0524
+a0525 = $0525
+a05A0 = $05A0
+a09A9 = $09A9
+a0AF0 = $0AF0
+a0AF1 = $0AF1
+a1872 = $1872
+a1873 = $1873
+a1874 = $1874
+a1875 = $1875
+a1877 = $1877
+a1878 = $1878
+a1889 = $1889
+a188A = $188A
+a188B = $188B
+a1892 = $1892
+a1893 = $1893
+a1943 = $1943
+a1944 = $1944
+a1945 = $1945
+a1946 = $1946
+a1947 = $1947
+a1948 = $1948
+a1949 = $1949
+a194A = $194A
+a194D = $194D
+a194E = $194E
+a194F = $194F
+a1950 = $1950
+a1951 = $1951
+a1952 = $1952
+a1953 = $1953
+a1954 = $1954
+a6D03 = $6D03
+a6D04 = $6D04
+a6D23 = $6D23
+a6D24 = $6D24
+a6D38 = $6D38
+a78A6 = $78A6
+a8001 = $8001
+a8002 = $8002
+a8003 = $8003
+a8004 = $8004
+a8005 = $8005
+a8006 = $8006
+a8007 = $8007
+a8047 = $8047
+a8075 = $8075
+a8203 = $8203
+a82AB = $82AB
+a82AC = $82AC
+a82BD = $82BD
+a82BE = $82BE
+a82BF = $82BF
+a8301 = $8301
+a841C = $841C
+a841D = $841D
+a8C27 = $8C27
+a8CC0 = $8CC0
+a8E88 = $8E88
+a8FF0 = $8FF0
+;
+; **** POINTERS **** 
+;
+p01 = $0001
+p23 = $0023
+p35 = $0035
+p3F = $003F
+p42 = $0042
+p68 = $0068
+p71 = $0071
+p88 = $0088
+pC0 = $00C0
+pE3 = $00E3
+pFD = $00FD
+p0102 = $0102
+p0105 = $0105
+p0106 = $0106
+p0108 = $0108
+p010E = $010E
+p0114 = $0114
+p011A = $011A
+p0123 = $0123
+p013F = $013F
+p0147 = $0147
+p0334 = $0334
+p0846 = $0846
+p0A00 = $0A00
+p0A62 = $0A62
+p0AE2 = $0AE2
+p0AF2 = $0AF2
+p0D80 = $0D80
+p1004 = $1004
+p1102 = $1102
+p1700 = $1700
+p1894 = $1894
+p6600 = $6600
+p7D00 = $7D00
+p7F02 = $7F02
+p8290 = $8290
+p8476 = $8476
+p8B0D = $8B0D
+p8B80 = $8B80
+p8BBC = $8BBC
+p8BD0 = $8BD0
+p8BE4 = $8BE4
+p9000 = $9000
+pB9B0 = $B9B0
+pC7B7 = $C7B7
+pFFF8 = $FFF8
+;
+; **** EXTERNAL JUMPS **** 
+;
+eA352 = $A352
+;
+; **** USER LABELS **** 
+;
+r12H = $001B
+diskBlkBuf = $8000
+fileHeader = $8100
+curDirHead = $8200
+fileTrScTab = $8300
+dirEntryBuf = $8400
+DrACurDkNm = $841E
+DrBCurDkNm = $8430
+dataFileName = $8442
+PrntFilename = $8465
+curDrive = $8489
+diskOpenFlg = $848A
+isGEOS = $848B
+numDrives = $848D
+driveType_8 = $848E
+driveType_9 = $848F
+driveType_10 = $8490
+driveType_11 = $8491
+RecoverVector_LO = $84B1
+RecoverVector_HI = $84B2
+iconSelFlag = $84B5
+menuNumber = $84B7
+mouseTop = $84B8
+mouseBottom = $84B9
+mouseLeft_LO = $84BA
+mouseLeft_HI = $84BB
+mouseRight_LO = $84BC
+mouseRight_HI = $84BD
+maxMouseSpeed = $8501
+minMouseSpeed = $8502
+mouseAccel = $8503
+keyData = $8504
+random = $850A
+year = $8516
+month = $8517
+day = $8518
+hour = $8519
+minutes = $851A
+seconds = $851B
+screencolors = $851E
+driveData = $88BF
+ramExpSize = $88C3
+sysRAMFlg = $88C4
+curType = $88C6
+inputDevName = $88CB
+dir2Head = $8900
+spr2pic = $8A80
+AllocateBlock = $9048
+BootGEOS = $C000
+ResetHandle = $C003
+version = $C00F
+InterruptMain = $C100
+InitProcesses = $C103
+RestartProcess = $C106
+BlockProcess = $C10C
+HorizontalLine = $C118
+InvertLine = $C11B
+VerticalLine = $C121
+Rectangle = $C124
+InvertRectangle = $C12A
+SetPattern = $C139
+GetScanLine = $C13C
+BitmapUp = $C142
+PutChar = $C145
+PutString = $C148
+UseSystemFont = $C14B
+DoMenu = $C151
+DoIcons = $C15A
+BBMult = $C160
+Ddiv = $C169
+ClearRam = $C178
+FillRam = $C17B
+MoveData = $C17E
+InitRam = $C181
+PutDecimal = $C184
+MouseUp = $C18A
+MouseOff = $C18D
+DoPreviousMenu = $C190
+ReDoMenu = $C193
+GetSerialNumber = $C196
+i_Rectangle = $C19F
+i_FrameRectangle = $C1A2
+i_GraphicsString = $C1A8
+i_FillRam = $C1B4
+DrawSprite = $C1C6
+GetCharWidth = $C1C9
+LoadCharSet = $C1CC
+PosSprite = $C1CF
+EnablSprite = $C1D2
+DisablSprite = $C1D5
+CallRoutine = $C1D8
+CalcBlksFree = $C1DB
+ChkDkGEOS = $C1DE
+NewDisk = $C1E1
+GetBlock = $C1E4
+PutBlock = $C1E7
+SetGEOSDisk = $C1EA
+GetFreeDirBlk = $C1F6
+WriteFile = $C1F9
+ReadFile = $C1FF
+GetFile = $C208
+FindFile = $C20B
+CRC = $C20E
+EnterTurbo = $C214
+LdDeskAcc = $C217
+ReadBlock = $C21A
+LdApplic = $C21D
+WriteBlock = $C220
+VerWriteBlock = $C223
+FreeFile = $C226
+GetFHdrInfo = $C229
+EnterDeskTop = $C22C
+StartAppl = $C22F
+ExitTurbo = $C232
+PurgeTurbo = $C235
+DeleteFile = $C238
+FindFTypes = $C23B
+ToBasic = $C241
+GetDirHead = $C247
+PutDirHead = $C24A
+NxtBlkAlloc = $C24D
+DoDlgBox = $C256
+InitForIO = $C25C
+DoneWithIO = $C25F
+DShiftRight = $C262
+CopyFString = $C268
+CmpString = $C26B
+CmpFString = $C26E
+OpenRecordFile = $C274
+PointRecord = $C280
+ReadRecord = $C28C
+SetNextFree = $C292
+OpenDisk = $C2A1
+DoInlineReturn = $C2A4
+FindBAMBit = $C2AD
+SetDevice = $C2B0
+IsMseInRegion = $C2B3
+FreeBlock = $C2B9
+ChangeDiskDevice = $C2BC
+StashRAM = $C2C8
+FetchRAM = $C2CB
+SwapRAM = $C2CE
+VerifyRAM = $C2D1
+DoRAMOp = $C2D4
+InitMouse = $FE80
+
+        * = $1956
+
+s1956   LDA #$00
+        STA a04EE
+        LDY aFE
+        LDA f8486,Y
+        BMI b1968
+        AND #$0F
+        CMP #$02
+        BNE b197A
+b1968   LDY a70
+        LDA f8486,Y
+        BMI b1975
+        AND #$0F
+        CMP #$02
+        BNE b197A
+b1975   LDA #$07
+        STA a1DA0
+b197A   JSR s231E
+        JSR s1A04
+        TXA 
+        BNE b19A3
+        JSR s1A12
+        CLC 
+        LDA #$00
+        ADC a03F4
+        STA a03F4
+        LDA #$03
+        ADC a03F5
+        STA a03F5
+        JSR s22C5
+        JSR s1B7C
+        JSR s1A04
+        JSR s1A6B
+b19A3   LDA #$08
+        STA a1DA0
+        CLV 
+        BVC b19FE
+s19AB   STA a04EE
+        JSR s1A12
+        LDX #$00
+        LDY a70
+        JSR s243F
+        CMP #$04
+        BCS b19FB
+        JSR s22F3
+        TXA 
+        BNE b19FB
+        LDA a03FB
+        STA r6H
+        LDA a03FA
+        STA r6L
+        JSR FindFile ;search for file in directory
+        TXA 
+        BNE b19FB
+        LDX #$0C
+        LDA dirEntryBuf
+        AND #$0F
+        CMP #$04
+        BEQ b19FB
+        LDA a841D
+        BNE b19EC
+        LDA a841C
+        CMP #$18
+        BCS b19EC
+        JSR s1A4F
+b19EC   JSR s22C5
+        JSR s1E8A
+        JSR s1A04
+        JSR s1A6B
+        CLV 
+        BVC b19FE
+b19FB   JSR s1A04
+b19FE   LDA #$00
+        STA a04ED
+        RTS 
+
+s1A04   TXA 
+        BEQ b1A11
+        CMP #$0C
+        BEQ b1A11
+        PHA 
+        JSR s259A
+        PLA 
+        TAX 
+b1A11   RTS 
+
+s1A12   LDA #$FF
+        STA a04ED
+        JSR s1A4F
+        LDA aFE
+        CMP a70
+        BNE b1A49
+        LDA a04EE
+        BNE b1A49
+        STA a04ED
+        STA a04EC
+        STA a024D
+        LDA #>p2808
+        STA a03F3
+        LDA #<p2808
+        STA a03F2
+        LDA #>p54F8
+        STA a03F5
+        LDA #<p54F8
+        STA a03F4
+        LDA #$00
+        STA a7E
+        JSR s563D
+b1A49   LDA #$00
+        STA a04EB
+        RTS 
+
+s1A4F   LDA #$FF
+        STA a04EC
+        LDA #>p6600
+        STA a03F3
+        LDA #<p6600
+        STA a03F2
+        LDA #>p1700
+        STA a03F5
+        LDA #<p1700
+        STA a03F4
+        JMP j5634
+
+s1A6B   TXA 
+        PHA 
+        LDA a04EC
+        BNE b1A80
+b1A72   JSR s1A8E
+        TXA 
+        BEQ b1A80
+        LDY #$00
+        JSR s246B
+        CLV 
+        BVC b1A72
+b1A80   JSR s22DC
+        JSR s562E
+        LDA #$FF
+        STA a04EC
+        PLA 
+        TAX 
+        RTS 
+
+s1A8E   JSR OpenDisk
+        JSR s253B
+        JSR s1AAE
+        JSR s253B
+        LDA r7H
+        BEQ b1AA2
+        LDX #$05
+        BNE b1AAD
+b1AA2   LDA r5H
+        STA r9H
+        LDA r5L
+        STA r9L
+        JSR s1AC2
+b1AAD   RTS 
+
+s1AAE   JSR s2574
+        LDA #$04
+        STA r7L
+s1AB5   JSR OpenDisk
+        LDA #$01
+        STA r7H
+        JSR s256B
+        JMP FindFTypes
+
+s1AC2   JSR GetFHdrInfo
+        JSR s253B
+        LDY #$01
+        LDA (r9L),Y
+        STA r1L
+        INY 
+        LDA (r9L),Y
+        STA r1H
+        JSR s1DE3
+        JSR s253B
+        LDA a8002
+        STA r1L
+        LDA a8003
+        STA r1H
+        LDA #$FF
+        STA r2L
+        STA r2H
+        JMP ReadFile
+
+s1AEC   LDA curDrive
+        EOR #$01
+s1AF1   PHA 
+        JSR SetDevice
+        PLA 
+        CMP #$08
+        BCC b1B0A
+        CMP a0AF1
+        BEQ b1B0A
+        STA a0AF1
+        LDA a0AF0
+        BEQ b1B0A
+        JSR s1B1C
+b1B0A   LDY curDrive
+        LDA f8486,Y
+        STA curType
+        LDX #$00
+        RTS 
+
+s1B16   JSR s1AF1
+        JMP OpenDisk
+
+s1B1C   JSR s1B22
+        JSR s1B3C
+s1B22   LDY #$05
+b1B24   LDA r0L,Y
+        TAX 
+        LDA f1B36,Y
+        STA r0L,Y
+        TXA 
+        STA f1B36,Y
+        DEY 
+        BPL b1B24
+        RTS 
+
+f1B36   .BYTE $00,$90,$F2,$0A,$80,$0D
+s1B3C   LDA r0H
+        PHA 
+        LDA r1H
+        PHA 
+        LDA r2H
+        PHA 
+        LDY #$00
+b1B47   LDA r2H
+        BEQ b1B61
+b1B4B   LDA (r0L),Y
+        TAX 
+        LDA (r1L),Y
+        STA (r0L),Y
+        TXA 
+        STA (r1L),Y
+        INY 
+        BNE b1B4B
+        INC r0H
+        INC r1H
+        DEC r2H
+        CLV 
+        BVC b1B47
+b1B61   CPY r2L
+        BEQ b1B72
+        LDA (r0L),Y
+        TAX 
+        LDA (r1L),Y
+        STA (r0L),Y
+        TXA 
+        STA (r1L),Y
+        INY 
+        BNE b1B61
+b1B72   PLA 
+        STA r2H
+        PLA 
+        STA r1H
+        PLA 
+        STA r0H
+        RTS 
+
+s1B7C   JSR s1BC4
+        LDA #$FF
+        JSR s1CFD
+b1B84   JSR s1BF8
+        JSR s253B
+        JSR s232C
+        JSR s253B
+        JSR s1C63
+        JSR s253B
+        LDA a04F4
+        CMP a0522
+        BEQ b1BA0
+        BCS b1BA7
+b1BA0   JSR s231E
+        TXA 
+        BEQ b1B84
+b1BA6   RTS 
+
+b1BA7   LDA a0520
+        CMP #$01
+        BNE b1BA6
+        LDA a0521
+        CMP #$02
+        BNE b1BA6
+        STA a0520
+        JSR GetDirHead
+        JSR s253B
+        JSR s1DF0
+        JMP PutDirHead
+
+s1BC4   LDA a03F5
+        STA r3H
+        LDA a03F4
+        STA r3L
+        LDA #>p0102
+        STA r0H
+        LDA #<p0102
+        STA r0L
+        LDX #$08
+        LDY #$02
+        JSR Ddiv
+        LDA r3L
+        STA a04F1
+        ASL r3L
+        ROL r3H
+        LDA a03F2
+        CLC 
+        ADC r3L
+        STA a04EF
+        LDA a03F3
+        ADC r3H
+        STA a04F0
+        RTS 
+
+s1BF8   JSR EnterTurbo
+        JSR s253B
+        JSR InitForIO
+        JSR s1C4E
+        LDA #$00
+        STA a04F2
+b1C09   LDA a04F4
+        STA r1L
+        CMP a0522
+        BEQ b1C15
+        BCS b1C49
+b1C15   LDA a04F3
+        STA r1H
+        JSR s1CC0
+        JSR ReadBlock
+        TXA 
+        BNE b1C4B
+        LDY #$00
+        LDA r1L
+        STA (r10L),Y
+        INY 
+        LDA r1H
+        STA (r10L),Y
+        INC a04F2
+        JSR s2541
+        INC r11H
+        LDA #$30
+        STA a01
+        JSR s1D21
+        LDA #$36
+        STA a01
+        LDA a04F2
+        CMP a04F1
+        BCC b1C09
+b1C49   LDX #$00
+b1C4B   JMP DoneWithIO
+
+s1C4E   LDA a03F3
+        STA r10H
+        LDA a03F2
+        STA r10L
+        LDA a04F0
+        STA r11H
+        LDA a04EF
+        STA r11L
+        RTS 
+
+s1C63   JSR EnterTurbo
+        JSR s253B
+        STX a04F6
+        JSR InitForIO
+        LDA a04F2
+        PHA 
+        JSR s1C86
+        PLA 
+        STA a04F2
+        TXA 
+        BNE b1C83
+        DEC a04F6
+        JSR s1C86
+b1C83   JMP DoneWithIO
+
+s1C86   JSR s1C4E
+b1C89   LDA a04F2
+        BEQ b1CBD
+        LDY #$00
+        LDA (r10L),Y
+        STA r1L
+        INY 
+        LDA (r10L),Y
+        STA r1H
+        JSR s1CC9
+        JSR s253B
+        JSR s1CC0
+        LDA a04F6
+        BNE b1CAD
+        JSR WriteBlock
+        CLV 
+        BVC b1CB0
+b1CAD   JSR VerWriteBlock
+b1CB0   JSR s253B
+        JSR s2541
+        INC r11H
+        DEC a04F2
+        BNE b1C89
+b1CBD   LDX #$00
+        RTS 
+
+s1CC0   LDA r11H
+        STA r4H
+        LDA r11L
+        STA r4L
+        RTS 
+
+s1CC9   LDA r1L
+        CMP a0523
+        BNE b1CF9
+        LDA r1H
+        ORA a04F6
+        BNE b1CF9
+        JSR s254D
+        JSR ReadBlock
+        JSR s253B
+        LDY #$90
+        LDX #$13
+b1CE4   LDA diskBlkBuf,Y
+        STA (r11L),Y
+        INY 
+        DEX 
+        BPL b1CE4
+        LDY #$BD
+        LDA #$00
+        STA (r11L),Y
+        INY 
+        STA (r11L),Y
+        INY 
+        STA (r11L),Y
+b1CF9   LDX #$00
+        RTS 
+
+a1CFC   .BYTE $00
+s1CFD   STA a1CFC
+        LDY a0520
+        LDA f1D34,Y
+        STA a0522
+        LDA f1D38,Y
+        STA a0523
+        LDA f1D3C,Y
+        STA a0524
+        LDY #$01
+        STY a04F4
+        DEY 
+        STY a04F3
+b1D1E   JSR s1D40
+s1D21   JSR s1DA1
+        BCC b1D33
+        INC a04F4
+        LDA a04F4
+        CMP a0522
+        BCC b1D1E
+        BEQ b1D1E
+b1D33   RTS 
+
+f1D34   .BYTE $23,$23
+        .BYTE $46,$50
+f1D38   .BYTE $12,$12,$12,$28
+f1D3C   .BYTE $01,$01,$01,$03
+s1D40   LDY #$27
+        LDA #$00
+b1D44   STA f04F7,Y
+        DEY 
+        BPL b1D44
+        LDA a0520
+        CMP #$03
+        BNE b1D58
+        LDA #$28
+        STA a04F5
+        BNE b1D78
+b1D58   LDA a04F4
+        CMP #$24
+        BCC b1D62
+        SEC 
+        SBC #$23
+b1D62   JSR s1E7B
+        LDA f1D9C,X
+        STA a04F5
+        TAY 
+b1D6C   CPY #$15
+        BEQ b1D78
+        LDA #$FF
+        STA f04F7,Y
+        INY 
+        BNE b1D6C
+b1D78   LDA a1CFC
+        BEQ b1D9B
+        LDA a04F4
+        STA r6L
+        LDA #$00
+        STA r6H
+b1D86   JSR FindBAMBit
+        BEQ b1D92
+        LDY r6H
+        LDA #$FF
+        STA f04F7,Y
+b1D92   INC r6H
+        LDA r6H
+        CMP a04F5
+        BCC b1D86
+b1D9B   RTS 
+
+f1D9C   .BYTE $15,$13,$12,$11
+a1DA0   .BYTE $08
+s1DA1   LDA a1DA0
+        CLC 
+        ADC a04F3
+        CMP a04F5
+        BCC b1DB1
+        SEC 
+        SBC a04F5
+b1DB1   TAY 
+        LDA f04F7,Y
+        BEQ b1DD0
+        LDX a04F5
+b1DBA   INY 
+        CPY a04F5
+        BCC b1DC6
+        TYA 
+        SEC 
+        SBC a04F5
+        TAY 
+b1DC6   LDA f04F7,Y
+        BEQ b1DD0
+        DEX 
+        BPL b1DBA
+        SEC 
+        RTS 
+
+b1DD0   STY a04F3
+        LDA #$FF
+        STA f04F7,Y
+        CLC 
+        RTS 
+
+s1DDA   LDA (r5L),Y
+        STA r1L
+        INY 
+        LDA (r5L),Y
+        STA r1H
+s1DE3   JSR s254D
+        JMP GetBlock
+
+j1DE9   JSR s254D
+        JMP PutBlock
+
+a1DEF   .BYTE $00
+s1DF0   LDA #$24
+        BNE b1E02
+        LDY #$04
+        LDA #$00
+b1DF8   STA curDirHead,Y
+        INY 
+        CPY #$90
+        BNE b1DF8
+        LDA #$01
+b1E02   STA a1DEF
+        LDY #$DD
+        LDA #$00
+b1E09   STA curDirHead,Y
+        INY 
+        BNE b1E09
+        LDY a0520
+        CPY #$02
+        BCC b1E2D
+        BNE b1E22
+        LDY #$00
+b1E1A   STA dir2Head,Y
+        INY 
+        BNE b1E1A
+        BEQ b1E2D
+b1E22   LDY #$10
+b1E24   STA dir2Head,Y
+        STA f9C80,Y
+        INY 
+        BNE b1E24
+b1E2D   LDA #$00
+        JSR s1CFD
+b1E32   LDA a04F3
+        STA r6H
+        LDA a04F4
+        STA r6L
+        CMP a0522
+        BEQ b1E43
+        BCS b1E4C
+b1E43   JSR s1E4D
+        JSR s1D21
+        CLV 
+        BVC b1E32
+b1E4C   RTS 
+
+s1E4D   LDA a0520
+        CMP #$02
+        BCC b1E6A
+        BNE b1E67
+        LDA r6L
+        CMP a1DEF
+        BCC b1E66
+        CMP #$35
+        BNE b1E67
+        LDA #$80
+        STA a8203
+b1E66   RTS 
+
+b1E67   JMP FreeBlock
+
+b1E6A   JSR FindBAMBit
+        LDA r8H
+        EOR curDirHead,X
+        STA curDirHead,X
+        LDX r7H
+        INC curDirHead,X
+        RTS 
+
+s1E7B   LDX #$00
+b1E7D   CMP f1E86,X
+        BCC b1E85
+        INX 
+        BNE b1E7D
+b1E85   RTS 
+
+f1E86   .BYTE $12,$19,$1F,$24
+s1E8A   JSR s2268
+        JSR s206D
+        JSR s2097
+        JSR s253B
+        JSR s232C
+        JSR s253B
+        LDA #>curDirHead
+        STA r5H
+        LDA #<curDirHead
+        STA r5L
+        JSR CalcBlksFree
+        LDX #$03
+        LDA a1893
+        CMP r4H
+        BNE b1EB5
+        LDA a1892
+        CMP r4L
+b1EB5   BEQ b1EB9
+        BCS b1F00
+b1EB9   LDA aFC
+        STA r10L
+        JSR GetFreeDirBlk
+        JSR s253B
+        LDA r10L
+        STA aFC
+        STY a04E0
+        LDA r1H
+        STA a04E2
+        LDA r1L
+        STA a04E1
+        JSR PutDirHead
+        JSR s253B
+b1EDA   JSR s1F01
+        JSR s253B
+        TYA 
+        BNE b1EF7
+        JSR s22F3
+        JSR s253B
+        JSR s2097
+        JSR s253B
+        JSR s2350
+        JSR s253B
+        BEQ b1EDA
+b1EF7   JSR s2244
+        JSR s253B
+        JSR PutDirHead
+b1F00   RTS 
+
+s1F01   PHP 
+        SEI 
+        LDA a03F3
+        STA r8H
+        LDA a03F2
+        STA r8L
+b1F0D   JSR s22AF
+        LDA (r10L),Y
+        AND #$80
+        BNE b1F1C
+        JSR s1FDB
+        CLV 
+        BVC b1F1F
+b1F1C   JSR s1F42
+b1F1F   TXA 
+        BNE b1F40
+        LDY #$02
+        LDA (r10L),Y
+        STA r8L
+        INY 
+        LDA (r10L),Y
+        STA r8H
+        LDY #$00
+        LDA (r10L),Y
+        AND #$30
+        BEQ b1F0D
+        LDX #$00
+        AND #$10
+        BEQ b1F40
+        JSR s1F5E
+        LDY #$FF
+b1F40   PLP 
+        RTS 
+
+s1F42   LDY #$00
+        LDA (r10L),Y
+        AND #$03
+        TAY 
+        LDA f1F56,Y
+        STA r0H
+        LDA f1F5A,Y
+        STA r0L
+        JMP (r0L)
+
+f1F56   .BYTE $1F,$1F,$1F,$1F
+f1F5A   .BYTE $7B,$B5,$C5,$41
+s1F5E   LDA a041B
+        CMP #$01
+        BNE b1F7A
+        LDA a0408
+        STA r1H
+        LDA a0407
+        STA r1L
+        LDA #>p7D00
+        STA r4H
+        LDA #<p7D00
+        STA r4L
+        JSR PutBlock
+b1F7A   RTS 
+
+        JSR s1FDB
+        TXA 
+        BNE b1FAA
+        LDA a04EA
+        STA a041A
+        LDA a04E9
+        STA a0419
+        LDA a041B
+        CMP #$01
+        BNE b1FAA
+        JSR s22BA
+        JSR SetNextFree
+        LDA r3L
+        STA a04E7
+        STA a0407
+        LDA r3H
+        STA a04E8
+        STA a0408
+b1FAA   LDA a2096
+        BEQ b1FB4
+        LDA #$23
+        STA a04E7
+b1FB4   RTS 
+
+        JSR s1FDB
+        LDA a04EA
+        STA a0408
+        LDA a04E9
+        STA a0407
+        RTS 
+
+        JSR s1FDB
+        LDY #$01
+        LDA (r10L),Y
+        ASL 
+        TAY 
+        LDA a04E9
+        STA f7D02,Y
+        LDA a04EA
+        STA f7D03,Y
+        RTS 
+
+s1FDB   LDA r8L
+        CLC 
+        ADC #$04
+        STA r7L
+        LDA r8H
+        ADC #$00
+        STA r7H
+        LDY #$02
+        LDA (r10L),Y
+        STA r2L
+        INY 
+        LDA (r10L),Y
+        STA r2H
+        LDA r2L
+        SEC 
+        SBC r7L
+        STA r2L
+        LDA r2H
+        SBC r7H
+        STA r2H
+        JSR s22BA
+        JSR s2064
+        LDA r7H
+        PHA 
+        LDA r7L
+        PHA 
+        JSR NxtBlkAlloc
+        PLA 
+        STA r7L
+        PLA 
+        STA r7H
+        JSR s253B
+        LDY #$00
+        LDA (r10L),Y
+        AND #$80
+        BEQ b202F
+        LDA a8301
+        STA a04EA
+        LDA fileTrScTab
+        STA a04E9
+        CLV 
+        BVC b2054
+b202F   LDA a04E8
+        STA r1H
+        LDA a04E7
+        STA r1L
+        JSR s254D
+        JSR GetBlock
+        JSR s253B
+        LDA a8301
+        STA a8001
+        LDA fileTrScTab
+        STA diskBlkBuf
+        JSR PutBlock
+        JSR s253B
+b2054   LDA r3H
+        STA a04E8
+        LDA r3L
+        STA a04E7
+        JSR s2064
+        JMP WriteFile
+
+s2064   LDA #>fileTrScTab
+        STA r6H
+        LDA #<fileTrScTab
+        STA r6L
+        RTS 
+
+s206D   LDA #$40
+        STA a04E3
+        LDA #$00
+        STA a2096
+        LDY a70
+        LDA f8486,Y
+        CMP #$03
+        BNE b2087
+        STA a2096
+        LDA #$27
+        BNE b2089
+b2087   LDA #<p01
+b2089   STA a04E7
+        LDA #>p01
+        STA a04E8
+        STA a2095
+        RTS 
+
+a2095   .BYTE $00
+a2096   .BYTE $00
+s2097   .BYTE $08
+        SEI 
+        LDA a03F3
+        STA r8H
+        LDA a03F2
+        STA r8L
+        LDA a03F5
+        STA r9H
+        LDA a03F4
+        STA r9L
+        LDA #>a04E3
+        STA r10H
+        LDA #<a04E3
+        STA r10L
+b20B5   LDA r9H
+        BEQ b20EA
+        CMP #$01
+        BNE b20C3
+        LDA r9L
+        CMP #$04
+        BCC b20EA
+b20C3   LDY #$00
+        LDA (r10L),Y
+        AND #$40
+        BNE b20D1
+        JSR s2153
+        CLV 
+        BVC b20D4
+b20D1   JSR s20F9
+b20D4   TXA 
+        BNE b20F7
+        LDY #$00
+        LDA (r10L),Y
+        AND #$40
+        BEQ b20EA
+        LDA a2095
+        CMP #$04
+        BNE b20B5
+        LDA #$30
+        BNE b20EC
+b20EA   LDA #$20
+b20EC   LDY #$00
+        ORA (r10L),Y
+        STA (r10L),Y
+        STA a04E3
+        LDX #$00
+b20F7   PLP 
+        RTS 
+
+s20F9   LDY a2095
+        LDA f2109,Y
+        STA r0H
+        LDA f210D,Y
+        STA r0L
+        JMP (r0L)
+
+f2109   .BYTE $21,$21,$21,$21
+f210D   .BYTE $11,$39,$6D,$8D
+        LDA a1889
+        BEQ b2139
+        JSR s22AF
+        LDA #$80
+        STA (r10L),Y
+        LDA a188A
+        STA r1H
+        LDA a1889
+        STA r1L
+        JSR s21DF
+        LDY #$01
+        LDA a188B
+        CMP #$01
+        BNE b2135
+        LDY #$02
+b2135   STY a2095
+        RTS 
+
+b2139   JSR s22AF
+        LDA #$81
+        STA (r10L),Y
+        LDA a1878
+        STA r1H
+        LDA a1877
+        STA r1L
+        JSR s21DF
+        LDA #$04
+        STA a2095
+        RTS 
+
+s2153   LDY #$00
+        LDA (r10L),Y
+        PHA 
+        JSR s22AF
+        PLA 
+        AND #$0F
+        STA (r10L),Y
+        LDA a04E6
+        STA r1H
+        LDA a04E5
+        STA r1L
+        JMP s21DF
+
+        LDA #$FF
+        STA a04E4
+        LDA a1878
+        STA r1H
+        LDA a1877
+        STA r1L
+        LDA #>p7D00
+        STA r4H
+        LDA #<p7D00
+        STA r4L
+        JSR GetBlock
+        LDA #$03
+        STA a2095
+        RTS 
+
+        LDA a04E4
+        STA r0L
+        JSR s21C6
+        LDA a2095
+        CMP #$04
+        BEQ b21C5
+        JSR s22AF
+        LDA r0L
+        STA a04E4
+        ASL 
+        TAX 
+        LDA f7D02,X
+        STA r1L
+        LDA f7D03,X
+        STA r1H
+        LDA #$82
+        STA (r10L),Y
+        INY 
+        LDA r0L
+        STA (r10L),Y
+        LDA r0L
+        PHA 
+        JSR s21DF
+        PLA 
+        STA r0L
+        TXA 
+        BEQ s21C6
+b21C5   RTS 
+
+s21C6   INC r0L
+        LDA r0L
+        CMP #$7F
+        BCS b21D7
+        ASL 
+        TAX 
+        LDA f7D02,X
+        BEQ s21C6
+        BNE b21DC
+b21D7   LDA #$04
+        STA a2095
+b21DC   LDX #$00
+        RTS 
+
+s21DF   LDA r10L
+        CLC 
+        ADC #$04
+        STA r7L
+        LDA r10H
+        ADC #$00
+        STA r7H
+        SEC 
+        LDA r9L
+        SBC #$04
+        STA r2L
+        LDA r9H
+        SBC #$00
+        STA r2H
+        JSR ReadFile
+        CPX #$0B
+        BNE b220E
+        LDA r1H
+        STA a04E6
+        LDA r1L
+        STA a04E5
+        LDX #$00
+        BEQ b2216
+b220E   LDY #$00
+        LDA (r10L),Y
+        ORA #$40
+        STA (r10L),Y
+b2216   LDA r7H
+        STA r8H
+        LDA r7L
+        STA r8L
+        LDA r8L
+        SEC 
+        SBC r10L
+        STA r0L
+        LDA r8H
+        SBC r10H
+        STA r0H
+        LDA r9L
+        SEC 
+        SBC r0L
+        STA r9L
+        LDA r9H
+        SBC r0H
+        STA r9H
+        LDA r8L
+        LDY #$02
+        STA (r10L),Y
+        LDA r8H
+        INY 
+        STA (r10L),Y
+        RTS 
+
+s2244   LDA a04E2
+        STA r1H
+        LDA a04E1
+        STA r1L
+        JSR s1DE3
+        JSR s253B
+        LDY a04E0
+        LDX #$00
+b2259   LDA f0406,X
+        STA diskBlkBuf,Y
+        INX 
+        INY 
+        CPX #$1E
+        BNE b2259
+        JMP j1DE9
+
+s2268   LDY #$1D
+b226A   LDA (r5L),Y
+        STA f1876,Y
+        STA f0406,Y
+        DEY 
+        BPL b226A
+        LDA a03FD
+        STA r3H
+        LDA a03FC
+        STA r3L
+        LDA #$FF
+        STA r1H
+        LDX #$03
+        LDY #$00
+b2287   LDA (r3L),Y
+        BNE b2291
+        LDA #$00
+        STA r1H
+b228F   LDA #$A0
+b2291   STA f0406,X
+        INX 
+        INY 
+        CPY #$10
+        BEQ b22A0
+        LDA r1H
+        BNE b2287
+        BEQ b228F
+b22A0   LDA #$00
+        STA a0407
+        STA a0408
+        STA a0419
+        STA a041A
+        RTS 
+
+s22AF   LDA r8H
+        STA r10H
+        LDA r8L
+        STA r10L
+        LDY #$00
+        RTS 
+
+s22BA   LDA a04E8
+        STA r3H
+        LDA a04E7
+        STA r3L
+        RTS 
+
+s22C5   LDA RecoverVector_HI
+        STA a03FF
+        LDA RecoverVector_LO
+        STA a03FE
+        LDA #>p22E9
+        STA RecoverVector_HI
+        LDA #<p22E9
+        STA RecoverVector_LO
+        RTS 
+
+s22DC   LDA a03FF
+        STA RecoverVector_HI
+        LDA a03FE
+        STA RecoverVector_LO
+        RTS 
+
+p22E9   LDA #$80
+        STA a2F
+        JSR s2447
+        JMP Rectangle
+
+s22F3   LDY #$00
+b22F5   LDA curDirHead,Y
+        STA spr2pic,Y
+        LDA dir2Head,Y
+        STA f7E00,Y
+        INY 
+        BNE b22F5
+        LDY a70
+        LDA f8486,Y
+        AND #$0F
+        CMP #$03
+        BNE s231E
+        TYA 
+        JSR s1AF1
+        LDY #$00
+b2315   LDA f9C80,Y
+        STA f7F00,Y
+        INY 
+        BNE b2315
+s231E   LDA a03F7
+        STA r1H
+        LDA a03F6
+        STA r1L
+        LDA aFE
+        BNE b2338
+s232C   LDA a03F9
+        STA r1H
+        LDA a03F8
+        STA r1L
+        LDA a70
+b2338   JSR s1AF1
+        LDA a04ED
+        BEQ b234D
+        LDA a04EB
+        CMP #$02
+        BCC b234A
+        LDX #$00
+        RTS 
+
+b234A   INC a04EB
+b234D   JMP j2383
+
+s2350   JSR s232C
+        LDY #$00
+b2355   LDA spr2pic,Y
+        STA curDirHead,Y
+        LDA f7E00,Y
+        STA dir2Head,Y
+        INY 
+        BNE b2355
+        LDY a70
+        LDA f8486,Y
+        AND #$0F
+        CMP #$03
+        BNE b237A
+        LDY #$00
+b2371   LDA f7F00,Y
+        STA f9C80,Y
+        INY 
+        BNE b2371
+b237A   RTS 
+
+        JSR s1AF1
+s237E   JSR s3871
+        BEQ b237A
+j2383   JSR s23E4
+        PHP 
+        LDX #$00
+        PLP 
+        BNE b2392
+        LDY #$FF
+        STY a024D
+        RTS 
+
+b2392   JSR s2559
+        LDX #$04
+        LDY #$0C
+        LDA #$12
+        JSR s2418
+        LDA curDrive
+        CLC 
+        ADC #$39
+        STA a275D
+        LDA r1H
+        PHA 
+        LDA r1L
+        PHA 
+        LDX #$23
+        LDA #$FF
+        JSR s2483
+        PLA 
+        STA r1L
+        PLA 
+        STA r1H
+        LDX #$0C
+        LDA r0L
+        CMP #$02
+        BNE j2383
+j23C2   LDA a04EC
+        BEQ b23D6
+        LDA #>p5175
+        STA r7H      ;start address of application
+        LDA #<p5175
+        STA r7L      ;start address of application
+        LDA #$00
+        STA r0L      ;options byte: %00xxxxxx = not passing data, not printing
+        JMP StartAppl ;warm start GEOS and jsr to application already in memory
+
+b23D6   JSR s2515
+        JMP EnterDeskTop
+
+s23DC   LDA a79
+        JMP s1AF1
+
+s23E1   JSR s3871
+s23E4   LDA r1H
+        PHA 
+        LDA r1L
+        PHA 
+        JSR OpenDisk
+        PLA 
+        STA r1L
+        PLA 
+        STA r1H
+        JSR s253B
+        LDX #$0C
+        LDY #$04
+        LDA #$12
+        JMP CmpFString
+
+        .BYTE $81,$0B,$10,$10,$5F,$27,$0B,$10
+        .BYTE $20,$80,$8B,$0B,$10,$30,$51,$27
+        .BYTE $01,$01,$48,$02,$11,$48,$00
+s2416   LDA #$10
+s2418   STX a2426
+        STY a2428
+        STY a243A
+        STA r15L
+        LDY #$00
+a2426   =*+$01
+b2425   LDA (p00),Y
+a2428   =*+$01
+        STA (p00),Y
+        CMP #$A0
+        BEQ b242F
+        STY r15H
+b242F   INY 
+        DEC r15L
+        BNE b2425
+        LDY r15H
+        INY 
+        LDA #$00
+a243A   =*+$01
+        STA (p00),Y
+        RTS 
+
+        LDY curDrive
+s243F   LDA f8486,Y
+        AND #$07
+        CMP #$02
+        RTS 
+
+s2447   LDA #$00
+s244A   =*+$01
+        BIT a02A9
+        JMP SetPattern
+
+f244F   .BYTE $27,$2C,$2D,$30,$31,$2C,$2D
+f2456   .BYTE $38,$D8,$18,$EE,$22,$FC,$48
+f245D   .BYTE $27,$2C,$2D,$31,$31,$2D,$2D
+f2464   .BYTE $27,$F4,$33,$07,$42,$33,$66
+s246B   LDA f2456,Y
+        STA r5L
+        LDA f244F,Y
+        STA r5H
+        LDA f2464,Y
+        STA r6L
+        LDA f245D,Y
+        STA r6H
+        LDX #>p2504
+        LDA #<p2504
+s2483   STX r0H
+        STA r0L
+        LDA r5H
+        PHA 
+        LDA r5L
+        PHA 
+        LDA r6H
+        PHA 
+        LDA r6L
+        PHA 
+        LDA r7H
+        PHA 
+        LDA r7L
+        PHA 
+        JSR s24F0
+        BEQ b24A3
+        LDX #$00
+        JSR s4DA4    ;Erase menubar dropdown menus
+b24A3   LDA a8E88
+        PHA 
+        LDA a8CC0
+        PHA 
+        LDA #>r3L
+        STA r3H
+        LDA #<r3L
+        STA r3L
+        LDA #>r15L
+        STA r4H
+        LDA #<r15L
+        STA r4L
+        LDA #<p1004
+        STA r2L
+        LDA #>p1004
+        STA r2H
+        LDA screencolors
+        STA r6L
+        JSR s2687
+        PLA 
+        STA a8CC0
+        PLA 
+        STA a8E88
+        PLA 
+        STA r7L
+        PLA 
+        STA r7H
+        PLA 
+        STA r6L
+        PLA 
+        STA r6H
+        PLA 
+        STA r5L
+        PLA 
+        STA r5H
+        JSR DoDlgBox
+        JSR s24F0
+        BNE b2503
+        JMP j26F4    ;comes here after drawing pad and disk info - seems to draw file icons
+
+s24F0   LDX #$FF
+        LDA RecoverVector_LO
+        CMP #$77
+        BNE b2500
+        LDA RecoverVector_HI
+        CMP #$4D
+        BEQ b2502
+b2500   LDX #$00
+b2502   TXA 
+b2503   RTS 
+
+p2504   .BYTE $81,$0C,$10,$20,$0C,$0C,$10,$30
+        .BYTE $0E,$01,$11,$48,$00
+s2511   LDA #$C0
+        STA a2F
+s2515   LDA r9H
+        PHA 
+        LDA r9L
+        PHA 
+        JSR s26FA
+        JSR i_GraphicsString
+        .BYTE $05,$02,$01,$00,$00,$00,$03,$3F
+        .BYTE $01,$C7,$00
+        PLA 
+        STA r9L
+        PLA 
+        STA r9H
+        RTS 
+
+s2533   PHA 
+        LDA version
+        CMP #$20
+        PLA 
+        RTS 
+
+s253B   TXA 
+        BEQ b2540
+        PLA 
+        PLA 
+b2540   RTS 
+
+s2541   CLC 
+        LDA #$02
+        ADC r10L
+        STA r10L
+        BCC b254C
+        INC r10H
+b254C   RTS 
+
+s254D   LDA #>diskBlkBuf
+        STA r4H
+        LDA #<diskBlkBuf
+        STA r4L
+        RTS 
+
+        JSR s2562
+s2559   LDA #>p8B80
+        STA r5H
+        LDA #<p8B80
+        STA r5L
+        RTS 
+
+s2562   LDA #>p8BE4
+        STA r6H
+        LDA #<p8BE4
+        STA r6L
+        RTS 
+
+s256B   LDA #>p8B80
+        STA r6H
+        LDA #<p8B80
+        STA r6L
+        RTS 
+
+s2574   LDA #>p2727
+        STA r10H
+        LDA #<p2727
+        STA r10L
+        RTS 
+
+        LDA r5H
+        BEQ s259A
+        TXA 
+        PHA 
+        LDA r5L
+        CLC 
+        ADC #$03
+        STA r5L
+        BCC b258E
+        INC r5H
+b258E   LDX #$0C
+        LDY #$0C
+        JSR s2416
+        PLA 
+        TAX 
+        CLV 
+        BVC b25A2
+s259A   LDA #>p25EE
+        STA r5H
+        LDA #<p25EE
+        STA r5L
+b25A2   LDA #$00
+        STA a7D
+        CPX #$FF
+        BEQ b25D5
+        CPX #$0C
+        BEQ b25D5
+        TXA 
+        BEQ b25D5
+        JSR s25EF
+        TXA 
+        STA a265F
+        LDY #$00
+b25BA   CMP f2650,Y
+        BEQ b25C4
+        INY 
+        INY 
+        INY 
+        BNE b25BA
+b25C4   LDA f2651,Y
+        STA r6L
+        LDA f2652,Y
+        STA r6H
+        LDX #$25
+        LDA #$D8
+        JSR s2483
+b25D5   LDX #$00
+        RTS 
+
+        .BYTE $81,$0B,$0C,$16,$74,$27,$0B,$0C
+        .BYTE $26,$8F,$27,$0C,$0C,$36,$0E,$0C
+        .BYTE $0C,$46,$0C,$01,$11,$48
+p25EE   .BYTE $00
+s25EF   TXA 
+        LDY #$02
+        JSR s2609
+        LDA curDrive
+        CLC 
+        ADC #$39
+        STA a2635
+        LDA r1L
+        LDY #$15
+        JSR s2609
+        LDA r1H
+        LDY #$1F
+s2609   PHA 
+        JSR s2618
+        STA f2628,Y
+        PLA 
+        JSR s261C
+        STA f2629,Y
+        RTS 
+
+s2618   LSR 
+        LSR 
+        LSR 
+        LSR 
+s261C   AND #$0F
+        ORA #$30
+        CMP #$3A
+        BCC b2627
+        CLC 
+        ADC #$07
+b2627   RTS 
+
+f2628   .BYTE $49
+f2629   .BYTE $3A,$32,$33,$20,$20,$1B,$44,$72
+        .BYTE $69,$76,$65,$20
+a2635   .BYTE $41,$20,$74,$72,$61,$63,$6B,$20
+        .BYTE $30,$32,$20,$73,$65,$63,$74,$6F
+        .BYTE $72,$20,$30,$36,$20,$28,$68,$65
+        .BYTE $78,$29,$00
+f2650   .BYTE $03
+f2651   .BYTE $9B
+f2652   .BYTE $27,$04,$A5,$27,$21,$B5,$27,$26
+        .BYTE $D2,$27,$80,$ED,$27
+a265F   .BYTE $00,$28,$26
+j2662   LDY #$00
+b2664   LDA (r0L),Y
+        STA r2L,Y
+        INY 
+        CPY #$06
+        BNE b2664
+        LDA a8C27
+        STA r6L
+        LDX #$06
+        JSR s26D1
+        LDX #$07
+        JSR s26D1
+        LDX #$08
+        JSR s26D1
+        LDX #$0A
+        JSR s26D1
+s2687   LDA r4L
+        SEC 
+        SBC r3L
+        STA r4L
+        LDA r2H
+        SEC 
+        SBC r2L
+        STA r2H
+        LDA r2L
+        STA r5L
+        LDA #$00
+        STA r5H
+        JSR s26D9
+        CLC 
+        LDA #$00
+        ADC r5L
+        STA r5L
+        LDA #$8C
+        ADC r5H
+        STA r5H
+        LDA r3L
+        CLC 
+        ADC r5L
+        STA r5L
+        BCC b26B8
+        INC r5H
+b26B8   LDY r4L
+b26BA   LDA r6L
+        STA (r5L),Y
+        DEY 
+        BPL b26BA
+        CLC 
+        LDA #$28
+        ADC r5L
+        STA r5L
+        BCC b26CC
+        INC r5H
+b26CC   DEC r2H
+        BPL b26B8
+        RTS 
+
+s26D1   LDA f00,X
+        LSR 
+        LSR 
+        LSR 
+        STA f00,X
+        RTS 
+
+s26D9   LDA r5L
+        ASL 
+        ROL r5H
+        ASL 
+        ROL r5H
+        CLC 
+        ADC r5L
+        BCC b26E8
+        INC r5H
+b26E8   ASL 
+        ROL r5H
+        ASL 
+        ROL r5H
+        ASL 
+        ROL r5H
+        STA r5L
+        RTS 
+
+; comes here after drawing pad and disk info - seems to draw file icons
+j26F4   LDA a8FF0
+        CLV 
+        BVC b26FD
+s26FA   LDA screencolors
+b26FD   JSR s2533
+        BCC b2726
+        TAY 
+        LDA r0L
+        PHA 
+        LDA #<p1102
+        STA r2L
+        LDA #>p1102
+        STA r2H
+        LDA #>p01
+        STA r3H
+        LDA #<p01
+        STA r3L
+        LDA #>r15L
+        STA r4H
+        LDA #<r15L
+        STA r4L
+        STY r6L
+        JSR s2687
+        PLA 
+        STA r0L
+b2726   RTS 
+
+p2727   .TEXT "deskTop AM  V2.0", $00, $18, "Please insert disk wit"
+        .TEXT "h", $00, $18, "In drive:  "
+a275D   .TEXT "A", $00, $18, "Please insert disk:", $00, $18, "Operation cancel"
+        .TEXT "ed due to", $00, "disk error:", $00, "Disk full", $00, "Director"
+        .TEXT "y full.", $00, "Missing or unformatted disk.", $00, "Wri"
+        .TEXT "te protect tab on disk.", $00, "Double-sided dis"
+        .TEXT "k in 1541.", $00
+p2808   .TEXT $C2, "U", $FF, $D5
+        .BYTE $BE,$21,$7E,$E4,$51,$13,$BE,$4A
+        .BYTE $7D,$C1,$FF,$83,$C0,$00,$45,$A2
+        .BYTE $10,$45,$A2,$10,$AB,$A5,$28,$AB
+        .BYTE $95,$29,$11,$98,$C5,$11,$88,$C6
+        .BYTE $11,$48,$82,$2B,$D8,$C2,$2A,$54
+        .BYTE $C6,$27,$E5,$45,$46,$65,$29,$43
+        .BYTE $C2,$28,$82,$72,$10,$8D,$AE,$10
+        .BYTE $7A,$55,$FF,$D5,$AA,$AA,$AA,$B3
+        .BYTE $AB,$FF,$AA,$55,$00,$55,$AA,$BC
+        .BYTE $2A,$55,$80,$35,$AB,$1C,$6A,$56
+        .BYTE $00,$FF,$AE,$3C,$A3,$59,$00,$75
+        .BYTE $B3,$FF,$E9,$67,$FF,$9D,$C0,$00
+        .BYTE $3D,$FF,$FF,$DF,$80,$00,$5E,$9F
+        .BYTE $C0,$5D,$80,$06,$5A,$80,$00,$75
+        .BYTE $FF,$FF,$EA,$BF,$FF,$FF,$FF,$80
+        .BYTE $00,$01,$80,$00,$01,$80,$00,$01
+        .BYTE $80,$00,$03,$80,$3C,$02,$80,$66
+        .BYTE $03,$80,$C3,$01,$80,$C3,$01,$80
+        .BYTE $66,$01,$80,$3C,$C1,$80,$00,$C1
+        .BYTE $80,$00,$01,$80,$00,$01,$80,$18
+        .BYTE $01,$80,$18,$01,$80,$18,$01,$80
+        .BYTE $18,$01,$80,$18,$01,$80,$00,$01
+        .BYTE $FF,$FF,$FF,$BF,$FF,$FF,$FF,$80
+        .BYTE $00,$01,$80,$00,$01,$80,$00,$01
+        .BYTE $80,$78,$07,$80,$FC,$04,$81,$86
+        .BYTE $07,$81,$86,$01,$80,$0E,$01,$80
+        .BYTE $1C,$01,$80,$38,$01,$80,$30,$01
+        .BYTE $80,$30,$01,$80,$00,$01,$80,$30
+        .BYTE $01,$80,$30,$01,$80,$00,$01,$80
+        .BYTE $00,$01,$80,$00,$01,$80,$00,$01
+        .BYTE $FF,$FF,$FF,$BF,$00,$00,$FC,$00
+        .BYTE $01,$02,$FF,$FE,$01,$80,$00,$01
+        .BYTE $80,$FC,$01,$81,$FC,$01,$83,$83
+        .BYTE $E1,$83,$83,$C1,$83,$80,$01,$83
+        .BYTE $83,$C1,$83,$83,$E1,$81,$FC,$01
+        .BYTE $80,$FC,$01,$80,$00,$01,$81,$C1
+        .BYTE $01,$82,$03,$01,$83,$C5,$01,$82
+        .BYTE $2F,$81,$81,$C1,$01,$80,$00,$01
+        .BYTE $FF,$FF,$FF,$A0,$FF,$FF,$81,$02
+        .BYTE $83,$82,$87,$C2,$8F,$E2,$9F,$F2
+        .BYTE $83,$82,$80,$02,$80,$02,$83,$82
+        .BYTE $9F,$F2,$8F,$E2,$87,$C2,$83,$82
+        .BYTE $81,$02,$FF,$FF,$A0,$FF,$FF,$C0
+        .BYTE $01,$A0,$01,$90,$01,$88,$01,$84
+        .BYTE $01,$82,$01,$81,$01,$80,$81,$80
+        .BYTE $41,$80,$21,$80,$11,$80,$09,$80
+        .BYTE $05,$80,$03,$80,$01,$96,$FF,$FF
+        .BYTE $80,$01,$80,$01,$80,$01,$87,$E1
+        .BYTE $87,$E1,$87,$E1,$80,$01,$80,$01
+        .BYTE $80,$01,$FF,$FF
+p2998   .BYTE $04,$32,$00,$06,$08,$00,$CA,$00
+        .BYTE $00,$00,$03,$00,$05,$00,$09,$00
+        .BYTE $0F,$00,$13,$00,$19,$00,$1F,$00
+        .BYTE $21,$00,$24,$00,$27,$00,$2D,$00
+        .BYTE $31,$00,$34,$00,$38,$00,$3A,$00
+        .BYTE $3F,$00,$43,$00,$46,$00,$4A,$00
+        .BYTE $4E,$00,$52,$00,$56,$00,$5A,$00
+        .BYTE $5E,$00,$62,$00,$66,$00,$68,$00
+        .BYTE $6B,$00,$6E,$00,$72,$00,$75,$00
+        .BYTE $79,$00,$7E,$00,$83,$00,$88,$00
+        .BYTE $8C,$00,$91,$00,$95,$00,$99,$00
+        .BYTE $9E,$00,$A3,$00,$A5,$00,$A8,$00
+        .BYTE $AD,$00,$B1,$00,$B7,$00,$BC,$00
+        .BYTE $C1,$00,$C6,$00,$CB,$00,$D0,$00
+        .BYTE $D4,$00,$D8,$00,$DD,$00,$E3,$00
+        .BYTE $E9,$00,$ED,$00,$F1,$00,$F5,$00
+        .BYTE $F8,$00,$FE,$00,$01,$01,$05,$01
+        .BYTE $0C,$01,$0F,$01,$13,$01,$17,$01
+        .BYTE $1A,$01,$1E,$01,$22,$01,$25,$01
+        .BYTE $29,$01,$2D,$01,$2F,$01,$32,$01
+        .BYTE $36,$01,$38,$01,$3E,$01,$42,$01
+        .BYTE $46,$01,$4A,$01,$4E,$01,$51,$01
+        .BYTE $55,$01,$58,$01,$5C,$01,$60,$01
+        .BYTE $66,$01,$6A,$01,$6E,$01,$72,$01
+        .BYTE $76,$01,$78,$01,$7C,$01,$81,$01
+        .BYTE $88,$01,$0A,$94,$4C,$90,$94,$A8
+        .BYTE $00,$00,$45,$98,$5C,$9C,$88,$00
+        .BYTE $03,$18,$CE,$37,$3B,$9D,$29,$4A
+        .BYTE $22,$93,$38,$CE,$37,$4A,$2A,$AA
+        .BYTE $BB,$41,$80,$04,$08,$04,$08,$22
+        .BYTE $51,$00,$00,$00,$02,$00,$00,$00
+        .BYTE $0D,$62,$80,$00,$0A,$BE,$6D,$24
+        .BYTE $A2,$71,$00,$02,$AC,$44,$D1,$05
+        .BYTE $54,$05,$D0,$A5,$29,$44,$A2,$21
+        .BYTE $29,$52,$36,$D4,$A5,$29,$42,$4A
+        .BYTE $2A,$AA,$8A,$20,$80,$02,$6C,$4C
+        .BYTE $99,$B0,$15,$69,$89,$8C,$9B,$55
+        .BYTE $55,$55,$C9,$25,$00,$00,$08
+        .BYTE $14,$C2
+        .BYTE $1E,$22,$FB,$87,$04,$A4,$89,$59
+        .BYTE $88,$8D,$28,$09,$2D,$2E,$44,$BB
+        .BYTE $A1,$E9,$62,$2A,$B4,$A5,$29,$22
+        .BYTE $4A,$2A,$92,$92,$10,$90,$00,$AA
+        .BYTE $95,$52,$AA,$59,$55,$55,$55,$32
+        .BYTE $55,$54,$94,$91,$10,$00,$00,$00
+        .BYTE $3E,$65,$A4,$22,$71,$00,$08,$A5
+        .BYTE $05,$C5,$49,$44,$05,$D0,$2D,$E9
+        .BYTE $44,$A2,$25,$29,$52,$22,$94,$B9
+        .BYTE $2E,$12,$49,$4A,$A9,$22,$08,$A8
+        .BYTE $00,$AA,$95,$92,$AA,$59,$55,$55
+        .BYTE $55,$1A,$55,$54,$95,$11,$10,$00
+        .BYTE $00,$08,$14,$C9,$9C,$22,$A8,$10
+        .BYTE $50,$45,$D8,$58,$88,$89,$20,$01
+        .BYTE $11,$2E,$37,$3A,$1D,$2A,$4B,$A2
+        .BYTE $93,$20,$C9,$62,$30,$85,$29,$3A
+        .BYTE $04,$80,$00,$6C,$4C,$D1,$AA,$55
+        .BYTE $55,$49,$8D,$31,$32,$29,$4D,$C9
+        .BYTE $20,$00,$00,$00,$00,$40,$00,$14
+        .TEXT $00, " ", $00, $00
+        .BYTE $00,$00,$00,$00,$40,$00,$00,$00
+        .BYTE $00,$00,$00,$00,$00,$00,$00,$00
+        .BYTE $40,$00,$00,$00,$00
+        .TEXT $03, $01, $87, $E0, $00, $00, $01, $00, $80, $00, $01, $04, $00, $00, $00, $08, $0D, "`", $00, $00, $18, "This is a NON-GEOS "
+        .TEXT "disk", $00, "Convert it?", $00, " Kbytes used", $00, " Kbytes "
+p2BC8   .TEXT "free", $00, "Preferences"
+p2BD8   .TEXT $A0, $A0, $A0, $A0, $A0, "Pad Colo"
+        .TEXT "r Pref", $A0, $A0, "DRIVE A", $00, "DRIVE B", $00, "DRIVE C", $00, "Non-GEOS"
+        .TEXT " File"
+        .TEXT $00, "BASIC Prg.", $00, "Assembly Prg.", $00, "Data File"
+        .TEXT $00, "a System File"
+        .TEXT $00, "Desk Accessory", $00, "Application", $00, "Appl."
+        .TEXT " Data", $00, "Font File"
+        .TEXT $00, "Printer Driver"
+        .TEXT $00
+p2C83   .TEXT " N"
+        .TEXT "OT ON DISK ", $00, "C64 Input Driver", $00, "Disk Driver"
+        .TEXT $00
+p2CAE   .TEXT "a System Boot File"
+        .TEXT $00, "Temp", $00, "Auto-Exec", $00, " AM", $00, " PM", $00, $18, "Only 8 files ma"
+        .TEXT "y be on the", $00, "border.", $00, $18, "This file can't be "
+        .TEXT "printed", $00, $18, "This file can't be opened", $00, "from "
+        .TEXT "the deskTop.", $00, "in", $00, $18, "Can't proceed if applic"
+        .TEXT "ation", $00, "is on a different disk.", $00, $18, "must firs"
+        .TEXT "t be dele"
+        .TEXT "ted from", $00, "is on the disk.", $00, "OK to overwrite"
+        .TEXT "?", $00, $18, "A", $00, $18, "The file"
+        .TEXT $1B, $00, $18, "Please insert destination disk", $00, $18, "Put d"
+        .TEXT "isk to format in drive:  "
+a2E08   .TEXT "A", $00, "a"
+        .TEXT "nd enter a name for it:", $1B, $00, $18, "Repla"
+        .TEXT "ce contents of", $00, "with contents of", $00, $18, "The ope"
+        .TEXT "ration requested", $00, "may not be performed on"
+        .TEXT $00, "the GEOS Boot disk.", $00, "a Master disk.", $00, "a fi"
+        .TEXT "le from another disk.", $00, " files,", $00, " selected", $00
+        .TEXT $18, "Please enter new disk name:", $1B, $00, "DESK TOP", $00, $18
+        .TEXT "Select", $00, "Printer", $00, " ", $00, "Input", $00, "Device", $00, "geos", $00, "file", $00
+        .TEXT "view", $00, "select", $00, "page", $00, "options", $00, "GEOS info", $00, "deskT"
+        .TEXT "op info", $14, "\", $00, $80, $18, "Q", $1B, $00, "select printer", $00, "select inp"
+        .TEXT "ut", $14, "<", $00, $80, $18, "I", $1B, $00, "open", $14, "\", $00, $80, $18, "Z", $1B, $00, "duplicate", $14, "\", $00, $80, $18, "H", $1B, $00, "r"
+        .TEXT "ename", $14, "\", $00, $80, $18, "M", $1B, $00, "print", $14, "\", $00, $80, $18, "P", $1B, $00, "delete", $14, "\", $00, $80, $18, "D", $1B, $00
+        .TEXT "undo delete", $14, "\", $00, $80, $18, "U", $1B, $00, "by icon", $00, "by name", $00, "by da"
+        .TEXT "te", $00, "by size", $00, "by type", $00, "open", $14, "y", $00, $80, $18, "O", $1B, $00, "close", $14, "y", $00, $80
+        .TEXT $18, "C", $1B, $00, "rename", $14, "y", $00, $80, $18, "N", $1B, $00, "copy", $14, "y", $00, $80, $18, "K", $1B, $00, "erase", $14, "y", $00, $80, $18
+        .TEXT "E", $1B, $00, "validate", $14, "y", $00, $80, $18, "V", $1B, $00, "format", $14, "y", $00, $80, $18, "F", $1B, $00, "append", $14
+        .TEXT $B1, $00, $80, $18, "S", $1B, $00, "delete", $14, $B1, $00, $80, $18, "T", $1B, $00, "all pages", $14, $A1, $00, $80, $18, "W", $1B, $00, "pa"
+        .TEXT "ge files", $14, $A1, $00, $80, $18, "X", $1B, $00, "border files", $14, $A1, $00, $80, $18, "Y", $1B, $00, "set "
+        .TEXT "clock", $00, "BASIC", $00, "RESET", $14, $D1, $00, $80, $18, "R", $1B, $00, "shortcuts", $00, $18, "Disk"
+        .TEXT " is empty.", $00, "Copy blank disk?", $00, $18, "Disk copy c"
+        .TEXT "an't be done", $00, "between these disk formats", $00
+        .TEXT $18, "No multiple file operation for", $00, "this fea"
+        .TEXT "ture.", $00
+j3150   JSR s259A
+j3153   LDA diskOpenFlg
+        BEQ b3164
+        JSR s237E
+        JSR s47C3
+        JSR s47E3
+        JSR s31AC
+b3164   TXA 
+        BEQ b316D
+        JSR s259A
+        JSR s3601
+b316D   RTS 
+
+b316E   JSR s401C
+        JSR s321A    ;CLICK DISK ICON HANDLER
+        JSR s253B
+        STA aFB
+        LDA #$00
+        STA a7D
+        LDA isGEOS
+        BNE b31B2
+        LDX #$32
+        LDA #$49
+        JSR s2483
+        LDA r0L
+        CMP #$03
+        BNE b31B2
+        JSR GetDirHead
+        JSR s253B
+        JSR s35A2
+        CPX #$06
+        BEQ b31A5
+        JSR s253B
+        JSR PutDirHead
+        JSR s253B
+b31A5   JSR SetGEOSDisk
+        TXA 
+        BEQ b316E
+        RTS 
+
+s31AC   JSR s321A    ;CLICK DISK ICON HANDLER
+        TXA 
+        BNE b31F2
+b31B2   JSR s40F3
+        JSR s325B
+        JSR s3283
+        TXA 
+        BNE b31ED
+        JSR s3477    ;Set pad preferences (mouse, pad color)
+        JSR s3B3C
+        LDA PrntFilename
+        BNE b31E5
+        LDX a0258
+        BEQ b31E5
+        LDA #$11
+        JSR s4866
+        LDX a0258
+        LDY a0257
+        LDA #$84
+        STA r3H
+        LDA #$65
+        JSR s320D
+        JSR s3A9C
+b31E5   JSR s31F3    ;get input driver
+        JSR j5634
+        LDX #$00
+b31ED   LDA #$FF
+        STA diskOpenFlg
+b31F2   RTS 
+
+; get input driver
+s31F3   LDA inputDevName
+        BNE b320C
+        LDX a0256
+        BEQ b320C
+        LDY a0255
+        LDA #$88
+        STA r3H
+        LDA #$CB
+        JSR s320D
+        JSR s3AD9    ;Load input driver
+b320C   RTS 
+
+s320D   STA r3L
+        STX r2H
+        STY r2L
+        LDX #$06
+        LDY #$08
+        JMP s2416
+
+; CLICK DISK ICON HANDLER
+s321A   JSR s3220
+        JMP OpenDisk
+
+s3220   LDA #$04
+s3222   STA r0L
+        ORA #$80
+        STA a4C27
+        LDA #$0E
+        STA r1L
+        LDY #$02
+        LDX #$04
+        JSR BBMult
+        CLC 
+        ADC #$0C
+        CLC 
+        ADC #$07
+        AND #$F8
+        SEC 
+        SBC #$01
+        STA a4C22
+        CLC 
+        ADC #$02
+        STA a4EA6
+        RTS 
+
+        .BYTE $81,$0B,$0C
+        .BYTE $20,$8E,$2B,$0B,$0C,$30,$A7,$2B
+        .BYTE $03,$01,$48,$04,$11,$48,$00
+s325B   LDA a82BD
+        CMP #$50
+        BEQ b3263
+b3262   RTS 
+
+b3263   LDA a82BE
+        ORA a82BF
+        BNE b3262
+        JSR GetSerialNumber
+        LDA r0L
+        ASL 
+        ROL r0H
+        ADC #$00
+        STA a82BE
+        LDA r0H
+        STA a82BF
+        JSR PutDirHead ;Write directory header to disk (and BAM)
+        JMP GetDirHead ;Get directory header from disk
+
+s3283   JSR s32BB    ;Draw Pad Lines
+        JSR s39CB
+        JSR s253B
+        LDY curDrive
+        LDA f8486,Y
+        AND #$0F
+        CMP #$01
+        BNE b329F
+        LDX #$80
+        BIT a8203
+        BMI b32BA
+b329F   JSR s387D
+        LDA r9H
+        BEQ b32AC
+        JSR s39B4
+        CLV 
+        BVC b329F
+b32AC   JSR s32FA
+        JSR s3426
+        JSR s253B
+        JSR s3318    ;When opening a disk - draws pad and disk data
+        LDX #$00
+b32BA   RTS 
+
+; Draw Pad Lines
+s32BB   JSR i_GraphicsString ;Draw the pad using the graphics string commands.
+        .BYTE $05,$00,$01,$08,$00,$10,$03,$07
+        .BYTE $01,$8F,$07,$08,$00,$10,$01,$08
+        .BYTE $00,$1C,$02,$07,$01,$1C,$01,$08
+        .BYTE $00,$28,$02,$07,$01,$28,$01,$08
+        .BYTE $00,$8B,$02,$07,$01,$8B
+        .BYTE $01,$08,$00,$8D,$02,$07,$01,$8D
+        .BYTE $05,$09,$01,$09,$00,$11,$03,$06
+        .BYTE $01,$1B,$00
+        JMP j26F4    ;comes here after drawing pad and disk info - seems to draw file icons
+
+s32FA   LDA #>p8290
+        STA r0H
+        LDA #<p8290
+        STA r0L
+        LDX #$04
+        JSR s384F    ;Put the disk name at 8290
+        JSR s330F
+        LDX #$04
+        JSR s3829
+s330F   LDX #$02     ;$02 = pointer to $8290 (disk name)
+        LDY #$04     ;$04 = pointer to destination ($0212)
+        LDA #$12
+        JMP CopyFString ;Copy disk name from $8290 to $0212
+
+; When opening a disk - draws pad and disk data
+s3318   JSR s2447
+        JSR i_Rectangle ;draw the actual pad rectangle
+        .BYTE $1D,$27,$09,$00,$06,$01 ;y1=29, y2=39, x1=9, x2=262
+        LDX #$82
+        LDA #$90
+        JSR s578F
+        JSR s59C0
+        LDA #>p88
+        STA r11H
+        LDA #<p88
+        STA r11L
+        LDA #$18
+        STA r1H
+        JSR s57D7    ;Print file names on pad (saved to 8b80)
+        JSR s33AC    ;Print number of files at top of pad
+        JSR s338E    ;Calculate blocks free
+        LDY #$02
+        LDX #$02
+        JSR DShiftRight
+        LDA #>p71
+        STA r11H
+        LDA #<p71
+        STA r11L
+        JSR s33A7    ;Display 16-bit Integer
+        LDX #$2B
+        LDA #$B3
+        JSR s587F    ;print chars for top of pad (x files, 0 selected, etc) from 2ec0
+        JSR s338E    ;Calculate blocks free
+        LDA r4H
+        LSR 
+        ROR r4L
+        LSR 
+        ROR r4L
+        STA r0H
+        LDA r4L
+        STA r0L
+        LDA #>pC0
+        STA r11H
+        LDA #<pC0
+        STA r11L
+        JSR s33A7    ;Display 16-bit Integer
+        LDX #$2B
+        LDA #$C0
+        JSR s587F    ;print chars for top of pad (x files, 0 selected, etc) from 2ec0
+        LDX #$02
+        JSR s3829
+        JSR s47C3
+        LDX #$C0
+        STX r1L
+        JMP j364B
+
+; Calculate blocks free
+s338E   LDA #>curDirHead ;Get DIRHEAD (address of directory header) and put in r5
+        STA r5H
+        LDA #<curDirHead
+        STA r5L
+        JSR CalcBlksFree ;r4= # of free blocks, r3=# of available blocks
+        LDA r3L
+        SEC 
+        SBC r4L
+        STA r0L
+        LDA r3H
+        SBC r4H
+        STA r0H
+        RTS 
+
+; Display 16-bit Integer
+s33A7   LDA #$C0     ;Format = left justified, supress leading zeros ($C0=%11000000)
+        JMP PutDecimal
+
+; Print number of files at top of pad
+s33AC   JSR s387D
+        LDA r0L
+        PHA 
+        PLA 
+        STA r0L      ;r0 contains number of files on disk
+        STA a7B
+        LDA #$00
+        STA r0H
+        LDA #>r7L
+        STA r11H
+        LDA #<r7L
+        STA r11L     ;X Position
+        LDA #$24
+        STA r1H      ;Y Position
+        JSR s33A7    ;Display 16-bit Integer
+        LDX #$2E
+        LDA #$B8
+        JSR s587F    ;print chars for top of pad (x files, 0 selected, etc) from 2ec0
+        LDA #>p42
+        STA r11H
+        LDA #<p42
+        STA r11L
+        LDX #$2E
+        LDA #$C0
+        JSR s587F    ;print chars for top of pad (x files, 0 selected, etc) from 2ec0
+
+; Update # of selected icons for multi-select  (X selected, top of pad)
+s33E0   LDA r0H
+        PHA 
+        LDA r0L
+        PHA 
+        LDA r1L
+        PHA 
+        LDA #>p35
+        STA r11H
+        LDA #<p35
+        STA r11L
+        LDA #$24
+        STA r1H      ;Y position
+        JSR s3421    ;print space char
+        JSR s3421    ;print space char
+        LDA #>r14L
+        STA r11H     ;X position  HI
+        LDA #<r14L
+        STA r11L     ;X position LO
+        LDA a78
+        BIT a71
+        BPL b340C
+        CLC 
+        ADC #$01
+b340C   STA r0L      ;number to print
+        LDA #$00
+        STA r0H      ;number to print
+        LDA #$64     ;Format=right justify, suppress leading zero, 24 field width
+        JSR PutDecimal
+        PLA 
+        STA r1L
+        PLA 
+        STA r0L
+        PLA 
+        STA r0H
+        RTS 
+
+; print space char
+s3421   LDA #$20
+        JMP PutChar
+
+s3426   LDA #$02
+        STA r5L
+        LDA #$6D
+        CLC 
+        ADC aFB
+        STA r5H
+        LDA #$08
+        STA r8L
+        LDA #>p0846  ;buffer contains disk info like name, etc
+        STA r13H
+        LDA #<p0846
+        STA r13L
+b343D   LDY #$00
+        LDA (r5L),Y
+        BEQ b345A
+        LDY #$16
+        LDA (r5L),Y
+        BEQ b345A
+        LDY #$13
+        JSR s1DDA
+        JSR s253B
+        LDX #$0A
+        LDY #$1C
+        LDA #$44
+        JSR CopyFString ;Print disk name
+b345A   CLC 
+        LDA #$44
+        ADC r13L
+        STA r13L
+        BCC b3465
+        INC r13H
+b3465   CLC 
+        LDA #$20
+        ADC r5L
+        STA r5L
+        BCC b3470
+        INC r5H
+b3470   DEC r8L
+        BNE b343D
+        LDX #$00
+        RTS 
+
+; Set pad preferences (mouse, pad color)
+s3477   LDA a0251
+        BEQ b34D6
+        STA r1L
+        LDA a0252
+        STA r1H
+        JSR s1DE3
+        JSR s253B
+        LDA a8002
+        STA maxMouseSpeed
+        LDA a8003
+        STA minMouseSpeed
+        LDA a8004
+        STA mouseAccel
+        LDA a8005
+        ORA a8006
+        CMP screencolors
+        BEQ b34B4
+        STA screencolors
+        STA a34B3
+        JSR i_FillRam ;fill $8c00 with 1000 screencolor
+        .BYTE $E8,$03,$00,$8C
+a34B3   .BYTE $00
+b34B4   LDY a01
+        LDA #$35
+        STA a01
+        LDA a8007
+        STA $D027    ;Sprite 0 Color
+        STA $D028    ;Sprite 1 Color
+        LDA a8047
+        STA $D020    ;Border Color
+        STY a01
+        LDY #$3E
+b34CD   LDA f8008,Y
+        STA f84C1,Y
+        DEY 
+        BPL b34CD
+b34D6   LDA a0253
+        BEQ b34F6
+        STA r1L
+        LDA a0254
+        STA r1H
+        JSR s1DE3
+        JSR s253B
+        LDX #$08
+b34EA   LDA a8002,X
+        STA f8FE8,X
+        DEX 
+        BPL b34EA
+        JSR j26F4    ;comes here after drawing pad and disk info - seems to draw file icons
+b34F6   RTS 
+
+s34F7   LDA #$03
+        AND random
+        BNE b3542
+        LDA a82BD
+        CMP #$42
+        BNE b3542
+        LDY #$09
+b3507   LDA f6D25,Y
+        CMP f4D1A,Y  ;Compare against 'GEOS BOOT' string
+        BNE b3514
+        DEY 
+        BPL b3507
+        BMI b351C
+b3514   LDA a6D38
+        CMP #$0C
+        BEQ b3543
+        RTS 
+
+b351C   LDX a6D04
+        LDA a6D03
+        JSR s3552
+        BNE b3542
+        CPY #$19
+        BNE b3543
+        CMP #$FA
+        BNE b3543
+        LDX a6D24
+        LDA a6D23
+        JSR s3552
+        BNE b3542
+        CPY #$4A
+        BNE b3543
+        CMP #$E7
+        BNE b3543
+b3542   RTS 
+
+b3543   LDA #$00
+        LDY #$02
+b3547   STA f6D00,Y
+        INY 
+        CPY #$60
+        BNE b3547
+        JMP j3A7D
+
+s3552   STX r1H
+        STA r1L
+        LDA #>spr2pic
+        STA r0H
+        LDA #<spr2pic
+        STA r0L
+        LDY #$00
+        TYA 
+b3561   STA (r0L),Y
+        INY 
+        BNE b3561
+b3566   JSR s1DE3
+        JSR s253B
+        LDY a8001
+        STY r1H
+        INY 
+        LDA #$00
+        LDX diskBlkBuf
+        STX r1L
+        BEQ b357E
+        TAY 
+        LDA #$02
+p357F   =*+$01
+b357E   STA r2L
+        CLC 
+b3581   DEY 
+        LDA diskBlkBuf,Y
+        ADC (r0L),Y
+        STA (r0L),Y
+        CPY r2L
+        BNE b3581
+        LDA r1L
+        BNE b3566
+        LDY #$00
+        STY r1L
+        INY 
+        STY r1H
+        JSR CRC
+        LDY r2H
+        LDA r2L
+        LDX #$00
+        RTS 
+
+s35A2   JSR s35AB
+        BNE b35AA
+        JSR s35CD    ;Allocate a disk block
+b35AA   RTS 
+
+s35AB   LDY #$01
+        STY r1L
+        DEY 
+        STY r1H
+        JSR s1DE3
+        JSR s253B
+        LDY #$00
+        LDA (r4L),Y
+        CMP #$43
+        BNE b35CC
+        INY 
+        LDA (r4L),Y
+        CMP #$42
+        BNE b35CC
+        INY 
+        LDA (r4L),Y
+        CMP #$4D
+b35CC   RTS 
+
+; Allocate a disk block
+s35CD   LDA r1H
+        STA r6H      ;sector
+        LDA r1L
+        STA r6L      ;track
+        LDA a0520
+        CMP #$02
+        BCC b35DF
+        JMP AllocateBlock
+
+b35DF   JSR FindBAMBit
+        BEQ b35F6
+        LDA r8H
+        EOR #$FF
+        AND curDirHead,X
+        STA curDirHead,X
+        LDX r7H
+        DEC curDirHead,X
+        LDX #$00
+        RTS 
+
+b35F6   LDX #$06
+        RTS 
+
+; Disk->Close Menu Action ===================
+        JSR DoPreviousMenu
+        LDA diskOpenFlg
+        BEQ b3644
+s3601   JSR s3FF6
+        LDA #$02
+        STA r12L
+        LDA #$12
+        JSR s4808
+        JSR s32BB    ;Draw Pad Lines
+        JSR s47C3
+        JSR s47E3
+        LDA #$00
+        STA a0200
+        JSR s3220
+s361E   LDX #$04
+        JSR s3829
+        LDA #$00
+        TAY 
+        STA (r1L),Y
+        LDY curDrive
+        LDX #$02
+        JSR s3B23
+        LDA #$00
+        STA r1L
+        JSR s47C3
+        JSR j364B
+        JSR s5956
+        LDX #$00
+        STX a7D
+        STX diskOpenFlg
+b3644   RTS 
+
+f3645   .BYTE $36,$36,$36
+f3648   .BYTE $E7,$EF,$F7
+j364B   TAY 
+        LDA r1L
+        STA a3DA6
+        LDA r0H
+        PHA 
+        LDA r0L
+        PHA 
+        TYA 
+        JSR s47E3
+        TAY 
+        PLA 
+        STA r0L
+        PLA 
+        STA r0H
+        TYA 
+        JSR s47D3
+        PHA 
+        SEC 
+        SBC #$14
+        TAY 
+        LDA f3645,Y
+        STA r0H
+        LDA f3648,Y
+        STA r0L
+        PLA 
+        PHA 
+        JSR s49A6
+        PLA 
+        TAY 
+        LDA a3DA6
+        AND #$40
+        BNE b3697
+        TYA 
+        PHA 
+        LDX #$0C
+        JSR s498D
+        LDA #$BF
+        LDY #$00
+        STA (r5L),Y
+        INY 
+        LDA #$28
+        STA (r5L),Y
+        PLA 
+        TAY 
+b3697   LDA #>p0108
+        STA a36
+        LDA #<p0108
+        STA a35
+        TYA 
+        PHA 
+        JSR s49CC
+        LDA a3DA6
+        AND #$40
+        BEQ b36D7
+
+; draw drive letter on disk icon
+        PLA 
+        PHA 
+        CMP #$14
+        BNE b36C2
+        LDA #$28
+        STA r1H      ;YPOS=40
+        LDA #>p011A
+        STA r11H     ;XPOS
+        LDA #<p011A
+        STA r11L     ;XPOS
+        LDA #$41     ;'A'
+        CLV 
+        BVC b36D4
+b36C2   CMP #$15
+        BNE b36D7
+        LDA #$4C
+        STA r1H      ;YPOS=76
+        LDA #>p011A
+        STA r11H     ;XPOS
+        LDA #<p011A
+        STA r11L     ;XPOS
+        LDA #$42     ;'B'
+b36D4   JSR PutChar
+b36D7   PLA 
+        LDX a3DA6
+        BPL b36E0
+        JSR s4824    ;invert icon
+b36E0   LDA #$00
+        STA a35
+        STA a36
+        RTS 
+
+        .BYTE $7F,$28,$23,$18,$03,$15,$FF,$36
+        .BYTE $7F,$28,$23,$3C,$03,$15,$FF,$36
+        .BYTE $7F,$28,$23,$68,$03,$15,$71,$37
+        LDA curDrive
+        STA a79
+        BIT a71
+        BVC b3751
+        LDX #$37
+        LDA #$18
+        JSR s556C
+        JSR s468A
+        BNE b3717
+        JMP s31AC
+
+b3717   RTS 
+
+        JSR s46ED
+        CMP #$0C
+        BNE b3722
+        JMP j510B
+
+b3722   JSR s37BA
+        JSR s59AA
+        JSR s3E78
+        LDA a70
+        CMP curDrive
+        BNE b3738
+        JSR s3F73
+        JMP j3153
+
+b3738   JSR s23E1
+        BEQ b3745
+        LDA #$00
+        STA a024D
+        JSR s237E
+b3745   JSR s39CB
+        JSR s4A25
+        JSR s599C
+        JMP j3F6D
+
+b3751   LDA r0L
+j3753   JSR s47E3
+        JSR s47CC
+        STA a79
+        LDX diskOpenFlg
+        BEQ b376B
+        CMP curDrive
+        BEQ b376B
+        JSR s47C3
+        JSR s4824    ;invert icon
+b376B   JSR s23DC
+        JMP j4F24
+
+        LDA a024C
+        BEQ b3779
+        JMP j4100
+
+b3779   BIT a71
+        BVC b3780    ;Position mouse over sprite
+        JMP s3FF6
+
+; Position mouse over sprite
+b3780   JSR s3FF6
+        LDA #$16
+        JSR s404E
+        LDA #>p0108
+        STA mouseLeft_HI
+        LDA #<p0108
+        STA mouseLeft_LO
+        LDA #>p8B0D
+        STA mouseBottom
+        LDA #<p8B0D
+        STA mouseTop
+        LDA #$FF
+        STA a024C
+        RTS 
+
+        LDA #$08
+        BNE b37AF
+        LDY numDrives
+        DEY 
+        BNE b37AD
+        RTS 
+
+b37AD   LDA #$09
+b37AF   PHA 
+        JSR s3FF6
+        PLA 
+        JSR s47C6
+        JMP j3753
+
+s37BA   LDA curDrive
+        STA a79
+        LDA a72
+        STA a73
+        LDA r0L
+        JSR s47CC
+        STA a70
+        TAY 
+        LDX #$04
+        JSR s382C
+        LDA numDrives
+        CMP #$02
+        BCC b37DB
+        TYA 
+        EOR #$01
+        TAY 
+b37DB   STY aFE
+        LDY #$00
+        LDA (r1L),Y
+        BEQ b381F
+        LDA a72
+        LDX #$06
+        JSR s46B4
+        LDY #$04
+        LDA #$12
+        JSR CmpFString
+        BEQ b381F
+        LDA r2H
+        STA a03F7
+        LDA r2L
+        STA a03F6
+        LDA r1H
+        STA a03F9
+        LDA r1L
+        STA a03F8
+        JSR s2350
+        TXA 
+        BNE b3821
+        JSR s42A9
+        TXA 
+        BNE b3821
+        STA aFC
+        JSR s19AB
+        TXA 
+        BNE b3821
+        LDX #$00
+        BEQ b3821
+b381F   LDX #$FF
+b3821   TXA 
+        PHA 
+        JSR s23DC
+        PLA 
+        TAX 
+        RTS 
+
+s3829   LDA curDrive
+s382C   CMP #$08
+        BEQ b3846
+        CMP #$09
+        BEQ b383D
+        LDA #$36
+        STA f00,X
+        LDA #$02
+        STA f01,X
+        RTS 
+
+b383D   LDA #$24
+        STA f00,X
+        LDA #$02
+        STA f01,X
+        RTS 
+
+b3846   LDA #$12
+        STA f00,X
+        LDA #$02
+        STA f01,X
+        RTS 
+
+s384F   LDA #$00
+        STA f00,X
+        LDA #$02
+        STA f01,X
+        RTS 
+
+s3858   LDA numDrives
+        CMP #$02
+        BCC b386D
+        JSR s1AEC
+        JSR s237E
+        TXA 
+        PHA 
+        JSR s1AEC
+        PLA 
+        BNE b3870
+b386D   JSR s237E
+b3870   RTS 
+
+s3871   LDX #$04
+        JSR s3829
+        LDX #$00
+        LDY #$00
+        LDA (r1L),Y
+        RTS 
+
+s387D   LDA #$00
+        STA r0L
+        STA a0251
+        STA a0253
+        STA a0256
+        STA a0258
+        STA r9H
+        STA r3L
+        LDA #>p0A62
+        STA r1H
+        LDA #<p0A62
+        STA r1L
+        LDA #>f6D00
+        STA r2H
+b389D   LDY #<f6D00
+        STY r2L
+        LDA (r2L),Y
+        PHA 
+b38A4   JSR s38F0
+        CLC 
+        LDA #$20
+        ADC r2L
+        STA r2L
+        BCC b38B2
+        INC r2H
+b38B2   LDA r2L
+        BNE b38A4
+        PLA 
+        BNE b389D
+        LDA isGEOS
+        BEQ b38C9
+        LDA #$7F
+        CMP r2H
+        BCC b38C9
+        STA r2H
+        CLV 
+        BVC b389D
+b38C9   LDA r0L
+        PHA 
+        LDA r3L
+        CLC 
+        ADC #$04
+        JSR s3222
+        LDA r9H
+        PHA 
+        LDA r9L
+        PHA 
+        JSR s58C6
+        PLA 
+        STA r9L
+        PLA 
+        STA r9H
+        LDA #$FF
+        STA a024D
+        PLA 
+        STA r0L
+        LDA #$00
+        STA r0H
+        RTS 
+
+s38F0   LDY #$02
+        LDA (r2L),Y
+        BNE b38F7
+        RTS 
+
+b38F7   INC r0L
+        LDY #$18
+        LDA (r2L),Y
+        CMP #$05
+        BNE b3928
+        LDA r3L
+        CMP #$08
+        BCS b3928
+        LDY #$15
+        BNE b3911
+b390B   LDA (r2L),Y
+        CMP #$A0
+        BNE b3913
+b3911   LDA #$00
+b3913   DEY 
+        STA (r1L),Y
+        CPY #$05
+        BCS b390B
+        CLC 
+        LDA #$11
+        ADC r1L
+        STA r1L
+        BCC b3925
+        INC r1H
+b3925   INC r3L
+        RTS 
+
+b3928   CMP #$0A
+        BNE b3941
+        LDA a0256
+        BNE b3941
+        LDA r2L
+        CLC 
+        ADC #$05
+        STA a0255
+        LDA r2H
+        ADC #$00
+        STA a0256
+        RTS 
+
+b3941   CMP #$09
+        BNE b395A
+        LDA a0258
+        BNE b395A
+        LDA r2L
+        CLC 
+        ADC #$05
+        STA a0257
+        LDA r2H
+        ADC #$00
+        STA a0258
+        RTS 
+
+b395A   CMP #$04
+        BNE b3994
+        LDA #>p2BC8
+        STA r5H
+        LDA #<p2BC8
+        STA r5L
+        JSR s39A6
+        BNE b3979
+        LDY #$03
+        LDA (r2L),Y
+        STA a0251
+        INY 
+        LDA (r2L),Y
+        STA a0252
+        RTS 
+
+b3979   LDA #>p2BD8
+        STA r5H
+        LDA #<p2BD8
+        STA r5L
+        JSR s39A6
+        BNE b39A5
+        LDY #$03
+        LDA (r2L),Y
+        STA a0253
+        INY 
+        LDA (r2L),Y
+        STA a0254
+        RTS 
+
+b3994   CMP #$0D
+        BNE b39A5
+        LDA r2L
+        CLC 
+        ADC #$02
+        STA r9L
+        LDA r2H
+        ADC #$00
+        STA r9H
+b39A5   RTS 
+
+s39A6   LDY #$05
+b39A8   LDA (r2L),Y
+        CMP (r5L),Y
+        BNE b39B3
+        INY 
+        CPY #$15
+        BCC b39A8
+b39B3   RTS 
+
+s39B4   JSR FreeFile
+        LDY #$00
+        TYA 
+        STA (r9L),Y
+        LDA r9H
+        CMP #$7F
+        BNE b39C5
+        JMP j3A6D
+
+b39C5   SEC 
+        SBC #$6D
+        JMP j3A7D
+
+s39CB   LDX #$FF
+        LDA #$00
+b39CF   STA f7EFF,X
+        DEX 
+        BNE b39CF
+        LDA #>f6D00
+        STA r4H
+        LDA #<f6D00
+        STA r4L
+        JSR s3A17
+        STY r1H
+        LDA #$12
+        STA r2L
+        JSR s3A42
+        JSR s253B
+        LDA #$11
+        SEC 
+        SBC r2L
+        STA aFD
+        LDX #$00
+        CMP #$0A
+        BCC b39F9
+b39F9   LDA isGEOS
+        BEQ b3A16
+        JSR s3A04
+        JMP GetBlock
+
+s3A04   LDA #>f7F00
+        STA r4H
+        LDA #<f7F00
+        STA r4L
+        LDA a82AC
+        STA r1H
+        LDA a82AB
+        STA r1L
+b3A16   RTS 
+
+s3A17   LDA #$00
+        STA r1H
+        JSR s3A2F
+        TYA 
+        BNE b3A28
+        LDA #$12
+        STA r1L
+        LDY #$01
+        RTS 
+
+b3A28   LDA #$28
+        STA r1L
+        LDY #$03
+        RTS 
+
+s3A2F   LDY curDrive
+        LDA f8486,Y
+        AND #$0F
+        CMP #$03
+        BEQ b3A3F
+        LDY #$00
+        BEQ b3A41
+b3A3F   LDY #$FF
+b3A41   RTS 
+
+s3A42   JSR EnterTurbo
+        TXA 
+        BNE b3A66
+        JSR InitForIO
+b3A4B   JSR ReadBlock
+        TXA 
+        BNE b3A66
+        DEC r2L
+        BEQ b3A66
+        LDY #$00
+        LDA (r4L),Y
+        BEQ b3A66
+        STA r1L
+        INY 
+        LDA (r4L),Y
+        STA r1H
+        INC r4H
+        BNE b3A4B
+b3A66   JMP DoneWithIO
+
+        CMP #$08
+        BCC b3A7B
+j3A6D   LDX #$00
+        LDA isGEOS
+        BEQ b3A7A
+        JSR s3A04
+        JSR PutBlock
+b3A7A   RTS 
+
+b3A7B   LDA aFB
+j3A7D   PHA 
+        CLC 
+        ADC #$6C
+        STA r4H
+        LDY #$00
+        STY r4L
+        INY 
+        JSR s3A17
+        PLA 
+        BNE b3A91
+        TYA 
+        BNE b3A95
+b3A91   LDY #$01
+        LDA (r4L),Y
+b3A95   STA r1H
+        INC r4H
+        JMP PutBlock
+
+s3A9C   JSR s4645
+        JSR s58C6
+        LDX #$0C
+        JSR s384F
+        LDA #>p8476
+        STA r6H
+        LDA #<p8476
+        STA r6L
+        LDX #$0C
+        LDY #$0E
+        LDA #$12
+        JSR s2418
+j3AB8   TXA 
+        PHA 
+        LDA sysRAMFlg
+        AND #$20
+        BEQ b3ACF
+        LDY #$06
+b3AC3   LDA f3AD2,Y
+        STA r0L,Y
+        DEY 
+        BPL b3AC3
+        JSR StashRAM
+b3ACF   PLA 
+        TAX 
+        RTS 
+
+f3AD2   .BYTE $00,$84,$00,$79,$00,$05,$00
+
+; Load input driver
+s3AD9   LDA #$00
+        STA r0L
+        LDA #>inputDevName
+        STA r6H
+        LDA #<inputDevName
+        STA r6L
+        JSR GetFile
+        TXA 
+        BNE b3B0E
+        LDA version
+        CMP #$13
+        BCC b3B07
+        LDA sysRAMFlg
+        AND #$20
+        BEQ b3B07
+        LDY #$06
+b3AFB   LDA f3B15,Y
+        STA r0L,Y
+        DEY 
+        BPL b3AFB
+        JSR StashRAM
+b3B07   JSR InitMouse
+b3B0A   LDX #$00
+        BEQ b3B12
+b3B0E   CPX #$05
+        BEQ b3B0A
+b3B12   JMP j3AB8
+
+f3B15   .BYTE $80,$FE,$C0,$FA,$7A,$01,$00,$AD
+        .BYTE $89,$84,$49,$01,$A8,$60
+s3B23   TYA 
+        PHA 
+        SEC 
+        SBC #$08
+        TAY 
+        LDA f3B36,Y
+        STA f01,X
+        LDA f3B39,Y
+        STA f00,X
+        PLA 
+        TAY 
+        RTS 
+
+f3B36   .BYTE $2B,$2B,$2B
+f3B39   .BYTE $ED,$F5,$FD
+s3B3C   LDA a7D
+        BNE b3B43
+        JSR s5956
+b3B43   JSR s3B4C
+        JSR s4BA6
+        JMP j3BAD
+
+s3B4C   JSR s5886    ;Draw rectangle in pad for icons before displaying file icons
+        JSR s5926
+        BCS b3B67
+        LDA #$FF
+        STA a7F
+        JSR s53DD
+        BEQ b3B67
+        LDA #$00
+        STA a7A
+        JSR s586C    ;changing pad page
+        JSR s4BA6
+b3B67   LDY a7A
+        LDA f3B72,Y
+        LDX f3B77,Y
+        JMP CallRoutine
+
+f3B72   .BYTE $7C,$FD,$00
+        .BYTE $03,$06
+f3B77   .BYTE $3B,$54,$55,$55,$55
+j3B7C   LDA #$00
+b3B7E   JSR s44C4
+        CLC 
+        ADC #$01
+        CMP #$08
+        BCC b3B7E
+        SEC 
+        SBC #$01
+b3B8B   JSR s49CC
+        SEC 
+        SBC #$01
+        BPL b3B8B
+        LDA #>p88
+        STA r11H
+        LDA #<p88
+        STA r11L
+        LDA #$7F
+        STA r1H
+        LDA #$00
+        STA r0H
+        LDX aFB
+        INX 
+        STX r0L
+        LDA #$C0
+        JMP PutDecimal
+
+j3BAD   BIT a71
+        BMI b3BD3
+s3BB1   JSR s3BE9
+        LDA #>p7F02
+        STA r14H
+        LDA #<p7F02
+        STA r14L
+b3BBC   JSR s4449
+        JSR s599C
+        CLC 
+        LDA #$20
+        ADC r14L
+        STA r14L
+        BCC b3BCD
+        INC r14H
+b3BCD   LDA r14H
+        CMP #$80
+        BCC b3BBC
+b3BD3   JSR s4639    ;Clear desktop border
+        JSR s461A
+        LDA a7D
+        BEQ b3BE8
+        LDA #>p1894
+        STA r0H
+        LDA #<p1894
+        STA r0L
+        JSR s5931
+b3BE8   RTS 
+
+s3BE9   LDX #$1E
+        JSR s384F
+        LDA #>p0334
+        STA r15H
+        LDA #<p0334
+        STA r15L
+        LDA #$08
+        STA a75
+b3BFA   LDX #$20
+        LDY #$1E
+        LDA #$12
+        JSR CmpFString
+        BNE b3C1B
+        LDA #$00
+        TAY 
+        STA (r15L),Y
+        LDA a75
+        LDX #$0C
+        JSR s45F0
+        LDA #$00
+        TAY 
+        STA (r5L),Y
+        LDA a75
+        JSR s4804
+b3C1B   CLC 
+        LDA #$12
+        ADC r15L
+        STA r15L
+        BCC b3C26
+        INC r15H
+b3C26   INC a75
+        LDA a75
+        CMP #$10
+        BCC b3BFA
+        RTS 
+
+        JSR DoPreviousMenu
+j3C32   LDA curDrive
+        STA a79
+        BIT a71
+        BPL b3C83
+        LDA a78
+        BEQ b3C42
+        JMP j55FB
+
+b3C42   JSR s3E7C
+        LDA a74
+        BNE b3C4F
+        JSR s50F1
+        JMP j3F6D
+
+b3C4F   JSR s3858
+        LDA #$FF
+        STA a3C84
+        LDA numDrives
+        PHA 
+        LDA a0AF0
+        BEQ b3C6E
+        JSR s1AEC
+        JSR PurgeTurbo
+        JSR s1AEC
+        LDA #$01
+        STA numDrives
+b3C6E   JSR s46ED
+        JSR s3C85    ;Get desk accessory name to load to $8400
+        PLA 
+        STA numDrives
+        LDA a3C84
+        BEQ b3C83
+        JSR s3858
+        JSR s599C
+b3C83   RTS 
+
+a3C84   .BYTE $00
+
+; Get desk accessory name to load to $8400
+s3C85   PHA 
+        LDY #$1D
+a3C89   =*+$01
+b3C88   LDA (r9L),Y
+        STA dirEntryBuf,Y
+        DEY 
+        BPL b3C88
+        JSR s5A01    ;Load directory entry buffer to r9
+        PLA 
+        CMP #$03     ;is it a DATA file?
+        BCC b3CBE
+        CMP #$05     ;is it a DESK ACCESSORY?
+        BNE b3C9F
+        JMP j4EE4    ;Load and run a desk accessory
+
+b3C9F   CMP #$06     ;is it an APPLICATION?
+        BEQ b3CA7
+        CMP #$0E     ;is it an AUTO_EXEC?
+        BNE b3CAA
+b3CA7   JMP j3CD2    ;Load an application
+
+b3CAA   CMP #$07     ;is it APPLICATION DATA?
+        BNE b3CB1
+        JMP j3D15
+
+b3CB1   LDA #$00
+        STA a3C84
+        LDY #$02
+        JSR s246B
+        JMP j3F6D
+
+b3CBE   LDY #$00
+        LDA (r9L),Y
+        AND #$0F
+        CMP #$02
+        BNE b3CB1
+        JSR s551B
+        CPX #$0A
+        BEQ b3CB1
+        JMP s259A
+
+; Load an application
+j3CD2   LDA #$C2
+        PHA 
+        LDA #$2B
+        PHA 
+        JSR s2511
+        JSR s3CED
+        LDA #$00
+        STA r0L      ;LOAD_OPT= Load at address in file header, not passing data, not printing
+        JMP LdApplic
+
+f3CE5   .BYTE $04,$3D
+f3CE7   .BYTE $06,$A7
+f3CE9   .BYTE $38,$42
+f3CEB   .BYTE $D5,$59
+s3CED   LDA r2L
+        PHA 
+        LDX #$01
+b3CF2   LDA f3CE5,X
+        STA r1H
+        LDA f3CE7,X
+        STA r1L
+        LDA f3CE9,X
+        STA r0H
+        LDA f3CEB,X
+        STA r0L
+        JSR ClearRam
+        DEX 
+        BPL b3CF2
+        PLA 
+        STA r2L
+        LDA #$FF
+        STA a3C89
+        RTS 
+
+j3D15   LDA #$80
+        STA a3DA6
+        LDA r9L
+        CLC 
+        ADC #$03
+        STA r4L
+        LDA r9H
+        ADC #$00
+        STA r4H
+        JSR s59E6
+        LDX #$0A
+        LDY #$08
+        JSR s2416
+        JSR s59D2
+        LDX #$0A
+        JSR s384F
+        LDX #$0A
+        LDY #$06
+        LDA #$12
+        JSR CopyFString
+        LDY #$13
+        LDA (r9L),Y
+        STA r1L
+        INY 
+        LDA (r9L),Y
+        STA r1H
+        JSR s1DE3
+        TXA 
+        BEQ b3D59
+b3D53   JSR s259A
+b3D56   JMP j5034
+
+b3D59   LDA a8075
+        BNE b3D61
+        JMP b3CB1
+
+b3D61   LDA #>a8075
+        STA r1H
+        LDA #<a8075
+        STA r1L
+        LDA #>p8BE4
+        STA r10H
+        LDA #<p8BE4
+        STA r10L
+        LDX #$04
+        LDY #$16
+        LDA #$0C
+        JSR s2418
+        JSR s3DAB
+        CPX #$0C
+        BEQ b3D56
+        TXA 
+        BNE b3D53
+        LDA p8B80
+        BEQ b3D56
+        JSR s2511
+        JSR s59D2
+        JSR s59E6
+        JSR s256B
+        JSR s3CED
+        LDA a3DA6
+        STA r0L
+        LDA #$C2
+        PHA 
+        LDA #$2B
+        PHA 
+        JMP GetFile
+
+a3DA6   .BYTE $00
+s3DA7   LDA #$04
+        BNE b3DAD
+s3DAB   LDA #$06
+b3DAD   STA r7L
+        JSR s1AB5
+        TXA 
+        BNE b3DBA
+        LDA p8B80
+        BNE b3E18
+b3DBA   JSR s3E1E
+        TXA 
+        BNE b3DE4
+        LDY numDrives
+        DEY 
+        BEQ b3DD4
+        JSR s1AEC
+b3DC9   JSR s1AB5
+        TXA 
+        BNE b3DD4
+        LDA p8B80
+        BNE b3E18
+b3DD4   LDA a0249
+        BNE b3E16
+        JSR s59B9
+        BPL b3DEF
+        LDA r7L
+        CMP #$04
+        BEQ b3DEC
+b3DE4   LDY #$06
+        JSR s246B
+        CLV 
+        BVC b3E16
+b3DEC   JSR s1AEC
+b3DEF   LDY curDrive
+        LDX #$0C
+        JSR s3B23
+        LDA r7L
+        PHA 
+        LDA r10H
+        PHA 
+        LDA r10L
+        PHA 
+        LDX #$3E
+        LDA #$3B
+        JSR s2483
+        PLA 
+        STA r10L
+        PLA 
+        STA r10H
+        PLA 
+        STA r7L
+        LDA r0L
+        CMP #$01
+        BEQ b3DC9
+b3E16   LDX #$0C
+b3E18   LDY #$00
+        STY a0249
+        RTS 
+
+s3E1E   LDX #$00
+        LDA r7L
+        CMP #$04
+        BEQ b3E3A
+        LDA ramExpSize
+        BNE b3E3A
+        LDY numDrives
+        DEY 
+        BEQ b3E39
+        LDA driveType_8
+        CMP driveType_9
+        BEQ b3E3A
+b3E39   DEX 
+b3E3A   RTS 
+
+        .BYTE $81,$0B,$10,$10,$38,$27,$0C,$10
+        .BYTE $20,$16,$0B,$10,$30,$45,$2D,$0C
+        .BYTE $1C,$30,$0C,$01,$01,$48,$02,$11
+        .BYTE $48,$00
+s3E55   ASL 
+        ASL 
+        ASL 
+        ASL 
+        ASL 
+        BCC b3E60
+        ORA #$1F
+        BNE b3E62
+b3E60   ORA aFB
+b3E62   RTS 
+
+s3E63   LDA f18B2,X
+s3E66   PHA 
+        AND #$1F
+        TAY 
+        PLA 
+        LSR 
+        LSR 
+        LSR 
+        LSR 
+        LSR 
+        CPY #$1F
+        BNE b3E77
+        CLC 
+        ADC #$08
+b3E77   RTS 
+
+s3E78   LDX a024B
+s3E7C   =*+$01
+        BIT a78A6
+s3E7E   LDA r0H
+        PHA 
+        LDA r0L
+        PHA 
+        TXA 
+        PHA 
+        JSR s3E63
+        STA a72
+        CMP #$08
+        BCS b3E9A
+        TYA 
+        JSR s4AE4
+        CPX #$FF
+        BNE b3E9A
+        JMP j23C2
+
+b3E9A   LDA a72
+        JSR s4696
+        STX a74
+        LDX #$08
+        JSR s45F0
+        LDA r3H
+        STA a77
+        LDA r3L
+        STA a76
+        PLA 
+        TAX 
+        PLA 
+        STA r0L
+        PLA 
+        STA r0H
+        RTS 
+
+        JSR s5926
+        BCC b3F09
+        LDA diskOpenFlg
+        BEQ b3F09
+        BIT a71
+        BPL b3EE0
+        BVC b3ECA
+        JMP j40C6
+
+b3ECA   LDA r0L
+        JSR s3FD5
+        CPX #$FF
+        BNE b3EE3
+        JSR s3F0A
+        BEQ b3EE0
+        JSR s597A
+        BEQ b3EE0
+        JSR s3F14
+b3EE0   JMP j3F2F
+
+b3EE3   LDA a72
+        PHA 
+        JSR s3E7E
+        PLA 
+        SEC 
+        SBC a72
+        STA r14L
+        JSR s597A
+        BNE b3EF7
+b3EF4   JMP j3F6D
+
+b3EF7   LDX r0H
+        BEQ b3F06
+        LDX a78
+        BNE b3F06
+        LDA r14L
+        BNE b3EF4
+        JMP j3C32
+
+b3F06   JMP j402E
+
+b3F09   RTS 
+
+s3F0A   CMP #$08
+        BCS b3F26
+        LDA a71
+        AND #$20
+        BEQ b3F2C
+s3F14   LDA aFB
+        PHA 
+        LDA a72
+        PHA 
+        JSR s3FF6
+        PLA 
+        STA a72
+        PLA 
+        STA aFB
+        LDX #$00
+        RTS 
+
+b3F26   LDA a71
+        AND #$20
+        BEQ s3F14
+b3F2C   LDX #$FF
+        RTS 
+
+j3F2F   LDA a71
+        LDX r0L
+        CPX #$08
+        BCC b3F3B
+        ORA #$20
+        BNE b3F3D
+b3F3B   AND #$DF
+b3F3D   STA a71
+        JSR s40F3
+        BIT a71
+        BPL b3F48
+        INC a78
+b3F48   LDA #$80
+        ORA a71
+        STA a71
+        LDX a78
+        LDA r0L
+        JSR s3E55
+        STA f18B2,X
+        JSR s3E7E
+        LDA r0L
+        JSR s4824    ;invert icon
+        LDA a72
+        JSR s4696
+        STX a74
+        JSR s33E0    ;Update # of selected icons for multi-select  (X selected, top of pad)
+        LDX #$00
+        RTS 
+
+j3F6D   LDA #$FF
+        STA r3H
+        BNE b3F77
+s3F73   LDA #$00
+        STA r3H
+b3F77   LDA r0H
+        PHA 
+        LDA r0L
+        PHA 
+        LDA r1H
+        PHA 
+        LDA r1L
+        PHA 
+        LDA a72
+        JSR s3FCD
+        BEQ b3F97
+        JSR s40F3
+        LDA r3H
+        BEQ b3F94
+        JSR s4822
+b3F94   JSR s3FA6
+b3F97   PLA 
+        STA r1L
+        PLA 
+        STA r1H
+        PLA 
+        STA r0L
+        PLA 
+        STA r0H
+        LDX #$00
+        RTS 
+
+s3FA6   LDX a78
+        STX r0H
+        JSR s3FD3
+b3FAD   LDA r0H
+        BEQ b3FC7
+        LDA f18B3,X
+        STA f18B2,X
+        INX 
+        CPX r0H
+        BCC b3FAD
+        DEC a024B
+        DEC a78
+        LDA a78
+        CMP #$FF
+        BNE b3FCA
+b3FC7   JSR s401C
+b3FCA   JMP s33E0    ;Update # of selected icons for multi-select  (X selected, top of pad)
+
+s3FCD   JSR s3FD5
+        CPX #$FF
+        RTS 
+
+s3FD3   LDA a72
+s3FD5   PHA 
+        BIT a71
+        BPL b3FF2
+        STA r3L
+        LDX a78
+b3FDE   JSR s3E63
+        CMP #$08
+        BCS b3FE9
+        CPY aFB
+        BNE b3FED
+b3FE9   CMP r3L
+        BEQ b3FF4
+b3FED   DEX 
+        CPX #$FF
+        BNE b3FDE
+b3FF2   LDX #$FF
+b3FF4   PLA 
+        RTS 
+
+s3FF6   LDA diskOpenFlg
+        BEQ b4019
+        LDA r0L
+        PHA 
+        LDA #$0F
+b4000   PHA 
+        JSR s3FCD
+        BEQ b4009
+        JSR s4824    ;invert icon
+b4009   PLA 
+        SEC 
+        SBC #$01
+        BPL b4000
+        JSR b4019
+        JSR s33E0    ;Update # of selected icons for multi-select  (X selected, top of pad)
+        PLA 
+        STA r0L
+        RTS 
+
+b4019   JSR s40F3
+s401C   LDA #$00
+        STA a71
+        STA a78
+        STA a024B
+        STA a74
+        STA a72
+        STA a76
+        STA a77
+        RTS 
+
+j402E   LDA a71
+        ORA #$40
+        STA a71
+        LDA #$0D
+        STA mouseTop
+        LDX a78
+        BEQ b4048
+        LDA #<p4086
+        STA r4L
+        LDA #>p4086
+        STA r4H
+        CLV 
+        BVC b4065
+b4048   LDA f18B2
+        JSR s3E66
+s404E   LDX #$0C
+        JSR s498D
+        LDY #$00
+        LDA (r5L),Y
+        CLC 
+        ADC #$01
+        STA r4L
+        INY 
+        LDA (r5L),Y
+        STA r4H
+        BCC b4065
+        INC r4H
+b4065   LDA #$01
+        STA r3L
+        JSR DrawSprite
+        LDA #$35
+        STA a01
+        LDA $D027    ;Sprite 0 Color
+        STA $D028    ;Sprite 1 Color
+        LDA #$30
+        STA a01
+        LDA #$01
+        STA a0525
+        LDA #$01
+        STA r3L
+        JMP EnablSprite
+
+p4086   .BYTE $FF,$FF,$FF,$80,$00,$01,$80,$00
+        .BYTE $01,$A2,$0C,$89,$B6,$04,$81,$AA
+        .BYTE $95,$E9,$A2,$94,$89,$A2,$94,$89
+        .BYTE $A2,$74,$69,$80,$00,$01,$80,$00
+        .BYTE $01,$8F,$58,$01,$88,$09,$C1,$8E
+        .BYTE $4A,$21,$88,$4B,$E1,$88,$4A,$01
+        .BYTE $88,$49,$E1,$80,$00,$01,$80,$00
+        .BYTE $01,$80,$00,$01,$FF,$FF,$FF,$00
+j40C6   .BYTE $2C,$05,$85,$30,$27,$20,$3E,$58
+        .BYTE $00,$0C,$DD,$00,$3F,$01,$F0,$03
+        .BYTE $4C,$51,$55,$24,$71,$30,$08,$AD
+        .BYTE $4C,$02,$F0,$0D,$4C,$00,$41,$50
+        .BYTE $03,$4C,$2F,$41,$20,$7A,$59,$F0
+        .BYTE $03,$20,$F6,$3F,$60
+s40F3   BIT a71
+        BVC j4100
+        JSR s4115
+        LDA a71
+        AND #$BF
+        STA a71
+j4100   JSR s4115
+        STA a024C
+        STA mouseLeft_LO
+        STA mouseLeft_HI
+        STA mouseTop
+        LDA #$C7
+        STA mouseBottom
+        RTS 
+
+s4115   LDA #$01
+        STA r3L
+        JSR DisablSprite
+        LDA #$00
+        STA a0525
+        STA mouseTop
+        RTS 
+
+        BIT a71
+        BPL b412E
+        LDX #$00
+        JSR s3E7E
+b412E   RTS 
+
+        LDA #$FF
+        STA a1872
+        LDX #$41
+        LDA #$41
+        JSR s556C
+        LDA #$00
+        STA a1872
+        RTS 
+
+        JSR s3858
+        LDA a72
+        CMP #$08
+        BCS b415D
+        JSR s582A
+        BEQ b416C
+        LDA isGEOS
+        BNE b415A
+        JSR s50D4
+        CLV 
+        BVC b416F
+b415A   JMP j4172
+
+b415D   JSR s5834
+        BEQ b416F
+        LDA a74
+        BEQ b4169
+        JMP j41CC
+
+b4169   JMP j4234
+
+b416C   JMP j54AF
+
+b416F   JMP s3FF6
+
+j4172   JSR s46ED
+        CMP #$0C
+        BNE b417C
+        JMP j510B
+
+b417C   JSR s4426
+        BCC b4189
+        LDY #$01
+        JSR s246B
+        LDX #$FF
+        RTS 
+
+b4189   LDA r5H
+        PHA 
+        LDA r5L
+        PHA 
+        LDA a77
+        PHA 
+        LDA a76
+        PHA 
+        LDA a72
+        JSR s4804
+        PLA 
+        STA r4L
+        PLA 
+        STA r4H
+        PLA 
+        STA r5L
+        PLA 
+        STA r5H
+        JSR s449C
+        JSR b3A7B
+        JSR s599C
+        JSR j3A6D
+        JSR s599C
+        LDA a77
+        STA r14H
+        LDA a76
+        STA r14L
+        JSR s4449
+        JSR s599C
+        JSR s3F73
+        JSR s3BB1
+        LDX #$00
+        RTS 
+
+j41CC   JSR s34F7
+        LDA aFB
+        STA r10L
+        STA a024E
+        JSR GetFreeDirBlk
+        JSR s599C
+        TYA 
+        PHA 
+        LDA r10L
+        CMP aFD
+        BCC b41F8
+        BEQ b41F8
+        PHA 
+        JSR PutDirHead
+        TXA 
+        BNE b41F0
+        JSR s39CB
+b41F0   PLA 
+        CPX #$00
+        BEQ b41F8
+        JMP j3150
+
+b41F8   STA aFB
+        PLA 
+        CLC 
+        ADC #$00
+        STA r5L
+        LDA aFB
+        ADC #$6D
+        STA r5H
+        JSR s589D
+        JSR s4498
+        LDA a72
+        PHA 
+        JSR j3F6D
+        PLA 
+        JSR s458A
+        JSR s4222
+        JSR s3B4C
+        JSR j3BAD
+        LDX #$00
+        RTS 
+
+s4222   JSR b3A7B
+        JSR s599C
+        JSR j3A6D
+        JSR s599C
+        JSR s3426
+        JMP s599C
+
+j4234   JSR s34F7
+        LDA numDrives
+        CMP #$01
+        BNE b4245
+        LDA a78
+        BEQ b4245
+        JMP j55FB
+
+b4245   LDA #$00
+        STA a7D
+        LDA curDrive
+        STA a79
+        LDA a72
+        STA a73
+        LDA #$FF
+        JSR s42A9
+        TXA 
+        BNE b42A0
+        LDA #>a0200
+        STA a03F9
+        LDA #<a0200
+        STA a03F8
+        LDA a73
+        LDX #$06
+        JSR s46B4
+        LDA r2H
+        STA a03F7
+        LDA r2L
+        STA a03F6
+        LDA curDrive
+        STA a70
+        LDY numDrives
+        CPY #$02
+        BCC b4283
+        EOR #$01
+b4283   STA aFE
+        LDA aFB
+        STA aFC
+        LDA #$00
+        JSR s19AB
+        TXA 
+        BNE b42A0
+        LDA aFC
+        STA aFB
+        CMP aFD
+        BCC b429B
+        STA aFD
+b429B   LDA a73
+        JSR s458A
+b42A0   JSR j3F6D
+        JSR s23DC
+        JMP j3153
+
+s42A9   STA a024A
+        LDA a76
+        CLC 
+        ADC #$03
+        STA r0L
+        LDA a77
+        ADC #$00
+        STA r0H
+        LDA #>p8BD0
+        STA r1H
+        LDA #<p8BD0
+        STA r1L
+        LDX #$02
+        LDY #$04
+        JSR s2416
+        JSR s2562
+        LDX #$02
+        LDY #$0E
+        JSR s2416
+        JSR FindFile
+        CPX #$05
+        BEQ b434D
+        JSR s253B
+        JSR GetDirHead
+        LDA a82BD
+        BEQ b42E7
+        JMP j50DA
+
+b42E7   LDA a024A
+        BEQ b4319
+        LDA #>dirEntryBuf
+        STA r6H
+        LDA #<dirEntryBuf
+        STA r6L
+        JSR s45BC
+        TXA 
+        BEQ b4301
+        LDA #$00
+        STA a024A
+        BEQ b4319
+b4301   JSR s4364
+        CPX #$FF
+        BEQ b4316
+        JSR s59F8
+        LDX #$43
+        LDA #$B7
+        JSR s2483
+        LDX #$0C
+        BNE b4363
+b4316   STA a024A
+b4319   JSR s59F8
+        LDX #$43
+        LDA #$9C
+        JSR s2483
+        LDA r0L
+        LDX #$0C
+        CMP #$04
+        BEQ b4363
+        JSR GetDirHead
+        TXA 
+        BNE b4363
+        LDA #>p8BE4
+        STA r0H
+        LDA #<p8BE4
+        STA r0L
+        JSR DeleteFile
+        TXA 
+        BNE b4363
+        LDA a024A
+        BEQ b4347
+        JSR s458A
+b4347   JSR PutDirHead
+        TXA 
+        BNE b4363
+b434D   LDA #>p8BD0
+        STA a03FB
+        LDA #<p8BD0
+        STA a03FA
+        LDA #>p8BE4
+        STA a03FD
+        LDA #<p8BE4
+        STA a03FC
+        LDX #$00
+b4363   RTS 
+
+s4364   LDA #$08
+        STA r10L
+        LDA r7H
+        STA r11H
+        LDA r7L
+        STA r11L
+        LDA r10L
+        JSR s483A
+        BEQ b4393
+        LDA r10L
+        JSR s4696
+        BEQ b4393
+        LDX #$04
+        JSR s45F0
+        LDX #$04
+        LDY #$18
+        LDA #$1E
+        JSR CmpFString
+        BNE b4393
+        LDA r10L
+        JMP s3FD5
+
+b4393   .BYTE $E6,$16,$A5,$16,$C9,$10,$D0,$D5
+        .BYTE $00,$81,$0B,$10,$10,$BB,$2D,$0C
+        .BYTE $1F,$10,$0C,$0B,$10,$20,$9A,$2D
+        .BYTE $0B,$10,$30,$AA,$2D,$03,$01,$48
+        .BYTE $04,$11,$48,$00,$81,$0B,$10,$10
+        .BYTE $BE,$2D,$0C,$42,$10,$0C,$0B,$10
+        .BYTE $20,$7E,$2D,$0B,$10,$30,$A0,$2D
+        .BYTE $01,$11,$48,$00
+s43CF   JSR s59C9
+        LDY #$00
+        LDA #$08
+        STA a75
+b43D8   LDA (r1L),Y
+        BEQ b4402
+        INC a75
+        JSR s440C
+        BCC b43D8
+        LDX #$02
+        JSR s384F
+        JSR s59C9
+        LDA #$08
+        STA a75
+b43EF   LDX #$02
+        LDY #$04
+        LDA #$12
+        JSR CmpFString
+        BNE b4402
+        INC a75
+        JSR s440C
+        BCC b43EF
+        BRK 
+b4402   LDA a75
+        LDX #$0C
+        JSR s45F0
+        LDX #$00
+        RTS 
+
+s440C   LDA r1L
+        CLC 
+        ADC #$12
+        STA r1L
+        TAX 
+        BCC b4418
+        INC r1H
+b4418   CMP #$03
+        BCC b4424
+        CPX #$B2
+        BCC b4424
+        BEQ b4424
+        SEC 
+        RTS 
+
+b4424   CLC 
+        RTS 
+
+s4426   LDY #$02
+        LDA #>f7F00
+        STA r5H
+        LDA #<f7F00
+        STA r5L
+b4430   LDA (r5L),Y
+        BEQ b443D
+        TYA 
+        CLC 
+        ADC #$20
+        TAY 
+        BCC b4430
+        BCS b4448
+b443D   TYA 
+        CLC 
+        ADC r5L
+        STA r5L
+        BCC b4447
+        INC r5H
+b4447   CLC 
+b4448   RTS 
+
+s4449   LDY #$00
+        LDA (r14L),Y
+        BEQ b4495
+        JSR s43CF
+        LDX #$1E
+        LDY #$0C
+        LDA #$1E
+        JSR CopyFString
+        LDX #$02
+        JSR s384F
+        LDX #$02
+        LDY #$04
+        LDA #$12
+        JSR CopyFString
+        LDY #$16
+        LDA (r14L),Y
+        BEQ b4490
+        LDY #$13
+        LDA (r14L),Y
+        STA r1L
+        INY 
+        LDA (r14L),Y
+        STA r1H
+        JSR s1DE3
+        TXA 
+        BNE b4497
+        LDA a75
+        LDX #$0C
+        JSR s464D
+        LDX #$0A
+        LDY #$0C
+        LDA #$44
+        JSR CopyFString
+b4490   LDA a75
+        JSR s44C4
+b4495   LDX #$00
+b4497   RTS 
+
+s4498   LDA #$00
+        BEQ b44A2
+s449C   LDA #$80
+        BNE b44A2
+        LDA #$40
+b44A2   STA r2L
+        LDY #$00
+b44A6   LDA (r4L),Y
+        TAX 
+        LDA (r5L),Y
+        BIT r2L
+        BPL b44B5
+        LDA #$00
+        STA (r4L),Y
+        BEQ b44BB
+b44B5   BIT r2L
+        BVC b44BB
+        STA (r4L),Y
+b44BB   TXA 
+        STA (r5L),Y
+        INY 
+        CPY #$1E
+        BNE b44A6
+        RTS 
+
+s44C4   PHA 
+        LDX #$0A
+        JSR s464D
+        LDX #$06
+        JSR s498D
+        LDX #$08
+        JSR s45F0
+        LDY #$00
+        TYA 
+        STA (r2L),Y
+        INY 
+        STA (r2L),Y
+        LDY #$00
+        LDA (r3L),Y
+        BEQ b4508
+        LDY #$16
+        LDA (r3L),Y
+        BNE b44F0
+        PLA 
+        PHA 
+        JSR s499E
+        CLV 
+        BVC b44F3
+b44F0   JSR s450A
+b44F3   LDA r3L
+        CLC 
+        ADC #$03
+        STA r0L
+        LDA r3H
+        ADC #$00
+        STA r0H
+        PLA 
+        PHA 
+        JSR s47D3
+        JSR s452F
+b4508   PLA 
+        RTS 
+
+s450A   LDY #$00
+        LDA r4L
+        CLC 
+        ADC #$04
+        STA (r2L),Y
+        TYA 
+        ADC r4H
+        INY 
+        STA (r2L),Y
+        LDA #$03
+        LDY #$04
+        STA (r2L),Y
+        LDA #$15
+        INY 
+        STA (r2L),Y
+        INY 
+        LDA #$B7
+        STA (r2L),Y
+        INY 
+        LDA #$3E
+        STA (r2L),Y
+        RTS 
+
+s452F   PHA 
+        LDX #$0C
+        JSR s498D
+        LDY #$02
+        CMP #$08
+        BCS b4549
+        TAX 
+        LDA f455A,X
+        STA (r5L),Y
+        INY 
+        LDA f4562,X
+        STA (r5L),Y
+        BNE b4558
+b4549   SEC 
+        SBC #$08
+        TAX 
+        LDA f456A,X
+        STA (r5L),Y
+        INY 
+        LDA f4572,X
+        STA (r5L),Y
+b4558   PLA 
+        RTS 
+
+f455A   .BYTE $05,$0C,$13,$1A,$05,$0C,$13,$1A
+f4562   .BYTE $30,$30,$30,$30,$58,$58,$58,$58
+f456A   .BYTE $0B,$11,$17,$1D,$08,$0E,$14,$1A
+f4572   .BYTE $98,$98,$98,$98,$A4,$A4,$A4,$A4
+f457A   .BYTE $8C,$8C,$8D,$8D,$8D,$8D,$8D,$8D
+f4582   .BYTE $F5,$FC,$03,$0A,$BD,$C4,$CB,$D2
+s458A   PHA 
+        JSR s4804
+        LDX #$0E
+        JSR s45F0
+        CMP #$08
+        BCS b459E
+        LDX #$0E
+        JSR s45E7
+        PLA 
+        RTS 
+
+b459E   JSR s4696
+        BEQ b45AB
+        JSR s45BC
+        LDX #$10
+        JSR s45E7
+b45AB   LDX #$0E
+        JSR s45E7
+        LDY #$00
+        TYA 
+b45B3   STA (r0L),Y
+        INY 
+        CPY #$12
+        BNE b45B3
+        PLA 
+        RTS 
+
+s45BC   LDA #>p7F02
+        STA r7H
+        LDA #<p7F02
+        STA r7L
+b45C4   LDX #$0E
+        LDY #$10
+        LDA #$1E
+        JSR CmpFString
+        BEQ b45E4
+        CLC 
+        LDA #$20
+        ADC r7L
+        STA r7L
+        BCC b45DA
+        INC r7H
+b45DA   LDA r7H
+        CMP #$7F
+        BEQ b45C4
+        LDX #$05
+        BNE b45E6
+b45E4   LDX #$00
+b45E6   RTS 
+
+s45E7   STX a45EE
+        LDY #$00
+        TYA 
+a45EE   =*+$01
+        STA (r0L),Y
+        RTS 
+
+s45F0   PHA 
+        CMP #$08
+        BCS b45FD
+        PHA 
+        JSR s46E1
+        PLA 
+        CLV 
+        BVC b460A
+b45FD   SEC 
+        SBC #$08
+        PHA 
+        LDA #$26
+        STA f00,X
+        LDA #$05
+        STA f01,X
+        PLA 
+b460A   ASL 
+        ASL 
+        ASL 
+        ASL 
+        ASL 
+        CLC 
+        ADC f00,X
+        STA f00,X
+        BCC b4618
+        INC f01,X
+b4618   PLA 
+        RTS 
+
+s461A   LDA #>p010E
+        STA a38
+        LDA #<p010E
+        STA a37
+        LDA #$08
+        STA r13L
+        LDA #$08
+        JSR s49D0
+        LDA #$10
+        JSR s49CC
+        LDA #>p013F
+        STA a38
+        LDA #<p013F
+        STA a37
+        RTS 
+
+; Clear desktop border
+s4639   JSR s244A
+        JSR i_Rectangle ;Erase border contents
+        .BYTE $90,$C7,$3E,$00 ;y1=144, y2=199, x1=62, x2=270
+        .BYTE $0E,$01
+s4645   JSR s58B2
+        LDA #$11
+        JMP j4752    ;after disk icons loaded
+
+s464D   PHA 
+        TXA 
+        TAY 
+        INY 
+        INY 
+        PLA 
+        PHA 
+        CMP #$08
+        BCC b465B
+        SEC 
+        SBC #$08
+b465B   STA f00,X
+        LDA #$44
+        STA f0000,Y
+        JSR BBMult
+        PLA 
+        PHA 
+        CMP #$08
+        BCS b467B
+        LDA #$46
+        CLC 
+        ADC f00,X
+        STA f00,X
+        LDA #$08
+        ADC f01,X
+        STA f01,X
+        CLV 
+        BVC b4688
+b467B   LDA #$26
+        CLC 
+        ADC f00,X
+        STA f00,X
+        LDA #$06
+        ADC f01,X
+        STA f01,X
+b4688   PLA 
+        RTS 
+
+s468A   LDA a77
+        CMP #$6D
+        BCC b4694
+        CMP #$7F
+        BCC b46B1
+b4694   LDA a72
+s4696   PHA 
+        LDX #$02
+        JSR s46B4
+        LDX #$04
+        JSR s384F
+        LDX #$02
+        LDY #$04
+        LDA #$12
+        JSR CmpFString
+        BEQ b46B0
+        PLA 
+        LDX #$00
+        RTS 
+
+b46B0   PLA 
+b46B1   LDX #$FF
+        RTS 
+
+s46B4   PHA 
+        CMP #$08
+        BCS b46BE
+        JSR s384F
+        PLA 
+        RTS 
+
+b46BE   SEC 
+        SBC #$08
+        STA r14L
+        LDA #$12
+        STA r15L
+        TXA 
+        PHA 
+        LDY #$1E
+        LDX #$20
+        JSR BBMult
+        PLA 
+        TAX 
+        LDA #$34
+        CLC 
+        ADC r15L
+        STA f00,X
+        LDA #$03
+        ADC #$00
+        STA f01,X
+        PLA 
+        RTS 
+
+s46E1   LDA #$02
+        STA f00,X
+        LDA #$6D
+        CLC 
+        ADC aFB
+        STA f01,X
+        RTS 
+
+s46ED   LDA a77
+        STA r9H
+        LDA a76
+        STA r9L
+        LDY #$16
+        LDA (r9L),Y
+        RTS 
+
+s46FA   LDX #$BC
+        LDA #$00
+b46FE   STA f0423,X
+        DEX 
+        BNE b46FE
+        LDX #$2E
+        LDA #$00
+b4708   STA f03C3,X
+        DEX 
+        BNE b4708
+        LDA #$17
+        STA a0424
+        JSR s4731
+        LDA #>a0424
+        STA r0H
+        LDA #<a0424
+        STA r0L
+        JSR DoIcons
+        JSR s58B2
+        LDA #$00
+b4726   JSR j4752    ;after disk icons loaded
+        CLC 
+        ADC #$01
+        CMP #$17
+        BCC b4726
+        RTS 
+
+s4731   LDA #>p4742
+        STA r0H
+        LDA #<p4742
+        STA r0L
+        LDA #$02
+        STA r13L
+        LDA #$10
+        JMP j49AA
+
+p4742   .BYTE $08,$28,$23,$99,$03,$15,$76,$54
+        .BYTE $4B,$28,$03,$9C,$03,$11,$67,$54
+
+; after disk icons loaded
+j4752   TAY 
+        LDA a36
+        PHA 
+        LDA a35
+        PHA 
+        LDA a38
+        PHA 
+        LDA a37
+        PHA 
+        CPY #$10
+        BCS b4773
+        LDA #>r3H
+        STA a36
+        LDA #<r3H
+        STA a35
+        LDA #>p0105
+        STA a38
+        LDA #<p0105
+        STA a37
+b4773   TYA 
+        PHA 
+        JSR s497F
+        ORA r0L
+        BEQ b47A8
+        JSR s5793    ;Write single icon filename on pad
+        PLA 
+        PHA 
+        JSR s4932
+        CLC 
+        ADC r3L
+        STA r3L
+        BCC b478D
+        INC r3H
+b478D   LDA r3H
+        STA r11H
+        LDA r3L
+        STA r11L
+        CLC 
+        LDA r2H
+        ADC #$08
+        STA r1H
+        JSR s47B8
+        JSR s59C0
+        JSR s57D7    ;Print file names on pad (saved to 8b80)
+        JSR UseSystemFont
+b47A8   PLA 
+        TAY 
+        PLA 
+        STA a37
+        PLA 
+        STA a38
+        PLA 
+        STA a35
+        PLA 
+        STA a36
+        TYA 
+        RTS 
+
+s47B8   LDA #>p2998
+        STA r0H
+        LDA #<p2998
+        STA r0L
+        JMP LoadCharSet
+
+s47C3   LDA curDrive
+s47C6   AND #$03
+        CLC 
+        ADC #$14
+        RTS 
+
+s47CC   SEC 
+        SBC #$14
+        CLC 
+        ADC #$08
+        RTS 
+
+s47D3   PHA 
+        ASL 
+        TAX 
+        LDA r0L
+        STA f03C4,X
+        INX 
+        LDA r0H
+        STA f03C4,X
+        PLA 
+        RTS 
+
+s47E3   PHA 
+        JSR s483A
+        BEQ b4802
+        PLA 
+        JSR s4846
+        PHA 
+        JSR s4932
+        JSR Rectangle
+        PLA 
+        PHA 
+        JSR s4866
+        PLA 
+        PHA 
+        CMP #$08
+        BCS b4802
+        JSR s4A61
+b4802   PLA 
+        RTS 
+
+s4804   LDX #$01
+        STX r12L
+s4808   JSR s47E3
+        LDX #$0C
+        JSR s498D
+        TAX 
+        LDA #$00
+        TAY 
+        STA (r5L),Y
+        INY 
+        STA (r5L),Y
+        INX 
+        TXA 
+        DEC r12L
+        BNE s4808
+        DEX 
+        TXA 
+        RTS 
+
+s4822   LDA a72
+
+; invert icon
+s4824   TAY 
+        JSR s483A
+        BEQ b4839
+        TYA 
+        PHA 
+        JSR s4932
+        JSR InvertRectangle
+        PLA 
+        JSR s4883
+        JSR InvertRectangle
+b4839   RTS 
+
+s483A   ASL 
+        ASL 
+        ASL 
+        TAX 
+        LDA f0428,X
+        INX 
+        ORA f0428,X
+        RTS 
+
+s4846   PHA 
+        TAY 
+        LDA f4850,Y
+        JSR SetPattern
+        PLA 
+        RTS 
+
+f4850   .BYTE $00,$00,$00,$00,$00,$00,$00,$00
+        .BYTE $02,$02,$02,$02,$02,$02,$02,$02
+        .BYTE $02,$02,$00,$09,$02,$02
+s4866   JSR s4846
+        PHA 
+        JSR s4879
+        BEQ b4877
+        PLA 
+        PHA 
+        JSR s4883
+        JSR Rectangle
+b4877   PLA 
+        RTS 
+
+s4879   ASL 
+        TAX 
+        LDA f03C4,X
+        INX 
+        ORA f03C4,X
+        RTS 
+
+s4883   PHA 
+        JSR s47B8
+        PLA 
+        PHA 
+        JSR s4932
+        CLC 
+        ADC r3L
+        STA r3L
+        BCC b4895
+        INC r3H
+b4895   PLA 
+        PHA 
+        JSR s497F
+        JSR s5793    ;Write single icon filename on pad
+        JSR s59C0
+        JSR s57EE
+        LDA r4L
+        LSR 
+        STA r13L
+        LDA r3L
+        SEC 
+        SBC r13L
+        STA r3L
+        LDA r3H
+        SBC #$00
+        STA r3H
+        BPL b48BD
+        LDA #$00
+        STA r3L
+        STA r3H
+b48BD   JSR s4971
+        LDA #>p013F
+        STA r13H
+        LDA #<p013F
+        STA r13L
+        JSR s4921
+        LDA r2H
+        STA r2L
+        LDA r2L
+        CLC 
+        ADC #$04
+        STA r2L
+        LDA a29
+        CLC 
+        ADC r2L
+        SEC 
+        SBC #$01
+        STA r2H
+        PLA 
+        CMP #$14
+        BCC b48F3
+        LDA #>p0108
+        STA r13H
+        LDA #<p0108
+        STA r13L
+        JSR s4910
+        CLV 
+        BVC b490D
+b48F3   CMP #$10
+        BCS b490D
+        LDA #>r3H
+        STA r13H
+        LDA #<r3H
+        STA r13L
+        JSR s4910
+        LDA #>p0106
+        STA r13H
+        LDA #<p0106
+        STA r13L
+        JSR s4921
+b490D   JMP UseSystemFont
+
+s4910   LDX r13H
+        LDA r13L
+        CPX r3H
+        BNE b491A
+        CMP r3L
+b491A   BCC b4920
+        STX r3H
+        STA r3L
+b4920   RTS 
+
+s4921   LDX r13H
+        LDA r13L
+        CPX r4H
+        BNE b492B
+        CMP r4L
+b492B   BCS b4931
+        STX r4H
+        STA r4L
+b4931   RTS 
+
+s4932   LDX #$0C
+        JSR s498D
+        LDA #$00
+        STA r3H
+        LDY #$02
+        LDA (r5L),Y
+        ASL 
+        ASL 
+        ASL 
+        ROL r3H
+        STA r3L
+        INY 
+        LDA (r5L),Y
+        STA r2L
+        INY 
+        LDA #$00
+        STA r4H
+        LDA (r5L),Y
+        ASL 
+        ASL 
+        PHA 
+        ASL 
+        ROL r4H
+        SEC 
+        SBC #$01
+        STA r4L
+        BCS b4961
+        DEC r4H
+b4961   JSR s4971
+        INY 
+        LDA (r5L),Y
+        CLC 
+        ADC r2L
+        SEC 
+        SBC #$01
+        STA r2H
+        PLA 
+        RTS 
+
+s4971   LDA r3L
+        CLC 
+        ADC r4L
+        STA r4L
+        LDA r3H
+        ADC r4H
+        STA r4H
+        RTS 
+
+s497F   ASL 
+        TAX 
+        LDA f03C4,X
+        STA r0L
+        INX 
+        LDA f03C4,X
+        STA r0H
+        RTS 
+
+s498D   PHA 
+        ASL 
+        ASL 
+        ASL 
+        CLC 
+        ADC #$28
+        STA f00,X
+        LDA #$04
+        ADC #$00
+        STA f01,X
+        PLA 
+        RTS 
+
+s499E   LDY #>p49C4
+        STY r0H
+        LDY #<p49C4
+        STY r0L
+s49A6   LDX #$01
+        STX r13L
+j49AA   ASL 
+        ASL 
+        ASL 
+        TAX 
+        LDY #$00
+b49B0   LDA #$08
+        STA r13H
+b49B4   LDA (r0L),Y
+        STA f0428,X
+        INX 
+        INY 
+        DEC r13H
+        BNE b49B4
+        DEC r13L
+        BNE b49B0
+        RTS 
+
+p49C4   .BYTE $FF,$28,$00,$00,$03,$15,$B7,$3E
+s49CC   LDX #$01
+        STX r13L
+s49D0   TAY 
+        LDA r13L
+        PHA 
+        TYA 
+        PHA 
+        JSR s4A16
+        BEQ b4A08
+        DEY 
+b49DC   LDA (r5L),Y  ;loop to load bitmap data from *0c to r0 ($02)
+        STA r0L,X
+        INX 
+        INY 
+        CPY #$06
+        BNE b49DC
+        JSR BitmapUp ;place a compacted bitmap on screen
+        PLA 
+        PHA 
+        CMP #$08
+        BCS b49F7
+        LDX a024D
+        BEQ b49F7
+        JSR s4A3E
+b49F7   PLA 
+        PHA 
+        JSR j4752    ;after disk icons loaded
+        PLA 
+        PHA 
+        JSR s3FD5
+        CPX #$FF
+        BEQ b4A08
+        JSR s4824    ;invert icon
+b4A08   PLA 
+        TAX 
+        INX 
+        PLA 
+        STA r13L
+        TXA 
+        DEC r13L
+        BNE s49D0
+        DEX 
+        TXA 
+        RTS 
+
+s4A16   LDX #$0C
+        JSR s498D
+        LDY #$00
+        LDX #$00
+        LDA (r5L),Y
+        INY 
+        ORA (r5L),Y
+        RTS 
+
+s4A25   LDA diskOpenFlg
+        AND a024D
+        BEQ b4A3D
+        LDA a7A
+        BNE b4A3D
+        LDA #$07
+b4A33   PHA 
+        JSR s4A3E
+        PLA 
+        SEC 
+        SBC #$01
+        BPL b4A33
+b4A3D   RTS 
+
+s4A3E   STA r0L
+        JSR s4A16
+        BEQ b4A96
+        LDA r0L
+        LDX #$0C
+        JSR s45F0
+        LDY #$16
+        LDA (r5L),Y
+        JSR s4A97
+        STA r5L
+        LDA a8FF0
+        AND #$0F
+        ORA r5L
+        LDY r0L
+        CLV 
+        BVC b4A65
+s4A61   TAY 
+        LDA a8FF0
+b4A65   JSR s2533
+        BCC b4A96
+        JSR s5926
+        BCC b4A96
+        STA r0L
+        LDA f457A,Y
+        STA r5H
+        LDA f4582,Y
+        STA r5L
+        LDX #$03
+b4A7D   LDY #$00
+        LDA r0L
+b4A81   STA (r5L),Y
+        INY 
+        CPY #$03
+        BNE b4A81
+        LDA r5L
+        CLC 
+        ADC #$28
+        STA r5L
+        BCC b4A93
+        INC r5H
+b4A93   DEX 
+        BNE b4A7D
+b4A96   RTS 
+
+s4A97   LSR 
+        TAY 
+        LDA f8FE8,Y
+        BCS b4AA2
+        ASL 
+        ASL 
+        ASL 
+        ASL 
+b4AA2   AND #$F0
+        RTS 
+
+        LDY diskOpenFlg
+        BEQ b4ABB
+        LDY #$01
+        STY r1L
+        BNE b4ABF
+        LDY diskOpenFlg
+        BEQ b4ABB
+        LDY #$FF
+        STY r1L
+        BNE b4ABF
+b4ABB   RTS 
+
+; CLICK HANDLER - Pad Pager
+        JSR s4B03    ;called by CLICK HANDLER - Pager
+b4ABF   LDA r1L
+        PHA 
+        JSR s4B1F    ;Pad pager clicked (next and prev)
+        PLA 
+        CLC 
+        ADC aFB
+        BPL b4ACD
+        LDA aFD
+b4ACD   CMP aFD
+        BCC b4AD5
+        BEQ b4AD5
+        LDA #$00
+b4AD5   CMP aFB
+        BEQ b4AE1
+        STA aFB
+        JSR s3426
+        JSR s599C
+b4AE1   JMP j3B7C
+
+s4AE4   CMP aFD
+        BEQ b4AEA
+        BCS b4B02
+b4AEA   CMP aFB
+        BEQ b4B02
+        PHA 
+        BCS b4AF7
+        LDA #$FF
+        STA r1L
+        BNE b4AFB
+b4AF7   LDA #$01
+        STA r1L
+b4AFB   JSR s4B1F    ;Pad pager clicked (next and prev)
+        PLA 
+        JSR b4AD5
+b4B02   RTS 
+
+; called by CLICK HANDLER - Pager
+s4B03   LDA #$01
+        LDX #$02
+        JSR s581E
+        LDA a3A
+        SEC 
+        SBC r0L
+        CLC 
+        ADC #$7C
+        LDY #$01
+        CMP a3C
+        BEQ b4B1A
+        BCS b4B1C
+b4B1A   LDY #$FF
+b4B1C   STY r1L
+        RTS 
+
+; Pad pager clicked (next and prev)
+s4B1F   LDA r1L
+        PHA 
+        JSR s40F3
+        JSR s237E
+        JSR s586C    ;changing pad page
+        LDA #>r11L
+        STA r4H
+        LDA #<r11L
+        STA r4L
+        LDA #$7C
+        STA r11L
+        PLA 
+        PHA 
+        STA r1L
+        TAY 
+        LDA #>r3L
+        STA r1H
+        LDA #<r3L
+        STA r1L
+        TYA 
+        BPL b4B5B
+        LDA #>p68
+        STA r4H
+        LDA #<p68
+        STA r4L
+        LDA #$29
+        STA r11L
+        LDA #>pFFF8
+        STA r1H
+        LDA #<pFFF8
+        STA r1L
+b4B5B   LDA #<p0A00
+        STA r0L
+        LDA #>p0A00
+        STA r0H
+b4B63   LDA #>r3H    ;start loop to draw pager animation
+        STA r3H
+        LDA #<r3H
+        STA r3L
+        LDA r0L
+        JSR HorizontalLine
+        LDA r11L
+        STA r3L
+        LDA #$8A
+        STA r3H
+        LDA r0L
+        JSR VerticalLine
+        LDA r0L
+        EOR #$FF
+        STA r0L
+        BPL b4B63    ;end loop to draw pager animation
+        LDA r1L
+        CLC 
+        ADC r4L
+        STA r4L
+        LDA r1H
+        ADC r4H
+        STA r4H
+        SEC 
+        LDA r11L
+        SBC r1L
+        STA r11L
+        DEC r0H
+        BNE b4B63
+        LDA #$12
+        JSR s49CC
+        PLA 
+        STA r1L
+        RTS 
+
+s4BA6   LDA #>p4BDF
+        STA r0H
+        LDA #<p4BDF
+        STA r0L
+        LDA a7A
+        BEQ b4BC4
+        JSR i_FrameRectangle ;Draw rectangle (clear) bottom of pad to erase pager
+        .BYTE $7C,$8B,$08,$00,$07,$01,$FF ;y1=124, y2=139, x1=8, x2=263
+        LDA #>p4BE7
+        STA r0H
+        LDA #<p4BE7
+        STA r0L
+b4BC4   LDA #$12
+        JSR s49A6
+        LDA #>p4BEF
+        STA r0H
+        LDA #<p4BEF
+        STA r0L
+        LDA #$13
+        JSR s49A6
+        LDA #$02
+        STA r13L
+        LDA #$12
+        JMP s49D0
+
+p4BDF   .BYTE $60,$29,$01,$7C,$02,$10,$BC,$4A
+p4BE7   .BYTE $3F,$29,$10,$7C,$02,$10,$09,$55
+p4BEF   .BYTE $81,$29,$1E,$11,$02,$0B,$FC,$35
+p4BF7   .BYTE $00
+
+; Main menu structure
+        .BYTE $0C,$00,$00
+        .BYTE $C9,$00,$07,$10,$2F,$40,$24,$4D
+        .BYTE $15,$2F,$40,$2F,$4D,$1A,$2F,$40
+        .BYTE $3A,$4D,$E4,$2D,$40,$45,$4D,$1F
+        .BYTE $2F,$40,$50,$4D,$26,$2F,$40,$5B
+        .BYTE $4D,$2B,$2F,$40,$66,$4D,$0C
+a4C22   .BYTE $44,$00,$00,$4F,$00
+a4C27   .BYTE $84,$33,$2F,$00,$21,$55,$3D,$2F
+        .BYTE $00,$2A,$55,$51,$2F,$00,$D9,$54
+        .BYTE $60,$2F,$00,$E2,$54,$66,$0A,$00
+        .BYTE $C3,$4E,$77,$0A,$00,$C3,$4E,$88
+        .BYTE $0A,$00,$C3,$4E,$99,$0A,$00,$C3
+        .BYTE $4E,$AA,$0A,$00,$C3,$4E,$BB,$0A
+        .BYTE $00,$C3,$4E,$CC,$0A,$00,$C3,$4E
+        .BYTE $DD,$0A,$00,$C3,$4E,$0C,$6F,$20
+        .BYTE $00,$77,$00,$87,$74,$2F,$00,$2F
+        .BYTE $3C,$80,$2F,$00,$45,$55,$91,$2F
+        .BYTE $00,$3C,$55,$45,$2F,$00,$D0,$54
+        .BYTE $9F,$2F,$00,$5E,$54,$AC,$2F,$00
+        .BYTE $6D,$54,$BA,$2F,$00,$9A,$54,$0C
+        .BYTE $57,$30,$00,$5F,$00,$85
+a4C95   .BYTE $CD
+a4C96   .BYTE $2F,$00,$48,$51,$E5,$2F,$00,$48
+        .BYTE $51,$ED,$2F,$00,$48,$51,$DD,$2F
+        .BYTE $00,$48,$51,$D5,$2F,$00,$48,$51
+        .BYTE $0C,$6F,$50,$00,$8F,$00
+        .BYTE $87
+mnuStructDiskOpen .BYTE $F5,$2F,$00,$21,$4F
+mnuStructDiskClose .BYTE $01,$30,$00,$F9,$35
+mnuStructDiskRename .BYTE $0E,$30,$00,$33,$55
+mnuStructDiskCopy .BYTE $1C,$30,$00,$45,$4F
+mnuStructDiskValidat .BYTE $35,$30,$00,$7C,$54
+mnuStructDiskErase .BYTE $28,$30,$00,$A3,$54
+mnuStructDiskFormat .BYTE $45,$30,$00,$85,$54,$0C,$37,$68
+        .BYTE $00,$B7,$00,$83,$6F,$30,$00,$B5
+        .BYTE $54,$80,$30,$00,$BE,$54,$92,$30
+        .BYTE $00,$C7,$54,$0C,$27,$88,$00,$C7
+        .BYTE $00,$82,$53,$30,$00,$EB,$54,$61
+        .BYTE $30,$00,$F4,$54
+p4CFF   .BYTE $0C,$47,$A0,$00,$E7,$00,$84,$A6
+        .BYTE $30,$00,$4E,$55,$B6,$30,$00,$6C
+        .BYTE $51,$B0,$30,$00,$0F,$55,$C3,$30
+        .BYTE $00,$5D,$55
+f4D1A   .TEXT "GEOS BOOT", $A0
+
+; show GEOS submenu
+        LDX #$04
+        JSR s4DA4    ;Erase menubar dropdown menus
+        LDA #$21
+        LDY #$4C
+        BNE b4D6F
+
+; show file submenu
+        LDX #$08
+        JSR s4DA4    ;Erase menubar dropdown menus
+        LDA #$64
+        LDY #$4C
+        BNE b4D6F
+
+; show view submenu
+        LDX #$0C
+        JSR s4DA4    ;Erase menubar dropdown menus
+        LDA #$8E
+        LDY #$4C
+        BNE b4D6F
+
+; show disk submenu
+        LDX #$10
+        JSR s4DA4    ;Erase menubar dropdown menus
+        LDA #$AE
+        LDY #$4C
+        BNE b4D6F
+
+; show select submenu
+        LDX #$14
+        JSR s4DA4    ;Erase menubar dropdown menus
+        LDA #$D8
+        LDY #$4C
+        BNE b4D6F
+
+; show page submenu
+        LDX #$18
+        JSR s4DA4    ;Erase menubar dropdown menus
+        LDA #$EE
+        LDY #$4C
+        BNE b4D6F
+
+; show options submenu
+        LDX #$1C
+        JSR s4DA4    ;Erase menubar dropdown menus
+        LDA #<p4CFF
+        LDY #>p4CFF
+b4D6F   STY r0H
+        STA r0L
+        JMP j2662
+
+a4D76   .BYTE $00
+        LDX a4D76
+        CPX #$FF
+        BEQ b4DA3
+        CPX #$20
+        BNE b4D87
+        JSR s3B4C
+        LDX #$20
+b4D87   TXA 
+        PHA 
+        JSR j26F4    ;comes here after drawing pad and disk info - seems to draw file icons
+        JSR s4A25
+        PLA 
+        TAX 
+        JSR s4DB4
+        LDX a4D76
+        CPX #$20
+        BNE b4D9E
+        JSR s3BB1
+b4D9E   LDA #$FF
+        STA a4D76
+b4DA3   RTS 
+
+; Erase menubar dropdown menus
+s4DA4   STX a4D76
+        JSR s4E84
+        JSR s4DF1
+        LDY #$00
+        TYA 
+        STA (r7L),Y
+        BEQ b4DBC
+s4DB4   JSR s4E84
+        JSR s4DF1
+        LDA #$FF
+b4DBC   STA r4H
+b4DBE   LDX r2H      ;Y Coordinate of line to calculate memory address
+        JSR GetScanLine
+        LDA r2L
+        ASL 
+        ASL 
+        ASL 
+        BCC b4DCC
+        INC r5H
+b4DCC   TAY 
+        LDA r3L
+        STA r4L
+b4DD1   BIT r4H
+        BPL b4DDB
+        JSR s4E4E
+        CLV 
+        BVC b4DDE
+b4DDB   JSR s4E04
+b4DDE   CLC 
+        ADC #$08
+        BCC b4DE5
+        INC r5H
+b4DE5   TAY 
+        DEC r4L
+        BNE b4DD1
+        INC r2H
+        DEC r3H
+        BNE b4DBE
+        RTS 
+
+s4DF1   JSR s4DFB
+s4DF4   INC r1L
+        BNE b4DFA
+        INC r1H
+b4DFA   RTS 
+
+s4DFB   LDA r1H
+        STA r7H
+        LDA r1L
+        STA r7L
+        RTS 
+
+s4E04   TYA 
+        PHA 
+        LDA r1H
+        CMP #$6D
+        BCS b4E4C
+        LDA (r5L),Y
+        LDY #$00
+        TAX 
+        BNE b4E24
+        LDA (r7L),Y
+        BMI b4E1B
+        CMP #$7F
+        BNE b4E45
+b4E1B   JSR s4DF1
+        LDA #$00
+        STA (r7L),Y
+        BEQ b4E45
+b4E24   LDA (r7L),Y
+        BPL b4E35
+        CMP #$FF
+        BEQ b4E35
+b4E2C   TXA 
+        STA (r1L),Y
+        JSR s4DF4
+        CLV 
+        BVC b4E45
+b4E35   JSR s4DF1
+        LDA #$80
+        STA (r7L),Y
+        LDA r1H
+        CMP #$6D
+        BCS b4E4C
+        CLV 
+        BVC b4E2C
+b4E45   LDA (r7L),Y
+        CLC 
+        ADC #$01
+        STA (r7L),Y
+b4E4C   PLA 
+        RTS 
+
+s4E4E   TYA 
+        PHA 
+b4E50   LDY #$00
+        LDA (r7L),Y
+        AND #$7F
+        BNE b4E5E
+        JSR s4DF1
+        CLV 
+        BVC b4E50
+b4E5E   LDX #$00
+        LDA r1H
+        CMP #$6D
+        BEQ b4E7D
+        LDA (r7L),Y
+        BMI b4E6E
+        LDA #$00
+        BEQ b4E75
+b4E6E   LDA (r1L),Y
+        PHA 
+        JSR s4DF4
+        PLA 
+b4E75   TAX 
+        LDA (r7L),Y
+        SEC 
+        SBC #$01
+        STA (r7L),Y
+b4E7D   PLA 
+        TAY 
+        TXA 
+        STA (r5L),Y
+        TYA 
+        RTS 
+
+s4E84   TXA 
+        PHA 
+        LDA #>p6600
+        STA r1H
+        LDA #<p6600
+        STA r1L
+        LDY #$00
+b4E90   LDA f4E9F,X
+        STA r2L,Y
+        INX 
+        INY 
+        CPY #$04
+        BNE b4E90
+        PLA 
+        TAX 
+        RTS 
+
+f4E9F   .BYTE $08,$20,$19,$68,$00,$0C,$0B
+a4EA6   .BYTE $3A,$04,$0C,$0C,$64,$06,$0C,$07
+        .BYTE $4C,$0A,$0C,$09,$64,$0D,$0C,$0B
+        .BYTE $2C,$11,$0C,$09,$1E,$14,$0C,$0A
+        .BYTE $3E,$09
+        .BYTE $77,$16
+        .BYTE $44,$48
+
+; Get filename for GEOS menu initiated desk accessory
+        JSR DoPreviousMenu
+        PLA 
+        SEC 
+        SBC #$04
+        STA r6L
+        ASL 
+        ASL 
+        ASL 
+        ASL 
+        CLC 
+        ADC r6L
+        ADC #$66
+        STA r6L      ;filename pointer r6
+        LDA #$00
+        ADC #$0A
+        STA r6H      ;filename pointer r6
+        JSR FindFile
+        JSR s599C
+
+; Load and run a desk accessory
+j4EE4   JSR s3FF6
+        JSR s5A01    ;Load directory entry buffer to r9
+        LDX #$00
+        STX r10L     ;always set to zero for desk accessory
+        STX r0L
+        LDA a4C96
+        PHA 
+        LDA a4C95
+        PHA 
+        JSR LdDeskAcc
+        LDA #$80
+        STA a2F
+        PLA 
+        STA a4C95
+        PLA 
+        STA a4C96
+        TXA 
+        PHA 
+        LDA screencolors ;restore screen colors after desk accessory returns
+        STA a4F16
+        JSR i_FillRam
+        .BYTE $E8,$03,$00,$8C ;count=1000 bytes, start=$8c00, fill= screencolors
+a4F16   .BYTE $00
+        PLA 
+        BEQ b4F1E
+        TAX 
+        JSR s259A
+b4F1E   JMP p5175    ;DESKTOP MAIN ENTRY POINT ==================================
+
+; Disk->Open menu action
+        JSR DoPreviousMenu
+j4F24   LDA a024C
+        BEQ b4F39
+        JSR s40F3
+        LDA curDrive
+        CMP #$08
+        BEQ b4F36
+        JMP j5334
+
+b4F36   JMP j5331
+
+b4F39   JSR s47C3
+        JSR s47E3
+        JSR b316E
+        JMP b3164
+
+; Disk->Copy Menu Action =========================
+        JSR DoPreviousMenu
+        LDA diskOpenFlg
+        BNE b4F4E
+        RTS 
+
+b4F4E   JSR s237E
+        JSR s3FF6
+        JSR GetDirHead
+        TXA 
+        BNE b4FD6
+        JSR s504C
+        CMP #$03
+        BEQ b4F63
+        BCS b4FA8
+b4F63   STA a0520
+        JSR s338E    ;Calculate blocks free
+        LDA r0L
+        LDY isGEOS
+        BEQ b4F72
+        AND #$FE
+b4F72   ORA r0H
+        BNE b4F84
+        LDX #$50
+        LDA #$3A
+        JSR s2483
+        LDA r0L
+        CMP #$03
+        BEQ b4F84
+        RTS 
+
+b4F84   LDA a82BD
+        CMP #$42
+        BNE b4F8E
+        JMP j50DA
+
+b4F8E   LDA curDrive
+        STA a79
+        STA aFE
+        LDY numDrives
+        CPY #$02
+        BCC b4F9E
+        EOR #$01
+b4F9E   STA a70
+        TAY 
+        LDA f8486,Y
+        AND #$0F
+        CMP #$03
+b4FA8   BEQ b4FAC
+        BCS b4FF8
+b4FAC   CMP a0520
+        BEQ b4FBA
+        CMP #$03
+        BEQ b4FF8
+        CMP a0520
+        BCC b4FF8
+b4FBA   STA a0521
+        LDA f8486,Y
+        BMI b4FD7
+        TYA 
+        CLC 
+        ADC #$39
+        STA a2E08
+        LDX #$50
+        LDA #$A8
+        JSR s2483
+        LDA r0L
+        CMP #$02
+        BNE b4FD7
+b4FD6   RTS 
+
+b4FD7   LDA a70
+        JSR s1AF1
+        JSR NewDisk
+        TXA 
+        BNE b4FE8
+        JSR GetDirHead
+        TXA 
+        BEQ b5000
+b4FE8   JSR s5491
+        TXA 
+        BEQ b4FD7
+        CPX #$0C
+        BEQ j5034
+        JSR s259A
+        CLV 
+        BVC j5034
+b4FF8   LDY #$03
+        JSR s246B
+        CLV 
+        BVC j5034
+b5000   LDA a82BD
+        BEQ b500B
+        JSR j50DA
+        CLV 
+        BVC j5034
+b500B   LDA a0521
+        CMP #$02
+        BNE b5021
+        BIT a8203
+        BMI b5021
+        LDA #$01
+        STA a0521
+        CMP a0520
+        BNE b4FF8
+b5021   JSR s5060
+        LDX #$50
+        LDA #$BA
+        JSR s2483
+        LDA r0L
+        CMP #$02
+        BEQ j5034
+        JSR s1956
+j5034   JSR s23DC
+        JMP p5175    ;DESKTOP MAIN ENTRY POINT ==================================
+
+        .BYTE $81,$0B,$0C,$20,$CD,$30,$0B,$0C
+        .BYTE $30,$DD,$30,$03,$01,$48,$04,$11
+        .BYTE $48,$00
+s504C   LDY curDrive
+        LDA f8486,Y
+        AND #$0F
+        CMP #$02
+        BNE b505F
+        BIT a8203
+        BMI b505F
+        LDA #$01
+b505F   RTS 
+
+s5060   JSR s59DB
+        JSR s2562
+        LDY #$0E
+        JSR s2416
+        LDX #$06
+        LDA #>p8BBC
+        STA r3H
+        LDA #<p8BBC
+        STA r3L
+        LDY #$08
+        LDA #$12
+        JSR CopyFString
+        LDA #>a0200
+        STA r2H
+        LDA #<a0200
+        STA r2L
+        LDA #>p8BD0
+        STA r7H
+        LDA #<p8BD0
+        STA r7L
+        LDX #$06
+        LDY #$10
+        JSR s2416
+        LDA #>p8BBC
+        STA a03F9
+        LDA #<p8BBC
+        STA a03F8
+        LDA #>a0200
+        STA a03F7
+        LDA #<a0200
+        STA a03F6
+        RTS 
+
+        .BYTE $81,$0B,$10,$20,$C9,$2D,$0B,$10
+        .BYTE $30,$FD,$2D,$01,$01,$48,$02,$11
+        .BYTE $48,$00,$81,$0B,$10,$10,$24,$2E
+        .BYTE $0C,$10,$20,$0E,$0B,$10,$30,$39
+        .BYTE $2E,$0C,$10,$40,$10,$03,$01,$48
+        .BYTE $02,$11,$48,$00
+s50D4   .BYTE $A0
+        .BYTE $97,$A2
+        .BYTE $2B,$D0
+j50DA   =*+$01
+        AND fC9,X
+        .BYTE $42
+        BNE b50E4
+        LDY #$7B
+        LDX #$2E
+        BNE b510F
+b50E4   LDY #$8F
+        LDX #$2E
+        BNE b510F
+        LDA a74
+        BEQ b50EF
+        RTS 
+
+b50EF   PLA 
+        PLA 
+s50F1   LDY #$9E
+        LDX #$2E
+        BNE b510F
+        LDY #$36
+        LDX #$2C
+        BNE b510F
+        JSR s46ED
+        CMP #$04
+        BEQ b5109
+        CMP #$0C
+        BEQ b5109
+        RTS 
+
+b5109   PLA 
+        PLA 
+j510B   LDY #<p2CAE
+        LDX #>p2CAE
+b510F   STY r5L
+        STX r5H
+        LDX #$51
+        LDA #$1D
+        JSR s2483
+        LDX #$0C
+        RTS 
+
+        .BYTE $81,$0B,$18,$10,$4A,$2E,$0B,$10
+        .BYTE $20,$63,$2E,$0C,$10,$30,$0C,$01
+        .BYTE $11,$48,$00
+        LDA a76
+        STA r9L
+        STA r6L
+        STA r7L
+        LDA a77
+        STA r9H
+        STA r6H
+        STA r7H
+        CMP #$6D
+        BCS b5147
+        JSR s45BC
+b5147   RTS 
+
+        PHA 
+        JSR DoPreviousMenu
+        PLA 
+        CMP a7A
+        BEQ b516B
+        LDX diskOpenFlg
+        BEQ b516B
+        STA a7A
+        CMP #$00
+        BNE b515F
+        JSR s3426
+b515F   JSR s3FF6
+        JSR s586C    ;changing pad page
+        JSR s3B4C
+        JSR s4BA6
+b516B   RTS 
+
+        JSR DoPreviousMenu
+        JSR s40F3
+        JMP p5175    ;DESKTOP MAIN ENTRY POINT ==================================
+
+; DESKTOP MAIN ENTRY POINT ==================================
+p5175   LDX #$48
+        LDA #$00
+b5179   STA f01FF,X
+        DEX 
+        BNE b5179
+        LDA #$00
+        LDY #$03
+b5183   STA f00FB,Y
+        DEY 
+        BPL b5183
+        LDY #$0F
+b518B   STA f0070,Y
+        DEY 
+        BPL b518B
+        STA iconSelFlag
+        STA a04ED
+        STA a024C
+        STA a0248
+        STA a1872
+        STA a0AF0
+        LDA #$FF
+        STA a024D
+        STA a04EC
+        JSR s51ED
+        LDA #>p5202
+        STA r0H
+        LDA #<p5202
+        STA r0L
+        JSR InitRam
+        JSR s2515
+        JSR s2533
+        BCS b51C4    ;Call DoMenu with menu structure
+        JSR s5557
+
+; Call DoMenu with menu structure
+b51C4   LDA #>p4BF7
+        STA r0H
+        LDA #<p4BF7
+        STA r0L
+        LDA #$02     ;POINTER_OVER=2 (2nd item)
+        JSR DoMenu
+        JSR s46FA
+        JSR s5606    ;Draw Clock Rectangle
+        JSR s5A0A    ;INITIALIZE DESK TOP (After menu built)
+        CPX #$21
+        BNE b51E1
+        JSR s3601
+b51E1   JSR s599C
+        LDA #$FF
+        STA a0249
+        JSR s53D4
+        RTS 
+
+s51ED   LDX #$90
+        LDA #$00
+b51F1   STA f0333,X
+        DEX 
+        BNE b51F1
+        LDX #$FF
+        LDA #$00
+b51FB   STA a0525,X
+        DEX 
+        BNE b51FB
+        RTS 
+
+p5202   .BYTE $A9,$84,$02,$C6,$40
+        .BYTE $9B,$84,$02
+        JSR eA352
+        STY r0L
+        EOR (p52,X)
+        STA a0184
+        ORA (p2F,X)
+        BRK 
+        ORA (p80,X)
+        LDA (p84),Y
+        .BYTE $02
+        .BYTE $77,$4D
+        BRK 
+        BRK 
+        LDA a0525
+        BEQ b5240
+        LDA #$01
+        STA r3L
+        LDA a3C
+        SEC 
+        SBC #$08
+        STA r5L
+        SEC 
+        LDA a3A
+        SBC #$08
+        STA r4L
+        LDA a3B
+        SBC #$00
+        STA r4H
+        JMP PosSprite
+
+b5240   RTS 
+
+        LDA a024C
+        ORA menuNumber
+        BNE b5240
+        LDA keyData
+        LDX diskOpenFlg
+        BEQ b52CB
+        LDX a7A
+        BNE b52CB
+        LDY #$0E
+b5257   CMP f526A,Y
+        BEQ b5261
+        DEY 
+        BPL b5257
+        BMI b5297
+b5261   LDX f5288,Y
+        LDA f5279,Y
+        JMP CallRoutine
+
+f526A   .BYTE $FA,$E8,$ED,$E4,$F1,$F0,$F5,$F3
+        .BYTE $F4,$F7,$F8,$F9,$E7,$10,$11
+f5279   .BYTE $32,$48,$3F,$70,$D3,$61,$9D,$EE
+        .BYTE $F7,$B8,$C1,$CA,$25,$B0,$A5
+f5288   .BYTE $3C,$55,$55,$54,$54,$54,$54,$54
+        .BYTE $54,$54,$54,$54,$41,$4A,$4A
+b5297   CMP #$30
+        BNE b529F
+        LDA #$09
+        BNE b52B7
+b529F   TAY 
+        CMP #$3A
+        BCS b52A9
+        SEC 
+        SBC #$31
+        BCS b52B7
+b52A9   TYA 
+        CMP #$29
+        BCS b52BA
+        CMP #$21
+        BCC b52BA
+        AND #$0F
+        CLC 
+        ADC #$09
+b52B7   JMP s4AE4
+
+b52BA   TYA 
+        CMP #$A1
+        BCC b52CB
+        CMP #$A9
+        BCC b5308
+        CMP #$B1
+        BCC b52CB
+        CMP #$B9
+        BCC b530D
+b52CB   LDY #$0C
+b52CD   CMP f52E1,Y
+        BEQ b52D7
+        DEY 
+        BPL b52CD
+        BMI b52E0
+b52D7   LDX f52EE,Y
+        LDA f52FB,Y
+        JSR CallRoutine
+b52E0   RTS 
+
+f52E1   .BYTE $E1,$E2,$C1,$C2,$E3,$E9,$EE,$EB
+        .BYTE $EF,$E5,$F6,$E6,$F2
+f52EE   .BYTE $37,$37,$53,$53,$35,$54,$55,$4F
+        .BYTE $4F,$54,$54,$54,$51
+f52FB   .BYTE $A2,$A6,$31,$34,$FC,$E5,$36,$48
+        .BYTE $39,$A6,$7F,$88,$6F
+b5308   SEC 
+        SBC #$99
+        BNE b5310
+b530D   SEC 
+        SBC #$B1
+b5310   TAY 
+        JSR s40F3
+        TYA 
+        JSR s483A
+        BNE b531B
+        RTS 
+
+b531B   TYA 
+        STA r0L
+        JSR s3FD5
+        CPX #$FF
+        BEQ b532B
+        JSR s3E7E
+        JMP j3F6D
+
+b532B   JSR s3F0A
+        JMP j3F2F
+
+j5331   LDA #$08
+j5334   =*+$01
+        BIT a09A9
+        LDX driveType_10
+        BEQ b5373
+        BIT sysRAMFlg
+        BVC b5373
+        PHA 
+        JSR s3FF6
+        PLA 
+        STA r10L
+        JSR s1AF1
+        LDA driveType_11
+        BNE b5373
+        LDA #$0B
+        JSR s5374
+        LDA #$0A
+        JSR s1AF1
+        LDA r10L
+        JSR s5374
+        LDA #$0B
+        JSR s1AF1
+        LDA #$0A
+        JSR s5374
+        LDA r10L
+        JSR s1AF1
+        JSR j3AB8
+        JMP p5175    ;DESKTOP MAIN ENTRY POINT ==================================
+
+b5373   RTS 
+
+s5374   PHA 
+        TAY 
+        LDA f53C4,Y
+        STA r1L
+        LDA f53C8,Y
+        STA r1H
+        LDA #>p9000
+        STA r0H
+        LDA #<p9000
+        STA r0L
+        LDA #>p0D80
+        STA r2H
+        LDA #<p0D80
+        STA r2L
+        LDA #$00
+        STA r3L
+        JSR StashRAM
+        PLA 
+        STA r0L
+        LDA curDrive
+        PHA 
+        TAY 
+        LDA driveData,Y
+        PHA 
+        LDA f8486,Y
+        PHA 
+        BPL b53B1
+        LDA r0L
+        JSR s1AF1
+        CLV 
+        BVC b53B6
+b53B1   LDA r0L
+        JSR ChangeDiskDevice
+b53B6   LDY curDrive
+        PLA 
+        STA f8486,Y
+        PLA 
+        STA driveData,Y
+        PLA 
+        TAY 
+f53C4   =*+$01
+        LDA #$00
+        STA driveData,Y
+f53C8   STA f8486,Y
+        RTS 
+
+        .BYTE $00,$80,$00,$80,$83,$90,$9E,$AB
+s53D4   LDY #$01
+s53D7   =*+$01
+        BIT a02A0
+s53DA   =*+$01
+        BIT a03A0
+s53DD   =*+$01
+        BIT a04A0
+s53E0   =*+$01
+        BIT a05A0
+        CPY a7E
+        BNE b53EC
+        JSR s5566
+        JMP j5434
+
+b53EC   LDA a7E
+        PHA 
+        STY a7E
+        LDA curDrive
+        PHA 
+b53F5   JSR s2574
+        JSR s3DA7
+        CPX #$0C
+        BEQ b5438
+        TXA 
+        BNE b5429
+        JSR s59C0
+        JSR OpenRecordFile
+        TXA 
+        BNE b5429
+        LDA a7E
+        JSR PointRecord
+        TXA 
+        BNE b5429
+        LDY #>p5B1E
+        STY r7H
+        LDY #<p5B1E
+        STY r7L
+        LDA #>p0AE2
+        STA r2H
+        LDA #<p0AE2
+        STA r2L
+        JSR ReadRecord
+        TXA 
+        BEQ b542F
+b5429   JSR s259A
+        CLV 
+        BVC b53F5
+b542F   PLA 
+        JSR s1B16
+        PLA 
+j5434   LDX #$00
+        BEQ b544A
+b5438   PLA 
+        JSR s1B16
+        PLA 
+        STA a7E
+        JSR s3FF6
+        LDA a7F
+        BNE b5448
+        PLA 
+        PLA 
+b5448   LDX #$FF
+b544A   TXA 
+        PHA 
+        LDA a0248
+        BNE b5454
+        JSR s3858
+b5454   LDA #$00
+        STA a7F
+        STA a0248
+        PLA 
+        TAX 
+        RTS 
+
+        JSR DoPreviousMenu
+        JSR s53D4
+        JMP p5B1E
+
+        JSR s53D4
+        JMP j5B21
+
+        JSR DoPreviousMenu
+        JSR s53D4
+        JMP j5B24
+
+        JSR s53D4
+        JMP j5B27
+
+; Disk->Validate Menu Action ==========================
+        JSR DoPreviousMenu
+        JSR s53D4
+        JMP j5B2A
+
+; Disk->Format Menu Action =====================
+        JSR DoPreviousMenu
+        JSR s5566
+        JSR s53D4
+        JMP j5B2D
+
+s5491   JSR s5566
+        JSR s53D4
+        JMP j5B30
+
+        JSR DoPreviousMenu
+        JSR s53D4
+        JMP j5B33
+
+; Disk->Erase Menu Action ============================
+        JSR DoPreviousMenu
+        JSR s5566
+        JSR s53D4
+        JMP j5B36
+
+j54AF   JSR s53D4
+        JMP j5B39
+
+        JSR DoPreviousMenu
+        JSR s53D4
+        JMP j5B3C
+
+        JSR DoPreviousMenu
+        JSR s53D4
+        JMP j5B3F
+
+        JSR DoPreviousMenu
+        JSR s53D4
+        JMP j5B42
+
+        JSR DoPreviousMenu
+        JSR s53D7
+        JMP p5B1E
+
+        JSR DoPreviousMenu
+        JSR s53DA
+        JMP p5B1E
+
+        JSR DoPreviousMenu
+        JSR s53DA
+        JMP j5B21
+
+        JSR DoPreviousMenu
+        JSR s53DA
+        JMP j5B24
+
+        JSR DoPreviousMenu
+p54F8   =*+$01
+        JSR s53DA
+        JMP j5B27
+
+        JMP p5B1E
+
+        JMP j5B21
+
+        JMP j5B24
+
+        JMP j5B27
+
+        JSR s53DD
+        JMP j5B2A
+
+        JSR DoPreviousMenu
+        JSR s5566
+        JSR s53DD
+        JMP j5B2D
+
+s551B   JSR s53DD
+        JMP j5B30
+
+        JSR DoPreviousMenu
+        JSR s53DD
+        JMP j5B33
+
+        JSR DoPreviousMenu
+        JSR s53DD
+        JMP j5B36
+
+; Disk->Rename Menu Action ==========================
+        JSR DoPreviousMenu
+        JSR s53DD
+        JMP j5B39
+
+        JSR DoPreviousMenu
+        JSR s53DD
+        JMP j5B3C
+
+        JSR DoPreviousMenu
+        JSR s53DD
+        JMP j5B3F
+
+        JSR DoPreviousMenu
+        JSR s53E0
+        JMP p5B1E
+
+s5557   JSR s53E0
+        JMP j5B21
+
+        JSR DoPreviousMenu
+        JSR s53E0
+        JMP j5B24
+
+s5566   LDA #$FF
+        STA a0248
+        RTS 
+
+s556C   BIT a71
+        BPL b55DC
+        STA a55C3
+        STX a55C4
+        JSR s40F3
+        LDA a3C
+        STA a1873
+        LDA a3B
+        STA a1875
+        LDA a3A
+        STA a1874
+        LDA #$FF
+        STA a024B
+        LDA a78
+b558F   INC a024B
+        TAX 
+        CPX #$FF
+        BEQ b55DC
+        DEX 
+        TXA 
+        PHA 
+        JSR s3E78
+        LDA r0H
+        PHA 
+        LDA r0L
+        PHA 
+        LDA r1H
+        PHA 
+        LDA r1L
+        PHA 
+        LDA a1872
+        BEQ b55BD
+        LDA a1873
+        STA a3C
+        LDA a1875
+        STA a3B
+        LDA a1874
+        STA a3A
+b55BD   JSR MouseOff
+        LDA a72
+a55C3   =*+$01
+a55C4   =*+$02
+        JSR f0000
+        JSR MouseUp
+        PLA 
+        STA r1L
+        PLA 
+        STA r1H
+        PLA 
+        STA r0L
+        PLA 
+        STA r0H
+        CPX #$FF
+        BNE b55DF
+        JSR s3FF6
+        PLA 
+b55DC   LDX #$00
+        RTS 
+
+b55DF   CPX #$00
+        BEQ b55EA
+        CPX #$0C
+        BNE b55F9
+        JSR j3F6D
+b55EA   JSR s597E
+        BEQ b55F3
+        PLA 
+        CLV 
+        BVC b558F
+b55F3   JSR s3FF6
+        JSR j3153
+b55F9   PLA 
+        RTS 
+
+j55FB   LDY #$04
+        JSR s246B
+        JSR s3FF6
+        LDX #$FF
+        RTS 
+
+; Draw Clock Rectangle
+s5606   LDA #$00
+        STA a0250
+        JSR s2447
+        JSR i_Rectangle
+        .BYTE $00,$0C,$DD,$00,$3F,$01
+        JSR i_FrameRectangle
+        .BYTE $00,$0C,$DD,$00
+        .BYTE $3F,$01,$FF
+
+; Set up process to update the clock
+        LDA #>ClockProcStruct
+        STA r0H      ;Process data structure pointer HI
+        LDA #<ClockProcStruct
+        STA r0L      ;Process data structure LO
+        LDA #$01     ;1 Process
+        JSR InitProcesses ;Initialize and install a process
+s562E   JSR j5634
+        JMP j56A8    ;called after editing clock bar
+
+j5634   LDX #$00
+        JMP RestartProcess
+
+ClockProcStruct .BYTE $52,$56,$3C,$00
+s563D   LDX #$00
+        JMP BlockProcess
+
+; called from interrupt for clock
+s5642   CMP f194C,X
+        BEQ b5651
+        STA f194C,X
+        TXA 
+        PHA 
+        JSR s572D    ;called from interrupt
+        PLA 
+        TAX 
+b5651   RTS 
+
+; Process / Interrupt for clock update
+        BIT a0250
+        BMI b56A7
+        PHP 
+        SEI 
+        LDA a01
+        PHA 
+        LDA #$35
+        STA a01
+        LDA #$41
+        BIT $DC0B    ;CIA1: Time-of-Day Clock: Hours + AM/PM Flag
+        BPL b5669
+        LDA #$50
+b5669   LDX #$06
+        JSR s5642    ;called from interrupt for clock
+        LDA $DC0B    ;CIA1: Time-of-Day Clock: Hours + AM/PM Flag
+        AND #$7F
+        BNE b5677
+        LDA #$12
+b5677   JSR s5772
+        PHA 
+        TXA 
+        LDX #$00
+        JSR s5642    ;called from interrupt for clock
+        INX 
+        PLA 
+        JSR s5642    ;called from interrupt for clock
+        LDA $DC0A    ;CIA1: Time-of-Day Clock: Minutes
+        JSR s5772
+        PHA 
+        TXA 
+        LDX #$03
+        JSR s5642    ;called from interrupt for clock
+        INX 
+        PLA 
+        JSR s5642    ;called from interrupt for clock
+        LDA $DC08    ;CIA1: Time-of-Day Clock: 1/10 Seconds
+        PLA 
+        STA a01
+        PLP 
+        LDA hour
+        ORA minutes
+        BEQ j56A8    ;called after editing clock bar
+b56A7   RTS 
+
+; called after editing clock bar
+j56A8   LDA #$00
+        LDX #$09
+        STA f194C,X
+        STA f1942,X
+        LDA #$20
+        STA a1951
+        STA a1954
+        STA a194A
+        PHP 
+        SEI 
+        LDA a01
+        PHA 
+        LDA #$35
+        STA a01
+        LDA #$4D
+        STA a1953
+        LDA #$3A
+        STA a194E
+        LDA $DC0A    ;CIA1: Time-of-Day Clock: Minutes
+        JSR s5772
+        STA a1950
+        STX a194F
+        LDX #$41
+        LDA $DC0B    ;CIA1: Time-of-Day Clock: Hours + AM/PM Flag
+        BPL b56E5
+        LDX #$50
+b56E5   AND #$7F
+        BNE b56EB
+        LDA #$12
+b56EB   STX a1952
+        JSR s5772
+        STA a194D
+        STX f194C
+        BIT $DC08    ;CIA1: Time-of-Day Clock: 1/10 Seconds
+        PLA 
+        STA a01
+        PLP 
+        LDA year
+        JSR s5782
+        STA a1949
+        STX a1948
+        LDA #$2F
+        STA a1947
+        STA a1944
+        LDA day
+        JSR s5782
+        STA a1946
+        STX a1945
+        LDA month
+        JSR s5782
+        STA a1943
+        STX f1942
+        JSR s574D    ;called from interrupt 2 after editing clock
+
+; called from interrupt
+s572D   PHP 
+        SEI 
+        LDA a01
+        PHA 
+        LDA #$30
+        STA a01
+        LDA #>f194C
+        STA r0H
+        LDA #<f194C
+        STA r0L
+        LDA #>p0114
+        STA r11H
+        LDA #<p0114
+        STA r11L
+        LDA #$09
+        STA r1H
+        CLV 
+        BVC b576A
+
+; called from interrupt 2 after editing clock
+s574D   PHP 
+        SEI 
+        LDA a01
+        PHA 
+        LDA #$30
+        STA a01
+        LDA #>f1942
+        STA r0H
+        LDA #<f1942
+        STA r0L
+        LDA #>pE3
+        STA r11H
+        LDA #<pE3
+        STA r11L
+        LDA #$09
+        STA r1H
+b576A   JSR PutString
+        PLA 
+        STA a01
+        PLP 
+        RTS 
+
+s5772   PHA 
+        LSR 
+        LSR 
+        LSR 
+        LSR 
+        CLC 
+        ADC #$30
+        TAX 
+        PLA 
+        AND #$0F
+        CLC 
+        ADC #$30
+        RTS 
+
+s5782   LDX #$30
+        SEC 
+b5785   SBC #$0A
+        BCC b578C
+        INX 
+        BCS b5785
+b578C   ADC #$3A
+        RTS 
+
+s578F   STX r0H
+        STA r0L
+
+; Write single icon filename on pad
+s5793   LDX #$00
+        STX r1L
+        LDA #$20
+        STA p8B80,X
+        INX 
+        JSR s57AF
+        LDX r1L
+        INX 
+        LDA #$20
+        STA p8B80,X
+        INX 
+        LDA #$00
+        STA p8B80,X
+        RTS 
+
+s57AF   LDY #$00
+b57B1   LDA (r0L),Y
+        BEQ b57D0
+        AND #$7F
+        CMP #$20
+        BCC b57BF
+        CMP #$7F
+        BCC b57C1
+b57BF   LDA #$2A
+b57C1   STA p8B80,X
+        CMP #$20
+        BEQ b57CA
+        STX r1L
+b57CA   INX 
+        INY 
+        CPY #$10
+        BNE b57B1
+b57D0   RTS 
+
+        JSR s57EE
+        CLV 
+        BVC b57DE
+
+; Print file names on pad (saved to 8b80)
+s57D7   JSR s57EE
+        LSR r4H
+        ROR r4L
+b57DE   LDA r11L
+        SEC 
+        SBC r4L
+        STA r11L
+        LDA r11H
+        SBC r4H
+        STA r11H
+        JMP PutString
+
+s57EE   LDY #$00
+        STY r4L
+        STY r4H
+b57F4   LDA (r0L),Y
+b57F6   BEQ b580D
+        STY a024F
+        JSR GetCharWidth
+        LDY a024F
+        CLC 
+        ADC r4L
+        STA r4L
+        BCC b580A
+        INC r4H
+b580A   INY 
+        BNE b57F4
+b580D   RTS 
+
+        LDX #$00
+        JSR s57AF
+        LDY r1L
+        INY 
+        JSR s256B
+        LDA #$00
+        STA (r6L),Y
+        RTS 
+
+s581E   LDY #$00
+        STY f01,X
+        ASL 
+        ASL 
+        ASL 
+        ROL f01,X
+        STA f00,X
+        RTS 
+
+s582A   JSR s583E    ;after clicking pad header
+        BCC b57F6
+        .BYTE $2F,$00,$18
+        ORA (p60,X)
+s5834   JSR s583E    ;after clicking pad header
+        AND #$8A
+        ORA #$00
+        ASL a01
+        RTS 
+
+; after clicking pad header
+s583E   PLA 
+        STA a3D
+        PLA 
+        STA a3E
+        LDY #$01
+        LDA (p3D),Y
+        STA r2L
+        INY 
+        LDA (p3D),Y
+        STA r2H
+        INY 
+        LDA (p3D),Y
+        STA r3L
+        INY 
+        LDA (p3D),Y
+        STA r3H
+        INY 
+        LDA (p3D),Y
+        STA r4L
+        INY 
+        LDA (p3D),Y
+        STA r4H
+        JSR IsMseInRegion
+        PHP 
+        LDA #$07
+        JMP DoInlineReturn
+
+; changing pad page
+s586C   JSR s2447
+        LDA #$80
+        STA a2F
+        JSR i_Rectangle ;draw file icon pad rectangle
+        .BYTE $29,$8A,$09,$00,$06,$01 ;y1=29, y2=138, x1=9, x2=262
+        JMP j26F4    ;comes here after drawing pad and disk info - seems to draw file icons
+
+; print chars for top of pad (x files, 0 selected, etc) from 2ec0
+s587F   STX r0H
+        STA r0L
+        JMP PutString
+
+; Draw rectangle in pad for icons before displaying file icons
+s5886   JSR s2447
+        JSR i_Rectangle ;This draws just for the file icons in the pad
+        .BYTE $29,$76,$09,$00,$06,$01 ;y1=41, y2=118, x1=9, x2=262
+        JMP j26F4    ;comes here after drawing pad and disk info - seems to draw file icons
+
+        LDA #>f0406  ; 
+        STA r5H
+        LDA #<f0406
+        STA r5L
+s589D   LDA a77
+        STA r4H
+        LDA a76
+        STA r4L
+        RTS 
+
+        LDA #$00
+        STA r0L
+        LDA aFB
+        CLC 
+        ADC #$6D
+        STA r0H
+        RTS 
+
+s58B2   LDY #$2E
+        LDX #$F9
+        LDA PrntFilename
+        BEQ b58BF
+        LDY #>PrntFilename
+        LDX #<PrntFilename
+b58BF   STY a03E7
+        STX a03E6
+        RTS 
+
+s58C6   LDA a03E6
+        STA r6L
+        LDA a03E7
+        STA r6H
+        JSR FindFile
+        TXA 
+        CMP #$05
+        BEQ b58FB
+        LDY #$16
+        LDA (r5L),Y
+        CMP #$09
+        BNE b58E0
+b58E0   LDA #<pC7B7
+        STA r2L
+        LDA #>pC7B7
+        STA r2H
+        LDA #>r0H
+        STA r3H
+        LDA #<r0H
+        STA r3L
+        LDA #>p3F
+        STA r4H
+        LDA #<p3F
+        STA r4L
+        JMP j5920
+
+b58FB   LDA #>p2C83
+        STA r2H
+        LDA #<p2C83
+        STA r2L
+        LDA #$BB
+        STA r1H
+        LDA #>p23
+        STA r11H
+        LDA #<p23
+        STA r11L
+j590F   JSR s47B8
+        LDA r2H
+        STA r0H
+        LDA r2L
+        STA r0L
+        JSR s57D7    ;Print file names on pad (saved to 8b80)
+        JMP UseSystemFont
+
+j5920   JSR s244A
+        JMP Rectangle
+
+s5926   PHA 
+        LDA a7A
+        BEQ b592E
+        PLA 
+        CLC 
+        RTS 
+
+b592E   PLA 
+        SEC 
+        RTS 
+
+s5931   CLC 
+        LDA #$03
+        ADC r0L
+        STA r0L
+        BCC b593C
+        INC r0H
+b593C   JSR s5793    ;Write single icon filename on pad
+        LDA #>p8B80
+        STA r2H
+        LDA #<p8B80
+        STA r2L
+        LDA #$B4
+        STA r1H
+        LDA #>p0123
+        STA r11H
+        LDA #<p0123
+        STA r11L
+        JMP j590F
+
+s5956   LDA #<pB9B0
+        STA r2L
+        LDA #>pB9B0
+        STA r2H
+        LDA #>pFD
+        STA r3H
+        LDA #<pFD
+        STA r3L
+        LDA #>p0147
+        STA r4H
+        LDA #<p0147
+        STA r4L
+        JMP j5920
+
+s5971   LDA r1H
+        STA r0H
+        LDA r1L
+        STA r0L
+        RTS 
+
+s597A   LDA #$CF
+        BNE b5980
+s597E   LDA #$7F
+b5980   STA r15L
+        PHP 
+        SEI 
+        LDA a01
+        PHA 
+        LDA #>p357F
+        STA a01
+        LDA #<p357F
+        STA $DC00    ;CIA1: Data Port Register A
+        LDX $DC01    ;CIA1: Data Port Register B
+        PLA 
+        STA a01
+        PLP 
+        TXA 
+        SEC 
+        SBC r15L
+        RTS 
+
+s599C   TXA 
+        BEQ b59A3
+        CMP #$0C
+        BNE b59A4
+b59A3   RTS 
+
+b59A4   JSR s259A
+        JMP j23C2
+
+s59AA   TXA 
+        BEQ b59B8
+        CMP #$0C
+        BEQ b59B8
+        PLA 
+        PLA 
+        JSR j3153
+        LDX #$FF
+b59B8   RTS 
+
+s59B9   LDY curDrive
+        LDA f8486,Y
+        RTS 
+
+s59C0   LDA #>p8B80
+        STA r0H
+        LDA #<p8B80
+        STA r0L
+        RTS 
+
+s59C9   LDA #>p0334
+        STA r1H
+        LDA #<p0334
+        STA r1L
+        RTS 
+
+s59D2   LDA #>p8BBC
+        STA r2H
+        LDA #<p8BBC
+        STA r2L
+        RTS 
+
+s59DB   LDA #>p8290
+        STA r2H
+        LDA #<p8290
+        STA r2L
+        LDX #$06
+        RTS 
+
+s59E6   LDA #>p8BD0
+        STA r3H
+        LDA #<p8BD0
+        STA r3L
+        RTS 
+
+        LDA #>spr2pic
+        STA r4H
+        LDA #<spr2pic
+        STA r4L
+        RTS 
+
+s59F8   LDA #>p8BE4
+        STA r5H
+        LDA #<p8BE4
+        STA r5L
+        RTS 
+
+; Load directory entry buffer to r9
+s5A01   LDA #>dirEntryBuf
+        STA r9H
+        LDA #<dirEntryBuf
+        STA r9L
+        RTS 
+
+; INITIALIZE DESK TOP (After menu built)
+s5A0A   LDA a0AF0
+        BNE b5A41
+        LDY curDrive
+        STY a0AF1
+        LDA f8486,Y
+        STA r5L
+        LDA curDrive
+        EOR #$01
+        TAY 
+        LDA f8486,Y
+        BEQ b5A8E
+        STA r5H
+        INC numDrives
+        LDA ramExpSize
+        BNE b5A41
+        LDA r5H
+        CMP #$03
+        BEQ b5A3B
+        BCS b5A4E
+        CMP r5L
+        BEQ b5A41
+b5A3B   JSR s5AAD
+        TXA 
+        BNE b5A4E
+b5A41   JSR s1AEC
+        JSR OpenDisk
+        CPX #$0D
+        BNE b5A58
+        JSR s1AEC
+b5A4E   DEC numDrives
+        LDA #$00
+        STA a0AF0
+        BEQ b5A8E
+b5A58   TXA 
+        BNE b5A61
+        JSR s5A91
+        CLV 
+        BVC b5A64
+b5A61   JSR s361E
+b5A64   LDA ramExpSize
+        BEQ b5A8B
+        LDA curDrive
+        PHA 
+        LDA #$0A
+        JSR s1B16
+        CPX #$0D
+        BEQ b5A87
+        TXA 
+        BEQ b5A7F
+        JSR s361E
+        CLV 
+        BVC b5A87
+b5A7F   LDA curType
+        BEQ b5A87
+        JSR s5A91
+b5A87   PLA 
+        JSR s1B16
+b5A8B   JSR s1AEC
+b5A8E   JMP b316E
+
+s5A91   LDX #$04
+        JSR s3829
+        LDY #$04
+        JSR s59DB
+        LDA #$12
+        JSR CopyFString
+        JSR s5971
+        JSR s47C3
+        LDX #$40
+        STX r1L
+        JMP j364B
+
+s5AAD   STA r12L
+        LDA #>p6600
+        STA r6H
+        LDA #<p6600
+        STA r6L
+        LDA #<p010E
+        STA r7L
+        LDA #>p010E
+        STA r7H
+        LDA #>p5B08
+        STA r10H
+        LDA #<p5B08
+        STA r10L
+        JSR FindFTypes
+        JSR s253B
+        LDX #$05
+        LDA r7H
+        BNE b5AFF
+        LDA #>p6600
+        STA r0H
+        LDA #<p6600
+        STA r0L
+        JSR OpenRecordFile
+        JSR s253B
+        LDA r12L
+        CLC 
+        ADC #$01
+        JSR PointRecord
+        JSR s253B
+        LDA #>p0AF2
+        STA r7H
+        LDA #<p0AF2
+        STA r7L
+        LDA #>p0D80
+        STA r2H
+        LDA #<p0D80
+        STA r2L
+        JSR ReadRecord
+b5AFF   JSR s253B
+        LDA #$FF
+        STA a0AF0
+        RTS 
+
+p5B08   .TEXT "Configure", $00
+        .BYTE $00,$00,$00,$00,$00,$00,$00,$00
+        .BYTE $00,$00,$00,$00
+p5B1E   .BYTE $00,$00,$00
+j5B21   .BYTE $00,$00,$00
+j5B24   .BYTE $00,$00,$00
+j5B27   .BYTE $00,$00,$00
+j5B2A   .BYTE $00,$00,$00
+j5B2D   .BYTE $00,$00,$00
+j5B30   .BYTE $00,$00,$00
+j5B33   .BYTE $00,$00,$00
+j5B36   .BYTE $00,$00,$00
+j5B39   .BYTE $00,$00,$00
+j5B3C   .BYTE $00,$00,$00
+j5B3F   .BYTE $00,$00,$00
+j5B42   .BYTE $00,$00,$00,$00,$00,$00,$00,$00
+        .BYTE $00,$00,$00,$00,$00,$00,$00,$00
+        .BYTE $00,$00,$00,$00,$00,$00,$00,$00
+        .BYTE $00,$00,$00,$00,$00,$00,$00,$00
+        .BYTE $00,$00,$00,$00,$00,$00,$00,$00
+        .BYTE $00,$00,$00,$00,$00,$00,$00,$00
+        .BYTE $00,$00,$00,$00,$00,$00,$00,$00
+        .BYTE $00,$00,$00,$00,$00,$00,$00,$00
+        .BYTE $00,$00,$00,$00,$00,$00,$00,$00
+        .BYTE $00,$00,$00,$00,$00,$00,$00,$00
+        .BYTE $00,$00,$00,$00,$00,$00,$00,$00
+        .BYTE $00,$00,$00,$00,$00,$00,$00,$00
+        .BYTE $00,$00,$00,$00,$00,$00,$00,$00
+        .BYTE $00,$00,$00,$00,$00,$00,$00,$00
+        .BYTE $00,$00,$00,$00,$00,$00,$00,$00
+        .BYTE $00,$00,$00,$00,$00,$00,$00,$00
+        .BYTE $00,$00,$00,$00,$00,$00,$00,$00
+        .BYTE $00,$00,$00,$00,$00,$00
