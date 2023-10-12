@@ -5726,25 +5726,32 @@ p4BF7   .BYTE $00
         .BYTE $2F,$40,$50,$4D,$26,$2F,$40,$5B
         .BYTE $4D,$2B,$2F,$40,$66,$4D,$0C
 a4C22   .BYTE $44,$00,$00,$4F,$00
-a4C27   .BYTE $84,$33,$2F,$00,$21,$55,$3D,$2F
-        .BYTE $00,$2A,$55,$51,$2F,$00,$D9,$54
-        .BYTE $60,$2F,$00,$E2,$54,$66,$0A,$00
+a4C27   .BYTE $84
+mnuStructGEOSInfo .BYTE $33,$2F,$00,$21,$55
+mnuStructGEOSdesktop .BYTE $3D,$2F,$00,$2A,$55
+mnuStructGEOSSelPr .BYTE $51,$2F,$00,$D9,$54
+mnuStructGEOSSelInpt .BYTE $60,$2F,$00,$E2,$54,$66,$0A,$00
         .BYTE $C3,$4E,$77,$0A,$00,$C3,$4E,$88
         .BYTE $0A,$00,$C3,$4E,$99,$0A,$00,$C3
         .BYTE $4E,$AA,$0A,$00,$C3,$4E,$BB,$0A
         .BYTE $00,$C3,$4E,$CC,$0A,$00,$C3,$4E
         .BYTE $DD,$0A,$00,$C3,$4E,$0C,$6F,$20
-        .BYTE $00,$77,$00,$87,$74,$2F,$00,$2F
-        .BYTE $3C,$80,$2F,$00,$45,$55,$91,$2F
-        .BYTE $00,$3C,$55,$45,$2F,$00,$D0,$54
-        .BYTE $9F,$2F,$00,$5E,$54,$AC,$2F,$00
-        .BYTE $6D,$54,$BA,$2F,$00,$9A,$54,$0C
-        .BYTE $57,$30,$00,$5F,$00,$85
-a4C95   .BYTE $CD
-a4C96   .BYTE $2F,$00,$48,$51,$E5,$2F,$00,$48
-        .BYTE $51,$ED,$2F,$00,$48,$51,$DD,$2F
-        .BYTE $00,$48,$51,$D5,$2F,$00,$48,$51
-        .BYTE $0C,$6F,$50,$00,$8F,$00
+        .BYTE $00,$77,$00,$87
+mnuStructFileOpen .BYTE $74,$2F,$00,$2F,$3C
+mnuStructFileDupl .BYTE $80,$2F,$00,$45,$55
+mnuStructFileRenam .BYTE $91,$2F,$00,$3C,$55
+mnuStructFileInfo .BYTE $45,$2F,$00,$D0,$54,$9F
+mnuStructFilePrint .BYTE $2F,$00,$5E,$54
+mnuStructFileDelete .BYTE $AC,$2F,$00,$6D,$54
+mnuStructFileUndo .BYTE $BA,$2F,$00,$9A,$54,$0C,$57,$30
+        .BYTE $00,$5F,$00,$85
+mnuStructViewIcon .BYTE $CD
+a4C96   .BYTE $2F,$00,$48,$51
+mnuStructViewSize .BYTE $E5,$2F,$00,$48,$51
+mnuStructViewType .BYTE $ED,$2F,$00,$48,$51
+mnuStructViewDate .BYTE $DD,$2F,$00,$48,$51
+mnuStructViewName .BYTE $D5,$2F,$00,$48,$51,$0C,$6F,$50
+        .BYTE $00,$8F,$00
         .BYTE $87
 mnuStructDiskOpen .BYTE $F5,$2F,$00,$21,$4F
 mnuStructDiskClose .BYTE $01,$30,$00,$F9,$35
@@ -5753,15 +5760,18 @@ mnuStructDiskCopy .BYTE $1C,$30,$00,$45,$4F
 mnuStructDiskValidat .BYTE $35,$30,$00,$7C,$54
 mnuStructDiskErase .BYTE $28,$30,$00,$A3,$54
 mnuStructDiskFormat .BYTE $45,$30,$00,$85,$54,$0C,$37,$68
-        .BYTE $00,$B7,$00,$83,$6F,$30,$00,$B5
-        .BYTE $54,$80,$30,$00,$BE,$54,$92,$30
-        .BYTE $00,$C7,$54,$0C,$27,$88,$00,$C7
-        .BYTE $00,$82,$53,$30,$00,$EB,$54,$61
-        .BYTE $30,$00,$F4,$54
-p4CFF   .BYTE $0C,$47,$A0,$00,$E7,$00,$84,$A6
-        .BYTE $30,$00,$4E,$55,$B6,$30,$00,$6C
-        .BYTE $51,$B0,$30,$00,$0F,$55,$C3,$30
-        .BYTE $00,$5D,$55
+        .BYTE $00,$B7,$00,$83
+mnuStructSelectAllPg .BYTE $6F,$30,$00,$B5,$54
+mnuStructSelectPage .BYTE $80,$30,$00,$BE,$54
+mnuStructSelectBordr .BYTE $92,$30,$00,$C7,$54,$0C,$27,$88
+        .BYTE $00,$C7,$00,$82
+mnuStructPageAppend .BYTE $53,$30,$00,$EB,$54
+mnuStructPageDel .BYTE $61,$30,$00,$F4,$54
+p4CFF   .BYTE $0C,$47,$A0,$00,$E7,$00,$84
+mnuOptSetClock .BYTE $A6,$30,$00,$4E,$55
+mnuOptReset .BYTE $B6,$30,$00,$6C,$51
+mnuOptBasic .BYTE $B0,$30,$00,$0F,$55
+mnuOptShortCuts .BYTE $C3,$30,$00,$5D,$55
 f4D1A   .TEXT "GEOS BOOT", $A0
 
 ; show GEOS submenu
@@ -6018,13 +6028,13 @@ j4EE4   JSR s3FF6
         STX r0L
         LDA a4C96
         PHA 
-        LDA a4C95
+        LDA mnuStructViewIcon
         PHA 
         JSR LdDeskAcc
         LDA #$80
         STA a2F
         PLA 
-        STA a4C95
+        STA mnuStructViewIcon
         PLA 
         STA a4C96
         TXA 
