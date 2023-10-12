@@ -607,9 +607,9 @@ b1A80   JSR s22DC
         RTS 
 
 s1A8E   JSR OpenDisk
-        JSR s253B
+        JSR s253B    ;transfer X to A, if A=0 return, else pull from stack
         JSR s1AAE
-        JSR s253B
+        JSR s253B    ;transfer X to A, if A=0 return, else pull from stack
         LDA r7H
         BEQ b1AA2
         LDX #$05
@@ -631,7 +631,7 @@ s1AB5   JSR OpenDisk
         JMP FindFTypes
 
 s1AC2   JSR GetFHdrInfo
-        JSR s253B
+        JSR s253B    ;transfer X to A, if A=0 return, else pull from stack
         LDY #$01
         LDA (r9L),Y
         STA r1L
@@ -639,7 +639,7 @@ s1AC2   JSR GetFHdrInfo
         LDA (r9L),Y
         STA r1H
         JSR s1DE3
-        JSR s253B
+        JSR s253B    ;transfer X to A, if A=0 return, else pull from stack
         LDA a8002
         STA r1L
         LDA a8003
@@ -729,11 +729,11 @@ s1B7C   JSR s1BC4
         LDA #$FF
         JSR s1CFD
 b1B84   JSR s1BF8
-        JSR s253B
+        JSR s253B    ;transfer X to A, if A=0 return, else pull from stack
         JSR s232C
-        JSR s253B
+        JSR s253B    ;transfer X to A, if A=0 return, else pull from stack
         JSR s1C63
-        JSR s253B
+        JSR s253B    ;transfer X to A, if A=0 return, else pull from stack
         LDA a04F4
         CMP a0522
         BEQ b1BA0
@@ -751,7 +751,7 @@ b1BA7   LDA a0520
         BNE b1BA6
         STA a0520
         JSR GetDirHead
-        JSR s253B
+        JSR s253B    ;transfer X to A, if A=0 return, else pull from stack
         JSR s1DF0
         JMP PutDirHead
 
@@ -780,7 +780,7 @@ s1BC4   LDA a03F5
         RTS 
 
 s1BF8   JSR EnterTurbo
-        JSR s253B
+        JSR s253B    ;transfer X to A, if A=0 return, else pull from stack
         JSR InitForIO
         JSR s1C4E
         LDA #$00
@@ -827,7 +827,7 @@ s1C4E   LDA a03F3
         RTS 
 
 s1C63   JSR EnterTurbo
-        JSR s253B
+        JSR s253B    ;transfer X to A, if A=0 return, else pull from stack
         STX a04F6
         JSR InitForIO
         LDA a04F2
@@ -851,7 +851,7 @@ b1C89   LDA a04F2
         LDA (r10L),Y
         STA r1H
         JSR s1CC9
-        JSR s253B
+        JSR s253B    ;transfer X to A, if A=0 return, else pull from stack
         JSR s1CC0
         LDA a04F6
         BNE b1CAD
@@ -859,7 +859,7 @@ b1C89   LDA a04F2
         CLV 
         BVC b1CB0
 b1CAD   JSR VerWriteBlock
-b1CB0   JSR s253B
+b1CB0   JSR s253B    ;transfer X to A, if A=0 return, else pull from stack
         JSR s2541
         INC r11H
         DEC a04F2
@@ -881,7 +881,7 @@ s1CC9   LDA r1L
         BNE b1CF9
         JSR s254D
         JSR ReadBlock
-        JSR s253B
+        JSR s253B    ;transfer X to A, if A=0 return, else pull from stack
         LDY #$90
         LDX #$13
 b1CE4   LDA diskBlkBuf,Y
@@ -1092,9 +1092,9 @@ f1E86   .BYTE $12,$19,$1F,$24
 s1E8A   JSR s2268
         JSR s206D
         JSR s2097
-        JSR s253B
+        JSR s253B    ;transfer X to A, if A=0 return, else pull from stack
         JSR s232C
-        JSR s253B
+        JSR s253B    ;transfer X to A, if A=0 return, else pull from stack
         LDA #>curDirHead
         STA r5H
         LDA #<curDirHead
@@ -1111,7 +1111,7 @@ b1EB5   BEQ b1EB9
 b1EB9   LDA aFC
         STA r10L
         JSR GetFreeDirBlk
-        JSR s253B
+        JSR s253B    ;transfer X to A, if A=0 return, else pull from stack
         LDA r10L
         STA aFC
         STY a04E0
@@ -1120,20 +1120,20 @@ b1EB9   LDA aFC
         LDA r1L
         STA a04E1
         JSR PutDirHead
-        JSR s253B
+        JSR s253B    ;transfer X to A, if A=0 return, else pull from stack
 b1EDA   JSR s1F01
-        JSR s253B
+        JSR s253B    ;transfer X to A, if A=0 return, else pull from stack
         TYA 
         BNE b1EF7
         JSR s22F3
-        JSR s253B
+        JSR s253B    ;transfer X to A, if A=0 return, else pull from stack
         JSR s2097
-        JSR s253B
+        JSR s253B    ;transfer X to A, if A=0 return, else pull from stack
         JSR s2350
-        JSR s253B
+        JSR s253B    ;transfer X to A, if A=0 return, else pull from stack
         BEQ b1EDA
 b1EF7   JSR s2244
-        JSR s253B
+        JSR s253B    ;transfer X to A, if A=0 return, else pull from stack
         JSR PutDirHead
 b1F00   RTS 
 
@@ -1270,7 +1270,7 @@ s1FDB   LDA r8L
         STA r7L
         PLA 
         STA r7H
-        JSR s253B
+        JSR s253B    ;transfer X to A, if A=0 return, else pull from stack
         LDY #$00
         LDA (r10L),Y
         AND #$80
@@ -1287,13 +1287,13 @@ b202F   LDA a04E8
         STA r1L
         JSR s254D
         JSR GetBlock
-        JSR s253B
+        JSR s253B    ;transfer X to A, if A=0 return, else pull from stack
         LDA a8301
         STA a8001
         LDA fileTrScTab
         STA diskBlkBuf
         JSR PutBlock
-        JSR s253B
+        JSR s253B    ;transfer X to A, if A=0 return, else pull from stack
 b2054   LDA r3H
         STA a04E8
         LDA r3L
@@ -1544,7 +1544,7 @@ s2244   LDA a04E2
         LDA a04E1
         STA r1L
         JSR s1DE3
-        JSR s253B
+        JSR s253B    ;transfer X to A, if A=0 return, else pull from stack
         LDY a04E0
         LDX #$00
 b2259   LDA f0406,X
@@ -1747,7 +1747,7 @@ s23E4   LDA r1H
         STA r1L
         PLA 
         STA r1H
-        JSR s253B
+        JSR s253B    ;transfer X to A, if A=0 return, else pull from stack
         LDX #$0C
         LDY #$04
         LDA #$12
@@ -1897,6 +1897,7 @@ s2533   PHA
         PLA 
         RTS 
 
+; transfer X to A, if A=0 return, else pull from stack
 s253B   TXA 
         BEQ b2540
         PLA 
@@ -2336,7 +2337,7 @@ b316D   RTS
 
 b316E   JSR s401C
         JSR s321A    ;CLICK DISK ICON HANDLER
-        JSR s253B
+        JSR s253B    ;transfer X to A, if A=0 return, else pull from stack
         STA aFB
         LDA #$00
         STA a7D
@@ -2349,13 +2350,13 @@ b316E   JSR s401C
         CMP #$03
         BNE b31B2
         JSR GetDirHead
-        JSR s253B
+        JSR s253B    ;transfer X to A, if A=0 return, else pull from stack
         JSR s35A2
         CPX #$06
         BEQ b31A5
-        JSR s253B
+        JSR s253B    ;transfer X to A, if A=0 return, else pull from stack
         JSR PutDirHead
-        JSR s253B
+        JSR s253B    ;transfer X to A, if A=0 return, else pull from stack
 b31A5   JSR SetGEOSDisk
         TXA 
         BEQ b316E
@@ -2461,7 +2462,7 @@ b3263   LDA a82BE
 
 s3283   JSR s32BB    ;Draw Pad Lines
         JSR s39CB
-        JSR s253B
+        JSR s253B    ;transfer X to A, if A=0 return, else pull from stack
         LDY curDrive
         LDA f8486,Y
         AND #$0F
@@ -2478,7 +2479,7 @@ b329F   JSR s387D
         BVC b329F
 b32AC   JSR s32FA
         JSR s3426
-        JSR s253B
+        JSR s253B    ;transfer X to A, if A=0 return, else pull from stack
         JSR s3318    ;When opening a disk - draws pad and disk data
         LDX #$00
 b32BA   RTS 
@@ -2668,7 +2669,7 @@ b343D   LDY #$00
         BEQ b345A
         LDY #$13
         JSR s1DDA
-        JSR s253B
+        JSR s253B    ;transfer X to A, if A=0 return, else pull from stack
         LDX #$0A
         LDY #$1C
         LDA #$44
@@ -2697,7 +2698,7 @@ s3477   LDA a0251
         LDA a0252
         STA r1H
         JSR s1DE3
-        JSR s253B
+        JSR s253B    ;transfer X to A, if A=0 return, else pull from stack
         LDA a8002
         STA maxMouseSpeed
         LDA a8003
@@ -2733,7 +2734,7 @@ b34D6   LDA a0253
         LDA a0254
         STA r1H
         JSR s1DE3
-        JSR s253B
+        JSR s253B    ;transfer X to A, if A=0 return, else pull from stack
         LDX #$08
 b34EA   LDA a8002,X
         STA f8FE8,X
@@ -2798,7 +2799,7 @@ b3561   STA (r0L),Y
         INY 
         BNE b3561
 b3566   JSR s1DE3
-        JSR s253B
+        JSR s253B    ;transfer X to A, if A=0 return, else pull from stack
         LDY a8001
         STY r1H
         INY 
@@ -2839,7 +2840,7 @@ s35AB   LDY #$01
         DEY 
         STY r1H
         JSR s1DE3
-        JSR s253B
+        JSR s253B    ;transfer X to A, if A=0 return, else pull from stack
         LDY #$00
         LDA (r4L),Y
         CMP #$43
@@ -3390,7 +3391,7 @@ b39CF   STA f7EFF,X
         LDA #$12
         STA r2L
         JSR s3A42
-        JSR s253B
+        JSR s253B    ;transfer X to A, if A=0 return, else pull from stack
         LDA #$11
         SEC 
         SBC r2L
@@ -4494,7 +4495,7 @@ s42A9   STA a024A
         JSR FindFile
         CPX #$05
         BEQ b434D
-        JSR s253B
+        JSR s253B    ;transfer X to A, if A=0 return, else pull from stack
         JSR GetDirHead
         LDA a82BD
         BEQ b42E7
@@ -7500,15 +7501,15 @@ s5A0A   LDA a0AF0
         BEQ b5A8E
         STA r5H
         INC numDrives
-        LDA ramExpSize
-        BNE b5A41
+        LDA ramExpSize ;2=128k. 4=256k, 8=512k; 16=1MB, 32=1MB+
+        BNE b5A41    ;jump ahead if REU is present
         LDA r5H
         CMP #$03
         BEQ b5A3B
         BCS b5A4E
         CMP r5L
         BEQ b5A41
-b5A3B   JSR s5AAD
+b5A3B   JSR s5AAD    ;Find "CONFIGURE"
         TXA 
         BNE b5A4E
 b5A41   JSR s1AEC
@@ -7559,35 +7560,36 @@ s5A91   LDX #$04
         STX r1L
         JMP j364B
 
+; Find "CONFIGURE"
 s5AAD   STA r12L
-        LDA #>p6600
+        LDA #>p6600  ;Hi byte of buffer to store file list
         STA r6H
-        LDA #<p6600
+        LDA #<p6600  ;Lo byte of buffer to store file list
         STA r6L
         LDA #<p010E
-        STA r7L
+        STA r7L      ;File type to search for
         LDA #>p010E
-        STA r7H
-        LDA #>p5B08
+        STA r7H      ;Max # files to search for
+        LDA #>p5B08  ;Hi byte of "CONFIGURE" filename
         STA r10H
-        LDA #<p5B08
+        LDA #<p5B08  ;Lo byte of "CONFIGURE" filename
         STA r10L
         JSR FindFTypes
-        JSR s253B
+        JSR s253B    ;transfer X to A, if A=0 return, else pull from stack
         LDX #$05
         LDA r7H
         BNE b5AFF
         LDA #>p6600
-        STA r0H
+        STA r0H      ;Hi byte of filename to open
         LDA #<p6600
-        STA r0L
+        STA r0L      ;Lo byte of filename to open
         JSR OpenRecordFile
-        JSR s253B
+        JSR s253B    ;transfer X to A, if A=0 return, else pull from stack
         LDA r12L
         CLC 
         ADC #$01
         JSR PointRecord
-        JSR s253B
+        JSR s253B    ;transfer X to A, if A=0 return, else pull from stack
         LDA #>p0AF2
         STA r7H
         LDA #<p0AF2
@@ -7597,12 +7599,14 @@ s5AAD   STA r12L
         LDA #<p0D80
         STA r2L
         JSR ReadRecord
-b5AFF   JSR s253B
+b5AFF   JSR s253B    ;transfer X to A, if A=0 return, else pull from stack
         LDA #$FF
         STA a0AF0
         RTS 
 
 p5B08   .TEXT "Configure", $00
+
+; this space used by loaded auto-exec "configure"
         .BYTE $00,$00,$00,$00,$00,$00,$00,$00
         .BYTE $00,$00,$00,$00
 p5B1E   .BYTE $00,$00,$00
