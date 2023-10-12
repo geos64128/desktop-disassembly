@@ -2039,7 +2039,9 @@ f2651   .BYTE $9B
 f2652   .BYTE $27,$04,$A5,$27,$21,$B5,$27,$26
         .BYTE $D2,$27,$80,$ED,$27
 a265F   .BYTE $00,$28,$26
-j2662   LDY #$00
+
+; When user clicks on top level menu, this code executes before submenus displayed
+MainMenuHandler LDY #$00
 b2664   LDA (r0L),Y
         STA r2L,Y
         INY 
@@ -2048,13 +2050,13 @@ b2664   LDA (r0L),Y
         LDA a8C27
         STA r6L
         LDX #$06
-        JSR s26D1
+        JSR s26D1    ;divide the register rX by 8
         LDX #$07
-        JSR s26D1
+        JSR s26D1    ;divide the register rX by 8
         LDX #$08
-        JSR s26D1
+        JSR s26D1    ;divide the register rX by 8
         LDX #$0A
-        JSR s26D1
+        JSR s26D1    ;divide the register rX by 8
 s2687   LDA r4L
         SEC 
         SBC r3L
@@ -2096,6 +2098,7 @@ b26CC   DEC r2H
         BPL b26B8
         RTS 
 
+; divide the register rX by 8
 s26D1   LDA f00,X
         LSR 
         LSR 
@@ -3675,6 +3678,7 @@ b3C26   INC a75
         BCC b3BFA
         RTS 
 
+; File->Open Menu Action =======================
         JSR DoPreviousMenu
 j3C32   LDA curDrive
         STA a79
@@ -5716,42 +5720,59 @@ b4BC4   LDA #$12
 p4BDF   .BYTE $60,$29,$01,$7C,$02,$10,$BC,$4A
 p4BE7   .BYTE $3F,$29,$10,$7C,$02,$10,$09,$55
 p4BEF   .BYTE $81,$29,$1E,$11,$02,$0B,$FC,$35
-p4BF7   .BYTE $00
 
-; Main menu structure
-        .BYTE $0C,$00,$00
-        .BYTE $C9,$00,$07,$10,$2F,$40,$24,$4D
-        .BYTE $15,$2F,$40,$2F,$4D,$1A,$2F,$40
-        .BYTE $3A,$4D,$E4,$2D,$40,$45,$4D,$1F
-        .BYTE $2F,$40,$50,$4D,$26,$2F,$40,$5B
-        .BYTE $4D,$2B,$2F,$40,$66,$4D,$0C
+; MAIN MENU STRUCTURE ===============================
+mnuStruct .BYTE $00    ;y1=0
+        .BYTE $0C,$00,$00 ;y2=12, x1=0
+        .BYTE $C9,$00,$07 ;x2=201, attribute=HORIZONTAL | 7 items
+
+; 3rd byte = $40 = Dynamic submenu (all GEOS top level menus define submenus as dynamic)
+mnuStructGEOS .BYTE $10,$2F,$40,$24,$4D
+mnuStructFILE .BYTE $15,$2F,$40,$2F,$4D
+mnuStructVIEW .BYTE $1A,$2F,$40,$3A,$4D
+mnuStructDISK .BYTE $E4,$2D,$40,$45,$4D
+mnuStructSELECT .BYTE $1F,$2F,$40,$50,$4D
+mnuStructPAGE .BYTE $26,$2F,$40,$5B,$4D
+mnuStructOPTIONS .BYTE $2B,$2F,$40,$66,$4D
+
+; GEOS Submenu Structure
+_mnuStructGEOS .BYTE $0C
 a4C22   .BYTE $44,$00,$00,$4F,$00
 a4C27   .BYTE $84
 mnuStructGEOSInfo .BYTE $33,$2F,$00,$21,$55
 mnuStructGEOSdesktop .BYTE $3D,$2F,$00,$2A,$55
 mnuStructGEOSSelPr .BYTE $51,$2F,$00,$D9,$54
-mnuStructGEOSSelInpt .BYTE $60,$2F,$00,$E2,$54,$66,$0A,$00
-        .BYTE $C3,$4E,$77,$0A,$00,$C3,$4E,$88
-        .BYTE $0A,$00,$C3,$4E,$99,$0A,$00,$C3
-        .BYTE $4E,$AA,$0A,$00,$C3,$4E,$BB,$0A
-        .BYTE $00,$C3,$4E,$CC,$0A,$00,$C3,$4E
-        .BYTE $DD,$0A,$00,$C3,$4E,$0C,$6F,$20
-        .BYTE $00,$77,$00,$87
+mnuStructGEOSSelInpt .BYTE $60,$2F,$00,$E2,$54
+mnuStructGEOSExt1 .BYTE $66,$0A,$00,$C3,$4E
+mnuStructGEOSExt2 .BYTE $77,$0A,$00,$C3,$4E
+mnuStructGEOSExt3 .BYTE $88,$0A,$00,$C3,$4E
+mnuStructGEOSExt4 .BYTE $99,$0A,$00,$C3,$4E
+mnuStructGEOSExt5 .BYTE $AA,$0A,$00,$C3,$4E
+mnuStructGEOSExt6 .BYTE $BB,$0A,$00,$C3,$4E
+mnuStructGEOSExt7 .BYTE $CC,$0A,$00,$C3,$4E
+mnuStructGEOSExt8 .BYTE $DD,$0A,$00,$C3,$4E
+
+; File Submenu Structure
+_mnuStructFile .BYTE $0C,$6F,$20,$00,$77,$00,$87
 mnuStructFileOpen .BYTE $74,$2F,$00,$2F,$3C
 mnuStructFileDupl .BYTE $80,$2F,$00,$45,$55
 mnuStructFileRenam .BYTE $91,$2F,$00,$3C,$55
-mnuStructFileInfo .BYTE $45,$2F,$00,$D0,$54,$9F
-mnuStructFilePrint .BYTE $2F,$00,$5E,$54
+mnuStructFileInfo .BYTE $45,$2F,$00,$D0,$54
+mnuStructFilePrint .BYTE $9F,$2F,$00,$5E,$54
 mnuStructFileDelete .BYTE $AC,$2F,$00,$6D,$54
-mnuStructFileUndo .BYTE $BA,$2F,$00,$9A,$54,$0C,$57,$30
-        .BYTE $00,$5F,$00,$85
+mnuStructFileUndo .BYTE $BA,$2F,$00,$9A,$54
+
+; View Submenu Structure
+_mnuStructView .BYTE $0C,$57,$30,$00,$5F,$00,$85
 mnuStructViewIcon .BYTE $CD
 a4C96   .BYTE $2F,$00,$48,$51
 mnuStructViewSize .BYTE $E5,$2F,$00,$48,$51
 mnuStructViewType .BYTE $ED,$2F,$00,$48,$51
 mnuStructViewDate .BYTE $DD,$2F,$00,$48,$51
-mnuStructViewName .BYTE $D5,$2F,$00,$48,$51,$0C,$6F,$50
-        .BYTE $00,$8F,$00
+mnuStructViewName .BYTE $D5,$2F,$00,$48,$51
+
+; Disk Submenu Structure
+_mnuStructDisk .BYTE $0C,$6F,$50,$00,$8F,$00
         .BYTE $87
 mnuStructDiskOpen .BYTE $F5,$2F,$00,$21,$4F
 mnuStructDiskClose .BYTE $01,$30,$00,$F9,$35
@@ -5759,71 +5780,77 @@ mnuStructDiskRename .BYTE $0E,$30,$00,$33,$55
 mnuStructDiskCopy .BYTE $1C,$30,$00,$45,$4F
 mnuStructDiskValidat .BYTE $35,$30,$00,$7C,$54
 mnuStructDiskErase .BYTE $28,$30,$00,$A3,$54
-mnuStructDiskFormat .BYTE $45,$30,$00,$85,$54,$0C,$37,$68
-        .BYTE $00,$B7,$00,$83
+mnuStructDiskFormat .BYTE $45,$30,$00,$85,$54
+
+; Select Submenu Structure
+_mnuStructSelect .BYTE $0C,$37,$68,$00,$B7,$00,$83
 mnuStructSelectAllPg .BYTE $6F,$30,$00,$B5,$54
 mnuStructSelectPage .BYTE $80,$30,$00,$BE,$54
-mnuStructSelectBordr .BYTE $92,$30,$00,$C7,$54,$0C,$27,$88
-        .BYTE $00,$C7,$00,$82
+mnuStructSelectBordr .BYTE $92,$30,$00,$C7,$54
+
+; Page Submenu Structure
+_mnuStructPage .BYTE $0C,$27,$88,$00,$C7,$00,$82
 mnuStructPageAppend .BYTE $53,$30,$00,$EB,$54
 mnuStructPageDel .BYTE $61,$30,$00,$F4,$54
-p4CFF   .BYTE $0C,$47,$A0,$00,$E7,$00,$84
+
+; Options Submenu Structure
+_mnuStructOptions .BYTE $0C,$47,$A0,$00,$E7,$00,$84
 mnuOptSetClock .BYTE $A6,$30,$00,$4E,$55
 mnuOptReset .BYTE $B6,$30,$00,$6C,$51
 mnuOptBasic .BYTE $B0,$30,$00,$0F,$55
 mnuOptShortCuts .BYTE $C3,$30,$00,$5D,$55
 f4D1A   .TEXT "GEOS BOOT", $A0
 
-; show GEOS submenu
+; GEOS submenu handler ====================
         LDX #$04
         JSR s4DA4    ;Erase menubar dropdown menus
-        LDA #$21
-        LDY #$4C
+        LDA #$21     ;< address of submenu
+        LDY #$4C     ;> address of submenu
         BNE b4D6F
 
-; show file submenu
+; file submenu handler ====================
         LDX #$08
         JSR s4DA4    ;Erase menubar dropdown menus
-        LDA #$64
-        LDY #$4C
+        LDA #$64     ;< address of submenu
+        LDY #$4C     ;> address of submenu
         BNE b4D6F
 
-; show view submenu
+; view submenu handler ====================
         LDX #$0C
         JSR s4DA4    ;Erase menubar dropdown menus
-        LDA #$8E
-        LDY #$4C
+        LDA #$8E     ;< address of submenu
+        LDY #$4C     ;> address of submenu
         BNE b4D6F
 
-; show disk submenu
+; disk submenu handler ====================
         LDX #$10
         JSR s4DA4    ;Erase menubar dropdown menus
-        LDA #$AE
-        LDY #$4C
+        LDA #$AE     ;< address of submenu
+        LDY #$4C     ;> address of submenu
         BNE b4D6F
 
 ; show select submenu
         LDX #$14
         JSR s4DA4    ;Erase menubar dropdown menus
-        LDA #$D8
-        LDY #$4C
+        LDA #$D8     ;< address of submenu
+        LDY #$4C     ;> address of submenu
         BNE b4D6F
 
-; show page submenu
+; page submenu handler ====================
         LDX #$18
         JSR s4DA4    ;Erase menubar dropdown menus
-        LDA #$EE
-        LDY #$4C
+        LDA #$EE     ;< address of submenu
+        LDY #$4C     ;> address of submenu
         BNE b4D6F
 
-; show options submenu
+; options submenu handler ====================
         LDX #$1C
         JSR s4DA4    ;Erase menubar dropdown menus
-        LDA #<p4CFF
-        LDY #>p4CFF
+        LDA #<_mnuStructOptions ;< address of submenu
+        LDY #>_mnuStructOptions ;> address of submenu
 b4D6F   STY r0H
         STA r0L
-        JMP j2662
+        JMP MainMenuHandler ;When user clicks on top level menu, this code executes before submenus displayed
 
 a4D76   .BYTE $00
         LDX a4D76
@@ -5996,11 +6023,10 @@ f4E9F   .BYTE $08,$20,$19,$68,$00,$0C,$0B
 a4EA6   .BYTE $3A,$04,$0C,$0C,$64,$06,$0C,$07
         .BYTE $4C,$0A,$0C,$09,$64,$0D,$0C,$0B
         .BYTE $2C,$11,$0C,$09,$1E,$14,$0C,$0A
-        .BYTE $3E,$09
-        .BYTE $77,$16
-        .BYTE $44,$48
+        .BYTE $3E,$09,$77,$16,$44
 
-; Get filename for GEOS menu initiated desk accessory
+;  GEOS->Desk Accessories Menu Action ======================
+        PHA 
         JSR DoPreviousMenu
         PLA 
         SEC 
@@ -6295,6 +6321,7 @@ b510F   STY r5L
         JSR s45BC
 b5147   RTS 
 
+; View->All Types Menu Action ======================
         PHA 
         JSR DoPreviousMenu
         PLA 
@@ -6312,6 +6339,7 @@ b515F   JSR s3FF6
         JSR s4BA6
 b516B   RTS 
 
+; Options->Reset Menu Action ======================
         JSR DoPreviousMenu
         JSR s40F3
         JMP p5175    ;DESKTOP MAIN ENTRY POINT ==================================
@@ -6352,12 +6380,12 @@ b518B   STA f0070,Y
         JSR s5557
 
 ; Call DoMenu with menu structure
-b51C4   LDA #>p4BF7
+b51C4   LDA #>mnuStruct
         STA r0H
-        LDA #<p4BF7
+        LDA #<mnuStruct
         STA r0L
         LDA #$02     ;POINTER_OVER=2 (2nd item)
-        JSR DoMenu
+        JSR DoMenu   ;Draw and active the main menu
         JSR s46FA
         JSR s5606    ;Draw Clock Rectangle
         JSR s5A0A    ;INITIALIZE DESK TOP (After menu built)
@@ -6416,7 +6444,7 @@ p5202   .BYTE $A9,$84,$02,$C6,$40
 b5240   RTS 
 
         LDA a024C
-        ORA menuNumber
+        ORA menuNumber ;depth of current menu
         BNE b5240
         LDA keyData
         LDX diskOpenFlg
@@ -6588,11 +6616,11 @@ f53C8   STA f8486,Y
         .BYTE $00,$80,$00,$80,$83,$90,$9E,$AB
 s53D4   LDY #$01
 s53D7   =*+$01
-        BIT a02A0
+        BIT a02A0    ;LDY #$02
 s53DA   =*+$01
-        BIT a03A0
+        BIT a03A0    ;LDY #$03
 s53DD   =*+$01
-        BIT a04A0
+        BIT a04A0    ;LDY #$04
 s53E0   =*+$01
         BIT a05A0
         CPY a7E
@@ -6660,6 +6688,7 @@ b5454   LDA #$00
         TAX 
         RTS 
 
+; File->Print Menu Action ======================
         JSR DoPreviousMenu
         JSR s53D4
         JMP p5B1E
@@ -6667,6 +6696,7 @@ b5454   LDA #$00
         JSR s53D4
         JMP j5B21
 
+; File->Print Menu Action ======================
         JSR DoPreviousMenu
         JSR s53D4
         JMP j5B24
@@ -6689,6 +6719,7 @@ s5491   JSR s5566
         JSR s53D4
         JMP j5B30
 
+; File->Undo Delete Menu Action ======================
         JSR DoPreviousMenu
         JSR s53D4
         JMP j5B33
@@ -6702,34 +6733,42 @@ s5491   JSR s5566
 j54AF   JSR s53D4
         JMP j5B39
 
+; Select->All Pages Menu Action ======================
         JSR DoPreviousMenu
         JSR s53D4
         JMP j5B3C
 
+; Select->Page Files Menu Action ======================
         JSR DoPreviousMenu
         JSR s53D4
         JMP j5B3F
 
+; Select->Border Files Menu Action ======================
         JSR DoPreviousMenu
         JSR s53D4
         JMP j5B42
 
+; File->Info Menu Action ======================
         JSR DoPreviousMenu
         JSR s53D7
         JMP p5B1E
 
+; GEOS->Select Printer Menu Action ======================
         JSR DoPreviousMenu
         JSR s53DA
         JMP p5B1E
 
+; GEOS->Select Input Menu Action ======================
         JSR DoPreviousMenu
         JSR s53DA
         JMP j5B21
 
+; Page->Append Menu Action ======================
         JSR DoPreviousMenu
         JSR s53DA
         JMP j5B24
 
+; Page->Delete Menu Action ======================
         JSR DoPreviousMenu
 p54F8   =*+$01
         JSR s53DA
@@ -6746,18 +6785,21 @@ p54F8   =*+$01
         JSR s53DD
         JMP j5B2A
 
+; Options->BASIC Menu Action ======================
         JSR DoPreviousMenu
-        JSR s5566
+        JSR s5566    ;store $ff at $0248
         JSR s53DD
         JMP j5B2D
 
 s551B   JSR s53DD
         JMP j5B30
 
+; GEOS->Info Menu Action =======================
         JSR DoPreviousMenu
         JSR s53DD
         JMP j5B33
 
+; GEOS->Desktop Info Menu Action ======================
         JSR DoPreviousMenu
         JSR s53DD
         JMP j5B36
@@ -6767,14 +6809,17 @@ s551B   JSR s53DD
         JSR s53DD
         JMP j5B39
 
+; File->Rename Menu Action ======================
         JSR DoPreviousMenu
         JSR s53DD
         JMP j5B3C
 
+; File->Duplicate Menu Action ======================
         JSR DoPreviousMenu
         JSR s53DD
         JMP j5B3F
 
+; Options->Set Clock Menu Action ======================
         JSR DoPreviousMenu
         JSR s53E0
         JMP p5B1E
@@ -6782,6 +6827,7 @@ s551B   JSR s53DD
 s5557   JSR s53E0
         JMP j5B21
 
+; Options->Shortcuts Menu Action ======================
         JSR DoPreviousMenu
         JSR s53E0
         JMP j5B24
