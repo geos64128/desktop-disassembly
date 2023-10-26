@@ -1,54 +1,24 @@
+; ===============================================================================
 ;
-; **** ZP ABSOLUTE ADRESSES **** 
+; DESK TOP v2.0
+; For GEOS on the Commodore 64
 ;
-r0L = $02
-r0H = $03
-r1L = $04
-r1H = $05
-r2L = $06
-r2H = $07
-r3L = $08
-r3H = $09
-r4L = $0A
-r4H = $0B
-r5L = $0C
-r5H = $0D
-r6L = $0E
-r6H = $0F
-r8H = $13
-r9L = $14
-r9H = $15
-r10L = $16
-r12L = $1A
-r12H = $1B
-a70 = $70
-a71 = $71
-a72 = $72
-a73 = $73
-a74 = $74
-a76 = $76
-a77 = $77
-a78 = $78
-a7D = $7D
-a90 = $90
-aFB = $FB
-aFD = $FD
+; Reconstructed from binary by Scott Hutter
+; ===============================================================================
 ;
-; **** ZP POINTERS **** 
+; This File: VLIR Record 1
 ;
-r0L = $02
-r4L = $0A
-r4H = $0B
-r5L = $0C
-r9L = $14
-;
-; **** FIELDS **** 
-;
+; ===============================================================================
+
+
+.include "geos.inc"
+.include "kernal.inc"
+
 f8486 = $8486
 ;
 ; **** ABSOLUTE ADRESSES **** 
 ;
-a00A9 = $00A9
+a00A9 = $A9
 a0520 = $0520
 a0521 = $0521
 a0523 = $0523
@@ -139,188 +109,11 @@ eC175 = $C175
 ;
 ; **** USER LABELS **** 
 ;
-r7L = $0010
-r7H = $0011
-r8L = $0012
-r10H = $0017
-r11L = $0018
-r11H = $0019
-r13L = $001C
-r13H = $001D
-r14L = $001E
-r14H = $001F
-r15L = $0020
-r15H = $0021
-currentHeight = $0029
-displayBufferOn = $002F
-leftMarginLo = $0035
-leftMarginHi = $0036
-rightMarginLo = $0037
-rightMarginHi = $0038
-mouseXPosLo = $003A
-mouseXPosHi = $003B
-mouseYPos = $003C
-returnAddressLo = $003D
-returnAddressHi = $003E
-padViewMode = $007A
-dirBuffer_6d00 = $6D00
-diskBlkBuf = $8000
-fileHeader = $8100
-curDirHead = $8200
-fileTrScTab = $8300
-dirEntryBuf = $8400
-DrACurDkNm = $841E
-DrBCurDkNm = $8430
-dataFileName = $8442
-PrntFilename = $8465
-BootDiskName = $8476
-curDrive = $8489
-diskOpenFlg = $848A
-isGEOS = $848B
-numDrives = $848D
-driveType_8 = $848E
-driveType_9 = $848F
-driveType_10 = $8490
-driveType_11 = $8491
-fileWritten = $8498
-RecoverVector_LO = $84B1
-RecoverVector_HI = $84B2
-iconSelFlag = $84B5
-menuNumber = $84B7
-mouseTop = $84B8
-mouseBottom = $84B9
-mouseLeft_LO = $84BA
-mouseLeft_HI = $84BB
-mouseRight_LO = $84BC
-mouseRight_HI = $84BD
-maxMouseSpeed = $8501
-minMouseSpeed = $8502
-mouseAccel = $8503
-keyData = $8504
-random = $850A
-year = $8516
-month = $8517
-day = $8518
-hour = $8519
-minutes = $851A
-seconds = $851B
-screencolors = $851E
-driveData = $88BF
-ramExpSize = $88C3
-sysRAMFlg = $88C4
-curType = $88C6
-inputDevName = $88CB
-dir2Head = $8900
-spr2pic = $8A80
-AllocateBlock = $9048
-BootGEOS = $C000
-ResetHandle = $C003
-version = $C00F
-InterruptMain = $C100
-InitProcesses = $C103
-RestartProcess = $C106
-BlockProcess = $C10C
-HorizontalLine = $C118
-InvertLine = $C11B
-VerticalLine = $C121
-Rectangle = $C124
-InvertRectangle = $C12A
-SetPattern = $C139
-GetScanLine = $C13C
-BitmapUp = $C142
-PutChar = $C145
-PutString = $C148
-UseSystemFont = $C14B
-DoMenu = $C151
-DoIcons = $C15A
-BBMult = $C160
-Ddiv = $C169
-ClearRam = $C178
-FillRam = $C17B
-MoveData = $C17E
-InitRam = $C181
-PutDecimal = $C184
-MouseUp = $C18A
-MouseOff = $C18D
-DoPreviousMenu = $C190
-ReDoMenu = $C193
-GetSerialNumber = $C196
-i_Rectangle = $C19F
-i_FrameRectangle = $C1A2
-i_GraphicsString = $C1A8
-i_FillRam = $C1B4
-DrawSprite = $C1C6
-GetCharWidth = $C1C9
-LoadCharSet = $C1CC
-PosSprite = $C1CF
-EnablSprite = $C1D2
-DisablSprite = $C1D5
-CallRoutine = $C1D8
-CalcBlksFree = $C1DB
-ChkDkGEOS = $C1DE
-NewDisk = $C1E1
-GetBlock = $C1E4
-PutBlock = $C1E7
-SetGEOSDisk = $C1EA
-GetFreeDirBlk = $C1F6
-WriteFile = $C1F9
-ReadFile = $C1FF
-GetFile = $C208
-FindFile = $C20B
-CRC = $C20E
-EnterTurbo = $C214
-LdDeskAcc = $C217
-ReadBlock = $C21A
-LdApplic = $C21D
-WriteBlock = $C220
-VerWriteBlock = $C223
-FreeFile = $C226
-GetFHdrInfo = $C229
-EnterDeskTop = $C22C
-StartAppl = $C22F
-ExitTurbo = $C232
-PurgeTurbo = $C235
-DeleteFile = $C238
-FindFTypes = $C23B
-ToBasic = $C241
-GetDirHead = $C247
-PutDirHead = $C24A
-NxtBlkAlloc = $C24D
-DoDlgBox = $C256
-InitForIO = $C25C
-DoneWithIO = $C25F
-DShiftRight = $C262
-CopyFString = $C268
-CmpString = $C26B
-CmpFString = $C26E
-OpenRecordFile = $C274
-PointRecord = $C280
-ReadRecord = $C28C
-SetNextFree = $C292
-OpenDisk = $C2A1
-DoInlineReturn = $C2A4
-FindBAMBit = $C2AD
-SetDevice = $C2B0
-IsMseInRegion = $C2B3
-FreeBlock = $C2B9
-ChangeDiskDevice = $C2BC
-StashRAM = $C2C8
-FetchRAM = $C2CB
-SwapRAM = $C2CE
-VerifyRAM = $C2D1
-DoRAMOp = $C2D4
-InitMouse = $FE80
+
 ;
 ; **** PREDEFINED LABELS **** 
 ;
-ROM_SECOND = $FF93
-ROM_TKSA = $FF96
-ROM_ACPTR = $FFA5
-ROM_CIOUT = $FFA8
-ROM_UNTLK = $FFAB
-ROM_UNLSN = $FFAE
-ROM_LISTEN = $FFB1
-ROM_TALK = $FFB4
+
 
         * = $5B1E
 
@@ -810,7 +603,7 @@ b5F12   JSR DoneWithIO
 b5F21   RTS 
 
         .TEXT "U0>M"
-a5F26   .TEXT "1", $FF, "M-W"", $00, $01, $00, $FF
+a5F26   .TEXT "1", $FF, "M-W", $22, $00, $01, $00, $FF
 s5F30   STY r0H
         STA r0L
         LDA #$00
@@ -1253,7 +1046,7 @@ b63D3   LDA #$00
 
 j63D8   LDA #$08
 j63DB   =*+$01
-        BIT a00A9
+        .byte $2c, $a9, $00
         PHA 
         JSR e40F3
         PLA 

@@ -1,54 +1,29 @@
+; ===============================================================================
+;
+; DESK TOP v2.0
+; For GEOS on the Commodore 64
+;
+; Reconstructed from binary by Scott Hutter
+; ===============================================================================
+;
+; This File: VLIR Record 2
+;
+; ===============================================================================
+
+.include "geos.inc"
+.include "kernal.inc"
+
 ;
 ; **** ZP FIELDS **** 
 ;
-r2L = $06
 f25 = $25
 ;
 ; **** ZP ABSOLUTE ADRESSES **** 
 ;
-r0L = $02
-r0H = $03
-r1L = $04
-r1H = $05
-r2L = $06
-r2H = $07
-r3L = $08
-r3H = $09
-r4L = $0A
-r4H = $0B
-r5L = $0C
-r6L = $0E
-r7L = $10
-r7H = $11
-r8L = $12
-r9L = $14
-r9H = $15
-r11L = $18
-r11H = $19
-a22 = $22
-a23 = $23
-a24 = $24
-a25 = $25
-a2E = $2E
-a34 = $34
-mouseXPosLo = $3A
-mouseXPosHi = $3B
-mouseYPos = $3C
-a72 = $72
-a74 = $74
-a76 = $76
-a77 = $77
-a85 = $85
+
 ;
 ; **** ZP POINTERS **** 
 ;
-r0L = $02
-r2L = $06
-r3L = $08
-r4L = $0A
-r5L = $0C
-r7L = $10
-r9L = $14
 p24 = $24
 ;
 ; **** FIELDS **** 
@@ -122,232 +97,8 @@ eC2BF = $C2BF
 ;
 ; **** USER LABELS **** 
 ;
-r5H = $000D
-r6H = $000F
-r8H = $0013
-r10L = $0016
-r10H = $0017
-r12L = $001A
-r12H = $001B
-r13L = $001C
-r13H = $001D
-r14L = $001E
-r14H = $001F
-r15L = $0020
-r15H = $0021
-currentHeight = $0029
-displayBufferOn = $002F
-leftMarginLo = $0035
-leftMarginHi = $0036
-rightMarginLo = $0037
-rightMarginHi = $0038
-returnAddressLo = $003D
-returnAddressHi = $003E
-padViewMode = $007A
+
 MainMenuHandler = $2662
-mnuStruct = $4BF7
-mnuStructGEOS = $4BFE
-mnuStructFILE = $4C03
-mnuStructVIEW = $4C08
-mnuStructDISK = $4C0D
-mnuStructSELECT = $4C12
-mnuStructPAGE = $4C17
-mnuStructOPTIONS = $4C1C
-_mnuStructGEOS = $4C21
-mnuStructGEOSInfo = $4C28
-mnuStructGEOSdesktop = $4C2D
-mnuStructGEOSSelPr = $4C32
-mnuStructGEOSSelInpt = $4C37
-mnuStructGEOSExt1 = $4C3C
-mnuStructGEOSExt2 = $4C41
-mnuStructGEOSExt3 = $4C46
-mnuStructGEOSExt4 = $4C4B
-mnuStructGEOSExt5 = $4C50
-mnuStructGEOSExt6 = $4C55
-mnuStructGEOSExt7 = $4C5A
-mnuStructGEOSExt8 = $4C5F
-_mnuStructFile = $4C64
-mnuStructFileOpen = $4C6B
-mnuStructFileDupl = $4C70
-mnuStructFileRenam = $4C75
-mnuStructFileInfo = $4C7A
-mnuStructFilePrint = $4C7F
-mnuStructFileDelete = $4C84
-mnuStructFileUndo = $4C89
-_mnuStructView = $4C8E
-mnuStructViewIcon = $4C95
-mnuStructViewSize = $4C9A
-mnuStructViewType = $4C9F
-mnuStructViewDate = $4CA4
-mnuStructViewName = $4CA9
-_mnuStructDisk = $4CAE
-mnuStructDiskOpen = $4CB5
-mnuStructDiskClose = $4CBA
-mnuStructDiskRename = $4CBF
-mnuStructDiskCopy = $4CC4
-mnuStructDiskValidat = $4CC9
-mnuStructDiskErase = $4CCE
-mnuStructDiskFormat = $4CD3
-_mnuStructSelect = $4CD8
-mnuStructSelectAllPg = $4CDF
-mnuStructSelectPage = $4CE4
-mnuStructSelectBordr = $4CE9
-_mnuStructPage = $4CEE
-mnuStructPageAppend = $4CF5
-mnuStructPageDel = $4CFA
-_mnuStructOptions = $4CFF
-mnuOptSetClock = $4D06
-mnuOptReset = $4D0B
-mnuOptBasic = $4D10
-mnuOptShortCuts = $4D15
-ClockProcStruct = $5639
-dirBuffer_6d00 = $6D00
-diskBlkBuf = $8000
-fileHeader = $8100
-curDirHead = $8200
-fileTrScTab = $8300
-dirEntryBuf = $8400
-DrACurDkNm = $841E
-DrBCurDkNm = $8430
-dataFileName = $8442
-PrntFilename = $8465
-BootDiskName = $8476
-curDrive = $8489
-diskOpenFlg = $848A
-isGEOS = $848B
-numDrives = $848D
-driveType_8 = $848E
-driveType_9 = $848F
-driveType_10 = $8490
-driveType_11 = $8491
-fileWritten = $8498
-RecoverVector_LO = $84B1
-RecoverVector_HI = $84B2
-iconSelFlag = $84B5
-menuNumber = $84B7
-mouseTop = $84B8
-mouseBottom = $84B9
-mouseLeft_LO = $84BA
-mouseLeft_HI = $84BB
-mouseRight_LO = $84BC
-mouseRight_HI = $84BD
-maxMouseSpeed = $8501
-minMouseSpeed = $8502
-mouseAccel = $8503
-keyData = $8504
-random = $850A
-year = $8516
-month = $8517
-day = $8518
-hour = $8519
-minutes = $851A
-seconds = $851B
-screencolors = $851E
-driveData = $88BF
-ramExpSize = $88C3
-sysRAMFlg = $88C4
-curType = $88C6
-inputDevName = $88CB
-dir2Head = $8900
-spr2pic = $8A80
-AllocateBlock = $9048
-BootGEOS = $C000
-ResetHandle = $C003
-version = $C00F
-InterruptMain = $C100
-InitProcesses = $C103
-RestartProcess = $C106
-BlockProcess = $C10C
-HorizontalLine = $C118
-InvertLine = $C11B
-VerticalLine = $C121
-Rectangle = $C124
-InvertRectangle = $C12A
-SetPattern = $C139
-GetScanLine = $C13C
-BitmapUp = $C142
-PutChar = $C145
-PutString = $C148
-UseSystemFont = $C14B
-DoMenu = $C151
-DoIcons = $C15A
-BBMult = $C160
-Ddiv = $C169
-ClearRam = $C178
-FillRam = $C17B
-MoveData = $C17E
-InitRam = $C181
-PutDecimal = $C184
-MouseUp = $C18A
-MouseOff = $C18D
-DoPreviousMenu = $C190
-ReDoMenu = $C193
-GetSerialNumber = $C196
-i_Rectangle = $C19F
-i_FrameRectangle = $C1A2
-i_GraphicsString = $C1A8
-i_FillRam = $C1B4
-DrawSprite = $C1C6
-GetCharWidth = $C1C9
-LoadCharSet = $C1CC
-PosSprite = $C1CF
-EnablSprite = $C1D2
-DisablSprite = $C1D5
-CallRoutine = $C1D8
-CalcBlksFree = $C1DB
-ChkDkGEOS = $C1DE
-NewDisk = $C1E1
-GetBlock = $C1E4
-PutBlock = $C1E7
-SetGEOSDisk = $C1EA
-GetFreeDirBlk = $C1F6
-WriteFile = $C1F9
-ReadFile = $C1FF
-GetFile = $C208
-FindFile = $C20B
-CRC = $C20E
-EnterTurbo = $C214
-LdDeskAcc = $C217
-ReadBlock = $C21A
-LdApplic = $C21D
-WriteBlock = $C220
-VerWriteBlock = $C223
-FreeFile = $C226
-GetFHdrInfo = $C229
-EnterDeskTop = $C22C
-StartAppl = $C22F
-ExitTurbo = $C232
-PurgeTurbo = $C235
-DeleteFile = $C238
-FindFTypes = $C23B
-ToBasic = $C241
-GetDirHead = $C247
-PutDirHead = $C24A
-NxtBlkAlloc = $C24D
-DoDlgBox = $C256
-InitForIO = $C25C
-DoneWithIO = $C25F
-DShiftRight = $C262
-CopyFString = $C268
-CmpString = $C26B
-CmpFString = $C26E
-OpenRecordFile = $C274
-PointRecord = $C280
-ReadRecord = $C28C
-SetNextFree = $C292
-OpenDisk = $C2A1
-DoInlineReturn = $C2A4
-FindBAMBit = $C2AD
-SetDevice = $C2B0
-IsMseInRegion = $C2B3
-FreeBlock = $C2B9
-ChangeDiskDevice = $C2BC
-StashRAM = $C2C8
-FetchRAM = $C2CB
-SwapRAM = $C2CE
-VerifyRAM = $C2D1
-DoRAMOp = $C2D4
-InitMouse = $FE80
 
         * = $5B1E
 
