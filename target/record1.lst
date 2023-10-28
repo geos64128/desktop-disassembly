@@ -1,7 +1,7 @@
 
 ; 64tass Turbo Assembler Macro V1.53.1515 listing file
 ; 64tass -l ./target/record1.lbl -L ./target/record1.lst -o ./target/record1 ./record1.tas
-; Fri Oct 27 20:01:58 2023
+; Fri Oct 27 20:37:13 2023
 
 ;Offset	;Hex		;Monitor	;Source
 
@@ -6631,7 +6631,8 @@
 .5631	4c a8 56	jmp $56a8	        JMP j56A8    ;called after editing clock bar
 .5634	a2 00		ldx #$00	j5634   LDX #$00
 .5636	4c 06 c1	jmp $c106	        JMP RestartProcess
->5639	52 56 3c 00			ClockProcStruct .BYTE $52,$56,$3C,$00
+.5639					ClockProcStruct:
+>5639	52 56 3c 00			        .BYTE $52,$56,$3C,$00
 .563d	a2 00		ldx #$00	s563D   LDX #$00
 .563f	4c 0c c1	jmp $c10c	        JMP BlockProcess
 .5642	dd 4c 19	cmp $194c,x	s5642   CMP f194C,X
@@ -6914,19 +6915,19 @@
 .5866	08		php		        PHP
 .5867	a9 07		lda #$07	        LDA #$07
 .5869	4c a4 c2	jmp $c2a4	        JMP DoInlineReturn
-.586c	20 47 24	jsr $2447	s586C   JSR s2447    ;Set the rectangle pattern based on A
-.586f	a9 80		lda #$80	        LDA #$80     ;draw to the foreground screen
+.586c	20 47 24	jsr $2447	s586C   JSR s2447               ; Set the rectangle pattern based on A
+.586f	a9 80		lda #$80	        LDA #$80                ; draw to the foreground screen
 .5871	85 2f		sta $2f		        STA displayBufferOn
-.5873	20 9f c1	jsr $c19f	        JSR i_Rectangle ;draw file icon pad rectangle
+.5873	20 9f c1	jsr $c19f	        JSR i_Rectangle         ; draw file icon pad rectangle
 >5876	29 8a 09 00 06 01		        .BYTE $29,$8A,$09,$00,$06,$01 ;y1=29, y2=138, x1=9, x2=262
-.587c	4c f4 26	jmp $26f4	        JMP j26F4    ;comes here after drawing pad and disk info - seems to draw file icons
+.587c	4c f4 26	jmp $26f4	        JMP j26F4               ;comes here after drawing pad and disk info - seems to draw file icons
 .587f	86 03		stx $03		s587F   STX r0H
 .5881	85 02		sta $02		        STA r0L
 .5883	4c 48 c1	jmp $c148	        JMP PutString
-.5886	20 47 24	jsr $2447	s5886   JSR s2447    ;Set the rectangle pattern based on A
-.5889	20 9f c1	jsr $c19f	        JSR i_Rectangle ;This draws just for the file icons in the pad
+.5886	20 47 24	jsr $2447	s5886   JSR s2447               ; Set the rectangle pattern based on A
+.5889	20 9f c1	jsr $c19f	        JSR i_Rectangle         ; This draws just for the file icons in the pad
 >588c	29 76 09 00 06 01		        .BYTE $29,$76,$09,$00,$06,$01 ;y1=41, y2=118, x1=9, x2=262
-.5892	4c f4 26	jmp $26f4	        JMP j26F4    ;comes here after drawing pad and disk info - seems to draw file icons
+.5892	4c f4 26	jmp $26f4	        JMP j26F4               ; comes here after drawing pad and disk info - seems to draw file icons
 .5895	a9 04		lda #$04	        LDA #>f0406  ;
 .5897	85 0d		sta $0d		        STA r5H
 .5899	a9 06		lda #$06	        LDA #<f0406

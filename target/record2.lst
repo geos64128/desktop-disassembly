@@ -1,7 +1,7 @@
 
 ; 64tass Turbo Assembler Macro V1.53.1515 listing file
 ; 64tass -l ./target/record2.lbl -L ./target/record2.lst -o ./target/record2 ./record2.tas
-; Fri Oct 27 20:01:58 2023
+; Fri Oct 27 20:37:13 2023
 
 ;Offset	;Hex		;Monitor	;Source
 
@@ -364,15 +364,15 @@
 .5b21	4c 45 5b	jmp $5b45	        JMP j5B45
 .5b24	4c de 60	jmp $60de	        JMP j60DE
 .5b27	4c d4 60	jmp $60d4	        JMP j60D4
-.5b2a	4c 85 5b	jmp $5b85	        JMP j5B85
-.5b2d	4c a7 5b	jmp $5ba7	        JMP j5BA7
+.5b2a	4c 85 5b	jmp $5b85	        JMP j5B85       ; disk->validate menu routine
+.5b2d	4c a7 5b	jmp $5ba7	        JMP j5BA7       ; disk->format menu routine
 .5b30	4c c3 5b	jmp $5bc3	        JMP j5BC3
 .5b33	4c bd 61	jmp $61bd	        JMP j61BD
-.5b36	4c 23 62	jmp $6223	        JMP j6223
+.5b36	4c 23 62	jmp $6223	        JMP j6223       ; disk->erase menu routine
 .5b39	4c 3a 63	jmp $633a	        JMP j633A
-.5b3c	4c a2 63	jmp $63a2	        JMP j63A2
-.5b3f	4c db 63	jmp $63db	        JMP j63DB
-.5b42	4c d8 63	jmp $63d8	        JMP j63D8
+.5b3c	4c a2 63	jmp $63a2	        JMP j63A2       ; select->all pages menu routine
+.5b3f	4c db 63	jmp $63db	        JMP j63DB       ; select->page files menu routine
+.5b42	4c d8 63	jmp $63d8	        JMP j63D8       ; select->border files menu routine
 .5b45	24 71		bit $71		j5B45   BIT a71
 .5b47	50 3b		bvc $5b84	        BVC b5B84
 .5b49	20 7e 23	jsr $237e	j5B49   JSR e237E
