@@ -1,7 +1,7 @@
 
 ; 64tass Turbo Assembler Macro V1.53.1515 listing file
 ; 64tass -l ./target/record6.lbl -L ./target/record5.lst -o ./target/record6 ./record6.tas
-; Thu Oct 26 04:25:08 2023
+; Fri Oct 27 20:01:58 2023
 
 ;Offset	;Hex		;Monitor	;Source
 
@@ -43,6 +43,36 @@
 =$1f					r14H = $1F
 =$20					r15L = $20
 =$21					r15H = $21
+=$fb					a0	= $fb
+=$fb					a0L	= $fb
+=$fc					a0H	= $fc
+=$fd					a1	= $fd
+=$fd					a1L	= $fd
+=$fe					a1H	= $fe
+=$70					a2	= $70
+=$70					a2L	= $70
+=$71					a2H	= $71
+=$72					a3	= $72
+=$72					a3L	= $72
+=$73					a3H	= $73
+=$74					a4	= $74
+=$74					a4L	= $74
+=$75					a4H	= $75
+=$76					a5	= $76
+=$76					a5L	= $76
+=$77					a5H	= $77
+=$78					a6	= $78
+=$78					a6L	= $78
+=$79					a6H	= $79
+=$7a					a7	= $7a
+=$7a					a7L	= $7a
+=$7b					a7H	= $7b
+=$7c					a8	= $7c
+=$7c					a8L	= $7c
+=$7d					a8H	= $7d
+=$7e					a9	= $7e
+=$7e					a9L	= $7e
+=$7f					a9H	= $7f
 =$29					currentHeight   = $29
 =$2f					displayBufferOn = $2F
 =$35					leftMarginLo    = $35
@@ -83,56 +113,56 @@
 =$fc					aFC = $FC
 =$fd					aFD = $FD
 =$fe					aFE = $FE
-=$6d00					dirBuffer_6d00 = $6D00
-=$8000					diskBlkBuf = $8000
-=$8100					fileHeader = $8100
-=$8200					curDirHead = $8200
-=$8300					fileTrScTab = $8300
-=$8400					dirEntryBuf = $8400
-=$841e					DrACurDkNm = $841E
-=$8430					DrBCurDkNm = $8430
-=$8442					dataFileName = $8442
-=$8465					PrntFilename = $8465
-=$8476					BootDiskName = $8476
-=$8489					curDrive = $8489
-=$848a					diskOpenFlg = $848A
-=$848b					isGEOS = $848B
-=$848d					numDrives = $848D
-=$848e					driveType_8 = $848E
-=$848f					driveType_9 = $848F
-=$8490					driveType_10 = $8490
-=$8491					driveType_11 = $8491
-=$8498					fileWritten = $8498
-=$84b1					RecoverVector_LO = $84B1
-=$84b2					RecoverVector_HI = $84B2
-=$84b5					iconSelFlag = $84B5
-=$84b7					menuNumber = $84B7
-=$84b8					mouseTop = $84B8
-=$84b9					mouseBottom = $84B9
-=$84ba					mouseLeft_LO = $84BA
-=$84bb					mouseLeft_HI = $84BB
-=$84bc					mouseRight_LO = $84BC
-=$84bd					mouseRight_HI = $84BD
-=$8501					maxMouseSpeed = $8501
-=$8502					minMouseSpeed = $8502
-=$8503					mouseAccel = $8503
-=$8504					keyData = $8504
-=$850a					random = $850A
-=$8516					year = $8516
-=$8517					month = $8517
-=$8518					day = $8518
-=$8519					hour = $8519
-=$851a					minutes = $851A
-=$851b					seconds = $851B
-=$851e					screencolors = $851E
-=$88bf					driveData = $88BF
-=$88c3					ramExpSize = $88C3
-=$88c4					sysRAMFlg = $88C4
-=$88c6					curType = $88C6
-=$88cb					inputDevName = $88CB
-=$8900					dir2Head = $8900
-=$8a80					spr2pic = $8A80
-=$9048					AllocateBlock = $9048
+=$6d00					dirBuffer_6d00  = $6D00
+=$8000					diskBlkBuf      = $8000
+=$8100					fileHeader      = $8100
+=$8200					curDirHead      = $8200
+=$8300					fileTrScTab     = $8300
+=$8400					dirEntryBuf     = $8400
+=$841e					DrACurDkNm      = $841E
+=$8430					DrBCurDkNm      = $8430
+=$8442					dataFileName    = $8442
+=$8465					PrntFilename    = $8465
+=$8476					BootDiskName    = $8476
+=$8489					curDrive        = $8489
+=$848a					diskOpenFlg     = $848A
+=$848b					isGEOS          = $848B
+=$848d					numDrives       = $848D
+=$848e					driveType_8     = $848E
+=$848f					driveType_9     = $848F
+=$8490					driveType_10    = $8490
+=$8491					driveType_11    = $8491
+=$8498					fileWritten     = $8498
+=$84b1					RecoverVector_LO= $84B1
+=$84b2					RecoverVector_HI= $84B2
+=$84b5					iconSelFlag     = $84B5
+=$84b7					menuNumber      = $84B7
+=$84b8					mouseTop        = $84B8
+=$84b9					mouseBottom     = $84B9
+=$84ba					mouseLeft_LO    = $84BA
+=$84bb					mouseLeft_HI    = $84BB
+=$84bc					mouseRight_LO   = $84BC
+=$84bd					mouseRight_HI   = $84BD
+=$8501					maxMouseSpeed   = $8501
+=$8502					minMouseSpeed   = $8502
+=$8503					mouseAccel      = $8503
+=$8504					keyData         = $8504
+=$850a					random          = $850A
+=$8516					year            = $8516
+=$8517					month           = $8517
+=$8518					day             = $8518
+=$8519					hour            = $8519
+=$851a					minutes         = $851A
+=$851b					seconds         = $851B
+=$851e					screencolors    = $851E
+=$88bf					driveData       = $88BF
+=$88c3					ramExpSize      = $88C3
+=$88c4					sysRAMFlg       = $88C4
+=$88c6					curType         = $88C6
+=$88cb					inputDevName    = $88CB
+=$8900					dir2Head        = $8900
+=$8a80					spr2pic         = $8A80
+=$9048					AllocateBlock   = $9048
 =$c000					BootGEOS        = $C000
 =$c003					ResetHandle     = $C003
 =$c00f					version         = $C00F
@@ -281,10 +311,10 @@
 =$574d					e574D = $574D
 =$5782					e5782 = $5782
 =$599c					e599C = $599C
-.5b1e	4c 27 5b	jmp $5b27	        JMP j5B27
-.5b21	4c 36 60	jmp $6036	        JMP j6036
-.5b24	4c b7 60	jmp $60b7	        JMP j60B7
-.5b27	20 8d c1	jsr $c18d	j5B27   JSR MouseOff
+.5b1e	4c 27 5b	jmp $5b27	j5b1e   JMP j5B27       ; options->set clock handler
+.5b21	4c 36 60	jmp $6036	j5b21   JMP j6036       ; displays a special dialog to advise user to insert disk with kernal 2.0
+.5b24	4c b7 60	jmp $60b7	j5b24   JMP j60B7       ; options->show shortcuts dialog box
+.5b27	20 8d c1	jsr $c18d	j5B27   JSR MouseOff    ; Disable mouse pointer and GEOS mouse tracking.
 .5b2a	08		php		        PHP
 .5b2b	78		sei		        SEI
 .5b2c	20 3d 56	jsr $563d	        JSR e563D
@@ -313,36 +343,36 @@
 .5b66	8d 86 5f	sta $5f86	        STA a5F86
 .5b69	4c 5c 5e	jmp $5e5c	        JMP j5E5C
 .5b6c	ad 04 85	lda $8504	p5B6C   LDA keyData
-.5b6f	c9 0d		cmp #$0d	        CMP #$0D
+.5b6f	c9 0d		cmp #$0d	        CMP #$0D        ; CR?
 .5b71	d0 03		bne $5b76	        BNE b5B76
 .5b73	4c 9a 5e	jmp $5e9a	        JMP j5E9A
-.5b76	c9 20		cmp #$20	b5B76   CMP #$20
+.5b76	c9 20		cmp #$20	b5B76   CMP #$20        ; SPACEBAR to next field
 .5b78	d0 03		bne $5b7d	        BNE b5B7D
 .5b7a	4c c1 5d	jmp $5dc1	        JMP j5DC1
-.5b7d	c9 1d		cmp #$1d	b5B7D   CMP #$1D
+.5b7d	c9 1d		cmp #$1d	b5B7D   CMP #$1D        ; Cursor right?
 .5b7f	d0 03		bne $5b84	        BNE b5B84
 .5b81	4c 33 5e	jmp $5e33	        JMP j5E33
-.5b84	c9 1e		cmp #$1e	b5B84   CMP #$1E
+.5b84	c9 1e		cmp #$1e	b5B84   CMP #$1E        ; Cursor left? (?)
 .5b86	d0 03		bne $5b8b	        BNE b5B8B
 .5b88	4c c1 5d	jmp $5dc1	        JMP j5DC1
 .5b8b	c9 08		cmp #$08	b5B8B   CMP #$08
 .5b8d	d0 03		bne $5b92	        BNE b5B92
 .5b8f	4c 33 5e	jmp $5e33	        JMP j5E33
-.5b92	c9 61		cmp #$61	b5B92   CMP #$61
+.5b92	c9 61		cmp #$61	b5B92   CMP #$61        ; 'A'? (am/pm)
 .5b94	d0 04		bne $5b9a	        BNE b5B9A
 .5b96	a9 41		lda #$41	        LDA #$41
 .5b98	d0 06		bne $5ba0	        BNE b5BA0
-.5b9a	c9 70		cmp #$70	b5B9A   CMP #$70
+.5b9a	c9 70		cmp #$70	b5B9A   CMP #$70        ; 'P'? (am/pm)
 .5b9c	d0 02		bne $5ba0	        BNE b5BA0
-.5b9e	a9 50		lda #$50	        LDA #$50
-.5ba0	8d 80 5f	sta $5f80	b5BA0   STA a5F80
+.5b9e	a9 50		lda #$50	        LDA #$50        ; '2'
+.5ba0	8d 80 5f	sta $5f80	b5BA0   STA a5F80       ; temp store it
 .5ba3	ad 85 5f	lda $5f85	        LDA a5F85
 .5ba6	c9 10		cmp #$10	        CMP #$10
 .5ba8	d0 0b		bne $5bb5	        BNE b5BB5
 .5baa	ad 80 5f	lda $5f80	        LDA a5F80
-.5bad	c9 41		cmp #$41	        CMP #$41
+.5bad	c9 41		cmp #$41	        CMP #$41        ; 'a'? (am/pm)
 .5baf	f0 10		beq $5bc1	        BEQ b5BC1
-.5bb1	c9 50		cmp #$50	        CMP #$50
+.5bb1	c9 50		cmp #$50	        CMP #$50        ; 'p'? (am/pm)
 .5bb3	f0 0c		beq $5bc1	        BEQ b5BC1
 .5bb5	ad 80 5f	lda $5f80	b5BB5   LDA a5F80
 .5bb8	38		sec		        SEC
@@ -407,14 +437,14 @@
 .5c2f	4c 4d 57	jmp $574d	        JMP e574D
 .5c32	ad 80 5f	lda $5f80	j5C32   LDA a5F80
 .5c35	aa		tax		        TAX
-.5c36	e0 31		cpx #$31	        CPX #$31
+.5c36	e0 31		cpx #$31	        CPX #$31        ; '1'?
 .5c38	f0 10		beq $5c4a	        BEQ b5C4A
-.5c3a	e0 30		cpx #$30	        CPX #$30
+.5c3a	e0 30		cpx #$30	        CPX #$30        ; '0'?
 .5c3c	d0 2c		bne $5c6a	        BNE b5C6A
 .5c3e	ec 43 19	cpx $1943	        CPX a1943
 .5c41	d0 07		bne $5c4a	        BNE b5C4A
 .5c43	48		pha		        PHA
-.5c44	a9 31		lda #$31	        LDA #$31
+.5c44	a9 31		lda #$31	        LDA #$31        ; '1'
 .5c46	8d 43 19	sta $1943	        STA a1943
 .5c49	68		pla		        PLA
 .5c4a	8d 42 19	sta $1942	b5C4A   STA a1942
@@ -507,18 +537,18 @@
 .5d31	20 2c 5c	jsr $5c2c	        JSR s5C2C
 .5d34	4c c4 5d	jmp $5dc4	        JMP s5DC4
 .5d37	ad 80 5f	lda $5f80	j5D37   LDA a5F80
-.5d3a	c9 41		cmp #$41	        CMP #$41
+.5d3a	c9 41		cmp #$41	        CMP #$41        ; 'a'? (am/pm)
 .5d3c	f0 05		beq $5d43	        BEQ b5D43
-.5d3e	c9 50		cmp #$50	        CMP #$50
+.5d3e	c9 50		cmp #$50	        CMP #$50        ; 'p'? (am/pm)
 .5d40	f0 01		beq $5d43	        BEQ b5D43
 .5d42	60		rts		        RTS
 .5d43	8d 52 19	sta $1952	b5D43   STA a1952
 .5d46	20 26 5c	jsr $5c26	        JSR s5C26
 .5d49	4c c4 5d	jmp $5dc4	        JMP s5DC4
 .5d4c	ad 80 5f	lda $5f80	j5D4C   LDA a5F80
-.5d4f	c9 32		cmp #$32	        CMP #$32
+.5d4f	c9 32		cmp #$32	        CMP #$32        ; '2'?
 .5d51	10 30		bpl $5d83	        BPL b5D83
-.5d53	c9 31		cmp #$31	        CMP #$31
+.5d53	c9 31		cmp #$31	        CMP #$31        ; '1'?
 .5d55	f0 0c		beq $5d63	        BEQ b5D63
 .5d57	cd 4d 19	cmp $194d	        CMP a194D
 .5d5a	d0 07		bne $5d63	        BNE b5D63
@@ -530,7 +560,7 @@
 .5d66	20 26 5c	jsr $5c26	        JSR s5C26
 .5d69	20 c4 5d	jsr $5dc4	        JSR s5DC4
 .5d6c	ad 4c 19	lda $194c	        LDA a194C
-.5d6f	c9 30		cmp #$30	        CMP #$30
+.5d6f	c9 30		cmp #$30	        CMP #$30        ; '0'?
 .5d71	f0 10		beq $5d83	        BEQ b5D83
 .5d73	a9 32		lda #$32	        LDA #$32
 .5d75	cd 4d 19	cmp $194d	        CMP a194D
@@ -540,21 +570,21 @@
 .5d80	4c 5c 5e	jmp $5e5c	        JMP j5E5C
 .5d83	60		rts		b5D83   RTS
 .5d84	ad 4c 19	lda $194c	j5D84   LDA a194C
-.5d87	c9 30		cmp #$30	        CMP #$30
+.5d87	c9 30		cmp #$30	        CMP #$30        ; '0'?
 .5d89	d0 08		bne $5d93	        BNE b5D93
 .5d8b	ad 80 5f	lda $5f80	        LDA a5F80
 .5d8e	c9 30		cmp #$30	        CMP #$30
 .5d90	d0 08		bne $5d9a	        BNE b5D9A
 .5d92	60		rts		        RTS
 .5d93	ad 80 5f	lda $5f80	b5D93   LDA a5F80
-.5d96	c9 33		cmp #$33	        CMP #$33
+.5d96	c9 33		cmp #$33	        CMP #$33        ; '3'?
 .5d98	10 09		bpl $5da3	        BPL b5DA3
 .5d9a	8d 4d 19	sta $194d	b5D9A   STA a194D
 .5d9d	20 26 5c	jsr $5c26	        JSR s5C26
 .5da0	4c c4 5d	jmp $5dc4	        JMP s5DC4
 .5da3	60		rts		b5DA3   RTS
 .5da4	ad 80 5f	lda $5f80	j5DA4   LDA a5F80
-.5da7	c9 36		cmp #$36	        CMP #$36
+.5da7	c9 36		cmp #$36	        CMP #$36        ; '6'?
 .5da9	10 09		bpl $5db4	        BPL b5DB4
 .5dab	8d 4f 19	sta $194f	        STA a194F
 .5dae	20 26 5c	jsr $5c26	        JSR s5C26
@@ -575,7 +605,7 @@
 .5dd3	98		tya		b5DD3   TYA
 .5dd4	48		pha		        PHA
 .5dd5	bd 42 19	lda $1942,x	        LDA a1942,X
-.5dd8	20 c9 c1	jsr $c1c9	        JSR GetCharWidth
+.5dd8	20 c9 c1	jsr $c1c9	        JSR GetCharWidth        ; Calculate the pixel width of a character as it exists in the font
 .5ddb	18		clc		        CLC
 .5ddc	6d 83 5f	adc $5f83	        ADC a5F83
 .5ddf	8d 83 5f	sta $5f83	        STA a5F83
@@ -640,13 +670,13 @@
 .5e7e	85 0b		sta $0b		        STA r4H
 .5e80	ae 85 5f	ldx $5f85	        LDX a5F85
 .5e83	ad 86 5f	lda $5f86	        LDA a5F86
-.5e86	20 c9 c1	jsr $c1c9	        JSR GetCharWidth
+.5e86	20 c9 c1	jsr $c1c9	        JSR GetCharWidth        ; Calculate the pixel width of a character as it exists in the font
 .5e89	18		clc		        CLC
 .5e8a	65 0a		adc $0a		        ADC r4L
 .5e8c	85 0a		sta $0a		        STA r4L
 .5e8e	90 02		bcc $5e92	        BCC b5E92
 .5e90	e6 0b		inc $0b		        INC r4H
-.5e92	20 2a c1	jsr $c12a	b5E92   JSR InvertRectangle
+.5e92	20 2a c1	jsr $c12a	b5E92   JSR InvertRectangle     ; Inverts the pixels within a rectangular region.
 .5e95	68		pla		        PLA
 .5e96	85 01		sta $01		        STA a01
 .5e98	28		plp		        PLP
@@ -711,7 +741,7 @@
 .5f22	a9 00		lda #$00	        LDA #$00
 .5f24	8d 50 02	sta $0250	        STA a0250
 .5f27	20 2e 56	jsr $562e	        JSR e562E
-.5f2a	20 8a c1	jsr $c18a	        JSR MouseUp
+.5f2a	20 8a c1	jsr $c18a	        JSR MouseUp     ; Reenables the mouse pointer and GEOS mouse tracking.
 .5f2d	28		plp		        PLP
 .5f2e	60		rts		        RTS
 .5f2f	ae 4c 19	ldx $194c	s5F2F   LDX a194C
@@ -765,13 +795,13 @@
 .5f7b	69 0a		adc #$0a	        ADC #$0A
 .5f7d	d0 f9		bne $5f78	        BNE b5F78
 .5f7f	60		rts		b5F7F   RTS
-=24449					a5F81   =*+$01
-.5f80	00 00		brk #$00	a5F80   BRK #$00
+>5f80	00				a5F80   .BYTE $00       ; temp petscii value for keypress during clock setting
+>5f81	00				a5F81   .BYTE $00
 >5f82	00				a5F82   .BYTE $00
 >5f83	00				a5F83   .BYTE $00
 >5f84	00				a5F84   .BYTE $00
-=24454					a5F86   =*+$01
-.5f85	00 00		brk #$00	a5F85   BRK #$00
+>5f85	00				a5F85   .BYTE $00
+>5f86	00				a5F86   .BYTE $00
 >5f87	00				a5F87   .BYTE $00
 >5f88	00				a5F88   .BYTE $00
 >5f89	44 65 73 6b 54 6f 70 20		        .TEXT "DeskTop V2.0 requires a kernal that", $00
@@ -841,10 +871,10 @@
 >60b1	1e 60 01 11 48 00		        .BYTE $1E,$60,$01,$11,$48,$00
 .60b7	20 fa 26	jsr $26fa	j60B7   JSR e26FA
 .60ba	a9 60		lda #$60	        LDA #>p60C8
-.60bc	85 03		sta $03		        STA r0H
+.60bc	85 03		sta $03		        STA r0H         ; pointer to dialog box definition hi byte
 .60be	a9 c8		lda #$c8	        LDA #<p60C8
-.60c0	85 02		sta $02		        STA r0L
-.60c2	20 56 c2	jsr $c256	        JSR DoDlgBox
+.60c0	85 02		sta $02		        STA r0L         ; pointer to dialog box definition lo byte
+.60c2	20 56 c2	jsr $c256	        JSR DoDlgBox    ; start the dialog box handler for shortcuts window
 .60c5	4c 75 51	jmp $5175	        JMP e5175
 >60c8	01 10 be 08 00 30 01 0e		p60C8   .BYTE $01,$10,$BE,$08,$00,$30,$01,$0E
 >60d0	0b 10 0b 1c 61 0b 10 16		        .BYTE $0B,$10,$0B,$1C,$61,$0B,$10,$16
@@ -857,52 +887,59 @@
 >6108	1a 84 d5 62 0b 1a 8f 0c		        .BYTE $1A,$84,$D5,$62,$0B,$1A,$8F,$0C
 >6110	63 0b 1a 9a 33 63 0b 1a		        .BYTE $63,$0B,$1A,$9A,$33,$63,$0B,$1A
 >6118	a5 49 63 00 18			        .BYTE $A5,$49,$63,$00,$18
->611d	4f 54 48 45 52 20 4b 45		        .TEXT "OTHER KEYBOARD SHORTCUTS:", $00, $0E, $18, "Drive Manipu"
+>611d	4f 54 48 45 52 20 4b 45		        .TEXT "OTHER KEYBOARD SHORTCUTS:", $00
 >6125	59 42 4f 41 52 44 20 53 48 4f 52 54 43 55 54 53
->6135	3a 00 0e 18 44 72 69 76 65 20 4d 61 6e 69 70 75
->6145	6c 61 74 69 6f 6e 3a 0f		        .TEXT "lation:", $0F, $00, $18, "C= A", $1B, " and ", $18, "C= B", $1B, " to open drive"
->614d	00 18 43 3d 20 41 1b 20 61 6e 64 20 18 43 3d 20
->615d	42 1b 20 74 6f 20 6f 70 65 6e 20 64 72 69 76 65
->616d	73 20 41 20 61 6e 64 20		        .TEXT "s A and B.", $00, $18, "C= Shift A", $1B, " and ", $18, "C= Shift B", $1B
->6175	42 2e 00 18 43 3d 20 53 68 69 66 74 20 41 1b 20
->6185	61 6e 64 20 18 43 3d 20 53 68 69 66 74 20 42 1b
->6195	20 74 6f 20 73 77 61 70		        .TEXT " to swap drive with drive C.", $00, $0E, $18, "File Sele"
->619d	20 64 72 69 76 65 20 77 69 74 68 20 64 72 69 76
->61ad	65 20 43 2e 00 0e 18 46 69 6c 65 20 53 65 6c 65
->61bd	63 74 69 6f 6e 20 28 49		        .TEXT "ction (Icon Mode):", $0F, $00, $18, "C= 1", $1B, " through ", $18, "C= 8"
->61c5	63 6f 6e 20 4d 6f 64 65 29 3a 0f 00 18 43 3d 20
->61d5	31 1b 20 74 68 72 6f 75 67 68 20 18 43 3d 20 38
->61e5	1b 20 74 6f 20 73 65 6c		        .TEXT $1B, " to select page files.", $00, $18, "C= Shift 1", $1B, " thr"
->61ed	65 63 74 20 70 61 67 65 20 66 69 6c 65 73 2e 00
->61fd	18 43 3d 20 53 68 69 66 74 20 31 1b 20 74 68 72
->620d	6f 75 67 68 20 18 43 3d		        .TEXT "ough ", $18, "C= Shift 8", $1B, " to select border files"
+>6135	3a 00
+>6137	0e 18 44 72 69 76 65 20		        .TEXT $0E, $18, "Drive Manipulation:", $0F, $00
+>613f	4d 61 6e 69 70 75 6c 61 74 69 6f 6e 3a 0f 00
+>614e	18 43 3d 20 41 1b 20 61		        .TEXT $18, "C= A", $1B, " and ", $18, "C= B", $1B, " to open drives A and B.", $00
+>6156	6e 64 20 18 43 3d 20 42 1b 20 74 6f 20 6f 70 65
+>6166	6e 20 64 72 69 76 65 73 20 41 20 61 6e 64 20 42
+>6176	2e 00
+>6178	18 43 3d 20 53 68 69 66		        .TEXT $18, "C= Shift A", $1B, " and ", $18, "C= Shift B", $1B," to swap drive with drive C.", $00
+>6180	74 20 41 1b 20 61 6e 64 20 18 43 3d 20 53 68 69
+>6190	66 74 20 42 1b 20 74 6f 20 73 77 61 70 20 64 72
+>61a0	69 76 65 20 77 69 74 68 20 64 72 69 76 65 20 43
+>61b0	2e 00
+>61b2	0e 18 46 69 6c 65 20 53		        .TEXT $0E, $18, "File Selection (Icon Mode):", $0F, $00
+>61ba	65 6c 65 63 74 69 6f 6e 20 28 49 63 6f 6e 20 4d
+>61ca	6f 64 65 29 3a 0f 00
+>61d1	18 43 3d 20 31 1b 20 74		        .TEXT $18, "C= 1", $1B, " through ", $18, "C= 8",$1B, " to select page files.", $00
+>61d9	68 72 6f 75 67 68 20 18 43 3d 20 38 1b 20 74 6f
+>61e9	20 73 65 6c 65 63 74 20 70 61 67 65 20 66 69 6c
+>61f9	65 73 2e 00
+>61fd	18 43 3d 20 53 68 69 66		        .TEXT $18, "C= Shift 1", $1B, " through ", $18, "C= Shift 8", $1B, " to select border files.", $00
+>6205	74 20 31 1b 20 74 68 72 6f 75 67 68 20 18 43 3d
 >6215	20 53 68 69 66 74 20 38 1b 20 74 6f 20 73 65 6c
 >6225	65 63 74 20 62 6f 72 64 65 72 20 66 69 6c 65 73
->6235	2e 00 0e 18 4d 75 6c 74		        .TEXT ".", $00, $0E, $18, "Multiple File Operations (Icon Mode)"
->623d	69 70 6c 65 20 46 69 6c 65 20 4f 70 65 72 61 74
->624d	69 6f 6e 73 20 28 49 63 6f 6e 20 4d 6f 64 65 29
->625d	3a 0f 00 18 52 55 4e 2f		        .TEXT ":", $0F, $00, $18, "RUN/STOP", $1B, " to abort operations.", $00, $18, "C= G"
->6265	53 54 4f 50 1b 20 74 6f 20 61 62 6f 72 74 20 6f
->6275	70 65 72 61 74 69 6f 6e 73 2e 00 18 43 3d 20 47
->6285	1b 20 74 6f 20 76 69 65		        .TEXT $1B, " to view the first file in the queue.", $00, $0E
->628d	77 20 74 68 65 20 66 69 72 73 74 20 66 69 6c 65
->629d	20 69 6e 20 74 68 65 20 71 75 65 75 65 2e 00 0e
->62ad	18 4d 6f 76 65 6d 65 6e		        .TEXT $18, "Movement through the Pad (Icon Mode):", $0F, $00
->62b5	74 20 74 68 72 6f 75 67 68 20 74 68 65 20 50 61
->62c5	64 20 28 49 63 6f 6e 20 4d 6f 64 65 29 3a 0f 00
->62d5	18 76 1b 20 61 6e 64 20		        .TEXT $18, "v", $1B, " and ", $18, "^", $1B, " (CRSR key) to page forwards "
+>6235	2e 00
+>6237	0e 18 4d 75 6c 74 69 70		        .TEXT $0E, $18, "Multiple File Operations (Icon Mode):", $0F, $00
+>623f	6c 65 20 46 69 6c 65 20 4f 70 65 72 61 74 69 6f
+>624f	6e 73 20 28 49 63 6f 6e 20 4d 6f 64 65 29 3a 0f
+>625f	00
+>6260	18 52 55 4e 2f 53 54 4f		        .TEXT $18, "RUN/STOP", $1B, " to abort operations.", $00
+>6268	50 1b 20 74 6f 20 61 62 6f 72 74 20 6f 70 65 72
+>6278	61 74 69 6f 6e 73 2e 00
+>6280	18 43 3d 20 47 1b 20 74		        .TEXT $18, "C= G", $1B, " to view the first file in the queue.", $00
+>6288	6f 20 76 69 65 77 20 74 68 65 20 66 69 72 73 74
+>6298	20 66 69 6c 65 20 69 6e 20 74 68 65 20 71 75 65
+>62a8	75 65 2e 00
+>62ac	0e 18 4d 6f 76 65 6d 65		        .TEXT $0E, $18, "Movement through the Pad (Icon Mode):", $0F, $00
+>62b4	6e 74 20 74 68 72 6f 75 67 68 20 74 68 65 20 50
+>62c4	61 64 20 28 49 63 6f 6e 20 4d 6f 64 65 29 3a 0f
+>62d4	00
+>62d5	18 76 1b 20 61 6e 64 20		        .TEXT $18, "v", $1B, " and ", $18, "^", $1B, " (CRSR key) to page forwards and backwards.", $00
 >62dd	18 5e 1b 20 28 43 52 53 52 20 6b 65 79 29 20 74
 >62ed	6f 20 70 61 67 65 20 66 6f 72 77 61 72 64 73 20
->62fd	61 6e 64 20 62 61 63 6b		        .TEXT "and backwards.", $00, $18, "1", $1B, " through ", $18, "9", $1B, " to go to "
->6305	77 61 72 64 73 2e 00 18 31 1b 20 74 68 72 6f 75
->6315	67 68 20 18 39 1b 20 74 6f 20 67 6f 20 74 6f 20
->6325	70 61 67 65 73 20 31 20		        .TEXT "pages 1 to 9.", $00, $18, "0", $1B, " to go to page 10.", $00, $18, "Shi"
->632d	74 6f 20 39 2e 00 18 30 1b 20 74 6f 20 67 6f 20
->633d	74 6f 20 70 61 67 65 20 31 30 2e 00 18 53 68 69
->634d	66 74 20 31 1b 20 74 68		        .TEXT "ft 1", $1B, " through ", $18, "Shift 8", $1B, " to go to pages 1"
->6355	72 6f 75 67 68 20 18 53 68 69 66 74 20 38 1b 20
->6365	74 6f 20 67 6f 20 74 6f 20 70 61 67 65 73 20 31
->6375	31 20 74 6f 20 31 38 2e		        .TEXT "1 to 18.", $00
->637d	00
+>62fd	61 6e 64 20 62 61 63 6b 77 61 72 64 73 2e 00
+>630c	18 31 1b 20 74 68 72 6f		        .TEXT $18, "1", $1B, " through ", $18, "9", $1B, " to go to pages 1 to 9.", $00
+>6314	75 67 68 20 18 39 1b 20 74 6f 20 67 6f 20 74 6f
+>6324	20 70 61 67 65 73 20 31 20 74 6f 20 39 2e 00
+>6333	18 30 1b 20 74 6f 20 67		        .TEXT $18, "0", $1B, " to go to page 10.", $00
+>633b	6f 20 74 6f 20 70 61 67 65 20 31 30 2e 00
+>6349	18 53 68 69 66 74 20 31		        .TEXT $18, "Shift 1", $1B, " through ", $18, "Shift 8", $1B, " to go to pages 11 to 18.", $00
+>6351	1b 20 74 68 72 6f 75 67 68 20 18 53 68 69 66 74
+>6361	20 38 1b 20 74 6f 20 67 6f 20 74 6f 20 70 61 67
+>6371	65 73 20 31 31 20 74 6f 20 31 38 2e 00
 
 ;******  End of listing

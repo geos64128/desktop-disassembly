@@ -245,11 +245,6 @@ pFFF8 = $FFF8
 ; **** EXTERNAL JUMPS **** 
 ;
 eA352 = $A352
-;
-; **** USER LABELS **** 
-;
-
-
 
         * = $1956
 
@@ -398,10 +393,10 @@ b1A80   JSR s22DC    ;restore old RecoverVector
         TAX 
         RTS 
 
-s1A8E   JSR OpenDisk
-        JSR s253B    ;transfer X to A, if A=0 return, else pull from stack
-        JSR s1AAE    ;Find "deskTop AM V2.0" on disk
-        JSR s253B    ;transfer X to A, if A=0 return, else pull from stack
+s1A8E   JSR OpenDisk    ; Open the disk in the current drive
+        JSR s253B       ; transfer X to A, if A=0 return, else pull from stack
+        JSR s1AAE       ; Find "deskTop AM V2.0" on disk
+        JSR s253B       ; transfer X to A, if A=0 return, else pull from stack
         LDA r7H
         BEQ b1AA2
         LDX #$05
@@ -410,22 +405,22 @@ b1AA2   LDA r5H
         STA r9H
         LDA r5L
         STA r9L
-        JSR s1AC2    ;Read file based on file header info
+        JSR s1AC2       ; Read file based on file header info
 b1AAD   RTS 
 
 ; Find "deskTop AM V2.0" on disk
-s1AAE   JSR s2574    ;set r10 to pointer of text "deskTop AM  V2.0"
+s1AAE   JSR s2574       ; set r10 to pointer of text "deskTop AM  V2.0"
         LDA #$04
-        STA r7L      ;Search for SYSTEM ($04) file type
-s1AB5   JSR OpenDisk
+        STA r7L         ; Search for SYSTEM ($04) file type
+s1AB5   JSR OpenDisk    ; Open the disk in the current drive
         LDA #$01
-        STA r7H      ;search for only one file
-        JSR s256B    ;load r6 with $8b80 address
-        JMP FindFTypes
+        STA r7H         ; search for only one file
+        JSR s256B       ; load r6 with $8b80 address
+        JMP FindFTypes  ; Builds a list of files of a particular GEOS type from the current directory
 
 ; Read file based on file header info
-s1AC2   JSR GetFHdrInfo ;     Loads GEOS file header for a particular directory entry
-        JSR s253B    ;transfer X to A, if A=0 return, else pull from stack
+s1AC2   JSR GetFHdrInfo ; Loads GEOS file header for a particular directory entry
+        JSR s253B       ; transfer X to A, if A=0 return, else pull from stack
         LDY #$01
         LDA (r9L),Y
         STA r1L
@@ -433,38 +428,38 @@ s1AC2   JSR GetFHdrInfo ;     Loads GEOS file header for a particular directory 
         LDA (r9L),Y
         STA r1H
         JSR s1DE3
-        JSR s253B    ;transfer X to A, if A=0 return, else pull from stack
+        JSR s253B       ; transfer X to A, if A=0 return, else pull from stack
         LDA a8002
         STA r1L
         LDA a8003
-        STA r1H      ;track/sector of first data block (from $8002/03)
+        STA r1H         ; track/sector of first data block (from $8002/03)
         LDA #$FF
-        STA r2L      ;buffer size = $ffff (but readfile can only read 32258 bytes)
+        STA r2L         ; buffer size = $ffff (but readfile can only read 32258 bytes)
         STA r2H
         JMP ReadFile
 
 ; seems to set drive A or drive B type
 s1AEC   LDA curDrive
-        EOR #$01     ;toggles 8 and 9
-s1AF1   PHA          ;save it
-        JSR SetDevice ;     Establish communication with a new peripheral - switch to new drive number
-        PLA          ;restore it
-        CMP #$08     ;compare with 8
-        BCC b1B0A    ;jump ahead if the peripheral number is less than 8 (a printer?)
+        EOR #$01        ; toggles 8 and 9
+s1AF1   PHA             ; save it
+        JSR SetDevice   ; Establish communication with a new peripheral - switch to new drive number
+        PLA             ; restore it
+        CMP #$08        ; compare with 8
+        BCC b1B0A       ; jump ahead if the peripheral number is less than 8 (a printer?)
         CMP a0AF1
         BEQ b1B0A
         STA a0AF1
         LDA a0AF0
         BEQ b1B0A
         JSR s1B1C
-b1B0A   LDY curDrive ;y = current active disk drive number
-        LDA f8486,Y  ;get drive type
-        STA curType  ;store it in the current drive type
+b1B0A   LDY curDrive    ; y = current active disk drive number
+        LDA f8486,Y     ; get drive type
+        STA curType     ; store it in the current drive type
         LDX #$00
         RTS 
 
 s1B16   JSR s1AF1
-        JMP OpenDisk
+        JMP OpenDisk    ; Open the disk in the current drive
 
 s1B1C   JSR s1B22
         JSR s1B3C
@@ -480,6 +475,7 @@ b1B24   LDA r0L,Y
         RTS 
 
 f1B36   .BYTE $00,$90,$F2,$0A,$80,$0D
+
 s1B3C   LDA r0H
         PHA 
         LDA r1H
@@ -546,9 +542,9 @@ b1BA7   LDA a0520
         BNE b1BA6
         STA a0520
         JSR GetDirHead
-        JSR s253B    ;transfer X to A, if A=0 return, else pull from stack
+        JSR s253B       ; transfer X to A, if A=0 return, else pull from stack
         JSR s1DF0
-        JMP PutDirHead
+        JMP PutDirHead  ; write directory header and BAM to disk
 
 s1BC4   LDA a03F5
         STA r3H
@@ -574,21 +570,21 @@ s1BC4   LDA a03F5
         STA a04F0
         RTS 
 
-s1BF8   JSR EnterTurbo ;     Activate disk drive turbo mode
-        JSR s253B    ;transfer X to A, if A=0 return, else pull from stack
-        JSR InitForIO ;     Prepare for IO across the serial bus
-        JSR s1C4E    ;copy $03f2/f3 to r10 and $04ef/f0 to r11
+s1BF8   JSR EnterTurbo  ; Activate disk drive turbo mode
+        JSR s253B       ; transfer X to A, if A=0 return, else pull from stack
+        JSR InitForIO   ; Prepare for IO across the serial bus
+        JSR s1C4E       ; copy $03f2/f3 to r10 and $04ef/f0 to r11
         LDA #$00
         STA a04F2
 b1C09   LDA a04F4
-        STA r1L      ;get TRACK from $04f4
+        STA r1L         ; get TRACK from $04f4
         CMP a0522
         BEQ b1C15
         BCS b1C49
 b1C15   LDA a04F3
-        STA r1H      ;get SECTOR from $04f3
-        JSR s1CC0    ;copy r11 to r4
-        JSR ReadBlock ;     Very low level read block from disk
+        STA r1H         ; get SECTOR from $04f3
+        JSR s1CC0       ; copy r11 to r4
+        JSR ReadBlock   ; Very low level read block from disk
         TXA 
         BNE b1C4B
         LDY #$00
@@ -598,7 +594,7 @@ b1C15   LDA a04F3
         LDA r1H
         STA (r10L),Y
         INC a04F2
-        JSR s2541    ;Add 2 to r10
+        JSR s2541       ; Add 2 to r10
         INC r11H
         LDA #$30
         STA a01
@@ -609,7 +605,7 @@ b1C15   LDA a04F3
         CMP a04F1
         BCC b1C09
 b1C49   LDX #$00
-b1C4B   JMP DoneWithIO ;     restore system after IO across the serial bus
+b1C4B   JMP DoneWithIO  ; restore system after IO across the serial bus
 
 ; copy $03f2/f3 to r10 and $04ef/f0 to r11
 s1C4E   LDA a03F3
@@ -622,10 +618,10 @@ s1C4E   LDA a03F3
         STA r11L
         RTS 
 
-s1C63   JSR EnterTurbo ;     Activate disk drive turbo mode
-        JSR s253B    ;transfer X to A, if A=0 return, else pull from stack
+s1C63   JSR EnterTurbo  ; Activate disk drive turbo mode
+        JSR s253B       ; transfer X to A, if A=0 return, else pull from stack
         STX a04F6
-        JSR InitForIO ;     Prepare for IO across the serial bus
+        JSR InitForIO   ; Prepare for IO across the serial bus
         LDA a04F2
         PHA 
         JSR s1C86
@@ -635,28 +631,28 @@ s1C63   JSR EnterTurbo ;     Activate disk drive turbo mode
         BNE b1C83
         DEC a04F6
         JSR s1C86
-b1C83   JMP DoneWithIO ;     restore system after IO across the serial bus
+b1C83   JMP DoneWithIO  ; restore system after IO across the serial bus
 
-s1C86   JSR s1C4E    ;copy $03f2/f3 to r10 and $04ef/f0 to r11
+s1C86   JSR s1C4E       ; copy $03f2/f3 to r10 and $04ef/f0 to r11
 b1C89   LDA a04F2
         BEQ b1CBD
         LDY #$00
         LDA (r10L),Y
-        STA r1L      ;TRACK
+        STA r1L         ; TRACK
         INY 
         LDA (r10L),Y
-        STA r1H      ;SECTOR
+        STA r1H         ; SECTOR
         JSR s1CC9
-        JSR s253B    ;transfer X to A, if A=0 return, else pull from stack
-        JSR s1CC0    ;copy r11 to r4
+        JSR s253B       ; transfer X to A, if A=0 return, else pull from stack
+        JSR s1CC0       ; copy r11 to r4
         LDA a04F6
         BNE b1CAD
-        JSR WriteBlock ;     Very low-level write block to disk
+        JSR WriteBlock  ; Very low-level write block to disk
         CLV 
         BVC b1CB0
-b1CAD   JSR VerWriteBlock ;     Very low level block on disk
-b1CB0   JSR s253B    ;transfer X to A, if A=0 return, else pull from stack
-        JSR s2541    ;Add 2 to r10
+b1CAD   JSR VerWriteBlock ; Very low level block on disk
+b1CB0   JSR s253B       ; transfer X to A, if A=0 return, else pull from stack
+        JSR s2541       ; Add 2 to r10
         INC r11H
         DEC a04F2
         BNE b1C89
@@ -670,15 +666,15 @@ s1CC0   LDA r11H
         STA r4L
         RTS 
 
-s1CC9   LDA r1L      ;TRACK
+s1CC9   LDA r1L         ; TRACK
         CMP a0523
         BNE b1CF9
-        LDA r1H      ;SECTOR
+        LDA r1H         ; SECTOR
         ORA a04F6
         BNE b1CF9
-        JSR s254D    ;point r4 at diskBlkBuf
-        JSR ReadBlock ;     Very low level read block from disk
-        JSR s253B    ;transfer X to A, if A=0 return, else pull from stack
+        JSR s254D       ; point r4 at diskBlkBuf
+        JSR ReadBlock   ; Very low level read block from disk
+        JSR s253B       ; transfer X to A, if A=0 return, else pull from stack
         LDY #$90
         LDX #$13
 b1CE4   LDA diskBlkBuf,Y
@@ -725,6 +721,7 @@ f1D34   .BYTE $23,$23
         .BYTE $46,$50
 f1D38   .BYTE $12,$12,$12,$28
 f1D3C   .BYTE $01,$01,$01,$03
+
 s1D40   LDY #$27
         LDA #$00
 b1D44   STA f04F7,Y
@@ -754,10 +751,10 @@ b1D6C   CPY #$15
 b1D78   LDA a1CFC
         BEQ b1D9B
         LDA a04F4
-        STA r6L      ;TRACK number of block
+        STA r6L         ; TRACK number of block
         LDA #$00
-        STA r6H      ;SECTOR number of block
-b1D86   JSR FindBAMBit ;     Get disk block allocation status
+        STA r6H         ; SECTOR number of block
+b1D86   JSR FindBAMBit  ; Get disk block allocation status
         BEQ b1D92
         LDY r6H
         LDA #$FF
@@ -770,6 +767,7 @@ b1D9B   RTS
 
 f1D9C   .BYTE $15,$13,$12,$11
 a1DA0   .BYTE $08
+
 s1DA1   LDA a1DA0
         CLC 
         ADC a04F3
@@ -803,16 +801,16 @@ b1DD0   STY a04F3
 
 ; Get block from disk
 s1DDA   LDA (r5L),Y
-        STA r1L      ;TRACK
+        STA r1L         ; TRACK
         INY 
         LDA (r5L),Y
-        STA r1H      ;SECTOR
-s1DE3   JSR s254D    ;point r4 at diskBlkBuf
-        JMP GetBlock ;     General purpose routine to get a block from the current disk
+        STA r1H         ; SECTOR
+s1DE3   JSR s254D       ; point r4 at diskBlkBuf
+        JMP GetBlock    ; General purpose routine to get a block from the current disk
 
 ; Put the diskBlkBuf to disk
-j1DE9   JSR s254D    ;point r4 at diskBlkBuf
-        JMP PutBlock ;     General purpose routine to write a block to disk with verify
+j1DE9   JSR s254D       ; point r4 at diskBlkBuf
+        JMP PutBlock    ; General purpose routine to write a block to disk with verify
 
 a1DEF   .BYTE $00
 s1DF0   LDA #$24
@@ -847,7 +845,7 @@ b1E24   STA dir2Head,Y
         INY 
         BNE b1E24
 b1E2D   LDA #$00
-        JSR s1CFD    ;called when erasing a disk
+        JSR s1CFD       ; called when erasing a disk
 b1E32   LDA a04F3
         STA r6H
         LDA a04F4
@@ -864,19 +862,19 @@ b1E4C   RTS
 s1E4D   LDA a0520
         CMP #$02
         BCC b1E6A
-        BNE b1E67    ;free disk block
+        BNE b1E67       ; free disk block
         LDA r6L
         CMP a1DEF
         BCC b1E66
         CMP #$35
-        BNE b1E67    ;free a disk block
+        BNE b1E67       ; free a disk block
         LDA #$80
         STA a8203
 b1E66   RTS 
 
-b1E67   JMP FreeBlock ;     Free an allocated disk block
+b1E67   JMP FreeBlock   ; Free an allocated disk block
 
-b1E6A   JSR FindBAMBit ;     Get disk block allocation status
+b1E6A   JSR FindBAMBit  ; Get disk block allocation status
         LDA r8H
         EOR curDirHead,X
         STA curDirHead,X
@@ -897,26 +895,26 @@ f1E86   .BYTE $12,$19,$1F,$24
 s1E8A   JSR s2268
         JSR s206D
         JSR s2097
-        JSR s253B    ;transfer X to A, if A=0 return, else pull from stack
+        JSR s253B       ; transfer X to A, if A=0 return, else pull from stack
         JSR s232C
-        JSR s253B    ;transfer X to A, if A=0 return, else pull from stack
+        JSR s253B       ; transfer X to A, if A=0 return, else pull from stack
         LDA #>curDirHead
-        STA r5H      ;lo byte of curDirHead for CalcBlksFree
+        STA r5H         ; lo byte of curDirHead for CalcBlksFree
         LDA #<curDirHead
-        STA r5L      ;hi byte of curDirHead for CalcBlksFree
-        JSR CalcBlksFree ;     Calculates total number of free blocks on the disk
+        STA r5L         ; hi byte of curDirHead for CalcBlksFree
+        JSR CalcBlksFree ; Calculates total number of free blocks on the disk
         LDX #$03
         LDA a1893
-        CMP r4H      ;compare with hi byte of number of free blocks on disk (r4)
+        CMP r4H         ; compare with hi byte of number of free blocks on disk (r4)
         BNE b1EB5
         LDA a1892
-        CMP r4L      ;compare with lo byte of number of free blocks on disk (r4)
-b1EB5   BEQ b1EB9    ;free block sizes are equal - skip ahead
+        CMP r4L         ; compare with lo byte of number of free blocks on disk (r4)
+b1EB5   BEQ b1EB9       ; free block sizes are equal - skip ahead
         BCS b1F00
 b1EB9   LDA aFC
-        STA r10L     ;DIRPAGE parameter for GetFreeDirBlk - directory page to begin searching
-        JSR GetFreeDirBlk ;     Search cur dir for an empty slot for a new dir entry, allocate another block if needed
-        JSR s253B    ;transfer X to A, if A=0 return, else pull from stack
+        STA r10L        ; DIRPAGE parameter for GetFreeDirBlk - directory page to begin searching
+        JSR GetFreeDirBlk ; Search cur dir for an empty slot for a new dir entry, allocate another block if needed
+        JSR s253B       ; transfer X to A, if A=0 return, else pull from stack
         LDA r10L
         STA aFC
         STY a04E0
@@ -924,22 +922,22 @@ b1EB9   LDA aFC
         STA a04E2
         LDA r1L
         STA a04E1
-        JSR PutDirHead ;     Write directory header and BAM to disk
-        JSR s253B    ;transfer X to A, if A=0 return, else pull from stack
-b1EDA   JSR s1F01    ;copy file
-        JSR s253B    ;transfer X to A, if A=0 return, else pull from stack
+        JSR PutDirHead  ; Write directory header and BAM to disk
+        JSR s253B       ; transfer X to A, if A=0 return, else pull from stack
+b1EDA   JSR s1F01       ; copy file
+        JSR s253B       ; transfer X to A, if A=0 return, else pull from stack
         TYA 
         BNE b1EF7
         JSR s22F3
-        JSR s253B    ;transfer X to A, if A=0 return, else pull from stack
+        JSR s253B       ; transfer X to A, if A=0 return, else pull from stack
         JSR s2097
-        JSR s253B    ;transfer X to A, if A=0 return, else pull from stack
+        JSR s253B       ; transfer X to A, if A=0 return, else pull from stack
         JSR s2350
-        JSR s253B    ;transfer X to A, if A=0 return, else pull from stack
+        JSR s253B       ; transfer X to A, if A=0 return, else pull from stack
         BEQ b1EDA
 b1EF7   JSR s2244
-        JSR s253B    ;transfer X to A, if A=0 return, else pull from stack
-        JSR PutDirHead ;     Write directory header and BAM to disk
+        JSR s253B       ; transfer X to A, if A=0 return, else pull from stack
+        JSR PutDirHead  ; Write directory header and BAM to disk
 b1F00   RTS 
 
 ; copy file
@@ -989,6 +987,7 @@ s1F42   LDY #$00
 
 f1F56   .BYTE $1F,$1F,$1F,$1F
 f1F5A   .BYTE $7B,$B5,$C5,$41
+
 s1F5E   LDA a041B
         CMP #$01
         BNE b1F7A
@@ -1987,13 +1986,19 @@ b26FD   JSR s2533    ;compare version to 32
         STA r0L
 b2726   RTS 
 
-p2727   .TEXT "deskTop AM  V2.0", $00, $18, "Please insert disk wit"
-        .TEXT "h", $00, $18, "In drive:  "
-a275D   .TEXT "A", $00, $18, "Please insert disk:", $00, $18, "Operation cancel"
-        .TEXT "ed due to", $00, "disk error:", $00, "Disk full", $00, "Director"
-        .TEXT "y full.", $00, "Missing or unformatted disk.", $00, "Wri"
-        .TEXT "te protect tab on disk.", $00, "Double-sided dis"
-        .TEXT "k in 1541.", $00
+p2727   .TEXT "deskTop AM  V2.0", $00
+        .TEXT $18, "Please insert disk with", $00
+        .TEXT $18, "In drive:  "
+a275D   .TEXT "A", $00
+        .TEXT $18, "Please insert disk:", $00
+        .TEXT $18, "Operation canceled due to", $00
+        .TEXT "disk error:", $00
+        .TEXT "Disk full", $00
+        .TEXT "Directory full.", $00
+        .TEXT "Missing or unformatted disk.", $00
+        .TEXT "Write protect tab on disk.", $00
+        .TEXT "Double-sided disk in 1541.", $00
+
 p2808   .TEXT $C2, "U", $FF, $D5
         .BYTE $BE,$21,$7E,$E4,$51,$13,$BE,$4A
         .BYTE $7D,$C1,$FF,$83,$C0,$00,$45,$A2
@@ -2107,8 +2112,11 @@ p2998   .BYTE $04,$32,$00,$06,$08,$00,$CA,$00
         .BYTE $00,$00,$00,$00,$40,$00,$00,$00
         .BYTE $00,$00,$00,$00,$00,$00,$00,$00
         .BYTE $40,$00,$00,$00,$00
-        .TEXT $03, $01, $87, $E0, $00, $00, $01, $00, $80, $00, $01, $04, $00, $00, $00, $08, $0D, "`", $00, $00, $18, "This is a NON-GEOS "
-        .TEXT "disk", $00, "Convert it?", $00, " Kbytes used", $00, " Kbytes "
+        .TEXT $03, $01, $87, $E0, $00, $00, $01, $00, $80, $00, $01, $04, $00, $00, $00, $08, $0D, "`", $00, $00
+        .TEXT $18, "This is a NON-GEOS disk", $00
+        .TEXT "Convert it?", $00
+        .TEXT " Kbytes used", $00
+        .TEXT " Kbytes "
 p2BC8   .TEXT "free", $00, "Preferences"
 p2BD8   .TEXT $A0, $A0, $A0, $A0, $A0, "Pad Colo"
         .TEXT "r Pref", $A0, $A0, "DRIVE A", $00, "DRIVE B", $00, "DRIVE C", $00, "Non-GEOS"
@@ -2249,7 +2257,7 @@ s320D   STA r3L
 
 ; CLICK DISK ICON HANDLER
 s321A   JSR s3220
-        JMP OpenDisk
+        JMP OpenDisk    ; Open the disk in the current drive
 
 s3220   LDA #$04
 s3222   STA r0L
@@ -5092,11 +5100,11 @@ s4824   TAY
         BEQ b4839
         TYA 
         PHA 
-        JSR s4932    ;called many times during icons draw routine
-        JSR InvertRectangle
+        JSR s4932               ; called many times during icons draw routine
+        JSR InvertRectangle     ; Inverts the pixels within a rectangular region. 
         PLA 
         JSR s4883
-        JSR InvertRectangle
+        JSR InvertRectangle     ; Inverts the pixels within a rectangular region. 
 b4839   RTS 
 
 s483A   ASL 
@@ -6790,7 +6798,7 @@ b55BD   JSR MouseOff
 a55C3   =*+$01
 a55C4   =*+$02
         JSR f0000
-        JSR MouseUp
+        JSR MouseUp     ; Reenables the mouse pointer and GEOS mouse tracking.
         PLA 
         STA r1L
         PLA 
@@ -7092,7 +7100,7 @@ s57EE   LDY #$00
 b57F4   LDA (r0L),Y
 b57F6   BEQ b580D
         STY a024F
-        JSR GetCharWidth
+        JSR GetCharWidth        ; Calculate the pixel width of a character as it exists in the font
         LDY a024F
         CLC 
         ADC r4L
@@ -7388,6 +7396,7 @@ s59E6   LDA #>p8BD0
         RTS 
 
 ; load spr2pic to r4
+s59EF
         LDA #>spr2pic
         STA r4H
         LDA #<spr2pic
@@ -7434,7 +7443,7 @@ b5A3B   JSR s5AAD    ;Find "CONFIGURE"
         TXA 
         BNE b5A4E
 b5A41   JSR s1AEC    ;seems to set drive A or drive B type
-        JSR OpenDisk
+        JSR OpenDisk    ; Open the disk in the current drive
         CPX #$0D
         BNE b5A58
         JSR s1AEC    ;seems to set drive A or drive B type
@@ -7495,7 +7504,7 @@ s5AAD   STA r12L
         STA r10H
         LDA #<p5B08  ;Lo byte of "CONFIGURE" filename
         STA r10L
-        JSR FindFTypes
+        JSR FindFTypes ; Builds a list of files of a particular GEOS type from the current directory
         JSR s253B    ;transfer X to A, if A=0 return, else pull from stack
         LDX #$05
         LDA r7H

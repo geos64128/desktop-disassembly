@@ -11,9 +11,6 @@
 ;
 ; ===============================================================================
 
-;
-; **** ZP ABSOLUTE ADRESSES **** 
-;
 a01 = $01
 r0L = $02
 r0H = $03
@@ -47,6 +44,40 @@ r14L = $1E
 r14H = $1F
 r15L = $20
 r15H = $21
+
+;Zero Page variables for use by applications ONLY! Not to be used by
+;GEOS or desk accessories.
+
+a0	= $fb
+a0L	= $fb
+a0H	= $fc
+a1	= $fd
+a1L	= $fd
+a1H	= $fe
+a2	= $70
+a2L	= $70
+a2H	= $71
+a3	= $72
+a3L	= $72
+a3H	= $73
+a4	= $74
+a4L	= $74
+a4H	= $75
+a5	= $76
+a5L	= $76
+a5H	= $77
+a6	= $78
+a6L	= $78
+a6H	= $79
+a7	= $7a
+a7L	= $7a
+a7H	= $7b
+a8	= $7c
+a8L	= $7c
+a8H	= $7d
+a9	= $7e
+a9L	= $7e
+a9H	= $7f
 
 currentHeight   = $29
 displayBufferOn = $2F
@@ -90,56 +121,56 @@ aFC = $FC
 aFD = $FD
 aFE = $FE
 
-dirBuffer_6d00 = $6D00
-diskBlkBuf = $8000
-fileHeader = $8100
-curDirHead = $8200
-fileTrScTab = $8300
-dirEntryBuf = $8400
-DrACurDkNm = $841E
-DrBCurDkNm = $8430
-dataFileName = $8442
-PrntFilename = $8465
-BootDiskName = $8476
-curDrive = $8489
-diskOpenFlg = $848A
-isGEOS = $848B
-numDrives = $848D
-driveType_8 = $848E
-driveType_9 = $848F
-driveType_10 = $8490
-driveType_11 = $8491
-fileWritten = $8498
-RecoverVector_LO = $84B1
-RecoverVector_HI = $84B2
-iconSelFlag = $84B5
-menuNumber = $84B7
-mouseTop = $84B8
-mouseBottom = $84B9
-mouseLeft_LO = $84BA
-mouseLeft_HI = $84BB
-mouseRight_LO = $84BC
-mouseRight_HI = $84BD
-maxMouseSpeed = $8501
-minMouseSpeed = $8502
-mouseAccel = $8503
-keyData = $8504
-random = $850A
-year = $8516
-month = $8517
-day = $8518
-hour = $8519
-minutes = $851A
-seconds = $851B
-screencolors = $851E
-driveData = $88BF
-ramExpSize = $88C3
-sysRAMFlg = $88C4
-curType = $88C6
-inputDevName = $88CB
-dir2Head = $8900
-spr2pic = $8A80
-AllocateBlock = $9048
+dirBuffer_6d00  = $6D00
+diskBlkBuf      = $8000
+fileHeader      = $8100
+curDirHead      = $8200
+fileTrScTab     = $8300
+dirEntryBuf     = $8400
+DrACurDkNm      = $841E
+DrBCurDkNm      = $8430
+dataFileName    = $8442
+PrntFilename    = $8465
+BootDiskName    = $8476
+curDrive        = $8489
+diskOpenFlg     = $848A
+isGEOS          = $848B
+numDrives       = $848D
+driveType_8     = $848E
+driveType_9     = $848F
+driveType_10    = $8490
+driveType_11    = $8491
+fileWritten     = $8498
+RecoverVector_LO= $84B1
+RecoverVector_HI= $84B2
+iconSelFlag     = $84B5
+menuNumber      = $84B7
+mouseTop        = $84B8
+mouseBottom     = $84B9
+mouseLeft_LO    = $84BA
+mouseLeft_HI    = $84BB
+mouseRight_LO   = $84BC
+mouseRight_HI   = $84BD
+maxMouseSpeed   = $8501
+minMouseSpeed   = $8502
+mouseAccel      = $8503
+keyData         = $8504
+random          = $850A
+year            = $8516
+month           = $8517
+day             = $8518
+hour            = $8519
+minutes         = $851A
+seconds         = $851B
+screencolors    = $851E
+driveData       = $88BF
+ramExpSize      = $88C3
+sysRAMFlg       = $88C4
+curType         = $88C6
+inputDevName    = $88CB
+dir2Head        = $8900
+spr2pic         = $8A80
+AllocateBlock   = $9048
 
 ; GEOS Routines
 

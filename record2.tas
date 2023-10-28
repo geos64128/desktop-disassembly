@@ -106,41 +106,22 @@ e59C0 = $59C0
 e59EF = $59EF
 e904B = $904B
 eC175 = $C175
-;
-; **** USER LABELS **** 
-;
-
-;
-; **** PREDEFINED LABELS **** 
-;
 
 
         * = $5B1E
 
         JMP j5B49
-
         JMP j5B45
-
         JMP j60DE
-
         JMP j60D4
-
         JMP j5B85
-
         JMP j5BA7
-
         JMP j5BC3
-
         JMP j61BD
-
         JMP j6223
-
         JMP j633A
-
         JMP j63A2
-
         JMP j63DB
-
         JMP j63D8
 
 j5B45   BIT a71
@@ -179,7 +160,7 @@ b5B84   RTS
 j5B85   LDA diskOpenFlg
         BEQ b5BA6
         JSR e3FF6
-        JSR OpenDisk
+        JSR OpenDisk    ; Open the disk in the current drive
         JSR e253B
 j5B93   JSR e504C
         CMP #$04
@@ -188,7 +169,6 @@ j5B93   JSR e504C
         JSR s5C6B
         JSR e599C
         JMP e5175
-
 b5BA6   RTS 
 
 j5BA7   JSR e3FF6
@@ -202,7 +182,6 @@ j5BA7   JSR e3FF6
         BEQ b5BBF
         JSR e259A
 b5BBF   JMP e5175
-
 b5BC2   RTS 
 
 j5BC3   JSR e32BB
@@ -261,13 +240,12 @@ b5C36   JSR e59C0
 b5C3C   RTS 
 
         .BYTE $81,$0B,$08,$10,$BD,$5F,$0B,$08
-        .BYTE $20,$DD,$5F,$0B,$08
-        .BYTE $30
-        .BYTE $FF,$5F,$03,$01,$48,$04,$09,$48
-        .BYTE $02,$11,$48,$00,$81,$0B,$08,$20
-        .BYTE $E9,$2D,$0B,$08,$30,$0A,$2E,$0D
-        .BYTE $08
-        .BYTE $40,$0C,$10,$02,$11,$48,$00
+        .BYTE $20,$DD,$5F,$0B,$08,$30,$FF,$5F
+        .BYTE $03,$01,$48,$04,$09,$48,$02,$11
+        .BYTE $48,$00,$81,$0B,$08,$20,$E9,$2D
+        .BYTE $0B,$08,$30,$0A,$2E,$0D,$08,$40
+        .BYTE $0C,$10,$02,$11,$48,$00
+
 s5C6B   LDA #$00
         STA r5H
         JSR NewDisk
@@ -315,7 +293,7 @@ b5CC0   JSR s5CF2
         JSR s5CF2
         JSR e253B
 b5CE1   STA r5H
-        JSR PutDirHead
+        JSR PutDirHead  ; Write directory header and BAM to disk
         RTS 
 
 s5CE7   LDA a82AC
@@ -326,8 +304,8 @@ s5CE7   LDA a82AC
 
 s5CF2   LDA #$00
         STA r5H
-        JSR e59EF
-        JSR GetBlock
+        JSR e59EF       ; load spr2pic to r4
+        JSR GetBlock    ; General purpose routine to get a block from current disk.
         JSR e253B
         LDA #>p8A82
         STA r5H
@@ -351,11 +329,11 @@ b5D11   JSR s5D35
 b5D22   DEC r10L
         BNE b5D11
         PLA 
-        STA r1L
+        STA r1L         ; TRACK
         PLA 
-        STA r1H
-        JSR e59EF
-        JMP PutBlock
+        STA r1H         ; SECTOR
+        JSR e59EF       ; load spr2pic to r4
+        JMP PutBlock    ; General purpose routine to write a block to disk with verify
 
 b5D32   PLA 
         PLA 
@@ -463,7 +441,7 @@ s5DD5   LDX #$00
         STA r4H
         LDA #<fileHeader
         STA r4L
-        JSR GetBlock
+        JSR GetBlock    ; General purpose routine to get a block from current disk.
         JSR e253B
         LDY #$02
 b5DFA   TYA 
@@ -485,10 +463,10 @@ b5E10   PLA
         BNE b5DFA
 b5E19   RTS 
 
-s5E1A   JSR EnterTurbo
+s5E1A   JSR EnterTurbo  ; Activate disk drive turbo mode
         TXA 
         BNE b5E58
-        JSR InitForIO
+        JSR InitForIO   ; Prepare for IO across the serial bus
 b5E23   LDA #>diskBlkBuf
         STA r4H
         LDA #<diskBlkBuf
@@ -514,7 +492,7 @@ b5E44   JSR e35CD
         STA r1L
         BNE b5E23
         LDX #$00
-b5E58   JMP DoneWithIO
+b5E58   JMP DoneWithIO  ; restore system after IO across the serial bus
 
 f5E5B   .BYTE $00
         .BYTE $00,$00
@@ -593,7 +571,7 @@ b5F05   LDY #$5E
         TXA 
         BNE b5F12
         JSR s5F73
-b5F12   JSR DoneWithIO
+b5F12   JSR DoneWithIO  ; restore system after IO across the serial bus
         TXA 
         BNE b5F21
         JSR NewDisk
@@ -609,76 +587,80 @@ s5F30   STY r0H
         LDA #$00
         STA a90
         LDA curDrive
-        JSR ROM_LISTEN ;$FFB1 - make SERIAL device listen        
+        JSR ROM_LISTEN  ; $FFB1 - make SERIAL device listen        
         BIT a90
         BMI b5F6D
         LDA #$FF
-        JSR ROM_SECOND ;$FF93 - send secondary addr after listen 
+        JSR ROM_SECOND  ; $FF93 - send secondary addr after listen 
         BIT a90
         BMI b5F6D
         LDY #$00
 b5F4D   LDA (r0L),Y
         CMP #$FF
         BEQ b5F59
-        JSR ROM_CIOUT ;$FFA8 - output byte to SERIAL            
+        JSR ROM_CIOUT   ; $FFA8 - output byte to SERIAL            
         INY 
         BNE b5F4D
-b5F59   JSR ROM_UNLSN ;$FFAE - unlisten all SERIAL devices      
+b5F59   JSR ROM_UNLSN   ; $FFAE - unlisten all SERIAL devices      
         LDA curDrive
-        JSR ROM_LISTEN ;$FFB1 - make SERIAL device listen        
+        JSR ROM_LISTEN  ; $FFB1 - make SERIAL device listen        
         LDA #$EF
-        JSR ROM_SECOND ;$FF93 - send secondary addr after listen 
-        JSR ROM_UNLSN ;$FFAE - unlisten all SERIAL devices      
+        JSR ROM_SECOND  ; $FF93 - send secondary addr after listen 
+        JSR ROM_UNLSN   ; $FFAE - unlisten all SERIAL devices      
         LDX #$00
         RTS 
 
-b5F6D   JSR ROM_UNLSN ;$FFAE - unlisten all SERIAL devices      
+b5F6D   JSR ROM_UNLSN   ; $FFAE - unlisten all SERIAL devices      
         LDX #$0D
         RTS 
 
 s5F73   LDA #$00
         STA a90
         LDA curDrive
-        JSR ROM_TALK ;$FFB4 - make SERIAL device talk          
+        JSR ROM_TALK    ; $FFB4 - make SERIAL device talk          
         BIT a90
         BMI b5FB6
         LDA #$FF
-        JSR ROM_TKSA ;$FF96 - send secondary addr after talk   
+        JSR ROM_TKSA    ; $FF96 - send secondary addr after talk   
         BIT a90
         BMI b5FB6
-        JSR ROM_ACPTR ;$FFA5 - input byte from SERIAL           
+        JSR ROM_ACPTR   ; $FFA5 - input byte from SERIAL           
         AND #$0F
         ASL 
         ASL 
         ASL 
         ASL 
         STA a5FBC
-        JSR ROM_ACPTR ;$FFA5 - input byte from SERIAL           
+        JSR ROM_ACPTR   ; $FFA5 - input byte from SERIAL           
         AND #$0F
         ORA a5FBC
         STA a5FBC
-        JSR ROM_UNTLK ;$FFAB - untalk all SERIAL devices        
+        JSR ROM_UNTLK   ; $FFAB - untalk all SERIAL devices        
         LDA curDrive
-        JSR ROM_LISTEN ;$FFB1 - make SERIAL device listen        
+        JSR ROM_LISTEN  ; $FFB1 - make SERIAL device listen        
         LDA #$EF
-        JSR ROM_SECOND ;$FF93 - send secondary addr after listen 
-        JSR ROM_UNLSN ;$FFAE - unlisten all SERIAL devices      
+        JSR ROM_SECOND  ; $FF93 - send secondary addr after listen 
+        JSR ROM_UNLSN   ; $FFAE - unlisten all SERIAL devices      
         LDX a5FBC
         RTS 
 
-b5FB6   JSR ROM_UNTLK ;$FFAB - untalk all SERIAL devices        
+b5FB6   JSR ROM_UNTLK   ; $FFAB - untalk all SERIAL devices        
         LDX #$0D
         RTS 
 
-a5FBC   .TEXT $00, $18, "Format both sides of disk?  Be", $00, "careful"
-        .TEXT ", as this will destroy any", $00, "data on the f"
-        .TEXT "lip side of the disk.", $00
+a5FBC   .TEXT $00, $18, "Format both sides of disk?  Be", $00 
+        .TEXT "careful, as this will destroy any", $00
+        .TEXT "data on the flip side of the disk.", $00
 p6022   .TEXT $18, "There is currently no", $00
-p6039   .TEXT "recoverable file.", $1B, $00, $18, "Please insert disk t"
-        .TEXT "o erase in", $00, "drive "
-a6072   .TEXT $00, ".", $00, $18, "Erase contents of RAM disk?", $00, $18, "Delete "
-        .TEXT "selected files?", $00, $18, "is write protected and "
-        .TEXT "can't", $00, "be deleted.", $00
+p6039   .TEXT "recoverable file.", $1B, $00
+        .TEXT $18, "Please insert disk to erase in", $00
+        .TEXT "drive "
+a6072   .TEXT $00, ".", $00
+        .TEXT $18, "Erase contents of RAM disk?", $00
+        .TEXT $18, "Delete selected files?", $00
+        .TEXT $18, "is write protected and can't", $00
+        .TEXT "be deleted.", $00
+
 j60D4   JSR e237E
         BIT a71
         BVS b60E6
@@ -781,6 +763,7 @@ s618F   LDA r9H
         .BYTE $10,$BE,$2D,$0C,$42,$10,$0E,$0B
         .BYTE $10,$20,$AA,$60,$0B,$10,$30,$C8
         .BYTE $60,$01,$11,$48,$00
+
 j61BD   LDA diskOpenFlg
         BEQ b6222
         JSR e5926
@@ -805,7 +788,7 @@ b61E7   LDA #$00
         JSR e5956
         LDA aFB
         STA r10L
-        JSR GetFreeDirBlk
+        JSR GetFreeDirBlk       ; Search cur dir for an empty slot for a new dir entry, allocate another block if needed
         JSR e599C
         TYA 
         CLC 
@@ -820,7 +803,7 @@ b61E7   LDA #$00
         STA r4L
         JSR e4498
         JSR s5D35
-        JSR PutDirHead
+        JSR PutDirHead  ; Write directory header and BAM to disk
         JSR e599C
         LDA r10L
         STA aFB
@@ -852,7 +835,7 @@ b623B   LDA curDrive
         BNE b6252
         RTS 
 
-b6252   JSR OpenDisk
+b6252   JSR OpenDisk    ; Open the disk in the current drive
         JSR e599C
         LDA a82BD
         BEQ b6260

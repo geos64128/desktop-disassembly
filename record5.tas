@@ -13,14 +13,6 @@
 .include "geos.inc"
 .include "kernal.inc"
 
-;
-; **** ZP ABSOLUTE ADRESSES **** 
-;
-
-;
-; **** ZP POINTERS **** 
-;
-;
 ; **** FIELDS **** 
 ;
 f0800 = $0800
@@ -102,37 +94,22 @@ e599C = $599C
 e59AA = $59AA
 e59C0 = $59C0
 eC265 = $C265
-;
-; **** USER LABELS **** 
 
-;
 ; **** PREDEFINED LABELS **** 
-
 
         * = $5B1E
 
         JMP j5B5B
-
         JMP j5B6A
-
         JMP j5B51
-
         JMP j5B42
-
         JMP j5E3A
-
         JMP j5FFA
-
         JMP j6069
-
         JMP j620E
-
         JMP j622C
-
         JMP j6318
-
         JMP j638A
-
         JMP j644B
 
 j5B42   LDA #<p1003
@@ -754,24 +731,24 @@ j5FFA   LDA numDrives
         TXA 
         BNE b603E
         JSR PurgeTurbo
-        JSR InitForIO
+        JSR InitForIO   ; Prepare for IO across the serial bus
         LDA curDrive
-        JSR ROM_LISTEN ;$FFB1 - make SERIAL device listen        
+        JSR ROM_LISTEN  ; $FFB1 - make SERIAL device listen        
         LDA #$FF
-        JSR ROM_SECOND ;$FF93 - send secondary addr after listen 
+        JSR ROM_SECOND  ; $FF93 - send secondary addr after listen 
         LDA #$49
-        JSR ROM_CIOUT ;$FFA8 - output byte to SERIAL            
+        JSR ROM_CIOUT   ; $FFA8 - output byte to SERIAL            
         LDA #$3A
-        JSR ROM_CIOUT ;$FFA8 - output byte to SERIAL            
+        JSR ROM_CIOUT   ; $FFA8 - output byte to SERIAL            
         LDA #$30
-        JSR ROM_CIOUT ;$FFA8 - output byte to SERIAL            
-        JSR ROM_UNLSN ;$FFAE - unlisten all SERIAL devices      
+        JSR ROM_CIOUT   ; $FFA8 - output byte to SERIAL            
+        JSR ROM_UNLSN   ; $FFAE - unlisten all SERIAL devices      
         LDA curDrive
-        JSR ROM_LISTEN ;$FFB1 - make SERIAL device listen        
+        JSR ROM_LISTEN  ; $FFB1 - make SERIAL device listen        
         LDA #$EF
-        JSR ROM_SECOND ;$FF93 - send secondary addr after listen 
-        JSR ROM_UNLSN ;$FFAE - unlisten all SERIAL devices      
-        JSR DoneWithIO
+        JSR ROM_SECOND  ; $FF93 - send secondary addr after listen 
+        JSR ROM_UNLSN   ; $FFAE - unlisten all SERIAL devices      
+        JSR DoneWithIO  ; restore system after IO across the serial bus
 b603E   JSR e1AEC
 b6041   JMP j6044
 
@@ -1047,10 +1024,11 @@ s6363   STX r6H
         STA r9L
         LDX #$12
         JSR s6562
-        JMP PutDirHead
+        JMP PutDirHead  ; write directory header and BAM to disk
 
         .BYTE $81,$0B,$10,$20,$CA,$2E,$0D,$10
         .BYTE $30,$0E,$10,$02,$11,$48,$00
+        
 j638A   JSR e237E
         LDX #$63
         LDA #$94

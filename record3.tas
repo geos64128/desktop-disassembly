@@ -181,7 +181,7 @@ b5BD1   LDY #$13
         INY 
         LDA (r5L),Y
         STA r1H
-        JSR GetBlock
+        JSR GetBlock    ; General purpose routine to get a block from current disk.
         STX a5BBB
 b5BE2   LDA a8A82
         CMP #$03
@@ -283,7 +283,7 @@ b5C97   JSR s5D22
         AND #$40
         BEQ b5CC9
         JSR s5D38
-        JSR InvertRectangle
+        JSR InvertRectangle     ; Inverts the pixels within a rectangular region. 
 b5CC9   LDA #>p7D
         STA r11H
         LDA #<p7D
@@ -356,7 +356,7 @@ f5D44   .BYTE $84,$8B,$70,$00,$77,$00,$2C
         LDA f0406
         EOR #$40
         STA f0406
-        JSR InvertRectangle
+        JSR InvertRectangle     ; Inverts the pixels within a rectangular region. 
 b5D68   RTS 
 
 f5D69   .BYTE $B7,$BD,$C3,$CA,$D5,$DB,$E5

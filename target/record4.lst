@@ -1,7 +1,7 @@
 
 ; 64tass Turbo Assembler Macro V1.53.1515 listing file
 ; 64tass -l ./target/record4.lbl -L ./target/record4.lst -o ./target/record4 ./record4.tas
-; Thu Oct 26 04:25:08 2023
+; Fri Oct 27 20:01:58 2023
 
 ;Offset	;Hex		;Monitor	;Source
 
@@ -43,6 +43,36 @@
 =$1f					r14H = $1F
 =$20					r15L = $20
 =$21					r15H = $21
+=$fb					a0	= $fb
+=$fb					a0L	= $fb
+=$fc					a0H	= $fc
+=$fd					a1	= $fd
+=$fd					a1L	= $fd
+=$fe					a1H	= $fe
+=$70					a2	= $70
+=$70					a2L	= $70
+=$71					a2H	= $71
+=$72					a3	= $72
+=$72					a3L	= $72
+=$73					a3H	= $73
+=$74					a4	= $74
+=$74					a4L	= $74
+=$75					a4H	= $75
+=$76					a5	= $76
+=$76					a5L	= $76
+=$77					a5H	= $77
+=$78					a6	= $78
+=$78					a6L	= $78
+=$79					a6H	= $79
+=$7a					a7	= $7a
+=$7a					a7L	= $7a
+=$7b					a7H	= $7b
+=$7c					a8	= $7c
+=$7c					a8L	= $7c
+=$7d					a8H	= $7d
+=$7e					a9	= $7e
+=$7e					a9L	= $7e
+=$7f					a9H	= $7f
 =$29					currentHeight   = $29
 =$2f					displayBufferOn = $2F
 =$35					leftMarginLo    = $35
@@ -83,56 +113,56 @@
 =$fc					aFC = $FC
 =$fd					aFD = $FD
 =$fe					aFE = $FE
-=$6d00					dirBuffer_6d00 = $6D00
-=$8000					diskBlkBuf = $8000
-=$8100					fileHeader = $8100
-=$8200					curDirHead = $8200
-=$8300					fileTrScTab = $8300
-=$8400					dirEntryBuf = $8400
-=$841e					DrACurDkNm = $841E
-=$8430					DrBCurDkNm = $8430
-=$8442					dataFileName = $8442
-=$8465					PrntFilename = $8465
-=$8476					BootDiskName = $8476
-=$8489					curDrive = $8489
-=$848a					diskOpenFlg = $848A
-=$848b					isGEOS = $848B
-=$848d					numDrives = $848D
-=$848e					driveType_8 = $848E
-=$848f					driveType_9 = $848F
-=$8490					driveType_10 = $8490
-=$8491					driveType_11 = $8491
-=$8498					fileWritten = $8498
-=$84b1					RecoverVector_LO = $84B1
-=$84b2					RecoverVector_HI = $84B2
-=$84b5					iconSelFlag = $84B5
-=$84b7					menuNumber = $84B7
-=$84b8					mouseTop = $84B8
-=$84b9					mouseBottom = $84B9
-=$84ba					mouseLeft_LO = $84BA
-=$84bb					mouseLeft_HI = $84BB
-=$84bc					mouseRight_LO = $84BC
-=$84bd					mouseRight_HI = $84BD
-=$8501					maxMouseSpeed = $8501
-=$8502					minMouseSpeed = $8502
-=$8503					mouseAccel = $8503
-=$8504					keyData = $8504
-=$850a					random = $850A
-=$8516					year = $8516
-=$8517					month = $8517
-=$8518					day = $8518
-=$8519					hour = $8519
-=$851a					minutes = $851A
-=$851b					seconds = $851B
-=$851e					screencolors = $851E
-=$88bf					driveData = $88BF
-=$88c3					ramExpSize = $88C3
-=$88c4					sysRAMFlg = $88C4
-=$88c6					curType = $88C6
-=$88cb					inputDevName = $88CB
-=$8900					dir2Head = $8900
-=$8a80					spr2pic = $8A80
-=$9048					AllocateBlock = $9048
+=$6d00					dirBuffer_6d00  = $6D00
+=$8000					diskBlkBuf      = $8000
+=$8100					fileHeader      = $8100
+=$8200					curDirHead      = $8200
+=$8300					fileTrScTab     = $8300
+=$8400					dirEntryBuf     = $8400
+=$841e					DrACurDkNm      = $841E
+=$8430					DrBCurDkNm      = $8430
+=$8442					dataFileName    = $8442
+=$8465					PrntFilename    = $8465
+=$8476					BootDiskName    = $8476
+=$8489					curDrive        = $8489
+=$848a					diskOpenFlg     = $848A
+=$848b					isGEOS          = $848B
+=$848d					numDrives       = $848D
+=$848e					driveType_8     = $848E
+=$848f					driveType_9     = $848F
+=$8490					driveType_10    = $8490
+=$8491					driveType_11    = $8491
+=$8498					fileWritten     = $8498
+=$84b1					RecoverVector_LO= $84B1
+=$84b2					RecoverVector_HI= $84B2
+=$84b5					iconSelFlag     = $84B5
+=$84b7					menuNumber      = $84B7
+=$84b8					mouseTop        = $84B8
+=$84b9					mouseBottom     = $84B9
+=$84ba					mouseLeft_LO    = $84BA
+=$84bb					mouseLeft_HI    = $84BB
+=$84bc					mouseRight_LO   = $84BC
+=$84bd					mouseRight_HI   = $84BD
+=$8501					maxMouseSpeed   = $8501
+=$8502					minMouseSpeed   = $8502
+=$8503					mouseAccel      = $8503
+=$8504					keyData         = $8504
+=$850a					random          = $850A
+=$8516					year            = $8516
+=$8517					month           = $8517
+=$8518					day             = $8518
+=$8519					hour            = $8519
+=$851a					minutes         = $851A
+=$851b					seconds         = $851B
+=$851e					screencolors    = $851E
+=$88bf					driveData       = $88BF
+=$88c3					ramExpSize      = $88C3
+=$88c4					sysRAMFlg       = $88C4
+=$88c6					curType         = $88C6
+=$88cb					inputDevName    = $88CB
+=$8900					dir2Head        = $8900
+=$8a80					spr2pic         = $8A80
+=$9048					AllocateBlock   = $9048
 =$c000					BootGEOS        = $C000
 =$c003					ResetHandle     = $C003
 =$c00f					version         = $C00F
@@ -383,7 +413,7 @@
 .5bd2	a9 00		lda #$00	        LDA #$00
 .5bd4	85 16		sta $16		        STA r10L
 .5bd6	85 17		sta $17		        STA r10H
-.5bd8	20 3b c2	jsr $c23b	        JSR FindFTypes
+.5bd8	20 3b c2	jsr $c23b	        JSR FindFTypes  ; Builds a list of files of a particular GEOS type from the current directory
 .5bdb	a5 11		lda $11		        LDA r7H
 .5bdd	d0 47		bne $5c26	        BNE b5C26
 .5bdf	a0 03		ldy #$03	        LDY #$03
@@ -634,7 +664,7 @@
 .5df4	a9 00		lda #$00	        LDA #$00
 .5df6	85 16		sta $16		        STA r10L
 .5df8	85 17		sta $17		        STA r10H
-.5dfa	20 3b c2	jsr $c23b	        JSR FindFTypes
+.5dfa	20 3b c2	jsr $c23b	        JSR FindFTypes  ; Builds a list of files of a particular GEOS type from the current directory
 .5dfd	a5 11		lda $11		        LDA r7H
 .5dff	d0 3b		bne $5e3c	        BNE b5E3C
 .5e01	a0 03		ldy #$03	        LDY #$03
@@ -675,7 +705,7 @@
 .5e58	85 0f		sta $0f		        STA r6H
 .5e5a	a9 00		lda #$00	        LDA #<p6600
 .5e5c	85 0e		sta $0e		        STA r6L
-.5e5e	20 3b c2	jsr $c23b	        JSR FindFTypes
+.5e5e	20 3b c2	jsr $c23b	        JSR FindFTypes  ; Builds a list of files of a particular GEOS type from the current directory
 .5e61	a9 5e		lda #$5e	        LDA #$5E
 .5e63	38		sec		        SEC
 .5e64	e5 11		sbc $11		        SBC r7H
@@ -879,7 +909,7 @@
 .6049	85 0b		sta $0b		        STA r4H
 .604b	a9 bf		lda #$bf	        LDA #<pBF
 .604d	85 0a		sta $0a		        STA r4L
-.604f	4c 2a c1	jmp $c12a	        JMP InvertRectangle
+.604f	4c 2a c1	jmp $c12a	        JMP InvertRectangle     ; Inverts the pixels within a rectangular region.
 >6052	2a 36 42 4e 5a 66		f6052   .BYTE $2A,$36,$42,$4E,$5A,$66
 >6058	20 9f c1 2a 72 4b 00 bf		s6058   .BYTE $20,$9F,$C1,$2A,$72,$4B,$00,$BF
 >6060	00 60 20 a2 c1 29 73 4a		        .BYTE $00,$60,$20,$A2,$C1,$29,$73,$4A
@@ -1063,7 +1093,7 @@
 .620e	d0 15		bne $6225	        BNE b6225
 .6210	e6 fb		inc $fb		b6210   INC aFB
 .6212	e6 fd		inc $fd		        INC aFD
-.6214	20 4a c2	jsr $c24a	        JSR PutDirHead
+.6214	20 4a c2	jsr $c24a	        JSR PutDirHead  ; write directory header and BAM to disk
 .6217	8a		txa		        TXA
 .6218	d0 0b		bne $6225	        BNE b6225
 .621a	20 ac 31	jsr $31ac	        JSR e31AC
@@ -1077,7 +1107,7 @@
 .6229	60		rts		b6229   RTS
 .622a	b9 37 62	lda $6237,y	s622A   LDA f6237,Y
 .622d	be 34 62	ldx $6234,y	        LDX f6234,Y
-.6230	20 d8 c1	jsr $c1d8	        JSR CallRoutine
+.6230	20 d8 c1	jsr $c1d8	        JSR CallRoutine ; Perform a pseudo-subroutine call, checking first for a null address (which will be ignored).
 .6233	60		rts		        RTS
 >6234	90 90 90			f6234   .BYTE $90,$90,$90
 >6237	39 3c 3f			f6237   .BYTE $39,$3C,$3F
@@ -1202,7 +1232,7 @@
 .633b	50 a3		bvc $62e0	        BVC b62E0
 .633d	4c 50 31	jmp $3150	j633D   JMP e3150
 .6340	c6 fd		dec $fd		b6340   DEC aFD
-.6342	20 4a c2	jsr $c24a	        JSR PutDirHead
+.6342	20 4a c2	jsr $c24a	        JSR PutDirHead  ; write directory header and BAM to disk
 .6345	8a		txa		        TXA
 .6346	d0 f5		bne $633d	        BNE j633D
 .6348	20 ac 31	jsr $31ac	        JSR e31AC
@@ -1291,16 +1321,21 @@
 >6407	00 0b 10 30			a6407   .BYTE $00,$0B,$10,$30
 >640b	00				a640B   .BYTE $00
 >640c	00 01 11 48 00			a640C   .BYTE $00,$01,$11,$48,$00
->6411	00 18 41			a6411   .TEXT $00, $18, "A"
->6414	6c 6c 20 66 69 6c 65 73		        .TEXT "ll files on this page will", $00, "be lost.", $00, $18, "Can"
->641c	20 6f 6e 20 74 68 69 73 20 70 61 67 65 20 77 69
->642c	6c 6c 00 62 65 20 6c 6f 73 74 2e 00 18 43 61 6e
->643c	27 74 20 64 65 6c 65 74		        .TEXT "'t delete a page with", $00, "write protected fi"
->6444	65 20 61 20 70 61 67 65 20 77 69 74 68 00 77 72
->6454	69 74 65 20 70 72 6f 74 65 63 74 65 64 20 66 69
->6464	6c 65 73 2e 00 43 42 4d		        .TEXT "les.", $00, "CBM files", $00, $18, "Can't delete first page", $00
->646c	20 66 69 6c 65 73 00 18 43 61 6e 27 74 20 64 65
->647c	6c 65 74 65 20 66 69 72 73 74 20 70 61 67 65 00
+>6411	00 18 41 6c 6c 20 66 69		a6411   .TEXT $00, $18, "All files on this page will", $00
+>6419	6c 65 73 20 6f 6e 20 74 68 69 73 20 70 61 67 65
+>6429	20 77 69 6c 6c 00
+>642f	62 65 20 6c 6f 73 74 2e		        .TEXT "be lost.", $00
+>6437	00
+>6438	18 43 61 6e 27 74 20 64		        .TEXT $18, "Can't delete a page with", $00
+>6440	65 6c 65 74 65 20 61 20 70 61 67 65 20 77 69 74
+>6450	68 00
+>6452	77 72 69 74 65 20 70 72		        .TEXT "write protected files.", $00
+>645a	6f 74 65 63 74 65 64 20 66 69 6c 65 73 2e 00
+>6469	43 42 4d 20 66 69 6c 65		        .TEXT "CBM files", $00
+>6471	73 00
+>6473	18 43 61 6e 27 74 20 64		        .TEXT $18, "Can't delete first page", $00
+>647b	65 6c 65 74 65 20 66 69 72 73 74 20 70 61 67 65
+>648b	00
 >648c	6f 6e 20 64 65 73 6b 54		        .TEXT "on deskTop."
 >6494	6f 70 2e
 >6497	00 00 00 00 00 00 00 00		        .BYTE $00,$00,$00,$00,$00,$00,$00,$00

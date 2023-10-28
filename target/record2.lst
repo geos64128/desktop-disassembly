@@ -1,7 +1,7 @@
 
 ; 64tass Turbo Assembler Macro V1.53.1515 listing file
 ; 64tass -l ./target/record2.lbl -L ./target/record2.lst -o ./target/record2 ./record2.tas
-; Thu Oct 26 04:25:08 2023
+; Fri Oct 27 20:01:58 2023
 
 ;Offset	;Hex		;Monitor	;Source
 
@@ -43,6 +43,36 @@
 =$1f					r14H = $1F
 =$20					r15L = $20
 =$21					r15H = $21
+=$fb					a0	= $fb
+=$fb					a0L	= $fb
+=$fc					a0H	= $fc
+=$fd					a1	= $fd
+=$fd					a1L	= $fd
+=$fe					a1H	= $fe
+=$70					a2	= $70
+=$70					a2L	= $70
+=$71					a2H	= $71
+=$72					a3	= $72
+=$72					a3L	= $72
+=$73					a3H	= $73
+=$74					a4	= $74
+=$74					a4L	= $74
+=$75					a4H	= $75
+=$76					a5	= $76
+=$76					a5L	= $76
+=$77					a5H	= $77
+=$78					a6	= $78
+=$78					a6L	= $78
+=$79					a6H	= $79
+=$7a					a7	= $7a
+=$7a					a7L	= $7a
+=$7b					a7H	= $7b
+=$7c					a8	= $7c
+=$7c					a8L	= $7c
+=$7d					a8H	= $7d
+=$7e					a9	= $7e
+=$7e					a9L	= $7e
+=$7f					a9H	= $7f
 =$29					currentHeight   = $29
 =$2f					displayBufferOn = $2F
 =$35					leftMarginLo    = $35
@@ -83,56 +113,56 @@
 =$fc					aFC = $FC
 =$fd					aFD = $FD
 =$fe					aFE = $FE
-=$6d00					dirBuffer_6d00 = $6D00
-=$8000					diskBlkBuf = $8000
-=$8100					fileHeader = $8100
-=$8200					curDirHead = $8200
-=$8300					fileTrScTab = $8300
-=$8400					dirEntryBuf = $8400
-=$841e					DrACurDkNm = $841E
-=$8430					DrBCurDkNm = $8430
-=$8442					dataFileName = $8442
-=$8465					PrntFilename = $8465
-=$8476					BootDiskName = $8476
-=$8489					curDrive = $8489
-=$848a					diskOpenFlg = $848A
-=$848b					isGEOS = $848B
-=$848d					numDrives = $848D
-=$848e					driveType_8 = $848E
-=$848f					driveType_9 = $848F
-=$8490					driveType_10 = $8490
-=$8491					driveType_11 = $8491
-=$8498					fileWritten = $8498
-=$84b1					RecoverVector_LO = $84B1
-=$84b2					RecoverVector_HI = $84B2
-=$84b5					iconSelFlag = $84B5
-=$84b7					menuNumber = $84B7
-=$84b8					mouseTop = $84B8
-=$84b9					mouseBottom = $84B9
-=$84ba					mouseLeft_LO = $84BA
-=$84bb					mouseLeft_HI = $84BB
-=$84bc					mouseRight_LO = $84BC
-=$84bd					mouseRight_HI = $84BD
-=$8501					maxMouseSpeed = $8501
-=$8502					minMouseSpeed = $8502
-=$8503					mouseAccel = $8503
-=$8504					keyData = $8504
-=$850a					random = $850A
-=$8516					year = $8516
-=$8517					month = $8517
-=$8518					day = $8518
-=$8519					hour = $8519
-=$851a					minutes = $851A
-=$851b					seconds = $851B
-=$851e					screencolors = $851E
-=$88bf					driveData = $88BF
-=$88c3					ramExpSize = $88C3
-=$88c4					sysRAMFlg = $88C4
-=$88c6					curType = $88C6
-=$88cb					inputDevName = $88CB
-=$8900					dir2Head = $8900
-=$8a80					spr2pic = $8A80
-=$9048					AllocateBlock = $9048
+=$6d00					dirBuffer_6d00  = $6D00
+=$8000					diskBlkBuf      = $8000
+=$8100					fileHeader      = $8100
+=$8200					curDirHead      = $8200
+=$8300					fileTrScTab     = $8300
+=$8400					dirEntryBuf     = $8400
+=$841e					DrACurDkNm      = $841E
+=$8430					DrBCurDkNm      = $8430
+=$8442					dataFileName    = $8442
+=$8465					PrntFilename    = $8465
+=$8476					BootDiskName    = $8476
+=$8489					curDrive        = $8489
+=$848a					diskOpenFlg     = $848A
+=$848b					isGEOS          = $848B
+=$848d					numDrives       = $848D
+=$848e					driveType_8     = $848E
+=$848f					driveType_9     = $848F
+=$8490					driveType_10    = $8490
+=$8491					driveType_11    = $8491
+=$8498					fileWritten     = $8498
+=$84b1					RecoverVector_LO= $84B1
+=$84b2					RecoverVector_HI= $84B2
+=$84b5					iconSelFlag     = $84B5
+=$84b7					menuNumber      = $84B7
+=$84b8					mouseTop        = $84B8
+=$84b9					mouseBottom     = $84B9
+=$84ba					mouseLeft_LO    = $84BA
+=$84bb					mouseLeft_HI    = $84BB
+=$84bc					mouseRight_LO   = $84BC
+=$84bd					mouseRight_HI   = $84BD
+=$8501					maxMouseSpeed   = $8501
+=$8502					minMouseSpeed   = $8502
+=$8503					mouseAccel      = $8503
+=$8504					keyData         = $8504
+=$850a					random          = $850A
+=$8516					year            = $8516
+=$8517					month           = $8517
+=$8518					day             = $8518
+=$8519					hour            = $8519
+=$851a					minutes         = $851A
+=$851b					seconds         = $851B
+=$851e					screencolors    = $851E
+=$88bf					driveData       = $88BF
+=$88c3					ramExpSize      = $88C3
+=$88c4					sysRAMFlg       = $88C4
+=$88c6					curType         = $88C6
+=$88cb					inputDevName    = $88CB
+=$8900					dir2Head        = $8900
+=$8a80					spr2pic         = $8A80
+=$9048					AllocateBlock   = $9048
 =$c000					BootGEOS        = $C000
 =$c003					ResetHandle     = $C003
 =$c00f					version         = $C00F
@@ -374,7 +404,7 @@
 .5b85	ad 8a 84	lda $848a	j5B85   LDA diskOpenFlg
 .5b88	f0 1c		beq $5ba6	        BEQ b5BA6
 .5b8a	20 f6 3f	jsr $3ff6	        JSR e3FF6
-.5b8d	20 a1 c2	jsr $c2a1	        JSR OpenDisk
+.5b8d	20 a1 c2	jsr $c2a1	        JSR OpenDisk    ; Open the disk in the current drive
 .5b90	20 3b 25	jsr $253b	        JSR e253B
 .5b93	20 4c 50	jsr $504c	j5B93   JSR e504C
 .5b96	c9 04		cmp #$04	        CMP #$04
@@ -449,13 +479,11 @@
 .5c39	4c 7b 5e	jmp $5e7b	        JMP j5E7B
 .5c3c	60		rts		b5C3C   RTS
 >5c3d	81 0b 08 10 bd 5f 0b 08		        .BYTE $81,$0B,$08,$10,$BD,$5F,$0B,$08
->5c45	20 dd 5f 0b 08			        .BYTE $20,$DD,$5F,$0B,$08
->5c4a	30				        .BYTE $30
->5c4b	ff 5f 03 01 48 04 09 48		        .BYTE $FF,$5F,$03,$01,$48,$04,$09,$48
->5c53	02 11 48 00 81 0b 08 20		        .BYTE $02,$11,$48,$00,$81,$0B,$08,$20
->5c5b	e9 2d 0b 08 30 0a 2e 0d		        .BYTE $E9,$2D,$0B,$08,$30,$0A,$2E,$0D
->5c63	08				        .BYTE $08
->5c64	40 0c 10 02 11 48 00		        .BYTE $40,$0C,$10,$02,$11,$48,$00
+>5c45	20 dd 5f 0b 08 30 ff 5f		        .BYTE $20,$DD,$5F,$0B,$08,$30,$FF,$5F
+>5c4d	03 01 48 04 09 48 02 11		        .BYTE $03,$01,$48,$04,$09,$48,$02,$11
+>5c55	48 00 81 0b 08 20 e9 2d		        .BYTE $48,$00,$81,$0B,$08,$20,$E9,$2D
+>5c5d	0b 08 30 0a 2e 0d 08 40		        .BYTE $0B,$08,$30,$0A,$2E,$0D,$08,$40
+>5c65	0c 10 02 11 48 00		        .BYTE $0C,$10,$02,$11,$48,$00
 .5c6b	a9 00		lda #$00	s5C6B   LDA #$00
 .5c6d	85 0d		sta $0d		        STA r5H
 .5c6f	20 e1 c1	jsr $c1e1	        JSR NewDisk
@@ -503,7 +531,7 @@
 .5cdb	20 f2 5c	jsr $5cf2	        JSR s5CF2
 .5cde	20 3b 25	jsr $253b	        JSR e253B
 .5ce1	85 0d		sta $0d		b5CE1   STA r5H
-.5ce3	20 4a c2	jsr $c24a	        JSR PutDirHead
+.5ce3	20 4a c2	jsr $c24a	        JSR PutDirHead  ; Write directory header and BAM to disk
 .5ce6	60		rts		        RTS
 .5ce7	ad ac 82	lda $82ac	s5CE7   LDA a82AC
 .5cea	85 05		sta $05		        STA r1H
@@ -512,8 +540,8 @@
 .5cf1	60		rts		        RTS
 .5cf2	a9 00		lda #$00	s5CF2   LDA #$00
 .5cf4	85 0d		sta $0d		        STA r5H
-.5cf6	20 ef 59	jsr $59ef	        JSR e59EF
-.5cf9	20 e4 c1	jsr $c1e4	        JSR GetBlock
+.5cf6	20 ef 59	jsr $59ef	        JSR e59EF       ; load spr2pic to r4
+.5cf9	20 e4 c1	jsr $c1e4	        JSR GetBlock    ; General purpose routine to get a block from current disk.
 .5cfc	20 3b 25	jsr $253b	        JSR e253B
 .5cff	a9 8a		lda #$8a	        LDA #>p8A82
 .5d01	85 0d		sta $0d		        STA r5H
@@ -537,11 +565,11 @@
 .5d22	c6 16		dec $16		b5D22   DEC r10L
 .5d24	d0 eb		bne $5d11	        BNE b5D11
 .5d26	68		pla		        PLA
-.5d27	85 04		sta $04		        STA r1L
+.5d27	85 04		sta $04		        STA r1L         ; TRACK
 .5d29	68		pla		        PLA
-.5d2a	85 05		sta $05		        STA r1H
-.5d2c	20 ef 59	jsr $59ef	        JSR e59EF
-.5d2f	4c e7 c1	jmp $c1e7	        JMP PutBlock
+.5d2a	85 05		sta $05		        STA r1H         ; SECTOR
+.5d2c	20 ef 59	jsr $59ef	        JSR e59EF       ; load spr2pic to r4
+.5d2f	4c e7 c1	jmp $c1e7	        JMP PutBlock    ; General purpose routine to write a block to disk with verify
 .5d32	68		pla		b5D32   PLA
 .5d33	68		pla		        PLA
 .5d34	60		rts		        RTS
@@ -644,7 +672,7 @@
 .5dec	85 0b		sta $0b		        STA r4H
 .5dee	a9 00		lda #$00	        LDA #<fileHeader
 .5df0	85 0a		sta $0a		        STA r4L
-.5df2	20 e4 c1	jsr $c1e4	        JSR GetBlock
+.5df2	20 e4 c1	jsr $c1e4	        JSR GetBlock    ; General purpose routine to get a block from current disk.
 .5df5	20 3b 25	jsr $253b	        JSR e253B
 .5df8	a0 02		ldy #$02	        LDY #$02
 .5dfa	98		tya		b5DFA   TYA
@@ -665,10 +693,10 @@
 .5e16	c8		iny		        INY
 .5e17	d0 e1		bne $5dfa	        BNE b5DFA
 .5e19	60		rts		b5E19   RTS
-.5e1a	20 14 c2	jsr $c214	s5E1A   JSR EnterTurbo
+.5e1a	20 14 c2	jsr $c214	s5E1A   JSR EnterTurbo  ; Activate disk drive turbo mode
 .5e1d	8a		txa		        TXA
 .5e1e	d0 38		bne $5e58	        BNE b5E58
-.5e20	20 5c c2	jsr $c25c	        JSR InitForIO
+.5e20	20 5c c2	jsr $c25c	        JSR InitForIO   ; Prepare for IO across the serial bus
 .5e23	a9 80		lda #$80	b5E23   LDA #>diskBlkBuf
 .5e25	85 0b		sta $0b		        STA r4H
 .5e27	a9 00		lda #$00	        LDA #<diskBlkBuf
@@ -694,7 +722,7 @@
 .5e52	85 04		sta $04		        STA r1L
 .5e54	d0 cd		bne $5e23	        BNE b5E23
 .5e56	a2 00		ldx #$00	        LDX #$00
-.5e58	4c 5f c2	jmp $c25f	b5E58   JMP DoneWithIO
+.5e58	4c 5f c2	jmp $c25f	b5E58   JMP DoneWithIO  ; restore system after IO across the serial bus
 >5e5b	00				f5E5B   .BYTE $00
 >5e5c	00 00				        .BYTE $00,$00
 >5e5e	00 00 00 00 00 00 00 00		f5E5E   .BYTE $00,$00,$00,$00,$00,$00,$00,$00
@@ -772,7 +800,7 @@
 .5f0c	8a		txa		        TXA
 .5f0d	d0 03		bne $5f12	        BNE b5F12
 .5f0f	20 73 5f	jsr $5f73	        JSR s5F73
-.5f12	20 5f c2	jsr $c25f	b5F12   JSR DoneWithIO
+.5f12	20 5f c2	jsr $c25f	b5F12   JSR DoneWithIO  ; restore system after IO across the serial bus
 .5f15	8a		txa		        TXA
 .5f16	d0 09		bne $5f21	        BNE b5F21
 .5f18	20 e1 c1	jsr $c1e1	        JSR NewDisk
@@ -788,86 +816,91 @@
 .5f34	a9 00		lda #$00	        LDA #$00
 .5f36	85 90		sta $90		        STA a90
 .5f38	ad 89 84	lda $8489	        LDA curDrive
-.5f3b	20 b1 ff	jsr $ffb1	        JSR ROM_LISTEN ;$FFB1 - make SERIAL device listen
+.5f3b	20 b1 ff	jsr $ffb1	        JSR ROM_LISTEN  ; $FFB1 - make SERIAL device listen
 .5f3e	24 90		bit $90		        BIT a90
 .5f40	30 2b		bmi $5f6d	        BMI b5F6D
 .5f42	a9 ff		lda #$ff	        LDA #$FF
-.5f44	20 93 ff	jsr $ff93	        JSR ROM_SECOND ;$FF93 - send secondary addr after listen
+.5f44	20 93 ff	jsr $ff93	        JSR ROM_SECOND  ; $FF93 - send secondary addr after listen
 .5f47	24 90		bit $90		        BIT a90
 .5f49	30 22		bmi $5f6d	        BMI b5F6D
 .5f4b	a0 00		ldy #$00	        LDY #$00
 .5f4d	b1 02		lda ($02),y	b5F4D   LDA (r0L),Y
 .5f4f	c9 ff		cmp #$ff	        CMP #$FF
 .5f51	f0 06		beq $5f59	        BEQ b5F59
-.5f53	20 a8 ff	jsr $ffa8	        JSR ROM_CIOUT ;$FFA8 - output byte to SERIAL
+.5f53	20 a8 ff	jsr $ffa8	        JSR ROM_CIOUT   ; $FFA8 - output byte to SERIAL
 .5f56	c8		iny		        INY
 .5f57	d0 f4		bne $5f4d	        BNE b5F4D
-.5f59	20 ae ff	jsr $ffae	b5F59   JSR ROM_UNLSN ;$FFAE - unlisten all SERIAL devices
+.5f59	20 ae ff	jsr $ffae	b5F59   JSR ROM_UNLSN   ; $FFAE - unlisten all SERIAL devices
 .5f5c	ad 89 84	lda $8489	        LDA curDrive
-.5f5f	20 b1 ff	jsr $ffb1	        JSR ROM_LISTEN ;$FFB1 - make SERIAL device listen
+.5f5f	20 b1 ff	jsr $ffb1	        JSR ROM_LISTEN  ; $FFB1 - make SERIAL device listen
 .5f62	a9 ef		lda #$ef	        LDA #$EF
-.5f64	20 93 ff	jsr $ff93	        JSR ROM_SECOND ;$FF93 - send secondary addr after listen
-.5f67	20 ae ff	jsr $ffae	        JSR ROM_UNLSN ;$FFAE - unlisten all SERIAL devices
+.5f64	20 93 ff	jsr $ff93	        JSR ROM_SECOND  ; $FF93 - send secondary addr after listen
+.5f67	20 ae ff	jsr $ffae	        JSR ROM_UNLSN   ; $FFAE - unlisten all SERIAL devices
 .5f6a	a2 00		ldx #$00	        LDX #$00
 .5f6c	60		rts		        RTS
-.5f6d	20 ae ff	jsr $ffae	b5F6D   JSR ROM_UNLSN ;$FFAE - unlisten all SERIAL devices
+.5f6d	20 ae ff	jsr $ffae	b5F6D   JSR ROM_UNLSN   ; $FFAE - unlisten all SERIAL devices
 .5f70	a2 0d		ldx #$0d	        LDX #$0D
 .5f72	60		rts		        RTS
 .5f73	a9 00		lda #$00	s5F73   LDA #$00
 .5f75	85 90		sta $90		        STA a90
 .5f77	ad 89 84	lda $8489	        LDA curDrive
-.5f7a	20 b4 ff	jsr $ffb4	        JSR ROM_TALK ;$FFB4 - make SERIAL device talk
+.5f7a	20 b4 ff	jsr $ffb4	        JSR ROM_TALK    ; $FFB4 - make SERIAL device talk
 .5f7d	24 90		bit $90		        BIT a90
 .5f7f	30 35		bmi $5fb6	        BMI b5FB6
 .5f81	a9 ff		lda #$ff	        LDA #$FF
-.5f83	20 96 ff	jsr $ff96	        JSR ROM_TKSA ;$FF96 - send secondary addr after talk
+.5f83	20 96 ff	jsr $ff96	        JSR ROM_TKSA    ; $FF96 - send secondary addr after talk
 .5f86	24 90		bit $90		        BIT a90
 .5f88	30 2c		bmi $5fb6	        BMI b5FB6
-.5f8a	20 a5 ff	jsr $ffa5	        JSR ROM_ACPTR ;$FFA5 - input byte from SERIAL
+.5f8a	20 a5 ff	jsr $ffa5	        JSR ROM_ACPTR   ; $FFA5 - input byte from SERIAL
 .5f8d	29 0f		and #$0f	        AND #$0F
 .5f8f	0a		asl a		        ASL
 .5f90	0a		asl a		        ASL
 .5f91	0a		asl a		        ASL
 .5f92	0a		asl a		        ASL
 .5f93	8d bc 5f	sta $5fbc	        STA a5FBC
-.5f96	20 a5 ff	jsr $ffa5	        JSR ROM_ACPTR ;$FFA5 - input byte from SERIAL
+.5f96	20 a5 ff	jsr $ffa5	        JSR ROM_ACPTR   ; $FFA5 - input byte from SERIAL
 .5f99	29 0f		and #$0f	        AND #$0F
 .5f9b	0d bc 5f	ora $5fbc	        ORA a5FBC
 .5f9e	8d bc 5f	sta $5fbc	        STA a5FBC
-.5fa1	20 ab ff	jsr $ffab	        JSR ROM_UNTLK ;$FFAB - untalk all SERIAL devices
+.5fa1	20 ab ff	jsr $ffab	        JSR ROM_UNTLK   ; $FFAB - untalk all SERIAL devices
 .5fa4	ad 89 84	lda $8489	        LDA curDrive
-.5fa7	20 b1 ff	jsr $ffb1	        JSR ROM_LISTEN ;$FFB1 - make SERIAL device listen
+.5fa7	20 b1 ff	jsr $ffb1	        JSR ROM_LISTEN  ; $FFB1 - make SERIAL device listen
 .5faa	a9 ef		lda #$ef	        LDA #$EF
-.5fac	20 93 ff	jsr $ff93	        JSR ROM_SECOND ;$FF93 - send secondary addr after listen
-.5faf	20 ae ff	jsr $ffae	        JSR ROM_UNLSN ;$FFAE - unlisten all SERIAL devices
+.5fac	20 93 ff	jsr $ff93	        JSR ROM_SECOND  ; $FF93 - send secondary addr after listen
+.5faf	20 ae ff	jsr $ffae	        JSR ROM_UNLSN   ; $FFAE - unlisten all SERIAL devices
 .5fb2	ae bc 5f	ldx $5fbc	        LDX a5FBC
 .5fb5	60		rts		        RTS
-.5fb6	20 ab ff	jsr $ffab	b5FB6   JSR ROM_UNTLK ;$FFAB - untalk all SERIAL devices
+.5fb6	20 ab ff	jsr $ffab	b5FB6   JSR ROM_UNTLK   ; $FFAB - untalk all SERIAL devices
 .5fb9	a2 0d		ldx #$0d	        LDX #$0D
 .5fbb	60		rts		        RTS
->5fbc	00 18 46 6f 72 6d 61 74		a5FBC   .TEXT $00, $18, "Format both sides of disk?  Be", $00, "careful"
+>5fbc	00 18 46 6f 72 6d 61 74		a5FBC   .TEXT $00, $18, "Format both sides of disk?  Be", $00
 >5fc4	20 62 6f 74 68 20 73 69 64 65 73 20 6f 66 20 64
->5fd4	69 73 6b 3f 20 20 42 65 00 63 61 72 65 66 75 6c
->5fe4	2c 20 61 73 20 74 68 69		        .TEXT ", as this will destroy any", $00, "data on the f"
->5fec	73 20 77 69 6c 6c 20 64 65 73 74 72 6f 79 20 61
->5ffc	6e 79 00 64 61 74 61 20 6f 6e 20 74 68 65 20 66
->600c	6c 69 70 20 73 69 64 65		        .TEXT "lip side of the disk.", $00
->6014	20 6f 66 20 74 68 65 20 64 69 73 6b 2e 00
+>5fd4	69 73 6b 3f 20 20 42 65 00
+>5fdd	63 61 72 65 66 75 6c 2c		        .TEXT "careful, as this will destroy any", $00
+>5fe5	20 61 73 20 74 68 69 73 20 77 69 6c 6c 20 64 65
+>5ff5	73 74 72 6f 79 20 61 6e 79 00
+>5fff	64 61 74 61 20 6f 6e 20		        .TEXT "data on the flip side of the disk.", $00
+>6007	74 68 65 20 66 6c 69 70 20 73 69 64 65 20 6f 66
+>6017	20 74 68 65 20 64 69 73 6b 2e 00
 >6022	18 54 68 65 72 65 20 69		p6022   .TEXT $18, "There is currently no", $00
 >602a	73 20 63 75 72 72 65 6e 74 6c 79 20 6e 6f 00
->6039	72 65 63 6f 76 65 72 61		p6039   .TEXT "recoverable file.", $1B, $00, $18, "Please insert disk t"
->6041	62 6c 65 20 66 69 6c 65 2e 1b 00 18 50 6c 65 61
->6051	73 65 20 69 6e 73 65 72 74 20 64 69 73 6b 20 74
->6061	6f 20 65 72 61 73 65 20		        .TEXT "o erase in", $00, "drive "
->6069	69 6e 00 64 72 69 76 65 20
->6072	00 2e 00 18 45 72 61 73		a6072   .TEXT $00, ".", $00, $18, "Erase contents of RAM disk?", $00, $18, "Delete "
->607a	65 20 63 6f 6e 74 65 6e 74 73 20 6f 66 20 52 41
->608a	4d 20 64 69 73 6b 3f 00 18 44 65 6c 65 74 65 20
->609a	73 65 6c 65 63 74 65 64		        .TEXT "selected files?", $00, $18, "is write protected and "
->60a2	20 66 69 6c 65 73 3f 00 18 69 73 20 77 72 69 74
+>6039	72 65 63 6f 76 65 72 61		p6039   .TEXT "recoverable file.", $1B, $00
+>6041	62 6c 65 20 66 69 6c 65 2e 1b 00
+>604c	18 50 6c 65 61 73 65 20		        .TEXT $18, "Please insert disk to erase in", $00
+>6054	69 6e 73 65 72 74 20 64 69 73 6b 20 74 6f 20 65
+>6064	72 61 73 65 20 69 6e 00
+>606c	64 72 69 76 65 20		        .TEXT "drive "
+>6072	00 2e 00			a6072   .TEXT $00, ".", $00
+>6075	18 45 72 61 73 65 20 63		        .TEXT $18, "Erase contents of RAM disk?", $00
+>607d	6f 6e 74 65 6e 74 73 20 6f 66 20 52 41 4d 20 64
+>608d	69 73 6b 3f 00
+>6092	18 44 65 6c 65 74 65 20		        .TEXT $18, "Delete selected files?", $00
+>609a	73 65 6c 65 63 74 65 64 20 66 69 6c 65 73 3f 00
+>60aa	18 69 73 20 77 72 69 74		        .TEXT $18, "is write protected and can't", $00
 >60b2	65 20 70 72 6f 74 65 63 74 65 64 20 61 6e 64 20
->60c2	63 61 6e 27 74 00 62 65		        .TEXT "can't", $00, "be deleted.", $00
->60ca	20 64 65 6c 65 74 65 64 2e 00
+>60c2	63 61 6e 27 74 00
+>60c8	62 65 20 64 65 6c 65 74		        .TEXT "be deleted.", $00
+>60d0	65 64 2e 00
 .60d4	20 7e 23	jsr $237e	j60D4   JSR e237E
 .60d7	24 71		bit $71		        BIT a71
 .60d9	70 0b		bvs $60e6	        BVS b60E6
@@ -985,7 +1018,7 @@
 .61eb	20 56 59	jsr $5956	        JSR e5956
 .61ee	a5 fb		lda $fb		        LDA aFB
 .61f0	85 16		sta $16		        STA r10L
-.61f2	20 f6 c1	jsr $c1f6	        JSR GetFreeDirBlk
+.61f2	20 f6 c1	jsr $c1f6	        JSR GetFreeDirBlk       ; Search cur dir for an empty slot for a new dir entry, allocate another block if needed
 .61f5	20 9c 59	jsr $599c	        JSR e599C
 .61f8	98		tya		        TYA
 .61f9	18		clc		        CLC
@@ -1000,7 +1033,7 @@
 .620a	85 0a		sta $0a		        STA r4L
 .620c	20 98 44	jsr $4498	        JSR e4498
 .620f	20 35 5d	jsr $5d35	        JSR s5D35
-.6212	20 4a c2	jsr $c24a	        JSR PutDirHead
+.6212	20 4a c2	jsr $c24a	        JSR PutDirHead  ; Write directory header and BAM to disk
 .6215	20 9c 59	jsr $599c	        JSR e599C
 .6218	a5 16		lda $16		        LDA r10L
 .621a	85 fb		sta $fb		        STA aFB
@@ -1028,7 +1061,7 @@
 .624d	c9 02		cmp #$02	        CMP #$02
 .624f	d0 01		bne $6252	        BNE b6252
 .6251	60		rts		        RTS
-.6252	20 a1 c2	jsr $c2a1	b6252   JSR OpenDisk
+.6252	20 a1 c2	jsr $c2a1	b6252   JSR OpenDisk    ; Open the disk in the current drive
 .6255	20 9c 59	jsr $599c	        JSR e599C
 .6258	ad bd 82	lda $82bd	        LDA a82BD
 .625b	f0 03		beq $6260	        BEQ b6260

@@ -1,7 +1,7 @@
 
 ; 64tass Turbo Assembler Macro V1.53.1515 listing file
 ; 64tass -l ./target/record3.lbl -L ./target/record3.lst -o ./target/record3 ./record3.tas
-; Thu Oct 26 04:25:08 2023
+; Fri Oct 27 20:01:58 2023
 
 ;Offset	;Hex		;Monitor	;Source
 
@@ -43,6 +43,36 @@
 =$1f					r14H = $1F
 =$20					r15L = $20
 =$21					r15H = $21
+=$fb					a0	= $fb
+=$fb					a0L	= $fb
+=$fc					a0H	= $fc
+=$fd					a1	= $fd
+=$fd					a1L	= $fd
+=$fe					a1H	= $fe
+=$70					a2	= $70
+=$70					a2L	= $70
+=$71					a2H	= $71
+=$72					a3	= $72
+=$72					a3L	= $72
+=$73					a3H	= $73
+=$74					a4	= $74
+=$74					a4L	= $74
+=$75					a4H	= $75
+=$76					a5	= $76
+=$76					a5L	= $76
+=$77					a5H	= $77
+=$78					a6	= $78
+=$78					a6L	= $78
+=$79					a6H	= $79
+=$7a					a7	= $7a
+=$7a					a7L	= $7a
+=$7b					a7H	= $7b
+=$7c					a8	= $7c
+=$7c					a8L	= $7c
+=$7d					a8H	= $7d
+=$7e					a9	= $7e
+=$7e					a9L	= $7e
+=$7f					a9H	= $7f
 =$29					currentHeight   = $29
 =$2f					displayBufferOn = $2F
 =$35					leftMarginLo    = $35
@@ -83,56 +113,56 @@
 =$fc					aFC = $FC
 =$fd					aFD = $FD
 =$fe					aFE = $FE
-=$6d00					dirBuffer_6d00 = $6D00
-=$8000					diskBlkBuf = $8000
-=$8100					fileHeader = $8100
-=$8200					curDirHead = $8200
-=$8300					fileTrScTab = $8300
-=$8400					dirEntryBuf = $8400
-=$841e					DrACurDkNm = $841E
-=$8430					DrBCurDkNm = $8430
-=$8442					dataFileName = $8442
-=$8465					PrntFilename = $8465
-=$8476					BootDiskName = $8476
-=$8489					curDrive = $8489
-=$848a					diskOpenFlg = $848A
-=$848b					isGEOS = $848B
-=$848d					numDrives = $848D
-=$848e					driveType_8 = $848E
-=$848f					driveType_9 = $848F
-=$8490					driveType_10 = $8490
-=$8491					driveType_11 = $8491
-=$8498					fileWritten = $8498
-=$84b1					RecoverVector_LO = $84B1
-=$84b2					RecoverVector_HI = $84B2
-=$84b5					iconSelFlag = $84B5
-=$84b7					menuNumber = $84B7
-=$84b8					mouseTop = $84B8
-=$84b9					mouseBottom = $84B9
-=$84ba					mouseLeft_LO = $84BA
-=$84bb					mouseLeft_HI = $84BB
-=$84bc					mouseRight_LO = $84BC
-=$84bd					mouseRight_HI = $84BD
-=$8501					maxMouseSpeed = $8501
-=$8502					minMouseSpeed = $8502
-=$8503					mouseAccel = $8503
-=$8504					keyData = $8504
-=$850a					random = $850A
-=$8516					year = $8516
-=$8517					month = $8517
-=$8518					day = $8518
-=$8519					hour = $8519
-=$851a					minutes = $851A
-=$851b					seconds = $851B
-=$851e					screencolors = $851E
-=$88bf					driveData = $88BF
-=$88c3					ramExpSize = $88C3
-=$88c4					sysRAMFlg = $88C4
-=$88c6					curType = $88C6
-=$88cb					inputDevName = $88CB
-=$8900					dir2Head = $8900
-=$8a80					spr2pic = $8A80
-=$9048					AllocateBlock = $9048
+=$6d00					dirBuffer_6d00  = $6D00
+=$8000					diskBlkBuf      = $8000
+=$8100					fileHeader      = $8100
+=$8200					curDirHead      = $8200
+=$8300					fileTrScTab     = $8300
+=$8400					dirEntryBuf     = $8400
+=$841e					DrACurDkNm      = $841E
+=$8430					DrBCurDkNm      = $8430
+=$8442					dataFileName    = $8442
+=$8465					PrntFilename    = $8465
+=$8476					BootDiskName    = $8476
+=$8489					curDrive        = $8489
+=$848a					diskOpenFlg     = $848A
+=$848b					isGEOS          = $848B
+=$848d					numDrives       = $848D
+=$848e					driveType_8     = $848E
+=$848f					driveType_9     = $848F
+=$8490					driveType_10    = $8490
+=$8491					driveType_11    = $8491
+=$8498					fileWritten     = $8498
+=$84b1					RecoverVector_LO= $84B1
+=$84b2					RecoverVector_HI= $84B2
+=$84b5					iconSelFlag     = $84B5
+=$84b7					menuNumber      = $84B7
+=$84b8					mouseTop        = $84B8
+=$84b9					mouseBottom     = $84B9
+=$84ba					mouseLeft_LO    = $84BA
+=$84bb					mouseLeft_HI    = $84BB
+=$84bc					mouseRight_LO   = $84BC
+=$84bd					mouseRight_HI   = $84BD
+=$8501					maxMouseSpeed   = $8501
+=$8502					minMouseSpeed   = $8502
+=$8503					mouseAccel      = $8503
+=$8504					keyData         = $8504
+=$850a					random          = $850A
+=$8516					year            = $8516
+=$8517					month           = $8517
+=$8518					day             = $8518
+=$8519					hour            = $8519
+=$851a					minutes         = $851A
+=$851b					seconds         = $851B
+=$851e					screencolors    = $851E
+=$88bf					driveData       = $88BF
+=$88c3					ramExpSize      = $88C3
+=$88c4					sysRAMFlg       = $88C4
+=$88c6					curType         = $88C6
+=$88cb					inputDevName    = $88CB
+=$8900					dir2Head        = $8900
+=$8a80					spr2pic         = $8A80
+=$9048					AllocateBlock   = $9048
 =$c000					BootGEOS        = $C000
 =$c003					ResetHandle     = $C003
 =$c00f					version         = $C00F
@@ -382,7 +412,7 @@
 .5bd7	c8		iny		        INY
 .5bd8	b1 0c		lda ($0c),y	        LDA (r5L),Y
 .5bda	85 05		sta $05		        STA r1H
-.5bdc	20 e4 c1	jsr $c1e4	        JSR GetBlock
+.5bdc	20 e4 c1	jsr $c1e4	        JSR GetBlock    ; General purpose routine to get a block from current disk.
 .5bdf	8e bb 5b	stx $5bbb	        STX a5BBB
 .5be2	ad 82 8a	lda $8a82	b5BE2   LDA a8A82
 .5be5	c9 03		cmp #$03	        CMP #$03
@@ -484,7 +514,7 @@
 .5cbf	29 40		and #$40	        AND #$40
 .5cc1	f0 06		beq $5cc9	        BEQ b5CC9
 .5cc3	20 38 5d	jsr $5d38	        JSR s5D38
-.5cc6	20 2a c1	jsr $c12a	        JSR InvertRectangle
+.5cc6	20 2a c1	jsr $c12a	        JSR InvertRectangle     ; Inverts the pixels within a rectangular region.
 .5cc9	a9 00		lda #$00	b5CC9   LDA #>p7D
 .5ccb	85 19		sta $19		        STA r11H
 .5ccd	a9 7d		lda #$7d	        LDA #<p7D
@@ -551,7 +581,7 @@
 .5d5d	ad 06 04	lda $0406	        LDA f0406
 .5d60	49 40		eor #$40	        EOR #$40
 .5d62	8d 06 04	sta $0406	        STA f0406
-.5d65	20 2a c1	jsr $c12a	        JSR InvertRectangle
+.5d65	20 2a c1	jsr $c12a	        JSR InvertRectangle     ; Inverts the pixels within a rectangular region.
 .5d68	60		rts		b5D68   RTS
 >5d69	b7 bd c3 ca d5 db e5		f5D69   .BYTE $B7,$BD,$C3,$CA,$D5,$DB,$E5
 >5d70	65 65 65 65 65 65 65		f5D70   .BYTE $65,$65,$65,$65,$65,$65,$65
