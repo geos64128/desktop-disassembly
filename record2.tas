@@ -114,15 +114,15 @@ eC175 = $C175
         JMP j5B45
         JMP j60DE
         JMP j60D4
-        JMP j5B85
-        JMP j5BA7
+        JMP j5B85       ; disk->validate menu routine
+        JMP j5BA7       ; disk->format menu routine
         JMP j5BC3
         JMP j61BD
-        JMP j6223
+        JMP j6223       ; disk->erase menu routine
         JMP j633A
-        JMP j63A2
-        JMP j63DB
-        JMP j63D8
+        JMP j63A2       ; select->all pages menu routine
+        JMP j63DB       ; select->page files menu routine
+        JMP j63D8       ; select->border files menu routine
 
 j5B45   BIT a71
         BVC b5B84

@@ -78,10 +78,10 @@ eC2BF = $C2BF
 
         * = $5B1E
 
-        JMP j5B2A
-        JMP j5D59
-        JMP j61A7
-        JMP j623A
+        JMP j5B2A       ; geos->select printer menu routine
+        JMP j5D59       ; geos->select input menu routine
+        JMP j61A7       ; page->append menu routine
+        JMP j623A       ; page->delete menu routine
 
 j5B2A   LDA diskOpenFlg
         BNE b5B30

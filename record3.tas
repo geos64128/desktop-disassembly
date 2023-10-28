@@ -18,10 +18,6 @@
 ;
 f25 = $25
 ;
-; **** ZP ABSOLUTE ADRESSES **** 
-;
-
-;
 ; **** ZP POINTERS **** 
 ;
 p24 = $24
@@ -94,9 +90,6 @@ eC1C0 = $C1C0
 eC29B = $C29B
 eC29E = $C29E
 eC2BF = $C2BF
-;
-; **** USER LABELS **** 
-;
 
 MainMenuHandler = $2662
 

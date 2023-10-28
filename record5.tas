@@ -99,16 +99,16 @@ eC265 = $C265
 
         * = $5B1E
 
-        JMP j5B5B
-        JMP j5B6A
-        JMP j5B51
-        JMP j5B42
+        JMP j5B5B       ; view->by size menu routine
+        JMP j5B6A       ; view->by type menu routine
+        JMP j5B51       ; view->by date menu routine
+        JMP j5B42       ; view->by name menu routine
         JMP j5E3A
-        JMP j5FFA
+        JMP j5FFA       ; options->basic menu routine
         JMP j6069
-        JMP j620E
-        JMP j622C
-        JMP j6318
+        JMP j620E       ; geos->geos info menu routine
+        JMP j622C       ; geos->desktop info menu routine
+        JMP j6318       ; disk->rename menu routine
         JMP j638A
         JMP j644B
 
@@ -723,6 +723,8 @@ b5FF1   PLA
         LDA #$4B
         JMP PutChar
 
+; Routine to drop to C64 BASIC ============================================
+
 j5FFA   LDA numDrives
         CMP #$02
         BCC b6041
@@ -1028,7 +1030,7 @@ s6363   STX r6H
 
         .BYTE $81,$0B,$10,$20,$CA,$2E,$0D,$10
         .BYTE $30,$0E,$10,$02,$11,$48,$00
-        
+
 j638A   JSR e237E
         LDX #$63
         LDA #$94

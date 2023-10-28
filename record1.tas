@@ -6858,7 +6858,9 @@ s562E   JSR j5634
 j5634   LDX #$00
         JMP RestartProcess
 
-ClockProcStruct .BYTE $52,$56,$3C,$00
+ClockProcStruct:
+        .BYTE $52,$56,$3C,$00
+
 s563D   LDX #$00
         JMP BlockProcess
 
@@ -7168,12 +7170,12 @@ s583E   PLA
         JMP DoInlineReturn
 
 ; changing pad page
-s586C   JSR s2447    ;Set the rectangle pattern based on A
-        LDA #$80     ;draw to the foreground screen
+s586C   JSR s2447               ; Set the rectangle pattern based on A
+        LDA #$80                ; draw to the foreground screen
         STA displayBufferOn
-        JSR i_Rectangle ;draw file icon pad rectangle
+        JSR i_Rectangle         ; draw file icon pad rectangle
         .BYTE $29,$8A,$09,$00,$06,$01 ;y1=29, y2=138, x1=9, x2=262
-        JMP j26F4    ;comes here after drawing pad and disk info - seems to draw file icons
+        JMP j26F4               ;comes here after drawing pad and disk info - seems to draw file icons
 
 ; print chars for top of pad (x files, 0 selected, etc) from 2ec0
 s587F   STX r0H
@@ -7181,10 +7183,10 @@ s587F   STX r0H
         JMP PutString
 
 ; Draw rectangle in pad for icons before displaying file icons
-s5886   JSR s2447    ;Set the rectangle pattern based on A
-        JSR i_Rectangle ;This draws just for the file icons in the pad
+s5886   JSR s2447               ; Set the rectangle pattern based on A
+        JSR i_Rectangle         ; This draws just for the file icons in the pad
         .BYTE $29,$76,$09,$00,$06,$01 ;y1=41, y2=118, x1=9, x2=262
-        JMP j26F4    ;comes here after drawing pad and disk info - seems to draw file icons
+        JMP j26F4               ; comes here after drawing pad and disk info - seems to draw file icons
 
         LDA #>f0406  ; 
         STA r5H
