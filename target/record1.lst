@@ -1,7 +1,7 @@
 
 ; 64tass Turbo Assembler Macro V1.53.1515 listing file
 ; 64tass -l ./target/record1.lbl -L ./target/record1.lst -o ./target/record1 ./record1.tas
-; Fri Oct 27 20:37:13 2023
+; Sat Oct 28 22:25:14 2023
 
 ;Offset	;Hex		;Monitor	;Source
 
@@ -2530,38 +2530,38 @@
 .3307	20 0f 33	jsr $330f	        JSR s330F
 .330a	a2 04		ldx #$04	        LDX #$04
 .330c	20 29 38	jsr $3829	        JSR s3829
-.330f	a2 02		ldx #$02	s330F   LDX #$02     ;$02 = pointer to $8290 (disk name)
-.3311	a0 04		ldy #$04	        LDY #$04     ;$04 = pointer to destination ($0212)
+.330f	a2 02		ldx #$02	s330F   LDX #$02        ; $02 = pointer to $8290 (disk name)
+.3311	a0 04		ldy #$04	        LDY #$04        ; $04 = pointer to destination ($0212)
 .3313	a9 12		lda #$12	        LDA #$12
-.3315	4c 68 c2	jmp $c268	        JMP CopyFString ;Copy disk name from $8290 to $0212
-.3318	20 47 24	jsr $2447	s3318   JSR s2447    ;Set the rectangle pattern based on A
-.331b	20 9f c1	jsr $c19f	        JSR i_Rectangle ;draw the actual pad rectangle
+.3315	4c 68 c2	jmp $c268	        JMP CopyFString ; Copy disk name from $8290 to $0212
+.3318	20 47 24	jsr $2447	s3318   JSR s2447       ; Set the rectangle pattern based on A
+.331b	20 9f c1	jsr $c19f	        JSR i_Rectangle ; draw the actual pad rectangle (using data below)
 >331e	1d 27 09 00 06 01		        .BYTE $1D,$27,$09,$00,$06,$01 ;y1=29, y2=39, x1=9, x2=262
 .3324	a2 82		ldx #$82	        LDX #$82
 .3326	a9 90		lda #$90	        LDA #$90
 .3328	20 8f 57	jsr $578f	        JSR s578F
-.332b	20 c0 59	jsr $59c0	        JSR s59C0    ;load $8b80 to r0
+.332b	20 c0 59	jsr $59c0	        JSR s59C0       ; load $8b80 to r0
 .332e	a9 00		lda #$00	        LDA #>p88
 .3330	85 19		sta $19		        STA r11H
 .3332	a9 88		lda #$88	        LDA #<p88
 .3334	85 18		sta $18		        STA r11L
 .3336	a9 18		lda #$18	        LDA #$18
 .3338	85 05		sta $05		        STA r1H
-.333a	20 d7 57	jsr $57d7	        JSR s57D7    ;Print file names on pad (saved to 8b80)
-.333d	20 ac 33	jsr $33ac	        JSR s33AC    ;Print number of files at top of pad
-.3340	20 8e 33	jsr $338e	        JSR s338E    ;Calculate blocks free
-.3343	a0 02		ldy #$02	        LDY #$02     ;number of times to shift the word
-.3345	a2 02		ldx #$02	        LDX #$02     ;address of zero page word to shift
-.3347	20 62 c2	jsr $c262	        JSR DShiftRight ;     Arithmetically right-shift a zero page word
+.333a	20 d7 57	jsr $57d7	        JSR s57D7       ; Print file names on pad (saved to 8b80)
+.333d	20 ac 33	jsr $33ac	        JSR s33AC       ; Print number of files at top of pad
+.3340	20 8e 33	jsr $338e	        JSR s338E       ; Calculate blocks free
+.3343	a0 02		ldy #$02	        LDY #$02        ; number of times to shift the word
+.3345	a2 02		ldx #$02	        LDX #$02        ; address of zero page word to shift
+.3347	20 62 c2	jsr $c262	        JSR DShiftRight ; Arithmetically right-shift a zero page word
 .334a	a9 00		lda #$00	        LDA #>p71
 .334c	85 19		sta $19		        STA r11H
 .334e	a9 71		lda #$71	        LDA #<p71
 .3350	85 18		sta $18		        STA r11L
-.3352	20 a7 33	jsr $33a7	        JSR s33A7    ;Display 16-bit Integer
+.3352	20 a7 33	jsr $33a7	        JSR s33A7       ; Display 16-bit Integer
 .3355	a2 2b		ldx #$2b	        LDX #$2B
 .3357	a9 b3		lda #$b3	        LDA #$B3
-.3359	20 7f 58	jsr $587f	        JSR s587F    ;print chars for top of pad (x files, 0 selected, etc) from 2ec0
-.335c	20 8e 33	jsr $338e	        JSR s338E    ;Calculate blocks free
+.3359	20 7f 58	jsr $587f	        JSR s587F       ; print chars for top of pad (x files, 0 selected, etc) from 2ec0
+.335c	20 8e 33	jsr $338e	        JSR s338E       ; Calculate blocks free
 .335f	a5 0b		lda $0b		        LDA r4H
 .3361	4a		lsr a		        LSR
 .3362	66 0a		ror $0a		        ROR r4L
@@ -2574,21 +2574,21 @@
 .336f	85 19		sta $19		        STA r11H
 .3371	a9 c0		lda #$c0	        LDA #<pC0
 .3373	85 18		sta $18		        STA r11L
-.3375	20 a7 33	jsr $33a7	        JSR s33A7    ;Display 16-bit Integer
+.3375	20 a7 33	jsr $33a7	        JSR s33A7       ; Display 16-bit Integer
 .3378	a2 2b		ldx #$2b	        LDX #$2B
 .337a	a9 c0		lda #$c0	        LDA #$C0
-.337c	20 7f 58	jsr $587f	        JSR s587F    ;print chars for top of pad (x files, 0 selected, etc) from 2ec0
+.337c	20 7f 58	jsr $587f	        JSR s587F       ; print chars for top of pad (x files, 0 selected, etc) from 2ec0
 .337f	a2 02		ldx #$02	        LDX #$02
 .3381	20 29 38	jsr $3829	        JSR s3829
 .3384	20 c3 47	jsr $47c3	        JSR s47C3
 .3387	a2 c0		ldx #$c0	        LDX #$C0
 .3389	86 04		stx $04		        STX r1L
 .338b	4c 4b 36	jmp $364b	        JMP j364B
-.338e	a9 82		lda #$82	s338E   LDA #>curDirHead ;Get DIRHEAD (address of directory header) and put in r5
+.338e	a9 82		lda #$82	s338E   LDA #>curDirHead ; Get DIRHEAD (address of directory header) and put in r5
 .3390	85 0d		sta $0d		        STA r5H
 .3392	a9 00		lda #$00	        LDA #<curDirHead
 .3394	85 0c		sta $0c		        STA r5L
-.3396	20 db c1	jsr $c1db	        JSR CalcBlksFree ;r4= # of free blocks, r3=# of available blocks
+.3396	20 db c1	jsr $c1db	        JSR CalcBlksFree ; r4= # of free blocks, r3=# of available blocks
 .3399	a5 08		lda $08		        LDA r3L
 .339b	38		sec		        SEC
 .339c	e5 0a		sbc $0a		        SBC r4L
@@ -2597,33 +2597,33 @@
 .33a2	e5 0b		sbc $0b		        SBC r4H
 .33a4	85 03		sta $03		        STA r0H
 .33a6	60		rts		        RTS
-.33a7	a9 c0		lda #$c0	s33A7   LDA #$C0     ;Format = left justified, supress leading zeros ($C0=%11000000)
+.33a7	a9 c0		lda #$c0	s33A7   LDA #$C0     ; Format = left justified, supress leading zeros ($C0=%11000000)
 .33a9	4c 84 c1	jmp $c184	        JMP PutDecimal
-.33ac	20 7d 38	jsr $387d	s33AC   JSR s387D    ;called when opening a disk (disk name text?)
+.33ac	20 7d 38	jsr $387d	s33AC   JSR s387D    ; called when opening a disk (disk name text?)
 .33af	a5 02		lda $02		        LDA r0L
 .33b1	48		pha		        PHA
 .33b2	68		pla		        PLA
-.33b3	85 02		sta $02		        STA r0L      ;r0 contains number of files on disk
+.33b3	85 02		sta $02		        STA r0L      ; r0 contains number of files on disk
 .33b5	85 7b		sta $7b		        STA a7B
 .33b7	a9 00		lda #$00	        LDA #$00
 .33b9	85 03		sta $03		        STA r0H
 .33bb	a9 00		lda #$00	        LDA #>r7L
 .33bd	85 19		sta $19		        STA r11H
 .33bf	a9 10		lda #$10	        LDA #<r7L
-.33c1	85 18		sta $18		        STA r11L     ;X Position
+.33c1	85 18		sta $18		        STA r11L     ; X Position
 .33c3	a9 24		lda #$24	        LDA #$24
-.33c5	85 05		sta $05		        STA r1H      ;Y Position
-.33c7	20 a7 33	jsr $33a7	        JSR s33A7    ;Display 16-bit Integer
+.33c5	85 05		sta $05		        STA r1H      ; Y Position
+.33c7	20 a7 33	jsr $33a7	        JSR s33A7    ; Display 16-bit Integer
 .33ca	a2 2e		ldx #$2e	        LDX #$2E
 .33cc	a9 b8		lda #$b8	        LDA #$B8
-.33ce	20 7f 58	jsr $587f	        JSR s587F    ;print chars for top of pad (x files, 0 selected, etc) from 2ec0
+.33ce	20 7f 58	jsr $587f	        JSR s587F    ; print chars for top of pad (x files, 0 selected, etc) from 2ec0
 .33d1	a9 00		lda #$00	        LDA #>p42
 .33d3	85 19		sta $19		        STA r11H
 .33d5	a9 42		lda #$42	        LDA #<p42
 .33d7	85 18		sta $18		        STA r11L
 .33d9	a2 2e		ldx #$2e	        LDX #$2E
 .33db	a9 c0		lda #$c0	        LDA #$C0
-.33dd	20 7f 58	jsr $587f	        JSR s587F    ;print chars for top of pad (x files, 0 selected, etc) from 2ec0
+.33dd	20 7f 58	jsr $587f	        JSR s587F    ; print chars for top of pad (x files, 0 selected, etc) from 2ec0
 .33e0	a5 03		lda $03		s33E0   LDA r0H
 .33e2	48		pha		        PHA
 .33e3	a5 02		lda $02		        LDA r0L
@@ -2635,22 +2635,22 @@
 .33ed	a9 35		lda #$35	        LDA #<leftMarginLo
 .33ef	85 18		sta $18		        STA r11L
 .33f1	a9 24		lda #$24	        LDA #$24
-.33f3	85 05		sta $05		        STA r1H      ;Y position
-.33f5	20 21 34	jsr $3421	        JSR s3421    ;print space char
-.33f8	20 21 34	jsr $3421	        JSR s3421    ;print space char
+.33f3	85 05		sta $05		        STA r1H      ; Y position
+.33f5	20 21 34	jsr $3421	        JSR s3421    ; print space char
+.33f8	20 21 34	jsr $3421	        JSR s3421    ; print space char
 .33fb	a9 00		lda #$00	        LDA #>r14L
-.33fd	85 19		sta $19		        STA r11H     ;X position  HI
+.33fd	85 19		sta $19		        STA r11H     ; X position  HI
 .33ff	a9 1e		lda #$1e	        LDA #<r14L
-.3401	85 18		sta $18		        STA r11L     ;X position LO
+.3401	85 18		sta $18		        STA r11L     ; X position LO
 .3403	a5 78		lda $78		        LDA a78
 .3405	24 71		bit $71		        BIT a71
 .3407	10 03		bpl $340c	        BPL b340C
 .3409	18		clc		        CLC
 .340a	69 01		adc #$01	        ADC #$01
-.340c	85 02		sta $02		b340C   STA r0L      ;number to print
+.340c	85 02		sta $02		b340C   STA r0L      ; number to print
 .340e	a9 00		lda #$00	        LDA #$00
-.3410	85 03		sta $03		        STA r0H      ;number to print
-.3412	a9 64		lda #$64	        LDA #$64     ;Format=right justify, suppress leading zero, 24 field width
+.3410	85 03		sta $03		        STA r0H      ; number to print
+.3412	a9 64		lda #$64	        LDA #$64     ; Format=right justify, suppress leading zero, 24 field width
 .3414	20 84 c1	jsr $c184	        JSR PutDecimal
 .3417	68		pla		        PLA
 .3418	85 04		sta $04		        STA r1L
@@ -2669,7 +2669,7 @@
 .342f	85 0d		sta $0d		        STA r5H
 .3431	a9 08		lda #$08	        LDA #$08
 .3433	85 12		sta $12		        STA r8L
-.3435	a9 08		lda #$08	        LDA #>p0846  ;buffer contains disk info like name, etc
+.3435	a9 08		lda #$08	        LDA #>p0846  ; buffer contains disk info like name, etc
 .3437	85 1d		sta $1d		        STA r13H
 .3439	a9 46		lda #$46	        LDA #<p0846
 .343b	85 1c		sta $1c		        STA r13L
@@ -2680,11 +2680,11 @@
 .3445	b1 0c		lda ($0c),y	        LDA (r5L),Y
 .3447	f0 11		beq $345a	        BEQ b345A
 .3449	a0 13		ldy #$13	        LDY #$13
-.344b	20 da 1d	jsr $1dda	        JSR s1DDA    ;Get block from disk
-.344e	20 3b 25	jsr $253b	        JSR s253B    ;transfer X to A, if A=0 return, else pull from stack
-.3451	a2 0a		ldx #$0a	        LDX #$0A
-.3453	a0 1c		ldy #$1c	        LDY #$1C
-.3455	a9 44		lda #$44	        LDA #$44
+.344b	20 da 1d	jsr $1dda	        JSR s1DDA       ; Get block from disk
+.344e	20 3b 25	jsr $253b	        JSR s253B       ; transfer X to A, if A=0 return, else pull from stack
+.3451	a2 0a		ldx #$0a	        LDX #$0A        ; SOURCE - zero page address of pointer to source string
+.3453	a0 1c		ldy #$1c	        LDY #$1C        ; DEST - zero page address of pointer to destination string
+.3455	a9 44		lda #$44	        LDA #$44        ; LENGTH - length of string (68 bytes)
 .3457	20 68 c2	jsr $c268	        JSR CopyFString ;Print disk name
 .345a	18		clc		b345A   CLC
 .345b	a9 44		lda #$44	        LDA #$44
@@ -3737,17 +3737,17 @@
 .3d21	a5 15		lda $15		        LDA r9H
 .3d23	69 00		adc #$00	        ADC #$00
 .3d25	85 0b		sta $0b		        STA r4H
-.3d27	20 e6 59	jsr $59e6	        JSR s59E6    ;load $8bd0 to r3
+.3d27	20 e6 59	jsr $59e6	        JSR s59E6       ; load $8bd0 to r3
 .3d2a	a2 0a		ldx #$0a	        LDX #$0A
 .3d2c	a0 08		ldy #$08	        LDY #$08
 .3d2e	20 16 24	jsr $2416	        JSR s2416
-.3d31	20 d2 59	jsr $59d2	        JSR s59D2    ;load $8bbc to r2
+.3d31	20 d2 59	jsr $59d2	        JSR s59D2       ; load $8bbc to r2
 .3d34	a2 0a		ldx #$0a	        LDX #$0A
 .3d36	20 4f 38	jsr $384f	        JSR s384F
-.3d39	a2 0a		ldx #$0a	        LDX #$0A
-.3d3b	a0 06		ldy #$06	        LDY #$06
-.3d3d	a9 12		lda #$12	        LDA #$12
-.3d3f	20 68 c2	jsr $c268	        JSR CopyFString
+.3d39	a2 0a		ldx #$0a	        LDX #$0A        ; SOURCE - zero page address of pointer to source string
+.3d3b	a0 06		ldy #$06	        LDY #$06        ; DEST - zero page address of pointer to destination string
+.3d3d	a9 12		lda #$12	        LDA #$12        ; LENGTH - length of string (18 bytes)
+.3d3f	20 68 c2	jsr $c268	        JSR CopyFString ; Copy a fixed-length string
 .3d42	a0 13		ldy #$13	        LDY #$13
 .3d44	b1 14		lda ($14),y	        LDA (r9L),Y
 .3d46	85 04		sta $04		        STA r1L
@@ -4558,17 +4558,17 @@
 .4449	a0 00		ldy #$00	s4449   LDY #$00
 .444b	b1 1e		lda ($1e),y	        LDA (r14L),Y
 .444d	f0 46		beq $4495	        BEQ b4495
-.444f	20 cf 43	jsr $43cf	        JSR s43CF    ;
-.4452	a2 1e		ldx #$1e	        LDX #$1E     ;zero page address of pointer to source string
-.4454	a0 0c		ldy #$0c	        LDY #$0C     ;zero page address of pointer to dest buffer
-.4456	a9 1e		lda #$1e	        LDA #$1E     ;length of string to copy (30 bytes)
-.4458	20 68 c2	jsr $c268	        JSR CopyFString
+.444f	20 cf 43	jsr $43cf	        JSR s43CF
+.4452	a2 1e		ldx #$1e	        LDX #$1E        ; zero page address of pointer to source string
+.4454	a0 0c		ldy #$0c	        LDY #$0C        ; zero page address of pointer to dest buffer
+.4456	a9 1e		lda #$1e	        LDA #$1E        ; length of string to copy (30 bytes)
+.4458	20 68 c2	jsr $c268	        JSR CopyFString ; Copy a fixed-length string
 .445b	a2 02		ldx #$02	        LDX #$02
 .445d	20 4f 38	jsr $384f	        JSR s384F
-.4460	a2 02		ldx #$02	        LDX #$02     ;zero page address of pointer to source string
-.4462	a0 04		ldy #$04	        LDY #$04     ;zero page address of pointer to dest buffer
-.4464	a9 12		lda #$12	        LDA #$12     ;length of string to copy (18 bytes)
-.4466	20 68 c2	jsr $c268	        JSR CopyFString
+.4460	a2 02		ldx #$02	        LDX #$02        ; zero page address of pointer to source string
+.4462	a0 04		ldy #$04	        LDY #$04        ; zero page address of pointer to dest buffer
+.4464	a9 12		lda #$12	        LDA #$12        ; length of string to copy (18 bytes)
+.4466	20 68 c2	jsr $c268	        JSR CopyFString ; Copy a fixed-length string
 .4469	a0 16		ldy #$16	        LDY #$16
 .446b	b1 1e		lda ($1e),y	        LDA (r14L),Y
 .446d	f0 21		beq $4490	        BEQ b4490
@@ -4584,10 +4584,10 @@
 .4480	a5 75		lda $75		        LDA a75
 .4482	a2 0c		ldx #$0c	        LDX #$0C
 .4484	20 4d 46	jsr $464d	        JSR s464D
-.4487	a2 0a		ldx #$0a	        LDX #$0A     ;zero page address of pointer to source string
-.4489	a0 0c		ldy #$0c	        LDY #$0C     ;zero page address of pointer to dest buffer
-.448b	a9 44		lda #$44	        LDA #$44     ;length of string to copy (68 bytes)
-.448d	20 68 c2	jsr $c268	        JSR CopyFString
+.4487	a2 0a		ldx #$0a	        LDX #$0A        ; zero page address of pointer to source string
+.4489	a0 0c		ldy #$0c	        LDY #$0C        ; zero page address of pointer to dest buffer
+.448b	a9 44		lda #$44	        LDA #$44        ; length of string to copy (68 bytes)
+.448d	20 68 c2	jsr $c268	        JSR CopyFString ; Copy a fixed-length string
 .4490	a5 75		lda $75		b4490   LDA a75
 .4492	20 c4 44	jsr $44c4	        JSR s44C4
 .4495	a2 00		ldx #$00	b4495   LDX #$00
@@ -6005,18 +6005,18 @@
 .505b	30 02		bmi $505f	        BMI b505F
 .505d	a9 01		lda #$01	        LDA #$01
 .505f	60		rts		b505F   RTS
-.5060	20 db 59	jsr $59db	s5060   JSR s59DB    ;load $8290 to r2
-.5063	20 62 25	jsr $2562	        JSR s2562    ;load r6 with $8be4
+.5060	20 db 59	jsr $59db	s5060   JSR s59DB       ; load $8290 to r2
+.5063	20 62 25	jsr $2562	        JSR s2562       ; load r6 with $8be4
 .5066	a0 0e		ldy #$0e	        LDY #$0E
 .5068	20 16 24	jsr $2416	        JSR s2416
-.506b	a2 06		ldx #$06	        LDX #$06     ;zero page address of pointer to source string
+.506b	a2 06		ldx #$06	        LDX #$06        ; zero page address of pointer to source string
 .506d	a9 8b		lda #$8b	        LDA #>p8BBC
 .506f	85 09		sta $09		        STA r3H
 .5071	a9 bc		lda #$bc	        LDA #<p8BBC
 .5073	85 08		sta $08		        STA r3L
-.5075	a0 08		ldy #$08	        LDY #$08     ;zero page address of pointer to destination buffer
-.5077	a9 12		lda #$12	        LDA #$12     ;length of string to copy
-.5079	20 68 c2	jsr $c268	        JSR CopyFString ;     copy string
+.5075	a0 08		ldy #$08	        LDY #$08        ; zero page address of pointer to destination buffer
+.5077	a9 12		lda #$12	        LDA #$12        ; length of string to copy
+.5079	20 68 c2	jsr $c268	        JSR CopyFString ; copy string
 .507c	a9 02		lda #$02	        LDA #>a0200
 .507e	85 07		sta $07		        STA r2H
 .5080	a9 00		lda #$00	        LDA #<a0200
@@ -7136,22 +7136,22 @@
 .5a23	f0 69		beq $5a8e	        BEQ b5A8E
 .5a25	85 0d		sta $0d		        STA r5H
 .5a27	ee 8d 84	inc $848d	        INC numDrives
-.5a2a	ad c3 88	lda $88c3	        LDA ramExpSize ;2=128k. 4=256k, 8=512k; 16=1MB, 32=1MB+
-.5a2d	d0 12		bne $5a41	        BNE b5A41    ;jump ahead if REU is present
+.5a2a	ad c3 88	lda $88c3	        LDA ramExpSize  ; 2=128k. 4=256k, 8=512k; 16=1MB, 32=1MB+
+.5a2d	d0 12		bne $5a41	        BNE b5A41       ; jump ahead if REU is present
 .5a2f	a5 0d		lda $0d		        LDA r5H
 .5a31	c9 03		cmp #$03	        CMP #$03
 .5a33	f0 06		beq $5a3b	        BEQ b5A3B
 .5a35	b0 17		bcs $5a4e	        BCS b5A4E
 .5a37	c5 0c		cmp $0c		        CMP r5L
 .5a39	f0 06		beq $5a41	        BEQ b5A41
-.5a3b	20 ad 5a	jsr $5aad	b5A3B   JSR s5AAD    ;Find "CONFIGURE"
+.5a3b	20 ad 5a	jsr $5aad	b5A3B   JSR s5AAD       ; Find "CONFIGURE"
 .5a3e	8a		txa		        TXA
 .5a3f	d0 0d		bne $5a4e	        BNE b5A4E
-.5a41	20 ec 1a	jsr $1aec	b5A41   JSR s1AEC    ;seems to set drive A or drive B type
+.5a41	20 ec 1a	jsr $1aec	b5A41   JSR s1AEC       ; seems to set drive A or drive B type
 .5a44	20 a1 c2	jsr $c2a1	        JSR OpenDisk    ; Open the disk in the current drive
 .5a47	e0 0d		cpx #$0d	        CPX #$0D
 .5a49	d0 0d		bne $5a58	        BNE b5A58
-.5a4b	20 ec 1a	jsr $1aec	        JSR s1AEC    ;seems to set drive A or drive B type
+.5a4b	20 ec 1a	jsr $1aec	        JSR s1AEC       ; seems to set drive A or drive B type
 .5a4e	ce 8d 84	dec $848d	b5A4E   DEC numDrives
 .5a51	a9 00		lda #$00	        LDA #$00
 .5a53	8d f0 0a	sta $0af0	        STA a0AF0
@@ -7162,8 +7162,8 @@
 .5a5e	b8		clv		        CLV
 .5a5f	50 03		bvc $5a64	        BVC b5A64
 .5a61	20 1e 36	jsr $361e	b5A61   JSR s361E
-.5a64	ad c3 88	lda $88c3	b5A64   LDA ramExpSize ;2=128k. 4=256k, 8=512k; 16=1MB, 32=1MB+
-.5a67	f0 22		beq $5a8b	        BEQ b5A8B    ;skip ahead if no ram expansion
+.5a64	ad c3 88	lda $88c3	b5A64   LDA ramExpSize ; 2=128k. 4=256k, 8=512k; 16=1MB, 32=1MB+
+.5a67	f0 22		beq $5a8b	        BEQ b5A8B       ; skip ahead if no ram expansion
 .5a69	ad 89 84	lda $8489	        LDA curDrive
 .5a6c	48		pha		        PHA
 .5a6d	a9 0a		lda #$0a	        LDA #$0A
@@ -7180,58 +7180,58 @@
 .5a84	20 91 5a	jsr $5a91	        JSR s5A91
 .5a87	68		pla		b5A87   PLA
 .5a88	20 16 1b	jsr $1b16	        JSR s1B16
-.5a8b	20 ec 1a	jsr $1aec	b5A8B   JSR s1AEC    ;seems to set drive A or drive B type
-.5a8e	4c 6e 31	jmp $316e	b5A8E   JMP b316E    ;Open a disk
+.5a8b	20 ec 1a	jsr $1aec	b5A8B   JSR s1AEC       ; seems to set drive A or drive B type
+.5a8e	4c 6e 31	jmp $316e	b5A8E   JMP b316E       ; Open a disk
 .5a91	a2 04		ldx #$04	s5A91   LDX #$04
 .5a93	20 29 38	jsr $3829	        JSR s3829
 .5a96	a0 04		ldy #$04	        LDY #$04
-.5a98	20 db 59	jsr $59db	        JSR s59DB    ;load $8290 to r2
-.5a9b	a9 12		lda #$12	        LDA #$12     ;18 bytes to copy
-.5a9d	20 68 c2	jsr $c268	        JSR CopyFString
-.5aa0	20 71 59	jsr $5971	        JSR s5971    ;copy r1 to r0
+.5a98	20 db 59	jsr $59db	        JSR s59DB       ; load $8290 to r2
+.5a9b	a9 12		lda #$12	        LDA #$12        ; 18 bytes to copy
+.5a9d	20 68 c2	jsr $c268	        JSR CopyFString ; Copy a fixed-length string
+.5aa0	20 71 59	jsr $5971	        JSR s5971       ; copy r1 to r0
 .5aa3	20 c3 47	jsr $47c3	        JSR s47C3
 .5aa6	a2 40		ldx #$40	        LDX #$40
 .5aa8	86 04		stx $04		        STX r1L
 .5aaa	4c 4b 36	jmp $364b	        JMP j364B
 .5aad	85 1a		sta $1a		s5AAD   STA r12L
-.5aaf	a9 66		lda #$66	        LDA #>p6600  ;Hi byte of buffer to store file list
+.5aaf	a9 66		lda #$66	        LDA #>p6600     ; Hi byte of buffer to store file list
 .5ab1	85 0f		sta $0f		        STA r6H
-.5ab3	a9 00		lda #$00	        LDA #<p6600  ;Lo byte of buffer to store file list
+.5ab3	a9 00		lda #$00	        LDA #<p6600     ; Lo byte of buffer to store file list
 .5ab5	85 0e		sta $0e		        STA r6L
 .5ab7	a9 0e		lda #$0e	        LDA #<p010E
-.5ab9	85 10		sta $10		        STA r7L      ;File type to search for
+.5ab9	85 10		sta $10		        STA r7L         ; File type to search for
 .5abb	a9 01		lda #$01	        LDA #>p010E
-.5abd	85 11		sta $11		        STA r7H      ;Max # files to search for
-.5abf	a9 5b		lda #$5b	        LDA #>p5B08  ;Hi byte of "CONFIGURE" filename
+.5abd	85 11		sta $11		        STA r7H         ; Max # files to search for
+.5abf	a9 5b		lda #$5b	        LDA #>p5B08     ; Hi byte of "CONFIGURE" filename
 .5ac1	85 17		sta $17		        STA r10H
-.5ac3	a9 08		lda #$08	        LDA #<p5B08  ;Lo byte of "CONFIGURE" filename
+.5ac3	a9 08		lda #$08	        LDA #<p5B08     ; Lo byte of "CONFIGURE" filename
 .5ac5	85 16		sta $16		        STA r10L
-.5ac7	20 3b c2	jsr $c23b	        JSR FindFTypes ; Builds a list of files of a particular GEOS type from the current directory
-.5aca	20 3b 25	jsr $253b	        JSR s253B    ;transfer X to A, if A=0 return, else pull from stack
+.5ac7	20 3b c2	jsr $c23b	        JSR FindFTypes  ; Builds a list of files of a particular GEOS type from the current directory
+.5aca	20 3b 25	jsr $253b	        JSR s253B       ; transfer X to A, if A=0 return, else pull from stack
 .5acd	a2 05		ldx #$05	        LDX #$05
 .5acf	a5 11		lda $11		        LDA r7H
 .5ad1	d0 2c		bne $5aff	        BNE b5AFF
 .5ad3	a9 66		lda #$66	        LDA #>p6600
-.5ad5	85 03		sta $03		        STA r0H      ;Hi byte of filename to open
+.5ad5	85 03		sta $03		        STA r0H         ; Hi byte of filename to open
 .5ad7	a9 00		lda #$00	        LDA #<p6600
-.5ad9	85 02		sta $02		        STA r0L      ;Lo byte of filename to open
+.5ad9	85 02		sta $02		        STA r0L         ; Lo byte of filename to open
 .5adb	20 74 c2	jsr $c274	        JSR OpenRecordFile
-.5ade	20 3b 25	jsr $253b	        JSR s253B    ;transfer X to A, if A=0 return, else pull from stack
+.5ade	20 3b 25	jsr $253b	        JSR s253B       ; transfer X to A, if A=0 return, else pull from stack
 .5ae1	a5 1a		lda $1a		        LDA r12L
 .5ae3	18		clc		        CLC
-.5ae4	69 01		adc #$01	        ADC #$01     ;Increase the record number (read next record)
-.5ae6	20 80 c2	jsr $c280	        JSR PointRecord ;     Make a particular record the current record (A=RECORD number)
-.5ae9	20 3b 25	jsr $253b	        JSR s253B    ;transfer X to A, if A=0 return, else pull from stack
+.5ae4	69 01		adc #$01	        ADC #$01        ; Increase the record number (read next record)
+.5ae6	20 80 c2	jsr $c280	        JSR PointRecord ; Make a particular record the current record (A=RECORD number)
+.5ae9	20 3b 25	jsr $253b	        JSR s253B       ; transfer X to A, if A=0 return, else pull from stack
 .5aec	a9 0a		lda #$0a	        LDA #>p0AF2
-.5aee	85 11		sta $11		        STA r7H      ;read record into $0af2
+.5aee	85 11		sta $11		        STA r7H         ; read record into $0af2
 .5af0	a9 f2		lda #$f2	        LDA #<p0AF2
-.5af2	85 10		sta $10		        STA r7L      ;read record into $0af2
+.5af2	85 10		sta $10		        STA r7L         ; read record into $0af2
 .5af4	a9 0d		lda #$0d	        LDA #>p0D80
-.5af6	85 07		sta $07		        STA r2H      ;size of the buffer (0d80 = 3456 bytes)
+.5af6	85 07		sta $07		        STA r2H         ; size of the buffer (0d80 = 3456 bytes)
 .5af8	a9 80		lda #$80	        LDA #<p0D80
-.5afa	85 06		sta $06		        STA r2L      ;size of the buffer (0d80 = 3456 bytes)
-.5afc	20 8c c2	jsr $c28c	        JSR ReadRecord ;read the record into $0af2
-.5aff	20 3b 25	jsr $253b	b5AFF   JSR s253B    ;transfer X to A, if A=0 return, else pull from stack
+.5afa	85 06		sta $06		        STA r2L         ; size of the buffer (0d80 = 3456 bytes)
+.5afc	20 8c c2	jsr $c28c	        JSR ReadRecord  ; read the record into $0af2
+.5aff	20 3b 25	jsr $253b	b5AFF   JSR s253B       ; transfer X to A, if A=0 return, else pull from stack
 .5b02	a9 ff		lda #$ff	        LDA #$FF
 .5b04	8d f0 0a	sta $0af0	        STA a0AF0
 .5b07	60		rts		        RTS
