@@ -1,6 +1,53 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+typedef struct signatureBlockType {
+
+    unsigned char cbmFileType;
+    unsigned char firstTrack;
+    unsigned char firstSector;
+    unsigned char filename[16];
+    unsigned char relSSTrack;
+    unsigned char relSSSector;
+    unsigned char relRecordSize;
+    unsigned char unused[4];
+    unsigned char saveReplace[2];
+    unsigned char fileSize[2];
+    unsigned char fileSignature[28];
+    unsigned char fill[196];
+    
+} SignatureBlock;
+
+typedef struct geosFileInfoBlockType {
+
+    unsigned char iconWidth;
+    unsigned char iconHeight;
+    unsigned char iconData[64];
+    unsigned char c64FileType;
+    unsigned char geosFileType;
+    unsigned char geosStructureType;
+    unsigned char fileStartAddress[2];
+    unsigned char fileEndAddress[2];
+    unsigned char initAddress[2];
+    unsigned char filename[20];
+    unsigned char extra[159];
+    
+} GEOSFileInfoBlock;
+
+typedef struct recBlockDataType {
+
+    unsigned char sectorCount;
+    unsigned char lastSectorIdx;
+
+} RecBlockData;
+
+typedef struct recordBlockType {
+
+    RecBlockData recBlockData[127];
+
+} RecordBlock;
+
+
 const char block1[255] = {
     0x83, 0x00, 0x00, 0x44, 0x45, 0x53, 0x4b, 0x20, 0x54, 0x4f, 0x50, 0xa0, 0xa0, 0xa0, 0xa0, 0xa0,
     0xa0, 0xa0, 0xa0, 0x00, 0x00, 0x01, 0x04, 0x58, 0x08, 0x13, 0x0d, 0x23, 0x78, 0x00, 0x50, 0x52,
@@ -83,6 +130,47 @@ void concatenateFiles(FILE *dest, const char *srcName) {
     // Free the buffer and close the source file
     free(buffer);
     fclose(srcFile);
+}
+
+void copyAndPadCharArray(const char *src, char *dest, size_t length, unsigned char pad) {
+    size_t i;
+    // Copy the source to destination up to 'length'
+    for (i = 0; i < length && src[i] != '\0'; ++i) {
+        dest[i] = src[i];
+    }
+
+    // Pad the remaining space with 0xA0
+    for (; i < length; ++i) {
+        dest[i] = pad;
+    }
+}
+
+
+void buildBlock1(SignatureBlock* signatureBlock) {
+
+    signatureBlock->cbmFileType = 0x83;
+    signatureBlock->firstTrack = 0x00;
+    signatureBlock->firstSector = 0x00;
+
+    copyAndPadCharArray("desk top", signatureBlock->filename, 16, 0xa0);
+
+    signatureBlock->relSSTrack = 0x00;
+    signatureBlock->relSSSector = 0x00;
+    signatureBlock->relRecordSize = 0x01;
+    signatureBlock->unused[0] = 0x04;
+    signatureBlock->unused[1] = 0x58;
+    signatureBlock->unused[2] = 0x08;
+    signatureBlock->unused[3] = 0x13;
+    signatureBlock->saveReplace[0] = 0x0d;
+    signatureBlock->saveReplace[1] = 0x23;
+    signatureBlock->fileSize[0] = 0x78;
+    signatureBlock->fileSize[1] = 0x00;
+
+    copyAndPadCharArray("PRG formatted GEOS file V1.0", signatureBlock->fileSignature, 28, 0x00);
+
+    for(unsigned char x=0; x< 196; x++)
+        signatureBlock->fill[x] = 0x00;
+
 }
 
 int main(void) {
