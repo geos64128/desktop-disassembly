@@ -1,7 +1,7 @@
 
 ; 64tass Turbo Assembler Macro V1.53.1515 listing file
 ; 64tass -l ./target/record6.lbl -L ./target/record5.lst -o ./target/record6 ./record6.tas
-; Sat Oct 28 22:25:15 2023
+; Wed Nov 01 23:00:25 2023
 
 ;Offset	;Hex		;Monitor	;Source
 
@@ -43,6 +43,22 @@
 =$1f					r14H = $1F
 =$20					r15L = $20
 =$21					r15H = $21
+=$02					r0 = $02
+=$04					r1 = $04
+=$06					r2 = $06
+=$08					r3 = $08
+=$0a					r4 = $0A
+=$0c					r5 = $0c
+=$0e					r6 = $0E
+=$10					r7 = $10
+=$12					r8 = $12
+=$14					r9 = $14
+=$16					r10 = $16
+=$18					r11 = $18
+=$1a					r12 = $1A
+=$1c					r13 = $1C
+=$1e					r14 = $1E
+=$20					r15 = $20
 =$fb					a0	= $fb
 =$fb					a0L	= $fb
 =$fc					a0H	= $fc
@@ -75,10 +91,13 @@
 =$7f					a9H	= $7f
 =$29					currentHeight   = $29
 =$2f					displayBufferOn = $2F
+=$35					leftMargin      = $35
 =$35					leftMarginLo    = $35
 =$36					leftMarginHi    = $36
+=$37					rightMargin     = $37
 =$37					rightMarginLo   = $37
 =$38					rightMarginHi   = $38
+=$3a					mouseXPos       = $3A
 =$3a					mouseXPosLo     = $3A
 =$3b					mouseXPosHi     = $3B
 =$3c					mouseYPos       = $3C
@@ -133,12 +152,14 @@
 =$8490					driveType_10    = $8490
 =$8491					driveType_11    = $8491
 =$8498					fileWritten     = $8498
+=$84b1					RecoverVector   = $84B1
 =$84b1					RecoverVector_LO= $84B1
 =$84b2					RecoverVector_HI= $84B2
 =$84b5					iconSelFlag     = $84B5
 =$84b7					menuNumber      = $84B7
 =$84b8					mouseTop        = $84B8
 =$84b9					mouseBottom     = $84B9
+=$84ba					mouseLeft       = $84BA
 =$84ba					mouseLeft_LO    = $84BA
 =$84bb					mouseLeft_HI    = $84BB
 =$84bc					mouseRight_LO   = $84BC

@@ -7,11 +7,15 @@ typedef struct signatureBlockType {
     unsigned char firstTrack;
     unsigned char firstSector;
     unsigned char filename[16];
-    unsigned char relSSTrack;
-    unsigned char relSSSector;
-    unsigned char relRecordSize;
-    unsigned char unused[4];
-    unsigned char saveReplace[2];
+    unsigned char fileHeaderBlockTrack;
+    unsigned char fileHeaderBlockSector;
+    unsigned char geosFileStructureType;
+    unsigned char geosFileType;
+    unsigned char yearLastModified;
+    unsigned char monthLastModified;
+    unsigned char dayLastModified;
+    unsigned char hourLastModified;
+    unsigned char minuteLastModified;
     unsigned char fileSize[2];
     unsigned char fileSignature[28];
     unsigned char fill[196];
@@ -30,7 +34,10 @@ typedef struct geosFileInfoBlockType {
     unsigned char fileEndAddress[2];
     unsigned char initAddress[2];
     unsigned char filename[20];
-    unsigned char extra[159];
+    unsigned char parentDiskAuthorName[20];
+    unsigned char parentApplication[20];
+    unsigned char application[23];
+    unsigned char getInfo[95];
     
 } GEOSFileInfoBlock;
 
@@ -154,16 +161,16 @@ void buildBlock1(SignatureBlock* signatureBlock) {
 
     copyAndPadCharArray("desk top", signatureBlock->filename, 16, 0xa0);
 
-    signatureBlock->relSSTrack = 0x00;
-    signatureBlock->relSSSector = 0x00;
-    signatureBlock->relRecordSize = 0x01;
-    signatureBlock->unused[0] = 0x04;
-    signatureBlock->unused[1] = 0x58;
-    signatureBlock->unused[2] = 0x08;
-    signatureBlock->unused[3] = 0x13;
-    signatureBlock->saveReplace[0] = 0x0d;
-    signatureBlock->saveReplace[1] = 0x23;
-    signatureBlock->fileSize[0] = 0x78;
+    signatureBlock->fileHeaderBlockTrack = 0x00;
+    signatureBlock->fileHeaderBlockSector = 0x00;
+    signatureBlock->geosFileStructureType = 0x01; // VLIR
+    signatureBlock->geosFileType = 0x04;        // system
+    signatureBlock->yearLastModified = 0x58;    // 1988
+    signatureBlock->monthLastModified = 0x08;   // august
+    signatureBlock->dayLastModified = 0x13;     // 19th
+    signatureBlock->hourLastModified = 0x0d;    // 1:35pm
+    signatureBlock->minuteLastModified = 0x23;
+    signatureBlock->fileSize[0] = 0x78;         //120 blocks
     signatureBlock->fileSize[1] = 0x00;
 
     copyAndPadCharArray("PRG formatted GEOS file V1.0", signatureBlock->fileSignature, 28, 0x00);

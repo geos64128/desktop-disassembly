@@ -12,6 +12,7 @@
 
 .include "geos.inc"
 .include "kernal.inc"
+.include "geosmacros.asm"
 ;
 ; **** ZP FIELDS **** 
 ;
@@ -248,8 +249,7 @@ eA352 = $A352
 
         * = $1956
 
-s1956   LDA #$00
-        STA a04EE
+s1956   LoadB a04EE, $00
         LDY aFE
         LDA f8486,Y
         BMI b1968
@@ -262,8 +262,7 @@ b1968   LDY a70
         AND #$0F
         CMP #$02
         BNE b197A
-b1975   LDA #$07
-        STA a1DA0
+b1975   LoadB a1DA0, $07
 b197A   JSR s231E
         JSR s1A04
         TXA 
@@ -276,12 +275,11 @@ b197A   JSR s231E
         LDA #$03
         ADC a03F5
         STA a03F5
-        JSR s22C5    ;save old RecoverVector, add new one (recover background behind menus and dialog boxes)
+        JSR s22C5               ;save old RecoverVector, add new one (recover background behind menus and dialog boxes)
         JSR s1B7C
         JSR s1A04
-        JSR s1A6B    ;called after copying desktop to another disk
-b19A3   LDA #$08
-        STA a1DA0
+        JSR s1A6B               ;called after copying desktop to another disk
+b19A3   LoadB a1DA0, $08
         CLV 
         BVC b19FE
 
@@ -296,13 +294,11 @@ s19AB   STA a04EE
         JSR s22F3
         TXA 
         BNE b19FB
-        LDA a03FB
-        STA r6H      ;hi byte of filename
-        LDA a03FA
-        STA r6L      ;lo byte of filename
-        JSR FindFile ;search for file in directory
-        TXA          ;tranfer error code to A
-        BNE b19FB    ;if an error, skip ahead
+        MoveB a03FB, r6H        ;hi byte of filename 
+        MoveB a03FA, r6L        ;lo byte of filename                    
+        JSR FindFile            ;search for file in directory
+        TXA                     ;tranfer error code to A
+        BNE b19FB               ;if an error, skip ahead
         LDX #$0C
         LDA dirEntryBuf
         AND #$0F
@@ -310,19 +306,17 @@ s19AB   STA a04EE
         BEQ b19FB
         LDA a841D
         BNE b19EC
-        LDA a841C
-        CMP #$18
+        CmpBI a841C, $18
         BCS b19EC
         JSR s1A4F
-b19EC   JSR s22C5    ;save old RecoverVector, add new one (recover background behind menus and dialog boxes)
-        JSR s1E8A    ;write file, directory entry, BAM, and header
+b19EC   JSR s22C5               ;save old RecoverVector, add new one (recover background behind menus and dialog boxes)
+        JSR s1E8A               ;write file, directory entry, BAM, and header
         JSR s1A04
-        JSR s1A6B    ;called after copying desktop to another disk
+        JSR s1A6B               ;called after copying desktop to another disk
         CLV 
         BVC b19FE
 b19FB   JSR s1A04
-b19FE   LDA #$00
-        STA a04ED
+b19FE   LoadB a04ED, $00
         RTS 
 
 s1A04   TXA 
@@ -335,42 +329,25 @@ s1A04   TXA
         TAX 
 b1A11   RTS 
 
-s1A12   LDA #$FF
-        STA a04ED
+s1A12   LoadB a04ED, $FF
         JSR s1A4F
-        LDA aFE
-        CMP a70
+        CmpB aFE, a70
         BNE b1A49
         LDA a04EE
         BNE b1A49
         STA a04ED
         STA a04EC
         STA a024D
-        LDA #>p2808
-        STA a03F3
-        LDA #<p2808
-        STA a03F2
-        LDA #>p54F8
-        STA a03F5
-        LDA #<p54F8
-        STA a03F4
-        LDA #$00
-        STA a7E
+        LoadW a03F2, p2808
+        LoadW a03F4, p54F8
+        LoadB a7E, $00
         JSR s563D
-b1A49   LDA #$00
-        STA a04EB
+b1A49   LoadB a04EB, $00
         RTS 
 
-s1A4F   LDA #$FF
-        STA a04EC
-        LDA #>p6600
-        STA a03F3
-        LDA #<p6600
-        STA a03F2
-        LDA #>p1700
-        STA a03F5
-        LDA #<p1700
-        STA a03F4
+s1A4F   LoadB a04EC, $FF
+        LoadW a03F2, p6600
+        LoadW a03F4, p1700
         JMP j5634
 
 ; called after copying desktop to another disk
@@ -385,18 +362,17 @@ b1A72   JSR s1A8E
         JSR s246B
         CLV 
         BVC b1A72
-b1A80   JSR s22DC    ;restore old RecoverVector
+b1A80   JSR s22DC               ;restore old RecoverVector
         JSR s562E
-        LDA #$FF
-        STA a04EC
+        LoadB a04EC, $FF
         PLA 
         TAX 
         RTS 
 
-s1A8E   JSR OpenDisk    ; Open the disk in the current drive
-        JSR s253B       ; transfer X to A, if A=0 return, else pull from stack
-        JSR s1AAE       ; Find "deskTop AM V2.0" on disk
-        JSR s253B       ; transfer X to A, if A=0 return, else pull from stack
+s1A8E   JSR OpenDisk            ; Open the disk in the current drive
+        JSR s253B               ; transfer X to A, if A=0 return, else pull from stack
+        JSR s1AAE               ; Find "deskTop AM V2.0" on disk
+        JSR s253B               ; transfer X to A, if A=0 return, else pull from stack
         LDA r7H
         BEQ b1AA2
         LDX #$05
@@ -405,22 +381,20 @@ b1AA2   LDA r5H
         STA r9H
         LDA r5L
         STA r9L
-        JSR s1AC2       ; Read file based on file header info
+        JSR s1AC2               ; Read file based on file header info
 b1AAD   RTS 
 
 ; Find "deskTop AM V2.0" on disk
-s1AAE   JSR s2574       ; set r10 to pointer of text "deskTop AM  V2.0"
-        LDA #$04
-        STA r7L         ; Search for SYSTEM ($04) file type
-s1AB5   JSR OpenDisk    ; Open the disk in the current drive
-        LDA #$01
-        STA r7H         ; search for only one file
-        JSR s256B       ; load r6 with $8b80 address
-        JMP FindFTypes  ; Builds a list of files of a particular GEOS type from the current directory
+s1AAE   JSR s2574               ; set r10 to pointer of text "deskTop AM  V2.0"
+        LoadB r7L, $04          ; Search for SYSTEM ($04) file type
+s1AB5   JSR OpenDisk            ; Open the disk in the current drive
+        LoadB r7H, $01          ; search for only one file
+        JSR s256B               ; load r6 with $8b80 address
+        JMP FindFTypes          ; Builds a list of files of a particular GEOS type from the current directory
 
 ; Read file based on file header info
-s1AC2   JSR GetFHdrInfo ; Loads GEOS file header for a particular directory entry
-        JSR s253B       ; transfer X to A, if A=0 return, else pull from stack
+s1AC2   JSR GetFHdrInfo         ; Loads GEOS file header for a particular directory entry
+        JSR s253B               ; transfer X to A, if A=0 return, else pull from stack
         LDY #$01
         LDA (r9L),Y
         STA r1L
@@ -428,38 +402,35 @@ s1AC2   JSR GetFHdrInfo ; Loads GEOS file header for a particular directory entr
         LDA (r9L),Y
         STA r1H
         JSR s1DE3
-        JSR s253B       ; transfer X to A, if A=0 return, else pull from stack
-        LDA a8002
-        STA r1L
-        LDA a8003
-        STA r1H         ; track/sector of first data block (from $8002/03)
-        LDA #$FF
-        STA r2L         ; buffer size = $ffff (but readfile can only read 32258 bytes)
+        JSR s253B               ; transfer X to A, if A=0 return, else pull from stack
+        MoveB a8002, r1L        ; track/sector of first data block (from $8002/03)
+        MoveB a8003, r1H               
+        LoadB r2L, $FF          ; buffer size = $ffff (but readfile can only read 32258 bytes)
         STA r2H
         JMP ReadFile
 
 ; seems to set drive A or drive B type
 s1AEC   LDA curDrive
-        EOR #$01        ; toggles 8 and 9
-s1AF1   PHA             ; save it
-        JSR SetDevice   ; Establish communication with a new peripheral - switch to new drive number
-        PLA             ; restore it
-        CMP #$08        ; compare with 8
-        BCC b1B0A       ; jump ahead if the peripheral number is less than 8 (a printer?)
+        EOR #$01                ; toggles 8 and 9
+s1AF1   PHA                     ; save it
+        JSR SetDevice           ; Establish communication with a new peripheral - switch to new drive number
+        PLA                     ; restore it
+        CMP #$08                ; compare with 8
+        BCC b1B0A               ; jump ahead if the peripheral number is less than 8 (a printer?)
         CMP a0AF1
         BEQ b1B0A
         STA a0AF1
         LDA a0AF0
         BEQ b1B0A
         JSR s1B1C
-b1B0A   LDY curDrive    ; y = current active disk drive number
-        LDA f8486,Y     ; get drive type
-        STA curType     ; store it in the current drive type
+b1B0A   LDY curDrive            ; y = current active disk drive number
+        LDA f8486,Y             ; get drive type
+        STA curType             ; store it in the current drive type
         LDX #$00
         RTS 
 
 s1B16   JSR s1AF1
-        JMP OpenDisk    ; Open the disk in the current drive
+        JMP OpenDisk            ; Open the disk in the current drive
 
 s1B1C   JSR s1B22
         JSR s1B3C
@@ -518,15 +489,14 @@ b1B72   PLA
 
 s1B7C   JSR s1BC4
         LDA #$FF
-        JSR s1CFD    ;called when erasing a disk
+        JSR s1CFD               ;called when erasing a disk
 b1B84   JSR s1BF8
-        JSR s253B    ;transfer X to A, if A=0 return, else pull from stack
+        JSR s253B               ;transfer X to A, if A=0 return, else pull from stack
         JSR s232C
-        JSR s253B    ;transfer X to A, if A=0 return, else pull from stack
+        JSR s253B               ;transfer X to A, if A=0 return, else pull from stack
         JSR s1C63
-        JSR s253B    ;transfer X to A, if A=0 return, else pull from stack
-        LDA a04F4
-        CMP a0522
+        JSR s253B               ;transfer X to A, if A=0 return, else pull from stack
+        CmpB a04F4, a0522
         BEQ b1BA0
         BCS b1BA7
 b1BA0   JSR s231E
@@ -534,26 +504,18 @@ b1BA0   JSR s231E
         BEQ b1B84
 b1BA6   RTS 
 
-b1BA7   LDA a0520
-        CMP #$01
+b1BA7   CmpBI a0520, $01
         BNE b1BA6
-        LDA a0521
-        CMP #$02
+        CmpBI a0521, $02
         BNE b1BA6
         STA a0520
         JSR GetDirHead
-        JSR s253B       ; transfer X to A, if A=0 return, else pull from stack
+        JSR s253B               ; transfer X to A, if A=0 return, else pull from stack
         JSR s1DF0
-        JMP PutDirHead  ; write directory header and BAM to disk
+        JMP PutDirHead          ; write directory header and BAM to disk
 
-s1BC4   LDA a03F5
-        STA r3H
-        LDA a03F4
-        STA r3L
-        LDA #>p0102
-        STA r0H
-        LDA #<p0102
-        STA r0L
+s1BC4   MoveW a03F4, r3
+        LoadW r0, p0102
         LDX #$08
         LDY #$02
         JSR Ddiv
@@ -570,21 +532,18 @@ s1BC4   LDA a03F5
         STA a04F0
         RTS 
 
-s1BF8   JSR EnterTurbo  ; Activate disk drive turbo mode
-        JSR s253B       ; transfer X to A, if A=0 return, else pull from stack
-        JSR InitForIO   ; Prepare for IO across the serial bus
-        JSR s1C4E       ; copy $03f2/f3 to r10 and $04ef/f0 to r11
-        LDA #$00
-        STA a04F2
-b1C09   LDA a04F4
-        STA r1L         ; get TRACK from $04f4
+s1BF8   JSR EnterTurbo          ; Activate disk drive turbo mode
+        JSR s253B               ; transfer X to A, if A=0 return, else pull from stack
+        JSR InitForIO           ; Prepare for IO across the serial bus
+        JSR s1C4E               ; copy $03f2/f3 to r10 and $04ef/f0 to r11
+        LoadB a04F2, $00
+b1C09   MoveB a04F4, r1L        ; get TRACK from $04f4              
         CMP a0522
         BEQ b1C15
         BCS b1C49
-b1C15   LDA a04F3
-        STA r1H         ; get SECTOR from $04f3
-        JSR s1CC0       ; copy r11 to r4
-        JSR ReadBlock   ; Very low level read block from disk
+b1C15   MoveB a04F3, r1H        ; get SECTOR from $04f3              
+        JSR s1CC0               ; copy r11 to r4
+        JSR ReadBlock           ; Very low level read block from disk
         TXA 
         BNE b1C4B
         LDY #$00
@@ -594,34 +553,25 @@ b1C15   LDA a04F3
         LDA r1H
         STA (r10L),Y
         INC a04F2
-        JSR s2541       ; Add 2 to r10
+        JSR s2541               ; Add 2 to r10
         INC r11H
-        LDA #$30
-        STA a01
+        LoadB a01, $30
         JSR s1D21
-        LDA #$36
-        STA a01
-        LDA a04F2
-        CMP a04F1
+        LoadB a01, $36
+        CmpB a04F2, a04F1
         BCC b1C09
 b1C49   LDX #$00
-b1C4B   JMP DoneWithIO  ; restore system after IO across the serial bus
+b1C4B   JMP DoneWithIO          ; restore system after IO across the serial bus
 
 ; copy $03f2/f3 to r10 and $04ef/f0 to r11
-s1C4E   LDA a03F3
-        STA r10H
-        LDA a03F2
-        STA r10L
-        LDA a04F0
-        STA r11H
-        LDA a04EF
-        STA r11L
+s1C4E   MoveW a03F2, r10
+        MoveW a04EF, r11
         RTS 
 
-s1C63   JSR EnterTurbo  ; Activate disk drive turbo mode
-        JSR s253B       ; transfer X to A, if A=0 return, else pull from stack
+s1C63   JSR EnterTurbo          ; Activate disk drive turbo mode
+        JSR s253B               ; transfer X to A, if A=0 return, else pull from stack
         STX a04F6
-        JSR InitForIO   ; Prepare for IO across the serial bus
+        JSR InitForIO           ; Prepare for IO across the serial bus
         LDA a04F2
         PHA 
         JSR s1C86
@@ -631,28 +581,28 @@ s1C63   JSR EnterTurbo  ; Activate disk drive turbo mode
         BNE b1C83
         DEC a04F6
         JSR s1C86
-b1C83   JMP DoneWithIO  ; restore system after IO across the serial bus
+b1C83   JMP DoneWithIO          ; restore system after IO across the serial bus
 
-s1C86   JSR s1C4E       ; copy $03f2/f3 to r10 and $04ef/f0 to r11
+s1C86   JSR s1C4E               ; copy $03f2/f3 to r10 and $04ef/f0 to r11
 b1C89   LDA a04F2
         BEQ b1CBD
         LDY #$00
         LDA (r10L),Y
-        STA r1L         ; TRACK
+        STA r1L                 ; TRACK
         INY 
         LDA (r10L),Y
-        STA r1H         ; SECTOR
+        STA r1H                 ; SECTOR
         JSR s1CC9
-        JSR s253B       ; transfer X to A, if A=0 return, else pull from stack
-        JSR s1CC0       ; copy r11 to r4
+        JSR s253B               ; transfer X to A, if A=0 return, else pull from stack
+        JSR s1CC0               ; copy r11 to r4
         LDA a04F6
         BNE b1CAD
-        JSR WriteBlock  ; Very low-level write block to disk
+        JSR WriteBlock          ; Very low-level write block to disk
         CLV 
         BVC b1CB0
-b1CAD   JSR VerWriteBlock ; Very low level block on disk
-b1CB0   JSR s253B       ; transfer X to A, if A=0 return, else pull from stack
-        JSR s2541       ; Add 2 to r10
+b1CAD   JSR VerWriteBlock       ; Very low level block on disk
+b1CB0   JSR s253B               ; transfer X to A, if A=0 return, else pull from stack
+        JSR s2541               ; Add 2 to r10
         INC r11H
         DEC a04F2
         BNE b1C89
@@ -666,15 +616,15 @@ s1CC0   LDA r11H
         STA r4L
         RTS 
 
-s1CC9   LDA r1L         ; TRACK
+s1CC9   LDA r1L                 ; TRACK
         CMP a0523
         BNE b1CF9
-        LDA r1H         ; SECTOR
+        LDA r1H                 ; SECTOR
         ORA a04F6
         BNE b1CF9
-        JSR s254D       ; point r4 at diskBlkBuf
-        JSR ReadBlock   ; Very low level read block from disk
-        JSR s253B       ; transfer X to A, if A=0 return, else pull from stack
+        JSR s254D               ; point r4 at diskBlkBuf
+        JSR ReadBlock           ; Very low level read block from disk
+        JSR s253B               ; transfer X to A, if A=0 return, else pull from stack
         LDY #$90
         LDX #$13
 b1CE4   LDA diskBlkBuf,Y
@@ -711,8 +661,7 @@ b1D1E   JSR s1D40
 s1D21   JSR s1DA1
         BCC b1D33
         INC a04F4
-        LDA a04F4
-        CMP a0522
+        CmpB a04F4, a0522
         BCC b1D1E
         BEQ b1D1E
 b1D33   RTS 
@@ -727,14 +676,11 @@ s1D40   LDY #$27
 b1D44   STA f04F7,Y
         DEY 
         BPL b1D44
-        LDA a0520
-        CMP #$03
+        CmpBI a0520, $03
         BNE b1D58
-        LDA #$28
-        STA a04F5
+        LoadB a04F5, $28
         BNE b1D78
-b1D58   LDA a04F4
-        CMP #$24
+b1D58   CmpBI a04F4, $24
         BCC b1D62
         SEC 
         SBC #$23
@@ -750,11 +696,9 @@ b1D6C   CPY #$15
         BNE b1D6C
 b1D78   LDA a1CFC
         BEQ b1D9B
-        LDA a04F4
-        STA r6L         ; TRACK number of block
-        LDA #$00
-        STA r6H         ; SECTOR number of block
-b1D86   JSR FindBAMBit  ; Get disk block allocation status
+        MoveB a04F4, r6L        ; TRACK number of block             
+        LoadB r6H, $00          ; SECTOR number of block
+b1D86   JSR FindBAMBit          ; Get disk block allocation status
         BEQ b1D92
         LDY r6H
         LDA #$FF
@@ -773,8 +717,7 @@ s1DA1   LDA a1DA0
         ADC a04F3
         CMP a04F5
         BCC b1DB1
-        SEC 
-        SBC a04F5
+        sub a04F5
 b1DB1   TAY 
         LDA f04F7,Y
         BEQ b1DD0
@@ -783,8 +726,7 @@ b1DBA   INY
         CPY a04F5
         BCC b1DC6
         TYA 
-        SEC 
-        SBC a04F5
+        sub a04F5
         TAY 
 b1DC6   LDA f04F7,Y
         BEQ b1DD0
@@ -801,16 +743,16 @@ b1DD0   STY a04F3
 
 ; Get block from disk
 s1DDA   LDA (r5L),Y
-        STA r1L         ; TRACK
+        STA r1L                 ; TRACK
         INY 
         LDA (r5L),Y
-        STA r1H         ; SECTOR
-s1DE3   JSR s254D       ; point r4 at diskBlkBuf
-        JMP GetBlock    ; General purpose routine to get a block from the current disk
+        STA r1H                 ; SECTOR
+s1DE3   JSR s254D               ; point r4 at diskBlkBuf
+        JMP GetBlock            ; General purpose routine to get a block from the current disk
 
 ; Put the diskBlkBuf to disk
-j1DE9   JSR s254D       ; point r4 at diskBlkBuf
-        JMP PutBlock    ; General purpose routine to write a block to disk with verify
+j1DE9   JSR s254D               ; point r4 at diskBlkBuf
+        JMP PutBlock            ; General purpose routine to write a block to disk with verify
 
 a1DEF   .BYTE $00
 s1DF0   LDA #$24
@@ -845,7 +787,7 @@ b1E24   STA dir2Head,Y
         INY 
         BNE b1E24
 b1E2D   LDA #$00
-        JSR s1CFD       ; called when erasing a disk
+        JSR s1CFD               ; called when erasing a disk
 b1E32   LDA a04F3
         STA r6H
         LDA a04F4
@@ -859,22 +801,20 @@ b1E43   JSR s1E4D
         BVC b1E32
 b1E4C   RTS 
 
-s1E4D   LDA a0520
-        CMP #$02
+s1E4D   CmpBI a0520, $02
         BCC b1E6A
-        BNE b1E67       ; free disk block
+        BNE b1E67               ; free disk block
         LDA r6L
         CMP a1DEF
         BCC b1E66
         CMP #$35
-        BNE b1E67       ; free a disk block
-        LDA #$80
-        STA a8203
+        BNE b1E67               ; free a disk block
+        LoadB a8203, $80
 b1E66   RTS 
 
-b1E67   JMP FreeBlock   ; Free an allocated disk block
+b1E67   JMP FreeBlock           ; Free an allocated disk block
 
-b1E6A   JSR FindBAMBit  ; Get disk block allocation status
+b1E6A   JSR FindBAMBit          ; Get disk block allocation status
         LDA r8H
         EOR curDirHead,X
         STA curDirHead,X
@@ -895,26 +835,22 @@ f1E86   .BYTE $12,$19,$1F,$24
 s1E8A   JSR s2268
         JSR s206D
         JSR s2097
-        JSR s253B       ; transfer X to A, if A=0 return, else pull from stack
+        JSR s253B               ; transfer X to A, if A=0 return, else pull from stack
         JSR s232C
-        JSR s253B       ; transfer X to A, if A=0 return, else pull from stack
-        LDA #>curDirHead
-        STA r5H         ; lo byte of curDirHead for CalcBlksFree
-        LDA #<curDirHead
-        STA r5L         ; hi byte of curDirHead for CalcBlksFree
-        JSR CalcBlksFree ; Calculates total number of free blocks on the disk
+        JSR s253B               ; transfer X to A, if A=0 return, else pull from stack
+        LoadW r5, curDirHead    ; curDirHead for CalcBlksFree
+        JSR CalcBlksFree        ; Calculates total number of free blocks on the disk
         LDX #$03
         LDA a1893
-        CMP r4H         ; compare with hi byte of number of free blocks on disk (r4)
+        CMP r4H                 ; compare with hi byte of number of free blocks on disk (r4)
         BNE b1EB5
         LDA a1892
-        CMP r4L         ; compare with lo byte of number of free blocks on disk (r4)
-b1EB5   BEQ b1EB9       ; free block sizes are equal - skip ahead
+        CMP r4L                 ; compare with lo byte of number of free blocks on disk (r4)
+b1EB5   BEQ b1EB9               ; free block sizes are equal - skip ahead
         BCS b1F00
-b1EB9   LDA aFC
-        STA r10L        ; DIRPAGE parameter for GetFreeDirBlk - directory page to begin searching
-        JSR GetFreeDirBlk ; Search cur dir for an empty slot for a new dir entry, allocate another block if needed
-        JSR s253B       ; transfer X to A, if A=0 return, else pull from stack
+b1EB9   MoveB aFC, r10L         ; DIRPAGE parameter for GetFreeDirBlk - directory page to begin searching              
+        JSR GetFreeDirBlk       ; Search cur dir for an empty slot for a new dir entry, allocate another block if needed
+        JSR s253B               ; transfer X to A, if A=0 return, else pull from stack
         LDA r10L
         STA aFC
         STY a04E0
@@ -922,36 +858,33 @@ b1EB9   LDA aFC
         STA a04E2
         LDA r1L
         STA a04E1
-        JSR PutDirHead  ; Write directory header and BAM to disk
-        JSR s253B       ; transfer X to A, if A=0 return, else pull from stack
-b1EDA   JSR s1F01       ; copy file
-        JSR s253B       ; transfer X to A, if A=0 return, else pull from stack
+        JSR PutDirHead          ; Write directory header and BAM to disk
+        JSR s253B               ; transfer X to A, if A=0 return, else pull from stack
+b1EDA   JSR s1F01               ; copy file
+        JSR s253B               ; transfer X to A, if A=0 return, else pull from stack
         TYA 
         BNE b1EF7
         JSR s22F3
-        JSR s253B       ; transfer X to A, if A=0 return, else pull from stack
+        JSR s253B               ; transfer X to A, if A=0 return, else pull from stack
         JSR s2097
-        JSR s253B       ; transfer X to A, if A=0 return, else pull from stack
+        JSR s253B               ; transfer X to A, if A=0 return, else pull from stack
         JSR s2350
-        JSR s253B       ; transfer X to A, if A=0 return, else pull from stack
+        JSR s253B               ; transfer X to A, if A=0 return, else pull from stack
         BEQ b1EDA
 b1EF7   JSR s2244
-        JSR s253B       ; transfer X to A, if A=0 return, else pull from stack
-        JSR PutDirHead  ; Write directory header and BAM to disk
+        JSR s253B               ; transfer X to A, if A=0 return, else pull from stack
+        JSR PutDirHead          ; Write directory header and BAM to disk
 b1F00   RTS 
 
 ; copy file
 s1F01   PHP 
         SEI 
-        LDA a03F3
-        STA r8H
-        LDA a03F2
-        STA r8L
-b1F0D   JSR s22AF    ;copy r8 to r10
+        MoveW a03F2, r8
+b1F0D   JSR s22AF               ;copy r8 to r10
         LDA (r10L),Y
         AND #$80
         BNE b1F1C
-        JSR s1FDB    ;allocate BAM and write file
+        JSR s1FDB               ;allocate BAM and write file
         CLV 
         BVC b1F1F
 b1F1C   JSR s1F42
@@ -988,32 +921,21 @@ s1F42   LDY #$00
 f1F56   .BYTE $1F,$1F,$1F,$1F
 f1F5A   .BYTE $7B,$B5,$C5,$41
 
-s1F5E   LDA a041B
-        CMP #$01
+s1F5E   CmpBI a041B, $01
         BNE b1F7A
-        LDA a0408
-        STA r1H
-        LDA a0407
-        STA r1L
-        LDA #>p7D00
-        STA r4H
-        LDA #<p7D00
-        STA r4L
+        MoveW a0407, r1
+        LoadW r4, p7D00
         JSR PutBlock
 b1F7A   RTS 
 
 ; part of copy file routine
-        JSR s1FDB    ;allocate BAM and write file
+        JSR s1FDB               ;allocate BAM and write file
         TXA 
         BNE b1FAA
-        LDA a04EA
-        STA a041A
-        LDA a04E9
-        STA a0419
-        LDA a041B
-        CMP #$01
+        MoveW a04E9, a0419
+        CmpBI a041B, $01
         BNE b1FAA
-        JSR s22BA    ;load $04e8 to r3
+        JSR s22BA               ; load $04e8 to r3
         JSR SetNextFree
         LDA r3L
         STA a04E7
@@ -1023,19 +945,15 @@ b1F7A   RTS
         STA a0408
 b1FAA   LDA a2096
         BEQ b1FB4
-        LDA #$23
-        STA a04E7
+        LoadB a04E7, $23
 b1FB4   RTS 
 
-        JSR s1FDB    ;allocate BAM and write file
-        LDA a04EA
-        STA a0408
-        LDA a04E9
-        STA a0407
+        JSR s1FDB               ; allocate BAM and write file
+        MoveW a04E9, a0407
         RTS 
 
 ; part of copy file routine
-        JSR s1FDB    ;allocate BAM and write file
+        JSR s1FDB               ; allocate BAM and write file
         LDY #$01
         LDA (r10L),Y
         ASL 
@@ -1063,65 +981,55 @@ s1FDB   LDA r8L
         LDA r2L
         SEC 
         SBC r7L
-        STA r2L      ;number of bytes to allocate space for (lo)
+        STA r2L                 ;number of bytes to allocate space for (lo)
         LDA r2H
         SBC r7H
-        STA r2H      ;number of bytes to allocate space for (hi)
-        JSR s22BA    ;load $04e8 to r3
-        JSR s2064    ;r6 = pointer to fileTrScTab (buffer used to hold track and sector chain for a file)
+        STA r2H                 ;number of bytes to allocate space for (hi)
+        JSR s22BA               ;load $04e8 to r3
+        JSR s2064               ;r6 = pointer to fileTrScTab (buffer used to hold track and sector chain for a file)
         LDA r7H
         PHA 
         LDA r7L
         PHA 
-        JSR NxtBlkAlloc ;     Special version of BlkAlloc that begins allocating from a specific block on the disk
+        JSR NxtBlkAlloc         ; Special version of BlkAlloc that begins allocating from a specific block on the disk
         PLA 
         STA r7L
         PLA 
         STA r7H
-        JSR s253B    ;transfer X to A, if A=0 return, else pull from stack
+        JSR s253B               ;transfer X to A, if A=0 return, else pull from stack
         LDY #$00
         LDA (r10L),Y
         AND #$80
         BEQ b202F
-        LDA a8301
-        STA a04EA
+        MoveB a8301, a04EA
         LDA fileTrScTab
         STA a04E9
         CLV 
         BVC b2054
-b202F   LDA a04E8
-        STA r1H      ;SECTOR parameter for GetBlock
-        LDA a04E7
-        STA r1L      ;TRACK parameter for GetBlock
-        JSR s254D    ;point r4 at diskBlkBuf
-        JSR GetBlock ;     General purpose routine to get a block from current disk
-        JSR s253B    ;transfer X to A, if A=0 return, else pull from stack
-        LDA a8301
-        STA a8001
-        LDA fileTrScTab
-        STA diskBlkBuf
+b202F   MoveB a04E8, r1H        ; SECTOR parameter for GetBlock
+        MoveB a04E7, r1L        ; TRACK parameter for GetBlock                          
+        JSR s254D               ; point r4 at diskBlkBuf
+        JSR GetBlock            ; General purpose routine to get a block from current disk
+        JSR s253B               ; transfer X to A, if A=0 return, else pull from stack
+        MoveB a8301, a8001
+        MoveB fileTrScTab, diskBlkBuf
         JSR PutBlock
-        JSR s253B    ;transfer X to A, if A=0 return, else pull from stack
-b2054   LDA r3H      ;pointer to start of DATA to write for WriteFile (hi)
+        JSR s253B               ; transfer X to A, if A=0 return, else pull from stack
+b2054   LDA r3H                 ; pointer to start of DATA to write for WriteFile (hi)
         STA a04E8
-        LDA r3L      ;pointer to start of DATA to write for WriteFile (lo)
+        LDA r3L                 ; pointer to start of DATA to write for WriteFile (lo)
         STA a04E7
-        JSR s2064    ;r6 = pointer to fileTrScTab (buffer used to hold track and sector chain for a file)
-        JMP WriteFile ;     Write data to a chained list of disk blocks
+        JSR s2064               ; r6 = pointer to fileTrScTab (buffer used to hold track and sector chain for a file)
+        JMP WriteFile           ; Write data to a chained list of disk blocks
 
 ; r6 = pointer to fileTrScTab (buffer used to hold track and sector chain for a file)
-s2064   LDA #>fileTrScTab
-        STA r6H
-        LDA #<fileTrScTab
-        STA r6L
+s2064   LoadW r6, fileTrScTab
         RTS 
 
-s206D   LDA #$40
-        STA a04E3
-        LDA #$00
-        STA a2096
+s206D   LoadB a04E3, $40
+        LoadB a2096, $00
         LDY a70
-        LDA f8486,Y  ;$8476 = disk that current printer driver resides on
+        LDA f8486,Y             ; $8476 = disk that current printer driver resides on
         CMP #$03
         BNE b2087
         STA a2096
@@ -1138,18 +1046,9 @@ a2095   .BYTE $00
 a2096   .BYTE $00
 s2097   PHP 
         SEI 
-        LDA a03F3
-        STA r8H
-        LDA a03F2
-        STA r8L
-        LDA a03F5
-        STA r9H
-        LDA a03F4
-        STA r9L
-        LDA #>a04E3
-        STA r10H
-        LDA #<a04E3
-        STA r10L
+        MoveW a03F2, r8
+        MoveW a03F4, r9
+        LoadW r10, a04E3
 b20B5   LDA r9H
         BEQ b20EA
         CMP #$01
@@ -1171,8 +1070,7 @@ b20D4   TXA
         LDA (r10L),Y
         AND #$40
         BEQ b20EA
-        LDA a2095
-        CMP #$04
+        CmpBI a2095, $04
         BNE b20B5
         LDA #$30
         BNE b20EC
@@ -1198,69 +1096,48 @@ f210D   .BYTE $11,$39,$6D,$8D
 ; COPY / DUPLICATE FILE HANDLER ========================
         LDA a1889
         BEQ b2139
-        JSR s22AF    ;copy r8 to r10
+        JSR s22AF               ;copy r8 to r10
         LDA #$80
         STA (r10L),Y
-        LDA a188A
-        STA r1H
-        LDA a1889
-        STA r1L
-        JSR s21DF    ;set up and read file into memory
+        MoveW a1889, r1
+        JSR s21DF               ;set up and read file into memory
         LDY #$01
-        LDA a188B
-        CMP #$01
+        CmpBI a188B, $01
         BNE b2135
         LDY #$02
 b2135   STY a2095
         RTS 
 
-b2139   JSR s22AF    ;copy r8 to r10
+b2139   JSR s22AF               ;copy r8 to r10
         LDA #$81
         STA (r10L),Y
-        LDA a1878
-        STA r1H
-        LDA a1877
-        STA r1L
-        JSR s21DF    ;set up and read file into memory
-        LDA #$04
-        STA a2095
+        MoveW a1877, r1
+        JSR s21DF               ;set up and read file into memory
+        LoadB a2095, $04
         RTS 
 
 s2153   LDY #$00
         LDA (r10L),Y
         PHA 
-        JSR s22AF    ;copy r8 to r10
+        JSR s22AF               ;copy r8 to r10
         PLA 
         AND #$0F
         STA (r10L),Y
-        LDA a04E6
-        STA r1H
-        LDA a04E5
-        STA r1L
-        JMP s21DF    ;set up and read file into memory
+        MoveW a04E5, r1
+        JMP s21DF               ;set up and read file into memory
 
-        LDA #$FF
-        STA a04E4
-        LDA a1878
-        STA r1H      ;SECTOR
-        LDA a1877
-        STA r1L      ;TRACK
-        LDA #>p7D00
-        STA r4H      ;hi byte of BUFFER to place block ($7D00)
-        LDA #<p7D00
-        STA r4L      ;low byte of BUFFER to place block ($7D00)
-        JSR GetBlock ;     General puspose routine to get a block from the current disk
-        LDA #$03
-        STA a2095
+        LoadB a04E4, $FF
+        MoveW a1877, r1         ; r1H = SECTOR, r1L = TRACK
+        LoadW r4, p7D00         ; BUFFER to place block ($7D00)
+        JSR GetBlock            ; General puspose routine to get a block from the current disk
+        LoadB a2095, $03
         RTS 
 
-        LDA a04E4
-        STA r0L
+        MoveB a04E4, r0L
         JSR s21C6
-        LDA a2095
-        CMP #$04
+        CmpBI a2095, $04
         BEQ b21C5
-        JSR s22AF    ;copy r8 to r10
+        JSR s22AF               ;copy r8 to r10
         LDA r0L
         STA a04E4
         ASL 
@@ -1276,7 +1153,7 @@ s2153   LDY #$00
         STA (r10L),Y
         LDA r0L
         PHA 
-        JSR s21DF    ;set up and read file into memory
+        JSR s21DF               ;set up and read file into memory
         PLA 
         STA r0L
         TXA 
@@ -1292,27 +1169,26 @@ s21C6   INC r0L
         LDA f7D02,X
         BEQ s21C6
         BNE b21DC
-b21D7   LDA #$04
-        STA a2095
+b21D7   LoadB a2095, $04
 b21DC   LDX #$00
         RTS 
 
 ; set up and read file into memory
-s21DF   LDA r10L     ;r1 = start track/sector of first data block
+s21DF   LDA r10L                ;r1 = start track/sector of first data block
         CLC 
         ADC #$04
-        STA r7L      ;pointer to buffer where data will be read into (lo)
+        STA r7L                 ;pointer to buffer where data will be read into (lo)
         LDA r10H
         ADC #$00
-        STA r7H      ;pointer to buffer where data will be read into (hi)
+        STA r7H                 ;pointer to buffer where data will be read into (hi)
         SEC 
         LDA r9L
         SBC #$04
-        STA r2L      ;size of buffer for ReadFile (lo)
+        STA r2L                 ;size of buffer for ReadFile (lo)
         LDA r9H
         SBC #$00
-        STA r2H      ;size of buffer for ReadFile (hi)
-        JSR ReadFile ;     Read a chained list of blocks into memory
+        STA r2H                 ;size of buffer for ReadFile (hi)
+        JSR ReadFile            ; Read a chained list of blocks into memory
         CPX #$0B
         BNE b220E
         LDA r1H
@@ -1351,12 +1227,9 @@ b2216   LDA r7H
         STA (r10L),Y
         RTS 
 
-s2244   LDA a04E2
-        STA r1H
-        LDA a04E1
-        STA r1L
+s2244   MoveW a04E1, r1
         JSR s1DE3
-        JSR s253B    ;transfer X to A, if A=0 return, else pull from stack
+        JSR s253B               ;transfer X to A, if A=0 return, else pull from stack
         LDY a04E0
         LDX #$00
 b2259   LDA f0406,X
@@ -1365,7 +1238,7 @@ b2259   LDA f0406,X
         INY 
         CPX #$1E
         BNE b2259
-        JMP j1DE9    ;Put the diskBlkBuf to disk
+        JMP j1DE9               ;Put the diskBlkBuf to disk
 
 s2268   LDY #$1D
 b226A   LDA (r5L),Y
@@ -1373,18 +1246,13 @@ b226A   LDA (r5L),Y
         STA f0406,Y
         DEY 
         BPL b226A
-        LDA a03FD
-        STA r3H
-        LDA a03FC
-        STA r3L
-        LDA #$FF
-        STA r1H
+        MoveW a03FC, r3
+        LoadB r1H, $FF
         LDX #$03
         LDY #$00
 b2287   LDA (r3L),Y
         BNE b2291
-        LDA #$00
-        STA r1H
+        LoadB r1H, $00
 b228F   LDA #$A0
 b2291   STA f0406,X
         INX 
@@ -1394,8 +1262,7 @@ b2291   STA f0406,X
         LDA r1H
         BNE b2287
         BEQ b228F
-b22A0   LDA #$00
-        STA a0407
+b22A0   LoadB a0407, $00
         STA a0408
         STA a0419
         STA a041A
@@ -1410,34 +1277,22 @@ s22AF   LDA r8H
         RTS 
 
 ; load $04e8 to r3
-s22BA   LDA a04E8
-        STA r3H
-        LDA a04E7
-        STA r3L
+s22BA   MoveW a04E7, r3
         RTS 
 
 ; save old RecoverVector, add new one (recover background behind menus and dialog boxes)
-s22C5   LDA RecoverVector_HI
-        STA a03FF
-        LDA RecoverVector_LO
-        STA a03FE
-        LDA #>p22E9
-        STA RecoverVector_HI
-        LDA #<p22E9
-        STA RecoverVector_LO
+s22C5   MoveW RecoverVector, a03FE
+        LoadW RecoverVector, p22E9
         RTS 
 
 ; restore old RecoverVector
-s22DC   LDA a03FF
-        STA RecoverVector_HI
-        LDA a03FE
-        STA RecoverVector_LO
+s22DC   MoveW a03FE, RecoverVector
         RTS 
 
 ; new RecoverVector (restore background from menus and dialog boxes)
-p22E9   LDA #$80     ;draw to the foreground screen
-        STA displayBufferOn
-        JSR s2447    ;Set the rectangle pattern based on A
+
+p22E9   LoadB displayBufferOn, $80      ; draw to the foreground screen
+        JSR s2447                       ; Set the rectangle pattern based on A
         JMP Rectangle
 
 s22F3   LDY #$00
@@ -1448,7 +1303,7 @@ b22F5   LDA curDirHead,Y
         INY 
         BNE b22F5
         LDY a70
-        LDA f8486,Y  ;disk name which contains current printer driver ($8476)
+        LDA f8486,Y             ;disk name which contains current printer driver ($8476)
         AND #$0F
         CMP #$03
         BNE s231E
@@ -1459,22 +1314,17 @@ b2315   LDA f9C80,Y
         STA f7F00,Y
         INY 
         BNE b2315
-s231E   LDA a03F7
-        STA r1H
-        LDA a03F6
-        STA r1L
+
+s231E   MoveW a03F6, r1
         LDA aFE
         BNE b2338
-s232C   LDA a03F9
-        STA r1H
-        LDA a03F8
-        STA r1L
+
+s232C   MoveW a03F8, r1
         LDA a70
 b2338   JSR s1AF1
         LDA a04ED
         BEQ b234D
-        LDA a04EB
-        CMP #$02
+        CmpBI a04EB, $02
         BCC b234A
         LDX #$00
         RTS 
@@ -1491,7 +1341,7 @@ b2355   LDA spr2pic,Y
         INY 
         BNE b2355
         LDY a70
-        LDA f8486,Y  ;disk name which contains current printer driver ($8476)
+        LDA f8486,Y             ;disk name which contains current printer driver ($8476)
         AND #$0F
         CMP #$03
         BNE b237A
@@ -1514,22 +1364,22 @@ j2383   JSR s23E4
         STY a024D
         RTS 
 
-b2392   JSR s2559    ;load r5 with $8b80
+b2392   JSR s2559               ;load r5 with $8b80
         LDX #$04
         LDY #$0C
         LDA #$12
-        JSR s2418    ;copies printer driver and disk name from $6d85 to $8465
-        LDA curDrive ;using current drive number...
+        JSR s2418               ;copies printer driver and disk name from $6d85 to $8465
+        LDA curDrive            ;using current drive number...
         CLC 
-        ADC #$39     ;...determine PETSCII value
-        STA a275D    ;and store at $275D for Drive A,B.C text message string
+        ADC #$39                ;...determine PETSCII value
+        STA a275D               ;and store at $275D for Drive A,B.C text message string
         LDA r1H
         PHA 
         LDA r1L
         PHA 
         LDX #$23
         LDA #$FF
-        JSR s2483    ;COMMON DIALOG BOX ROUTINE ============================
+        JSR s2483               ;COMMON DIALOG BOX ROUTINE ============================
         PLA 
         STA r1L
         PLA 
@@ -1540,13 +1390,9 @@ b2392   JSR s2559    ;load r5 with $8b80
         BNE j2383
 j23C2   LDA a04EC
         BEQ b23D6
-        LDA #>p5175
-        STA r7H      ;start address of application
-        LDA #<p5175
-        STA r7L      ;start address of application
-        LDA #$00
-        STA r0L      ;options byte: %00xxxxxx = not passing data, not printing
-        JMP StartAppl ;warm start GEOS and jsr to application already in memory
+        LoadW r7, p5175         ; start address of application
+        LoadB r0L, $00          ; options byte: %00xxxxxx = not passing data, not printing
+        JMP StartAppl           ; warm start GEOS and jsr to application already in memory
 
 b23D6   JSR s2515
         JMP EnterDeskTop
@@ -1559,23 +1405,25 @@ s23E4   LDA r1H
         PHA 
         LDA r1L
         PHA 
-        JSR OpenDisk ;     Open the disk in the current drive
+        JSR OpenDisk            ; Open the disk in the current drive
         PLA 
         STA r1L
         PLA 
         STA r1H
-        JSR s253B    ;transfer X to A, if A=0 return, else pull from stack
-        LDX #$0C     ;zero page address of pointer to source string
-        LDY #$04     ;zero page address of pointer to destination string
-        LDA #$12     ;length of strings
-        JMP CmpFString ;     Compare two fixed length strings
+        JSR s253B               ; transfer X to A, if A=0 return, else pull from stack
+        LDX #$0C                ; zero page address of pointer to source string
+        LDY #$04                ; zero page address of pointer to destination string
+        LDA #$12                ; length of strings
+        JMP CmpFString          ; Compare two fixed length strings
 
         .BYTE $81,$0B,$10,$10,$5F,$27,$0B,$10
         .BYTE $20,$80,$8B,$0B,$10,$30,$51,$27
         .BYTE $01,$01,$48,$02,$11,$48,$00
+
 s2416   LDA #$10
 
 ; copies printer driver and disk name from $6d85 to $8465
+
 s2418   STX a2426
         STY a2428
         STY a243A
@@ -1607,7 +1455,7 @@ s243F   LDA f8486,Y
 ; Set the rectangle pattern based on A
 s2447   LDA #$00
 s244A   =*+$01
-        BIT a02A9    ;LDA #$02
+        BIT a02A9               ; LDA #$02
         JMP SetPattern
 
 f244F   .BYTE $27,$2C,$2D,$30,$31,$2C,$2D
@@ -1640,10 +1488,10 @@ s2483   STX r0H
         PHA 
         LDA r7L
         PHA 
-        JSR s24F0    ;restores RecoverVector if a dialog box has altered it
+        JSR s24F0               ;restores RecoverVector if a dialog box has altered it
         BEQ b24A3
         LDX #$00
-        JSR s4DA4    ;before drawing menus or dialog boxes
+        JSR s4DA4               ;before drawing menus or dialog boxes
 b24A3   LDA a8E88
         PHA 
         LDA a8CC0
@@ -1679,10 +1527,10 @@ b24A3   LDA a8E88
         STA r5L
         PLA 
         STA r5H
-        JSR DoDlgBox ;     Actually starts the dialog box handler
-        JSR s24F0    ;restores RecoverVector if a dialog box has altered it
+        JSR DoDlgBox            ;Actually starts the dialog box handler
+        JSR s24F0               ;restores RecoverVector if a dialog box has altered it
         BNE b2503
-        JMP j26F4    ;comes here after drawing pad and disk info - seems to draw file icons
+        JMP j26F4               ;comes here after drawing pad and disk info - seems to draw file icons
 
 ; restores RecoverVector if a dialog box has altered it
 s24F0   LDX #$FF
@@ -1700,14 +1548,13 @@ p2504   .BYTE $81,$0C,$10,$20,$0C,$0C,$10,$30
         .BYTE $0E,$01,$11,$48,$00
 
 ; clear screen with pattern
-s2511   LDA #$C0     ;draw on both foreground and background screens
-        STA displayBufferOn
+s2511   LoadB displayBufferOn, $C0      ; draw on both foreground and background screens
 s2515   LDA r9H
         PHA 
         LDA r9L
         PHA 
         JSR s26FA
-        JSR i_GraphicsString ;new pattern (2), move pen to X=0,Y=0, rectangle to x=319, y=199
+        JSR i_GraphicsString    ; new pattern (2), move pen to X=0,Y=0, rectangle to x=319, y=199
         .BYTE $05,$02,$01,$00,$00,$00,$03,$3F
         .BYTE $01,$C7,$00
         PLA 
@@ -1740,50 +1587,32 @@ s2541   CLC
 b254C   RTS 
 
 ; point r4 at diskBlkBuf
-s254D   LDA #>diskBlkBuf
-        STA r4H
-        LDA #<diskBlkBuf
-        STA r4L
+s254D   LoadW r4, diskBlkBuf
         RTS 
 
-        JSR s2562    ;load r6 with $8be4
+        JSR s2562               ;load r6 with $8be4
 
 ; load r5 with $8b80
-s2559   LDA #>p8B80
-        STA r5H
-        LDA #<p8B80
-        STA r5L
+s2559   LoadW r5, p8B80
         RTS 
 
 ; load r6 with $8be4
-s2562   LDA #>p8BE4
-        STA r6H
-        LDA #<p8BE4
-        STA r6L
+s2562   LoadW r6, p8BE4
         RTS 
 
 ; load r6 with $8b80 address
-s256B   LDA #>p8B80
-        STA r6H
-        LDA #<p8B80
-        STA r6L
+s256B   LoadW r6, p8B80
         RTS 
 
 ; set r10 to pointer of text "deskTop AM  V2.0"
-s2574   LDA #>p2727
-        STA r10H
-        LDA #<p2727
-        STA r10L
+s2574   LoadW r10, p2727
         RTS 
 
         LDA r5H
         BEQ s259A
         TXA 
-        PHA 
-        LDA r5L
-        CLC 
-        ADC #$03
-        STA r5L
+        PHA
+        AddVB $03, r5L 
         BCC b258E
         INC r5H
 b258E   LDX #$0C
@@ -1793,12 +1622,9 @@ b258E   LDX #$0C
         TAX 
         CLV 
         BVC b25A2
-s259A   LDA #>p25EE
-        STA r5H
-        LDA #<p25EE
-        STA r5L
-b25A2   LDA #$00
-        STA a7D
+
+s259A   LoadW r5, p25EE
+b25A2   LoadB a7D, $00
         CPX #$FF
         BEQ b25D5
         CPX #$0C
@@ -1821,7 +1647,7 @@ b25C4   LDA f2651,Y
         STA r6H
         LDX #$25
         LDA #$D8
-        JSR s2483    ;COMMON DIALOG BOX ROUTINE ============================
+        JSR s2483               ;COMMON DIALOG BOX ROUTINE ============================
 b25D5   LDX #$00
         RTS 
 
@@ -1881,16 +1707,15 @@ b2664   LDA (r0L),Y
         INY 
         CPY #$06
         BNE b2664
-        LDA a8C27
-        STA r6L
+        MoveB a8C27, r6L
         LDX #$06
-        JSR s26D1    ;divide the register rX by 8
+        JSR s26D1               ;divide the register rX by 8
         LDX #$07
-        JSR s26D1    ;divide the register rX by 8
+        JSR s26D1               ;divide the register rX by 8
         LDX #$08
-        JSR s26D1    ;divide the register rX by 8
+        JSR s26D1               ;divide the register rX by 8
         LDX #$0A
-        JSR s26D1    ;divide the register rX by 8
+        JSR s26D1               ;divide the register rX by 8
 s2687   LDA r4L
         SEC 
         SBC r3L
@@ -1901,8 +1726,7 @@ s2687   LDA r4L
         STA r2H
         LDA r2L
         STA r5L
-        LDA #$00
-        STA r5H
+        LoadB r5H, $00
         JSR s26D9
         CLC 
         LDA #$00
@@ -1963,7 +1787,7 @@ j26F4   LDA a8FF0
         CLV 
         BVC b26FD
 s26FA   LDA screencolors
-b26FD   JSR s2533    ;compare version to 32
+b26FD   JSR s2533               ;compare version to 32
         BCC b2726
         TAY 
         LDA r0L
@@ -2111,59 +1935,134 @@ p2998   .BYTE $04,$32,$00,$06,$08,$00,$CA,$00
         .TEXT $00, " ", $00, $00
         .BYTE $00,$00,$00,$00,$40,$00,$00,$00
         .BYTE $00,$00,$00,$00,$00,$00,$00,$00
-        .BYTE $40,$00,$00,$00,$00
-        .TEXT $03, $01, $87, $E0, $00, $00, $01, $00, $80, $00, $01, $04, $00, $00, $00, $08, $0D, "`", $00, $00
+        .BYTE $40,$00,$00,$00,$00,$03,$01,$87
+        .BYTE $E0,$00,$00,$01,$00,$80,$00,$01
+        .TEXT $04, $00, $00, $00, $08, $0D, "`", $00, $00
         .TEXT $18, "This is a NON-GEOS disk", $00
         .TEXT "Convert it?", $00
         .TEXT " Kbytes used", $00
         .TEXT " Kbytes "
 p2BC8   .TEXT "free", $00, "Preferences"
-p2BD8   .TEXT $A0, $A0, $A0, $A0, $A0, "Pad Colo"
-        .TEXT "r Pref", $A0, $A0, "DRIVE A", $00, "DRIVE B", $00, "DRIVE C", $00, "Non-GEOS"
-        .TEXT " File"
-        .TEXT $00, "BASIC Prg.", $00, "Assembly Prg.", $00, "Data File"
-        .TEXT $00, "a System File"
-        .TEXT $00, "Desk Accessory", $00, "Application", $00, "Appl."
-        .TEXT " Data", $00, "Font File"
-        .TEXT $00, "Printer Driver"
-        .TEXT $00
-p2C83   .TEXT " N"
-        .TEXT "OT ON DISK ", $00, "C64 Input Driver", $00, "Disk Driver"
-        .TEXT $00
-p2CAE   .TEXT "a System Boot File"
-        .TEXT $00, "Temp", $00, "Auto-Exec", $00, " AM", $00, " PM", $00, $18, "Only 8 files ma"
-        .TEXT "y be on the", $00, "border.", $00, $18, "This file can't be "
-        .TEXT "printed", $00, $18, "This file can't be opened", $00, "from "
-        .TEXT "the deskTop.", $00, "in", $00, $18, "Can't proceed if applic"
-        .TEXT "ation", $00, "is on a different disk.", $00, $18, "must firs"
-        .TEXT "t be dele"
-        .TEXT "ted from", $00, "is on the disk.", $00, "OK to overwrite"
-        .TEXT "?", $00, $18, "A", $00, $18, "The file"
-        .TEXT $1B, $00, $18, "Please insert destination disk", $00, $18, "Put d"
-        .TEXT "isk to format in drive:  "
-a2E08   .TEXT "A", $00, "a"
-        .TEXT "nd enter a name for it:", $1B, $00, $18, "Repla"
-        .TEXT "ce contents of", $00, "with contents of", $00, $18, "The ope"
-        .TEXT "ration requested", $00, "may not be performed on"
-        .TEXT $00, "the GEOS Boot disk.", $00, "a Master disk.", $00, "a fi"
-        .TEXT "le from another disk.", $00, " files,", $00, " selected", $00
-        .TEXT $18, "Please enter new disk name:", $1B, $00, "DESK TOP", $00, $18
-        .TEXT "Select", $00, "Printer", $00, " ", $00, "Input", $00, "Device", $00, "geos", $00, "file", $00
-        .TEXT "view", $00, "select", $00, "page", $00, "options", $00, "GEOS info", $00, "deskT"
-        .TEXT "op info", $14, "\", $00, $80, $18, "Q", $1B, $00, "select printer", $00, "select inp"
-        .TEXT "ut", $14, "<", $00, $80, $18, "I", $1B, $00, "open", $14, "\", $00, $80, $18, "Z", $1B, $00, "duplicate", $14, "\", $00, $80, $18, "H", $1B, $00, "r"
-        .TEXT "ename", $14, "\", $00, $80, $18, "M", $1B, $00, "print", $14, "\", $00, $80, $18, "P", $1B, $00, "delete", $14, "\", $00, $80, $18, "D", $1B, $00
-        .TEXT "undo delete", $14, "\", $00, $80, $18, "U", $1B, $00, "by icon", $00, "by name", $00, "by da"
-        .TEXT "te", $00, "by size", $00, "by type", $00, "open", $14, "y", $00, $80, $18, "O", $1B, $00, "close", $14, "y", $00, $80
-        .TEXT $18, "C", $1B, $00, "rename", $14, "y", $00, $80, $18, "N", $1B, $00, "copy", $14, "y", $00, $80, $18, "K", $1B, $00, "erase", $14, "y", $00, $80, $18
-        .TEXT "E", $1B, $00, "validate", $14, "y", $00, $80, $18, "V", $1B, $00, "format", $14, "y", $00, $80, $18, "F", $1B, $00, "append", $14
-        .TEXT $B1, $00, $80, $18, "S", $1B, $00, "delete", $14, $B1, $00, $80, $18, "T", $1B, $00, "all pages", $14, $A1, $00, $80, $18, "W", $1B, $00, "pa"
-        .TEXT "ge files", $14, $A1, $00, $80, $18, "X", $1B, $00, "border files", $14, $A1, $00, $80, $18, "Y", $1B, $00, "set "
-        .TEXT "clock", $00, "BASIC", $00, "RESET", $14, $D1, $00, $80, $18, "R", $1B, $00, "shortcuts", $00, $18, "Disk"
-        .TEXT " is empty.", $00, "Copy blank disk?", $00, $18, "Disk copy c"
-        .TEXT "an't be done", $00, "between these disk formats", $00
-        .TEXT $18, "No multiple file operation for", $00, "this fea"
-        .TEXT "ture.", $00
+p2BD8   .TEXT $A0, $A0, $A0, $A0, $A0
+        .TEXT "Pad Color Pref", $A0, $A0 
+        .TEXT "DRIVE A", $00
+        .TEXT "DRIVE B", $00
+        .TEXT "DRIVE C", $00
+        .TEXT "Non-GEOS File", $00
+        .TEXT "BASIC Prg.", $00
+        .TEXT "Assembly Prg.", $00
+        .TEXT "Data File", $00
+        .TEXT "a System File", $00
+        .TEXT "Desk Accessory", $00
+        .TEXT "Application", $00
+        .TEXT "Appl. Data", $00
+        .TEXT "Font File", $00
+        .TEXT "Printer Driver", $00
+p2C83   .TEXT " NOT ON DISK ", $00
+        .TEXT "C64 Input Driver", $00 
+        .TEXT "Disk Driver", $00
+p2CAE   .TEXT "a System Boot File", $00
+        .TEXT "Temp", $00
+        .TEXT "Auto-Exec", $00
+        .TEXT " AM", $00
+        .TEXT " PM", $00
+        .TEXT $18, "Only 8 files may be on the", $00
+        .TEXT "border.", $00
+        .TEXT $18, "This file can't be printed", $00
+        .TEXT $18, "This file can't be opened", $00
+        .TEXT "from the deskTop.", $00
+        .TEXT "in", $00
+        .TEXT $18, "Can't proceed if application", $00
+        .TEXT "is on a different disk.", $00
+        .TEXT $18, "must first be deleted from", $00
+        .TEXT "is on the disk.", $00
+        .TEXT "OK to overwrite?", $00
+        .TEXT $18, "A", $00
+        .TEXT $18, "The file", $1B, $00
+        .TEXT $18, "Please insert destination disk", $00
+        .TEXT $18, "Put disk to format in drive:  "
+a2E08   .TEXT "A", $00
+        .TEXT "and enter a name for it:", $1B, $00 
+        .TEXT $18, "Replace contents of", $00
+        .TEXT "with contents of", $00 
+        .TEXT $18, "The operation requested", $00 
+        .TEXT "may not be performed on", $00
+        .TEXT "the GEOS Boot disk.", $00
+        .TEXT "a Master disk.", $00
+        .TEXT "a file from another disk.", $00
+        .TEXT " files,", $00
+        .TEXT " selected", $00
+        .TEXT $18, "Please enter new disk name:", $1B, $00
+        .TEXT "DESK TOP", $00 
+        .TEXT $18, "Select", $00
+        .TEXT "Printer", $00
+        .TEXT  " ", $00
+        .TEXT "Input", $00
+        .TEXT "Device", $00
+        .TEXT "geos", $00
+        .TEXT "file", $00
+        .TEXT "view", $00
+        .TEXT "select", $00
+        .TEXT "page", $00
+        .TEXT "options", $00
+        .TEXT "GEOS info", $00
+        .TEXT "deskTop info", $14, "\", $00
+        .TEXT $80, $18, "Q", $1B, $00
+        .TEXT "select printer", $00
+        .TEXT "select input", $14, "<", $00
+        .TEXT $80, $18, "I", $1B, $00
+        .TEXT "open", $14, "\", $00
+        .TEXT $80, $18, "Z", $1B, $00
+        .TEXT "duplicate", $14, "\", $00
+        .TEXT $80, $18, "H", $1B, $00
+        .TEXT "rename", $14, "\", $00
+        .TEXT $80, $18, "M", $1B, $00
+        .TEXT "print", $14, "\", $00
+        .TEXT $80, $18, "P", $1B, $00
+        .TEXT "delete", $14, "\", $00
+        .TEXT $80, $18, "D", $1B, $00
+        .TEXT "undo delete", $14, "\", $00
+        .TEXT $80, $18, "U", $1B, $00
+        .TEXT "by icon", $00
+        .TEXT "by name", $00
+        .TEXT "by date", $00
+        .TEXT "by size", $00
+        .TEXT "by type", $00
+        .TEXT "open", $14, "y", $00
+        .TEXT $80, $18, "O", $1B, $00
+        .TEXT "close", $14, "y", $00
+        .TEXT $80, $18, "C", $1B, $00
+        .TEXT "rename", $14, "y", $00
+        .TEXT $80, $18, "N", $1B, $00
+        .TEXT "copy", $14, "y", $00
+        .TEXT $80, $18, "K", $1B, $00
+        .TEXT "erase", $14, "y", $00
+        .TEXT $80, $18, "E", $1B, $00
+        .TEXT "validate", $14, "y", $00
+        .TEXT $80, $18, "V", $1B, $00
+        .TEXT "format", $14, "y", $00
+        .TEXT $80, $18, "F", $1B, $00
+        .TEXT "append", $14, $B1, $00
+        .TEXT $80, $18, "S", $1B, $00
+        .TEXT "delete", $14, $B1, $00
+        .TEXT $80, $18, "T", $1B, $00
+        .TEXT "all pages", $14, $A1, $00
+        .TEXT $80, $18, "W", $1B, $00
+        .TEXT "page files", $14, $A1, $00
+        .TEXT $80, $18, "X", $1B, $00
+        .TEXT "border files", $14, $A1, $00
+        .TEXT $80, $18, "Y", $1B, $00
+        .TEXT "set clock", $00
+        .TEXT "BASIC", $00
+        .TEXT "RESET", $14, $D1, $00
+        .TEXT $80, $18, "R", $1B, $00
+        .TEXT "shortcuts", $00
+        .TEXT $18, "Disk is empty.", $00
+        .TEXT "Copy blank disk?", $00
+        .TEXT $18, "Disk copy can't be done", $00
+        .TEXT "between these disk formats", $00
+        .TEXT $18, "No multiple file operation for", $00
+        .TEXT "this feature.", $00
 j3150   JSR s259A
 j3153   LDA diskOpenFlg
         BEQ b3164
@@ -2178,74 +2077,72 @@ b3164   TXA
 b316D   RTS 
 
 ; Open a disk
-b316E   JSR s401C    ;clear common GEOS dekstop variable locations
-        JSR s321A    ;CLICK DISK ICON HANDLER
-        JSR s253B    ;transfer X to A, if A=0 return, else pull from stack
+
+b316E   JSR s401C               ; clear common GEOS dekstop variable locations
+        JSR s321A               ; CLICK DISK ICON HANDLER
+        JSR s253B               ; transfer X to A, if A=0 return, else pull from stack
         STA aFB
-        LDA #$00
-        STA a7D
-        LDA isGEOS   ;is this a GEOS disk?
-        BNE b31B2    ;if so, skip ahead
+        LoadB a7D, $00
+        LDA isGEOS              ; is this a GEOS disk?
+        BNE b31B2               ; if so, skip ahead
         LDX #$32
-        LDA #$49     ;open a dialog box with "This is not a GEOS disk, would you like to convert it?"
-        JSR s2483    ;COMMON DIALOG BOX ROUTINE ============================
+        LDA #$49                ; open a dialog box with "This is not a GEOS disk, would you like to convert it?"
+        JSR s2483               ; COMMON DIALOG BOX ROUTINE ============================
         LDA r0L
-        CMP #$03     ;$04 = no,  $03=yes
-        BNE b31B2    ;Do not convert - skip ahead
-        JSR GetDirHead ;     Convert this disk to GEOS format. Read directory header and BAM
-        JSR s253B    ;transfer X to A, if A=0 return, else pull from stack
-        JSR s35A2    ;allocate a disk block
+        CMP #$03                ; $04 = no,  $03=yes
+        BNE b31B2               ; Do not convert - skip ahead
+        JSR GetDirHead          ; Convert this disk to GEOS format. Read directory header and BAM
+        JSR s253B               ; transfer X to A, if A=0 return, else pull from stack
+        JSR s35A2               ; allocate a disk block
         CPX #$06
         BEQ b31A5
-        JSR s253B    ;transfer X to A, if A=0 return, else pull from stack
-        JSR PutDirHead ;     write directory header back to the disk (Updates BAM)
-        JSR s253B    ;transfer X to A, if A=0 return, else pull from stack
-b31A5   JSR SetGEOSDisk ;     Make this a GEOS disk
+        JSR s253B               ; transfer X to A, if A=0 return, else pull from stack
+        JSR PutDirHead          ; write directory header back to the disk (Updates BAM)
+        JSR s253B               ; transfer X to A, if A=0 return, else pull from stack
+b31A5   JSR SetGEOSDisk         ; Make this a GEOS disk
         TXA 
-        BEQ b316E    ;Open a disk
+        BEQ b316E               ; Open a disk
         RTS 
 
-s31AC   JSR s321A    ;CLICK DISK ICON HANDLER
+s31AC   JSR s321A               ; CLICK DISK ICON HANDLER
         TXA 
         BNE b31F2
 b31B2   JSR s40F3
-        JSR s325B    ;check for serial number
+        JSR s325B               ; check for serial number
         JSR s3283
         TXA 
         BNE b31ED
-        JSR s3477    ;Set pad preferences (mouse, pad color)
+        JSR s3477               ; Set pad preferences (mouse, pad color)
         JSR s3B3C
-        LDA PrntFilename ;load 1st byte of current printer driver name
+        LDA PrntFilename        ; load 1st byte of current printer driver name
         BNE b31E5
         LDX a0258
         BEQ b31E5
         LDA #$11
-        JSR s4866    ;clear / restore a rectangle (disk icons and pad) with pattern
+        JSR s4866               ; clear / restore a rectangle (disk icons and pad) with pattern
         LDX a0258
         LDY a0257
-        LDA #$84
-        STA r3H
+        LoadB r3H, $84
         LDA #$65
         JSR s320D
         JSR s3A9C
-b31E5   JSR s31F3    ;get input driver
+b31E5   JSR s31F3               ; get input driver
         JSR j5634
         LDX #$00
-b31ED   LDA #$FF
-        STA diskOpenFlg
+b31ED   LoadB diskOpenFlg, $FF
 b31F2   RTS 
 
 ; get input driver
-s31F3   LDA inputDevName ;first byte of input driver name
+
+s31F3   LDA inputDevName        ; first byte of input driver name
         BNE b320C
         LDX a0256
         BEQ b320C
         LDY a0255
-        LDA #$88
-        STA r3H
+        LoadB r3H, $88
         LDA #$CB
         JSR s320D
-        JSR s3AD9    ;Load input driver
+        JSR s3AD9               ; Load input driver
 b320C   RTS 
 
 s320D   STA r3L
@@ -2257,14 +2154,13 @@ s320D   STA r3L
 
 ; CLICK DISK ICON HANDLER
 s321A   JSR s3220
-        JMP OpenDisk    ; Open the disk in the current drive
+        JMP OpenDisk            ; Open the disk in the current drive
 
 s3220   LDA #$04
 s3222   STA r0L
         ORA #$80
         STA a4C27
-        LDA #$0E
-        STA r1L
+        LoadB r1L, $0E
         LDY #$02
         LDX #$04
         JSR BBMult
@@ -2286,29 +2182,28 @@ s3222   STA r0L
         .BYTE $03,$01,$48,$04,$11,$48,$00
 
 ; check for serial number
-s325B   LDA a82BD
-        CMP #$50
-        BEQ b3263    ;check for serial number
+s325B   CmpBI a82BD, $50
+        BEQ b3263               ;check for serial number
 b3262   RTS 
 
 ; check for serial number
 b3263   LDA a82BE
         ORA a82BF
         BNE b3262
-        JSR GetSerialNumber ;     return the 16-bit serial number or pointer to the serial string for GEOS kernal
-        LDA r0L      ;serial # x 2, rol, update hi byte, store back to $82be/$82bf
+        JSR GetSerialNumber     ; return the 16-bit serial number or pointer to the serial string for GEOS kernal
+        LDA r0L                 ;serial # x 2, rol, update hi byte, store back to $82be/$82bf
         ASL 
         ROL r0H
         ADC #$00
         STA a82BE
         LDA r0H
         STA a82BF
-        JSR PutDirHead ;     Write directory header to disk (and BAM)
-        JMP GetDirHead ;     Get directory header from disk
+        JSR PutDirHead          ; Write directory header to disk (and BAM)
+        JMP GetDirHead          ; Get directory header from disk
 
-s3283   JSR s32BB    ;Draw Pad Lines
+s3283   JSR s32BB               ;Draw Pad Lines
         JSR s39CB
-        JSR s253B    ;transfer X to A, if A=0 return, else pull from stack
+        JSR s253B               ;transfer X to A, if A=0 return, else pull from stack
         LDY curDrive
         LDA f8486,Y
         AND #$0F
@@ -2317,21 +2212,21 @@ s3283   JSR s32BB    ;Draw Pad Lines
         LDX #$80
         BIT a8203
         BMI b32BA
-b329F   JSR s387D    ;called when opening a disk (disk name text?)
+b329F   JSR s387D               ;called when opening a disk (disk name text?)
         LDA r9H
         BEQ b32AC
-        JSR s39B4    ;Free / delete blocks in a GEOS file
+        JSR s39B4               ;Free / delete blocks in a GEOS file
         CLV 
         BVC b329F
 b32AC   JSR s32FA
         JSR s3426
-        JSR s253B    ;transfer X to A, if A=0 return, else pull from stack
-        JSR s3318    ;When opening a disk - draws pad and disk data
+        JSR s253B               ;transfer X to A, if A=0 return, else pull from stack
+        JSR s3318               ;When opening a disk - draws pad and disk data
         LDX #$00
 b32BA   RTS 
 
 ; Draw Pad Lines
-s32BB   JSR i_GraphicsString ;Draw the pad using the graphics string commands.
+s32BB   JSR i_GraphicsString    ;Draw the pad using the graphics string commands.
         .BYTE $05,$00,$01,$08,$00,$10,$03,$07
         .BYTE $01,$8F,$07,$08,$00,$10,$01,$08
         .BYTE $00,$1C,$02,$07,$01,$1C,$01,$08
@@ -2340,51 +2235,41 @@ s32BB   JSR i_GraphicsString ;Draw the pad using the graphics string commands.
         .BYTE $01,$08,$00,$8D,$02,$07,$01,$8D
         .BYTE $05,$09,$01,$09,$00,$11,$03,$06
         .BYTE $01,$1B,$00
-        JMP j26F4    ;comes here after drawing pad and disk info - seems to draw file icons
+        JMP j26F4               ;comes here after drawing pad and disk info - seems to draw file icons
 
-s32FA   LDA #>p8290
-        STA r0H
-        LDA #<p8290
-        STA r0L
+s32FA   LoadW r0, p8290
         LDX #$04
-        JSR s384F    ;Put the disk name at 8290
+        JSR s384F               ;Put the disk name at 8290
         JSR s330F
         LDX #$04
         JSR s3829
-s330F   LDX #$02        ; $02 = pointer to $8290 (disk name)
-        LDY #$04        ; $04 = pointer to destination ($0212)
+s330F   LDX #$02                ; $02 = pointer to $8290 (disk name)
+        LDY #$04                ; $04 = pointer to destination ($0212)
         LDA #$12
-        JMP CopyFString ; Copy disk name from $8290 to $0212
+        JMP CopyFString         ; Copy disk name from $8290 to $0212
 
 ; When opening a disk - draws pad and disk data
-s3318   JSR s2447       ; Set the rectangle pattern based on A
-        JSR i_Rectangle ; draw the actual pad rectangle (using data below)
+s3318   JSR s2447               ; Set the rectangle pattern based on A
+        JSR i_Rectangle         ; draw the actual pad rectangle (using data below)
         .BYTE $1D,$27,$09,$00,$06,$01 ;y1=29, y2=39, x1=9, x2=262
         LDX #$82
         LDA #$90
         JSR s578F
-        JSR s59C0       ; load $8b80 to r0
-        LDA #>p88
-        STA r11H
-        LDA #<p88
-        STA r11L
-        LDA #$18
-        STA r1H
-        JSR s57D7       ; Print file names on pad (saved to 8b80)
-        JSR s33AC       ; Print number of files at top of pad
-        JSR s338E       ; Calculate blocks free
-        LDY #$02        ; number of times to shift the word
-        LDX #$02        ; address of zero page word to shift
-        JSR DShiftRight ; Arithmetically right-shift a zero page word
-        LDA #>p71
-        STA r11H
-        LDA #<p71
-        STA r11L
-        JSR s33A7       ; Display 16-bit Integer
+        JSR s59C0               ; load $8b80 to r0
+        LoadW r11, p88
+        LoadB r1H, $18
+        JSR s57D7               ; Print file names on pad (saved to 8b80)
+        JSR s33AC               ; Print number of files at top of pad
+        JSR s338E               ; Calculate blocks free
+        LDY #$02                ; number of times to shift the word
+        LDX #$02                ; address of zero page word to shift
+        JSR DShiftRight         ; Arithmetically right-shift a zero page word
+        LoadW r11, p71
+        JSR s33A7               ; Display 16-bit Integer
         LDX #$2B
         LDA #$B3
-        JSR s587F       ; print chars for top of pad (x files, 0 selected, etc) from 2ec0
-        JSR s338E       ; Calculate blocks free
+        JSR s587F               ; print chars for top of pad (x files, 0 selected, etc) from 2ec0
+        JSR s338E               ; Calculate blocks free
         LDA r4H
         LSR 
         ROR r4L
@@ -2393,14 +2278,11 @@ s3318   JSR s2447       ; Set the rectangle pattern based on A
         STA r0H
         LDA r4L
         STA r0L
-        LDA #>pC0
-        STA r11H
-        LDA #<pC0
-        STA r11L
-        JSR s33A7       ; Display 16-bit Integer
+        LoadW r11, pC0
+        JSR s33A7               ; Display 16-bit Integer
         LDX #$2B
         LDA #$C0
-        JSR s587F       ; print chars for top of pad (x files, 0 selected, etc) from 2ec0
+        JSR s587F               ; print chars for top of pad (x files, 0 selected, etc) from 2ec0
         LDX #$02
         JSR s3829
         JSR s47C3
@@ -2409,11 +2291,8 @@ s3318   JSR s2447       ; Set the rectangle pattern based on A
         JMP j364B
 
 ; Calculate blocks free
-s338E   LDA #>curDirHead ; Get DIRHEAD (address of directory header) and put in r5
-        STA r5H
-        LDA #<curDirHead
-        STA r5L
-        JSR CalcBlksFree ; r4= # of free blocks, r3=# of available blocks
+s338E   LoadW r5, curDirHead    ; Get DIRHEAD (address of directory header) and put in r5
+        JSR CalcBlksFree        ; r4= # of free blocks, r3=# of available blocks
         LDA r3L
         SEC 
         SBC r4L
@@ -2424,64 +2303,57 @@ s338E   LDA #>curDirHead ; Get DIRHEAD (address of directory header) and put in 
         RTS 
 
 ; Display 16-bit Integer
-s33A7   LDA #$C0     ; Format = left justified, supress leading zeros ($C0=%11000000)
+
+s33A7   LDA #$C0                ; Format = left justified, supress leading zeros ($C0=%11000000)
         JMP PutDecimal
 
 ; Print number of files at top of pad
-s33AC   JSR s387D    ; called when opening a disk (disk name text?)
+
+s33AC   JSR s387D               ; called when opening a disk (disk name text?)
         LDA r0L
         PHA 
         PLA 
-        STA r0L      ; r0 contains number of files on disk
+        STA r0L                 ; r0 contains number of files on disk
         STA a7B
-        LDA #$00
-        STA r0H
+        LoadB r0H, $00
         LDA #>r7L
         STA r11H
         LDA #<r7L
-        STA r11L     ; X Position
-        LDA #$24
-        STA r1H      ; Y Position
-        JSR s33A7    ; Display 16-bit Integer
+        STA r11L                ; X Position
+        LoadB r1H, $24          ; Y Position
+        JSR s33A7               ; Display 16-bit Integer
         LDX #$2E
         LDA #$B8
-        JSR s587F    ; print chars for top of pad (x files, 0 selected, etc) from 2ec0
-        LDA #>p42
-        STA r11H
-        LDA #<p42
-        STA r11L
+        JSR s587F               ; print chars for top of pad (x files, 0 selected, etc) from 2ec0
+        LoadW r11, p42
         LDX #$2E
         LDA #$C0
-        JSR s587F    ; print chars for top of pad (x files, 0 selected, etc) from 2ec0
+        JSR s587F               ; print chars for top of pad (x files, 0 selected, etc) from 2ec0
 
 ; Update # of selected icons for multi-select  (X selected, top of pad)
+
 s33E0   LDA r0H
         PHA 
         LDA r0L
         PHA 
         LDA r1L
         PHA 
-        LDA #>leftMarginLo
-        STA r11H
-        LDA #<leftMarginLo
-        STA r11L
-        LDA #$24
-        STA r1H      ; Y position
-        JSR s3421    ; print space char
-        JSR s3421    ; print space char
+        LoadW r11, leftMargin
+        LoadB r1H, $24          ; Y position
+        JSR s3421               ; print space char
+        JSR s3421               ; print space char
         LDA #>r14L
-        STA r11H     ; X position  HI
+        STA r11H                ; X position  HI
         LDA #<r14L
-        STA r11L     ; X position LO
+        STA r11L                ; X position LO
         LDA a78
         BIT a71
         BPL b340C
         CLC 
         ADC #$01
-b340C   STA r0L      ; number to print
-        LDA #$00
-        STA r0H      ; number to print
-        LDA #$64     ; Format=right justify, suppress leading zero, 24 field width
+b340C   STA r0L                 ; number to print
+        LoadB r0H, $00          ; number to print
+        LDA #$64                ; Format=right justify, suppress leading zero, 24 field width
         JSR PutDecimal
         PLA 
         STA r1L
@@ -2495,18 +2367,13 @@ b340C   STA r0L      ; number to print
 s3421   LDA #$20
         JMP PutChar
 
-s3426   LDA #$02
-        STA r5L
+s3426   LoadB r5L, $02
         LDA #$6D
         CLC 
         ADC aFB
         STA r5H
-        LDA #$08
-        STA r8L
-        LDA #>p0846  ; buffer contains disk info like name, etc
-        STA r13H
-        LDA #<p0846
-        STA r13L
+        LoadB r8L, $08
+        LoadW r13, p0846        ; buffer contains disk info like name, etc
 b343D   LDY #$00
         LDA (r5L),Y
         BEQ b345A
@@ -2514,12 +2381,12 @@ b343D   LDY #$00
         LDA (r5L),Y
         BEQ b345A
         LDY #$13
-        JSR s1DDA       ; Get block from disk
-        JSR s253B       ; transfer X to A, if A=0 return, else pull from stack
-        LDX #$0A        ; SOURCE - zero page address of pointer to source string
-        LDY #$1C        ; DEST - zero page address of pointer to destination string
-        LDA #$44        ; LENGTH - length of string (68 bytes)
-        JSR CopyFString ;Print disk name
+        JSR s1DDA               ; Get block from disk
+        JSR s253B               ; transfer X to A, if A=0 return, else pull from stack
+        LDX #$0A                ; SOURCE - zero page address of pointer to source string
+        LDY #$1C                ; DEST - zero page address of pointer to destination string
+        LDA #$44                ; LENGTH - length of string (68 bytes)
+        JSR CopyFString         ; Print disk name
 b345A   CLC 
         LDA #$44
         ADC r13L
@@ -2538,72 +2405,63 @@ b3470   DEC r8L
         RTS 
 
 ; Set pad preferences (mouse, pad color)
+
 s3477   LDA a0251
         BEQ b34D6
         STA r1L
-        LDA a0252
-        STA r1H
+        MoveB a0252, r1H
         JSR s1DE3
-        JSR s253B    ;transfer X to A, if A=0 return, else pull from stack
-        LDA a8002    ;read from disk block buffer
-        STA maxMouseSpeed
-        LDA a8003    ;read from disk block buffer
-        STA minMouseSpeed
-        LDA a8004    ;read from disk block buffer
-        STA mouseAccel
-        LDA a8005    ;read from disk block buffer
-        ORA a8006    ;read from disk block buffer
+        JSR s253B               ; transfer X to A, if A=0 return, else pull from stack
+        MoveB a8002, maxMouseSpeed      ; read from disk block buffer
+        MoveB a8003, minMouseSpeed
+        MoveB a8004, mouseAccel
+        LDA a8005               ; read from disk block buffer
+        ORA a8006               ; read from disk block buffer
         CMP screencolors
         BEQ b34B4
         STA screencolors
         STA a34B3
-        JSR i_FillRam ;fill $8c00 with 1000 screencolor
+        JSR i_FillRam           ; fill $8c00 with 1000 screencolor
         .BYTE $E8,$03,$00,$8C
 a34B3   .BYTE $00
 b34B4   LDY a01
-        LDA #$35
-        STA a01
-        LDA a8007    ;read from disk block buffer
-        STA $D027    ;Sprite 0 Color
-        STA $D028    ;Sprite 1 Color
-        LDA a8047    ;read from disk block buffer
-        STA $D020    ;Border Color
+        LoadB a01, $35
+        MoveB a8007, $D027      ; set sprite 0 color from disk block buffer
+        STA $D028               ; Sprite 1 Color
+        MoveB a8047, $D020      ; set border color from disk block buffer
         STY a01
         LDY #$3E
-b34CD   LDA f8008,Y  ;loop through (backwards) and read mouse pic data, store to $84c1
-        STA f84C1,Y  ;$84c1 = mousePicData
+b34CD   LDA f8008,Y             ; loop through (backwards) and read mouse pic data, store to $84c1
+        STA f84C1,Y             ; $84c1 = mousePicData
         DEY 
         BPL b34CD
 b34D6   LDA a0253
         BEQ b34F6
         STA r1L
-        LDA a0254
-        STA r1H
+        MoveB a0254, r1H
         JSR s1DE3
-        JSR s253B    ;transfer X to A, if A=0 return, else pull from stack
+        JSR s253B               ; transfer X to A, if A=0 return, else pull from stack
         LDX #$08
 b34EA   LDA a8002,X
         STA f8FE8,X
         DEX 
         BPL b34EA
-        JSR j26F4    ;comes here after drawing pad and disk info - seems to draw file icons
+        JSR j26F4               ; comes here after drawing pad and disk info - seems to draw file icons
 b34F6   RTS 
 
 s34F7   LDA #$03
         AND random
         BNE b3542
-        LDA a82BD
-        CMP #$42
+        CmpBI a82BD, $42
         BNE b3542
         LDY #$09
 b3507   LDA f6D25,Y
-        CMP f4D1A,Y  ;Compare against 'GEOS BOOT' string
+        CMP f4D1A,Y             ; Compare against 'GEOS BOOT' string
         BNE b3514
         DEY 
         BPL b3507
         BMI b351C
-b3514   LDA a6D38
-        CMP #$0C
+b3514   CmpBI a6D38, $0C
         BEQ b3543
         RTS 
 
@@ -2635,17 +2493,14 @@ b3547   STA dirBuffer_6d00,Y
 
 s3552   STX r1H
         STA r1L
-        LDA #>spr2pic
-        STA r0H
-        LDA #<spr2pic
-        STA r0L
+        LoadW r0, spr2pic
         LDY #$00
         TYA 
 b3561   STA (r0L),Y
         INY 
         BNE b3561
 b3566   JSR s1DE3
-        JSR s253B    ;transfer X to A, if A=0 return, else pull from stack
+        JSR s253B               ; transfer X to A, if A=0 return, else pull from stack
         LDY a8001
         STY r1H
         INY 
@@ -2678,7 +2533,7 @@ b3581   DEY
 
 s35A2   JSR s35AB
         BNE b35AA
-        JSR s35CD    ;Allocate a disk block
+        JSR s35CD               ;Allocate a disk block
 b35AA   RTS 
 
 s35AB   LDY #$01
@@ -2686,7 +2541,7 @@ s35AB   LDY #$01
         DEY 
         STY r1H
         JSR s1DE3
-        JSR s253B    ;transfer X to A, if A=0 return, else pull from stack
+        JSR s253B               ;transfer X to A, if A=0 return, else pull from stack
         LDY #$00
         LDA (r4L),Y
         CMP #$43
@@ -2701,12 +2556,9 @@ s35AB   LDY #$01
 b35CC   RTS 
 
 ; Allocate a disk block
-s35CD   LDA r1H
-        STA r6H      ;sector
-        LDA r1L
-        STA r6L      ;track
-        LDA a0520
-        CMP #$02
+s35CD   MoveB r1H, r6H          ;sector
+        MoveB r1L, r6L          ;track                         
+        CmpBI a0520, $02
         BCC b35DF
         JMP AllocateBlock
 
@@ -2725,19 +2577,18 @@ b35F6   LDX #$06
         RTS 
 
 ; Disk->Close Menu Action ===================
+
         JSR DoPreviousMenu
         LDA diskOpenFlg
         BEQ b3644
-s3601   JSR s3FF6    ;unselect and un-reverse icon(s), 0 selected
-        LDA #$02
-        STA r12L
+s3601   JSR s3FF6               ; unselect and un-reverse icon(s), 0 selected
+        LoadB r12L, $02
         LDA #$12
         JSR s4808
-        JSR s32BB    ;Draw Pad Lines
+        JSR s32BB               ; Draw Pad Lines
         JSR s47C3
         JSR s47E3
-        LDA #$00
-        STA a0200
+        LoadB a0200, $00
         JSR s3220
 s361E   LDX #$04
         JSR s3829
@@ -2747,11 +2598,10 @@ s361E   LDX #$04
         LDY curDrive
         LDX #$02
         JSR s3B23
-        LDA #$00
-        STA r1L
+        LoadB r1L, $00
         JSR s47C3
         JSR j364B
-        JSR s5956    ;set coords and draw rectangle
+        JSR s5956               ; set coords and draw rectangle
         LDX #$00
         STX a7D
         STX diskOpenFlg
@@ -2759,6 +2609,7 @@ b3644   RTS
 
 f3645   .BYTE $36,$36,$36
 f3648   .BYTE $E7,$EF,$F7
+
 j364B   TAY 
         LDA r1L
         STA a3DA6
@@ -2774,7 +2625,7 @@ j364B   TAY
         PLA 
         STA r0H
         TYA 
-        JSR s47D3    ;push A, shift A left (x2), LDA r0, STA as index into $03C4, pull A
+        JSR s47D3               ; push A, shift A left (x2), LDA r0, STA as index into $03C4, pull A
         PHA 
         SEC 
         SBC #$14
@@ -2803,13 +2654,10 @@ j364B   TAY
         STA (r5L),Y
         PLA 
         TAY 
-b3697   LDA #>p0108
-        STA leftMarginHi
-        LDA #<p0108
-        STA leftMarginLo
+b3697   LoadW leftMargin, p0108
         TYA 
         PHA 
-        JSR s49CC    ;draw a pad file icon and filename
+        JSR s49CC               ; draw a pad file icon and filename
         LDA a3DA6
         AND #$40
         BEQ b36D7
@@ -2819,31 +2667,22 @@ b3697   LDA #>p0108
         PHA 
         CMP #$14
         BNE b36C2
-        LDA #$28
-        STA r1H      ;YPOS=40
-        LDA #>p011A
-        STA r11H     ;XPOS
-        LDA #<p011A
-        STA r11L     ;XPOS
-        LDA #$41     ;'A'
+        LoadB r1H, $28          ; YPOS=40
+        LoadW r11, p011A        ; XPOS
+        LDA #$41                ; 'A'
         CLV 
         BVC b36D4
 b36C2   CMP #$15
         BNE b36D7
-        LDA #$4C
-        STA r1H      ;YPOS=76
-        LDA #>p011A
-        STA r11H     ;XPOS
-        LDA #<p011A
-        STA r11L     ;XPOS
-        LDA #$42     ;'B'
+        LoadB r1H, $4C          ; YPOS=76
+        LoadW r11, p011A        ; XPOS
+        LDA #$42                ; 'B'
 b36D4   JSR PutChar
 b36D7   PLA 
         LDX a3DA6
         BPL b36E0
-        JSR s4824    ;invert icon
-b36E0   LDA #$00
-        STA leftMarginLo
+        JSR s4824               ; invert icon
+b36E0   LoadB leftMarginLo, $00
         STA leftMarginHi
         RTS 
 
@@ -2866,12 +2705,12 @@ b36E0   LDA #$00
 b3717   RTS 
 
 ; DROP FILE ON DISK ICON HANDLER (COPY) ==========================
-        JSR s46ED    ;r9 = $77/$76, A=*(r9+Y)
-        CMP #$0C     ;check if file is a SYSTEM BOOT file ($0c)
-        BNE b3722    ;it is not... skip ahead to copy file to other disk
+        JSR s46ED               ;r9 = $77/$76, A=*(r9+Y)
+        CMP #$0C                ;check if file is a SYSTEM BOOT file ($0c)
+        BNE b3722               ;it is not... skip ahead to copy file to other disk
         JMP j510B
 
-b3722   JSR s37BA    ;copy file to same or different disk
+b3722   JSR s37BA               ;copy file to same or different disk
         JSR s59AA
         JSR s3E78
         LDA a70
@@ -2882,8 +2721,7 @@ b3722   JSR s37BA    ;copy file to same or different disk
 
 b3738   JSR s23E1
         BEQ b3745
-        LDA #$00
-        STA a024D
+        LoadB a024D, $00
         JSR s237E
 b3745   JSR s39CB
         JSR s4A25
@@ -2892,39 +2730,36 @@ b3745   JSR s39CB
 
 b3751   LDA r0L
 j3753   JSR s47E3
-        JSR s47CC    ;A = A - 20 + 8
+        JSR s47CC               ; A = A - 20 + 8
         STA a79
         LDX diskOpenFlg
         BEQ b376B
         CMP curDrive
         BEQ b376B
         JSR s47C3
-        JSR s4824    ;invert icon
+        JSR s4824               ; invert icon
 b376B   JSR s23DC
         JMP j4F24
 
         LDA a024C
         BEQ b3779
-        JMP j4100    ;called after a click on page or border
+        JMP j4100               ; called after a click on page or border
 
 b3779   BIT a71
-        BVC b3780    ;Position mouse over sprite during "drag" operation
-        JMP s3FF6    ;unselect and un-reverse icon(s), 0 selected
+        BVC b3780               ; Position mouse over sprite during "drag" operation
+        JMP s3FF6               ; unselect and un-reverse icon(s), 0 selected
 
 ; Position mouse over sprite during "drag" operation
-b3780   JSR s3FF6    ;unselect and un-reverse icon(s), 0 selected
+
+b3780   JSR s3FF6               ; unselect and un-reverse icon(s), 0 selected
         LDA #$16
-        JSR s404E    ;draw and enable "drag" pad icon sprite
-        LDA #>p0108
-        STA mouseLeft_HI
-        LDA #<p0108
-        STA mouseLeft_LO
+        JSR s404E               ; draw and enable "drag" pad icon sprite
+        LoadW mouseLeft, p0108
         LDA #>p8B0D
         STA mouseBottom
         LDA #<p8B0D
         STA mouseTop
-        LDA #$FF
-        STA a024C
+        LoadB a024C, $FF
         RTS 
 
         LDA #$08
@@ -2936,18 +2771,18 @@ b3780   JSR s3FF6    ;unselect and un-reverse icon(s), 0 selected
 
 b37AD   LDA #$09
 b37AF   PHA 
-        JSR s3FF6    ;unselect and un-reverse icon(s), 0 selected
+        JSR s3FF6               ; unselect and un-reverse icon(s), 0 selected
         PLA 
         JSR s47C6
         JMP j3753
 
 ; copy file to same or different disk
+
 s37BA   LDA curDrive
         STA a79
-        LDA a72
-        STA a73
+        MoveB a72, a73
         LDA r0L
-        JSR s47CC    ;A = A - 20 + 8
+        JSR s47CC               ; A = A - 20 + 8
         STA a70
         TAY 
         LDX #$04
@@ -2963,12 +2798,12 @@ b37DB   STY aFE
         LDA (r1L),Y
         BEQ b381F
         LDA a72
-        LDX #$06     ;zero page address of pointer to source string
+        LDX #$06                ; zero page address of pointer to source string
         JSR s46B4
-        LDY #$04     ;zero page address of pointer to destination string
-        LDA #$12     ;length of strings
-        JSR CmpFString ;     Compares two fixed length strings (compare disk name for file copy)
-        BEQ b381F    ;if the disk name is the same, skip ahead
+        LDY #$04                ; zero page address of pointer to destination string
+        LDA #$12                ; length of strings
+        JSR CmpFString          ; Compares two fixed length strings (compare disk name for file copy)
+        BEQ b381F               ; if the disk name is the same, skip ahead
         LDA r2H
         STA a03F7
         LDA r2L
@@ -2984,7 +2819,7 @@ b37DB   STY aFE
         TXA 
         BNE b3821
         STA aFC
-        JSR s19AB    ;search for and copy a file
+        JSR s19AB               ; search for and copy a file
         TXA 
         BNE b3821
         LDX #$00
@@ -3029,11 +2864,11 @@ s384F   LDA #$00
 s3858   LDA numDrives ;how many drives do we have
         CMP #$02
         BCC b386D
-        JSR s1AEC    ;seems to set drive A or drive B type
+        JSR s1AEC               ;seems to set drive A or drive B type
         JSR s237E
         TXA 
         PHA 
-        JSR s1AEC    ;seems to set drive A or drive B type
+        JSR s1AEC               ; seems to set drive A or drive B type
         PLA 
         BNE b3870
 b386D   JSR s237E
@@ -3047,22 +2882,18 @@ s3871   LDX #$04
         RTS 
 
 ; called when opening a disk (disk name text?)
-s387D   LDA #$00     ;clear memory locations
-        STA r0L
+s387D   LoadB r0L, $00          ; clear memory locations
         STA a0251
         STA a0253
         STA a0256
         STA a0258
         STA r9H
         STA r3L
-        LDA #>p0A62
-        STA r1H      ;load r1 with $0a62
-        LDA #<p0A62
-        STA r1L
+        LoadW r1, p0A62         ; load r1 with $0a62
         LDA #>dirBuffer_6d00
-        STA r2H      ;load r2H with 6d00
+        STA r2H                 ; load r2H with 6d00
 b389D   LDY #<dirBuffer_6d00
-        STY r2L      ;load r2L with 6d00
+        STY r2L                 ; load r2L with 6d00
         LDA (r2L),Y
         PHA 
 b38A4   JSR s38F0
@@ -3076,8 +2907,8 @@ b38B2   LDA r2L
         BNE b38A4
         PLA 
         BNE b389D
-        LDA isGEOS   ;is this a GEOS formatted disk?
-        BEQ b38C9    ;if no, skip ahead
+        LDA isGEOS              ; is this a GEOS formatted disk?
+        BEQ b38C9               ; if no, skip ahead
         LDA #$7F
         CMP r2H
         BCC b38C9
@@ -3099,12 +2930,10 @@ b38C9   LDA r0L
         STA r9L
         PLA 
         STA r9H
-        LDA #$FF
-        STA a024D
+        LoadB a024D, $FF
         PLA 
         STA r0L
-        LDA #$00
-        STA r0H
+        LoadB r0H, $00
         RTS 
 
 s38F0   LDY #$02
@@ -3167,10 +2996,7 @@ b3941   CMP #$09
 
 b395A   CMP #$04
         BNE b3994
-        LDA #>p2BC8
-        STA r5H
-        LDA #<p2BC8
-        STA r5L
+        LoadW r5, p2BC8
         JSR s39A6
         BNE b3979
         LDY #$03
@@ -3181,10 +3007,7 @@ b395A   CMP #$04
         STA a0252
         RTS 
 
-b3979   LDA #>p2BD8
-        STA r5H
-        LDA #<p2BD8
-        STA r5L
+b3979   LoadW r5, p2BD8
         JSR s39A6
         BNE b39A5
         LDY #$03
@@ -3216,7 +3039,8 @@ b39A8   LDA (r2L),Y
 b39B3   RTS 
 
 ; Free / delete blocks in a GEOS file
-s39B4   JSR FreeFile ;     Frees all blocks in a GEOS file without deleting dir entry (file header and index blocks deleted also)
+
+s39B4   JSR FreeFile            ; Frees all blocks in a GEOS file without deleting dir entry (file header and index blocks deleted also)
         LDY #$00
         TYA 
         STA (r9L),Y
@@ -3234,16 +3058,12 @@ s39CB   LDX #$FF
 b39CF   STA f7EFF,X
         DEX 
         BNE b39CF
-        LDA #>dirBuffer_6d00
-        STA r4H
-        LDA #<dirBuffer_6d00
-        STA r4L
+        LoadW r4, dirBuffer_6d00
         JSR s3A17
         STY r1H
-        LDA #$12
-        STA r2L
-        JSR s3A42    ;read directory to *r4 ($6d00)
-        JSR s253B    ;transfer X to A, if A=0 return, else pull from stack
+        LoadB r2L, $12
+        JSR s3A42               ; read directory to *r4 ($6d00)
+        JSR s253B               ; transfer X to A, if A=0 return, else pull from stack
         LDA #$11
         SEC 
         SBC r2L
@@ -3253,32 +3073,23 @@ b39CF   STA f7EFF,X
         BCC b39F9
 b39F9   LDA isGEOS
         BEQ b3A16
-        JSR s3A04    ;load r4 from $7f00 and r1 from $82ac
+        JSR s3A04               ; load r4 from $7f00 and r1 from $82ac
         JMP GetBlock
 
 ; load r4 from $7f00 and r1 from $82ac
-s3A04   LDA #>f7F00
-        STA r4H
-        LDA #<f7F00
-        STA r4L
-        LDA a82AC
-        STA r1H
-        LDA a82AB
-        STA r1L
+s3A04   LoadW r4, f7F00
+        MoveW a82AB, r1
 b3A16   RTS 
 
-s3A17   LDA #$00
-        STA r1H
+s3A17   LoadB r1H, $00
         JSR s3A2F
         TYA 
         BNE b3A28
-        LDA #$12
-        STA r1L
+        LoadB r1L, $12
         LDY #$01
         RTS 
 
-b3A28   LDA #$28
-        STA r1L
+b3A28   LoadB r1L, $28
         LDY #$03
         RTS 
 
@@ -3293,32 +3104,33 @@ b3A3F   LDY #$FF
 b3A41   RTS 
 
 ; read directory to *r4 ($6d00)
-s3A42   JSR EnterTurbo ;     Activate disk drive turbo mode
+
+s3A42   JSR EnterTurbo          ; Activate disk drive turbo mode
         TXA 
         BNE b3A66
-        JSR InitForIO ;     Prepare for I/O across the serial bus
-b3A4B   JSR ReadBlock ;     Low level read block from disk (r1L=TRACK, r1H=SECTOR, r4=BUFFER)
+        JSR InitForIO           ; Prepare for I/O across the serial bus
+b3A4B   JSR ReadBlock           ; Low level read block from disk (r1L=TRACK, r1H=SECTOR, r4=BUFFER)
         TXA 
-        BNE b3A66    ;if error, skip ahead
+        BNE b3A66               ; if error, skip ahead
         DEC r2L
         BEQ b3A66
         LDY #$00
-        LDA (r4L),Y  ;get the first byte pointed to by r4 (read buffer)
-        BEQ b3A66    ;if zero, skip ahead
-        STA r1L      ;store the first two bytes to r1
+        LDA (r4L),Y             ; get the first byte pointed to by r4 (read buffer)
+        BEQ b3A66               ; if zero, skip ahead
+        STA r1L                 ; store the first two bytes to r1
         INY 
         LDA (r4L),Y
         STA r1H
-        INC r4H      ;increase buffer pointer hi byte
-        BNE b3A4B    ;if not zero, read next block
-b3A66   JMP DoneWithIO ;     Restore system IO across the serial bus
+        INC r4H                 ; increase buffer pointer hi byte
+        BNE b3A4B               ; if not zero, read next block
+b3A66   JMP DoneWithIO          ; Restore system IO across the serial bus
 
         CMP #$08
         BCC b3A7B
 j3A6D   LDX #$00
         LDA isGEOS
         BEQ b3A7A
-        JSR s3A04    ;load r4 from $7f00 and r1 from $82ac
+        JSR s3A04               ; load r4 from $7f00 and r1 from $82ac
         JSR PutBlock
 b3A7A   RTS 
 
@@ -3345,21 +3157,18 @@ s3A9C   JSR s4645
         JSR s58C6
         LDX #$0C
         JSR s384F
-        LDA #>BootDiskName
-        STA r6H
-        LDA #<BootDiskName
-        STA r6L
+        LoadW r6, BootDiskName
         LDX #$0C
         LDY #$0E
         LDA #$12
-        JSR s2418    ;copies printer driver and disk name from $6d85 to $8465
+        JSR s2418               ; copies printer driver and disk name from $6d85 to $8465
 j3AB8   TXA 
         PHA 
         LDA sysRAMFlg
-        AND #$20     ;if bit 5=1 $7900-$7dff is loaded with GEOS ram area $8400-$88ff by ToBasic routine
+        AND #$20                ; if bit 5=1 $7900-$7dff is loaded with GEOS ram area $8400-$88ff by ToBasic routine
         BEQ b3ACF
         LDY #$06
-b3AC3   LDA f3AD2,Y  ;set up bytes to stash to RAM (StashRAM parameters at $3ad2)
+b3AC3   LDA f3AD2,Y             ; set up bytes to stash to RAM (StashRAM parameters at $3ad2)
         STA r0L,Y
         DEY 
         BPL b3AC3
@@ -3372,28 +3181,24 @@ b3ACF   PLA
 f3AD2   .BYTE $00,$84,$00,$79,$00,$05,$00
 
 ; Load input driver
-s3AD9   LDA #$00
-        STA r0L
-        LDA #>inputDevName
-        STA r6H      ;hi byte of filename
-        LDA #<inputDevName
-        STA r6L      ;lo byte of filename
+s3AD9   LoadB r0L, $00
+        LoadW r6, inputDevName  ; filename of input device
         JSR GetFile
-        TXA          ;error to A
-        BNE b3B0E    ;if error skip ahead
+        TXA                     ; error to A
+        BNE b3B0E               ; if error skip ahead
         LDA version
         CMP #$13
         BCC b3B07
-        LDA sysRAMFlg ;get the sysRAMFlag
-        AND #$20     ;if bit 5=1 $7900-$7dff is loaded with GEOS ram area $8400-$88ff by ToBasic routine
+        LDA sysRAMFlg           ; get the sysRAMFlag
+        AND #$20                ; if bit 5=1 $7900-$7dff is loaded with GEOS ram area $8400-$88ff by ToBasic routine
         BEQ b3B07
         LDY #$06
-b3AFB   LDA f3B15,Y  ;set up bytes to stash to RAM (StashRAM parameters at $3b15)
+b3AFB   LDA f3B15,Y             ; set up bytes to stash to RAM (StashRAM parameters at $3b15)
         STA r0L,Y
         DEY 
         BPL b3AFB
         JSR StashRAM
-b3B07   JSR InitMouse ;     Initialize the input device
+b3B07   JSR InitMouse           ; Initialize the input device
 b3B0A   LDX #$00
         BEQ b3B12
 b3B0E   CPX #$05
@@ -3420,21 +3225,20 @@ f3B36   .BYTE $2B,$2B,$2B
 f3B39   .BYTE $ED,$F5,$FD
 s3B3C   LDA a7D
         BNE b3B43
-        JSR s5956    ;set coords and draw rectangle
+        JSR s5956               ; set coords and draw rectangle
 b3B43   JSR s3B4C
         JSR s4BA6
         JMP j3BAD
 
-s3B4C   JSR s5886    ;Draw rectangle in pad for icons before displaying file icons
-        JSR s5926    ;if pad view mode is icon, then CARRY=1, else CARRY=0
+s3B4C   JSR s5886               ; Draw rectangle in pad for icons before displaying file icons
+        JSR s5926               ; if pad view mode is icon, then CARRY=1, else CARRY=0
         BCS b3B67
-        LDA #$FF
-        STA a7F
+        LoadB a7F, $FF
         JSR s53DD
         BEQ b3B67
-        LDA #$00     ;this is the icon view mode of the pad
-        STA padViewMode ;save it
-        JSR s586C    ;changing pad page
+        LDA #$00                ; this is the icon view mode of the pad
+        STA padViewMode         ; save it
+        JSR s586C               ; changing pad page
         JSR s4BA6
 b3B67   LDY padViewMode
         LDA f3B72,Y
@@ -3449,36 +3253,29 @@ f3B77   .BYTE $3B,$54,$55,$55,$55
 j3B7C   LDA #$00
 b3B7E   JSR s44C4
         CLC 
-        ADC #$01     ;count files
-        CMP #$08     ;8 files?
-        BCC b3B7E    ;loop through filenames up to 8 times (8 icons)
+        ADC #$01                ; count files
+        CMP #$08                ; 8 files?
+        BCC b3B7E               ; loop through filenames up to 8 times (8 icons)
         SEC 
         SBC #$01
-b3B8B   JSR s49CC    ;draw a pad file icon and filename
+b3B8B   JSR s49CC               ; draw a pad file icon and filename
         SEC 
         SBC #$01
-        BPL b3B8B    ;loop through each icon position (8), drawing them
-        LDA #>p88
-        STA r11H     ;X position = 136
-        LDA #<p88
-        STA r11L
-        LDA #$7F
-        STA r1H      ;Y position = 127
-        LDA #$00
-        STA r0H      ;page number will always be less than 255
-        LDX aFB      ;load page number
-        INX          ;increment it
-        STX r0L      ;r0 = number to print
-        LDA #$C0     ;FORMAT=left justify, supress leading zero
+        BPL b3B8B               ; loop through each icon position (8), drawing them
+        LoadW r11, p88          ; X position = 136
+        LoadB r1H, $7F          ; Y position = 127
+        LoadB r0H, $00          ; page number will always be less than 255
+        LDX aFB                 ; load page number
+        INX                     ; increment it
+        STX r0L                 ; r0 = number to print
+        LDA #$C0                ; FORMAT=left justify, supress leading zero
         JMP PutDecimal
 
 j3BAD   BIT a71
         BMI b3BD3
+
 s3BB1   JSR s3BE9
-        LDA #>p7F02
-        STA r14H
-        LDA #<p7F02
-        STA r14L
+        LoadW r14, p7F02
 b3BBC   JSR s4449
         JSR s599C
         CLC 
@@ -3490,28 +3287,21 @@ b3BBC   JSR s4449
 b3BCD   LDA r14H
         CMP #$80
         BCC b3BBC
-b3BD3   JSR s4639    ;Clear desktop border
+b3BD3   JSR s4639               ; Clear desktop border
         JSR s461A
         LDA a7D
         BEQ b3BE8
-        LDA #>p1894
-        STA r0H
-        LDA #<p1894
-        STA r0L
+        LoadW r0, p1894
         JSR s5931
 b3BE8   RTS 
 
 s3BE9   LDX #$1E
         JSR s384F
-        LDA #>p0334
-        STA r15H
-        LDA #<p0334
-        STA r15L
-        LDA #$08
-        STA a75
-b3BFA   LDX #$20     ;zero page address of pointer to source string
-        LDY #$1E     ;zero page address of pointer to destination string
-        LDA #$12     ;length of string (18 bytes)
+        LoadW r15, p0334
+        LoadB a75, $08
+b3BFA   LDX #$20                ; zero page address of pointer to source string
+        LDY #$1E                ; zero page address of pointer to destination string
+        LDA #$12                ; length of string (18 bytes)
         JSR CmpFString
         BNE b3C1B
         LDA #$00
@@ -3532,8 +3322,7 @@ b3C1B   CLC
         BCC b3C26
         INC r15H
 b3C26   INC a75
-        LDA a75
-        CMP #$10
+        CmpBI a75, $10
         BCC b3BFA
         RTS 
 
@@ -3554,19 +3343,17 @@ b3C42   JSR s3E7C
         JMP j3F6D
 
 b3C4F   JSR s3858
-        LDA #$FF
-        STA a3C84
+        LoadB a3C84, $FF
         LDA numDrives
         PHA 
         LDA a0AF0
         BEQ b3C6E
-        JSR s1AEC    ;seems to set drive A or drive B type
+        JSR s1AEC               ; seems to set drive A or drive B type
         JSR PurgeTurbo
-        JSR s1AEC    ;seems to set drive A or drive B type
-        LDA #$01
-        STA numDrives
-b3C6E   JSR s46ED    ;r9 = $77/$76, A=*(r9+Y)
-        JSR s3C85    ;Get desk accessory name to load to $8400
+        JSR s1AEC               ; seems to set drive A or drive B type
+        LoadB numDrives, $01
+b3C6E   JSR s46ED               ; r9 = $77/$76, A=*(r9+Y)
+        JSR s3C85               ; Get desk accessory name to load to $8400
         PLA 
         STA numDrives
         LDA a3C84
@@ -3585,26 +3372,25 @@ b3C88   LDA (r9L),Y
         STA dirEntryBuf,Y
         DEY 
         BPL b3C88
-        JSR s5A01    ;Load directory entry buffer to r9
+        JSR s5A01               ; Load directory entry buffer to r9
         PLA 
-        CMP #$03     ;is it a DATA file?
+        CMP #$03                ; is it a DATA file?
         BCC b3CBE
-        CMP #$05     ;is it a DESK ACCESSORY?
+        CMP #$05                ; is it a DESK ACCESSORY?
         BNE b3C9F
-        JMP j4EE4    ;Load and run a desk accessory
+        JMP j4EE4               ; Load and run a desk accessory
 
-b3C9F   CMP #$06     ;is it an APPLICATION?
+b3C9F   CMP #$06                ; is it an APPLICATION?
         BEQ b3CA7
-        CMP #$0E     ;is it an AUTO_EXEC?
+        CMP #$0E                ; is it an AUTO_EXEC?
         BNE b3CAA
-b3CA7   JMP j3CD2    ;Load an application
+b3CA7   JMP j3CD2               ; Load an application
 
-b3CAA   CMP #$07     ;is it APPLICATION DATA?
+b3CAA   CMP #$07                ; is it APPLICATION DATA?
         BNE b3CB1
         JMP j3D15
 
-b3CB1   LDA #$00
-        STA a3C84
+b3CB1   LoadB a3C84, $00
         LDY #$02
         JSR s246B
         JMP j3F6D
@@ -3624,10 +3410,9 @@ j3CD2   LDA #$C2
         PHA 
         LDA #$2B
         PHA 
-        JSR s2511    ;clear screen with pattern
-        JSR s3CED    ;Clear ram addresses of overlay  area ($3da7- $7fff) 16985 bytes
-        LDA #$00
-        STA r0L      ;LOAD_OPT= Load at address in file header, not passing data, not printing
+        JSR s2511               ; clear screen with pattern
+        JSR s3CED               ; Clear ram addresses of overlay  area ($3da7- $7fff) 16985 bytes
+        LoadB r0L, $00          ; LOAD_OPT= Load at address in file header, not passing data, not printing
         JMP LdApplic
 
 ; table for overlay address and bytes to clear ($3da7)
@@ -3638,27 +3423,25 @@ f3CEB   .BYTE $D5,$59
 
 ; Clear ram addresses of overlay  area ($3da7- $7fff) 16985 bytes
 s3CED   LDA r2L
-        PHA          ;keep r2L for later
+        PHA                     ;keep r2L for later
         LDX #$01
 b3CF2   LDA f3CE5,X
-        STA r1H      ;address of area to clear (hi)
+        STA r1H                 ;address of area to clear (hi)
         LDA f3CE7,X
-        STA r1L      ;address of area to clear (lo)
+        STA r1L                 ;address of area to clear (lo)
         LDA f3CE9,X
-        STA r0H      ;number of bytes to clear (hi)
+        STA r0H                 ;number of bytes to clear (hi)
         LDA f3CEB,X
-        STA r0L      ;number of bytes to clear (lo)
+        STA r0L                 ;number of bytes to clear (lo)
         JSR ClearRam
         DEX 
         BPL b3CF2
-        PLA          ;retrieve r2L
+        PLA                     ;retrieve r2L
         STA r2L
-        LDA #$FF
-        STA a3C89
+        LoadB a3C89, $FF
         RTS 
 
-j3D15   LDA #$80
-        STA a3DA6
+j3D15   LoadB a3DA6, $80
         LDA r9L
         CLC 
         ADC #$03
@@ -3666,17 +3449,17 @@ j3D15   LDA #$80
         LDA r9H
         ADC #$00
         STA r4H
-        JSR s59E6       ; load $8bd0 to r3
+        JSR s59E6              ; load $8bd0 to r3
         LDX #$0A
         LDY #$08
         JSR s2416
-        JSR s59D2       ; load $8bbc to r2
+        JSR s59D2               ; load $8bbc to r2
         LDX #$0A
         JSR s384F
-        LDX #$0A        ; SOURCE - zero page address of pointer to source string
-        LDY #$06        ; DEST - zero page address of pointer to destination string
-        LDA #$12        ; LENGTH - length of string (18 bytes)
-        JSR CopyFString ; Copy a fixed-length string
+        LDX #$0A                ; SOURCE - zero page address of pointer to source string
+        LDY #$06                ; DEST - zero page address of pointer to destination string
+        LDA #$12                ; LENGTH - length of string (18 bytes)
+        JSR CopyFString         ; Copy a fixed-length string
         LDY #$13
         LDA (r9L),Y
         STA r1L
@@ -3693,18 +3476,12 @@ b3D59   LDA a8075
         BNE b3D61
         JMP b3CB1
 
-b3D61   LDA #>a8075
-        STA r1H
-        LDA #<a8075
-        STA r1L
-        LDA #>p8BE4
-        STA r10H
-        LDA #<p8BE4
-        STA r10L
+b3D61   LoadW r1, a8075
+        LoadW r10, p8BE4
         LDX #$04
         LDY #$16
         LDA #$0C
-        JSR s2418    ;copies printer driver and disk name from $6d85 to $8465
+        JSR s2418               ; copies printer driver and disk name from $6d85 to $8465
         JSR s3DAB
         CPX #$0C
         BEQ b3D56
@@ -3712,13 +3489,12 @@ b3D61   LDA #>a8075
         BNE b3D53
         LDA p8B80
         BEQ b3D56
-        JSR s2511    ;clear screen with pattern
-        JSR s59D2    ;load $8bbc to r2
-        JSR s59E6    ;load $8bd0 to r3
-        JSR s256B    ;load r6 with $8b80 address
-        JSR s3CED    ;Clear ram addresses of overlay  area ($3da7- $7fff) 16985 bytes
-        LDA a3DA6
-        STA r0L
+        JSR s2511               ; clear screen with pattern
+        JSR s59D2               ; load $8bbc to r2
+        JSR s59E6               ; load $8bd0 to r3
+        JSR s256B               ; load r6 with $8b80 address
+        JSR s3CED               ; Clear ram addresses of overlay  area ($3da7- $7fff) 16985 bytes
+        MoveB a3DA6, r0L
         LDA #$C2
         PHA 
         LDA #$2B
@@ -3743,7 +3519,7 @@ b3DBA   JSR s3E1E
         LDY numDrives
         DEY 
         BEQ b3DD4
-        JSR s1AEC    ;seems to set drive A or drive B type
+        JSR s1AEC               ; seems to set drive A or drive B type
 b3DC9   JSR s1AB5
         TXA 
         BNE b3DD4
@@ -3760,7 +3536,7 @@ b3DE4   LDY #$06
         JSR s246B
         CLV 
         BVC b3E16
-b3DEC   JSR s1AEC    ;seems to set drive A or drive B type
+b3DEC   JSR s1AEC               ; seems to set drive A or drive B type
 b3DEF   LDY curDrive
         LDX #$0C
         JSR s3B23
@@ -3772,7 +3548,7 @@ b3DEF   LDY curDrive
         PHA 
         LDX #$3E
         LDA #$3B
-        JSR s2483    ;COMMON DIALOG BOX ROUTINE ============================
+        JSR s2483               ; COMMON DIALOG BOX ROUTINE ============================
         PLA 
         STA r10L
         PLA 
@@ -3791,8 +3567,8 @@ s3E1E   LDX #$00
         LDA r7L
         CMP #$04
         BEQ b3E3A
-        LDA ramExpSize ;2=128k. 4=256k, 8=512k; 16=1MB, 32=1MB+
-        BNE b3E3A    ;return if REU is present
+        LDA ramExpSize          ; 2=128k. 4=256k, 8=512k; 16=1MB, 32=1MB+
+        BNE b3E3A               ; return if REU is present
         LDY numDrives
         DEY 
         BEQ b3E39
@@ -3808,7 +3584,7 @@ b3E3A   RTS
         .BYTE $48,$00
 
 ; test 4th bit
-s3E55   ASL          ;Shift 4th byte to carry flag
+s3E55   ASL                     ; Shift 4th byte to carry flag
         ASL 
         ASL 
         ASL 
@@ -3871,7 +3647,7 @@ b3E9A   LDA a72
         STA r0H
         RTS 
 
-        JSR s5926    ;if pad view mode is icon, then CARRY=1, else CARRY=0
+        JSR s5926               ;if pad view mode is icon, then CARRY=1, else CARRY=0
         BCC b3F09
         LDA diskOpenFlg
         BEQ b3F09
@@ -3895,8 +3671,7 @@ b3EE3   LDA a72
         PHA 
         JSR s3E7E
         PLA 
-        SEC 
-        SBC a72
+        sub a72
         STA r14L
         JSR s597A
         BNE b3EF7
@@ -3910,7 +3685,7 @@ b3EF7   LDX r0H
         BNE b3EF4
         JMP j3C32
 
-b3F06   JMP j402E    ;begin "drag" operation
+b3F06   JMP j402E               ;begin "drag" operation
 
 b3F09   RTS 
 
@@ -3923,7 +3698,7 @@ s3F14   LDA aFB
         PHA 
         LDA a72
         PHA 
-        JSR s3FF6    ;unselect and un-reverse icon(s), 0 selected
+        JSR s3FF6               ;unselect and un-reverse icon(s), 0 selected
         PLA 
         STA a72
         PLA 
@@ -3954,23 +3729,21 @@ b3F48   LDA #$80
         STA a71
         LDX a78
         LDA r0L
-        JSR s3E55    ;test 4th bit
+        JSR s3E55               ;test 4th bit
         STA f18B2,X
         JSR s3E7E
         LDA r0L
-        JSR s4824    ;invert icon
+        JSR s4824               ;invert icon
         LDA a72
         JSR s4696
         STX a74
-        JSR s33E0    ;Update # of selected icons for multi-select  (X selected, top of pad)
+        JSR s33E0               ;Update # of selected icons for multi-select  (X selected, top of pad)
         LDX #$00
         RTS 
 
-j3F6D   LDA #$FF
-        STA r3H
+j3F6D   LoadB r3H, $FF
         BNE b3F77
-s3F73   LDA #$00
-        STA r3H
+s3F73   LoadB r3H, $00
 b3F77   LDA r0H
         PHA 
         LDA r0L
@@ -4010,11 +3783,10 @@ b3FAD   LDA r0H
         BCC b3FAD
         DEC a024B
         DEC a78
-        LDA a78
-        CMP #$FF
+        CmpBI a78, $FF
         BNE b3FCA
-b3FC7   JSR s401C    ;clear common GEOS dekstop variable locations
-b3FCA   JMP s33E0    ;Update # of selected icons for multi-select  (X selected, top of pad)
+b3FC7   JSR s401C               ;clear common GEOS dekstop variable locations
+b3FCA   JMP s33E0               ;Update # of selected icons for multi-select  (X selected, top of pad)
 
 s3FCD   JSR s3FD5
         CPX #$FF
@@ -4049,13 +3821,13 @@ s3FF6   LDA diskOpenFlg
 b4000   PHA 
         JSR s3FCD
         BEQ b4009
-        JSR s4824    ;invert icon
+        JSR s4824               ; invert icon
 b4009   PLA 
         SEC 
         SBC #$01
         BPL b4000
         JSR b4019
-        JSR s33E0    ;Update # of selected icons for multi-select  (X selected, top of pad)
+        JSR s33E0               ; Update # of selected icons for multi-select  (X selected, top of pad)
         PLA 
         STA r0L
         RTS 
@@ -4076,9 +3848,8 @@ s401C   LDA #$00
 ; begin "drag" operation
 j402E   LDA a71
         ORA #$40
-        STA a71
-        LDA #$0D     ;move mouse down 13 bytes
-        STA mouseTop
+        STA a71   
+        LoadB mouseTop, $0D     ; move mouse down 13 bytes
         LDX a78
         BEQ b4048
         LDA #<p4086
@@ -4097,25 +3868,19 @@ s404E   LDX #$0C
         LDA (r5L),Y
         CLC 
         ADC #$01
-        STA r4L      ;lo byte of sprite data pointer
+        STA r4L                 ; lo byte of sprite data pointer
         INY 
         LDA (r5L),Y
-        STA r4H      ;hi byte of sprite data pointer
+        STA r4H                 ; hi byte of sprite data pointer
         BCC b4065
         INC r4H
-b4065   LDA #$01
-        STA r3L      ;sprite number 1
+b4065   LoadB r3L, $01          ; sprite number 1
         JSR DrawSprite
-        LDA #$35
-        STA a01
-        LDA $D027    ;Sprite 0 Color
-        STA $D028    ;Sprite 1 Color
-        LDA #$30
-        STA a01
-        LDA #$01
-        STA a0525
-        LDA #$01
-        STA r3L
+        LoadB a01, $35
+        MoveB $D027, $D028      ; copy sprite 0 Color to sprite 1 Color
+        LoadB a01, $30
+        LoadB a0525, $01
+        LoadB r3L, $01
         JMP EnablSprite
 
 p4086   .BYTE $FF,$FF,$FF,$80,$00,$01,$80,$00
@@ -4127,30 +3892,32 @@ p4086   .BYTE $FF,$FF,$FF,$80,$00,$01,$80,$00
         .BYTE $88,$49,$E1,$80,$00,$01,$80,$00
         .BYTE $01,$80,$00,$01,$FF
         .BYTE $FF,$FF,$00
+
 j40C6   BIT a8505
         BMI b40F2
-        JSR s583E    ;Retrieve the return address for inline call and JMP to it
-        BRK 
-        .BYTE $0C,$DD,$00
+        JSR s583E               ; Retrieve the return address for inline call and JMP to it
+
+        .BYTE $00, $0C,$DD,$00
         .BYTE $3F,$01,$F0
         .BYTE $03,$4C
+
         EOR (p55),Y
         BIT a71
         BMI b40E5
         LDA a024C
         BEQ b40EF
-        JMP j4100    ;called after a click on page or border
+        JMP j4100               ; called after a click on page or border
 
 b40E5   BVC b40EA
         JMP j412F
 
 b40EA   JSR s597A
         BEQ b40F2
-b40EF   JSR s3FF6    ;unselect and un-reverse icon(s), 0 selected
+b40EF   JSR s3FF6               ; unselect and un-reverse icon(s), 0 selected
 b40F2   RTS 
 
 s40F3   BIT a71
-        BVC j4100    ;called after a click on page or border
+        BVC j4100               ; called after a click on page or border
         JSR s4115
         LDA a71
         AND #$BF
@@ -4162,15 +3929,12 @@ j4100   JSR s4115
         STA mouseLeft_LO
         STA mouseLeft_HI
         STA mouseTop
-        LDA #$C7
-        STA mouseBottom
+        LoadB mouseBottom, $C7
         RTS 
 
-s4115   LDA #$01
-        STA r3L
+s4115   LoadB r3L, $01
         JSR DisablSprite
-        LDA #$00
-        STA a0525
+        LoadB a0525, $00
         STA mouseTop
         RTS 
 
@@ -4180,18 +3944,15 @@ s4115   LDA #$01
         JSR s3E7E
 b412E   RTS 
 
-j412F   LDA #$FF
-        STA a1872
+j412F   LoadB a1872, $FF
         LDX #$41
         LDA #$41
         JSR s556C
-        LDA #$00
-        STA a1872
+        LoadB a1872, $00
         RTS 
 
         JSR s3858
-        LDA a72
-        CMP #$08
+        CmpBI a72, $08
         BCS b415D
         JSR s582A
         BEQ b416C
@@ -4212,9 +3973,9 @@ b4169   JMP j4234
 
 b416C   JMP j54AF
 
-b416F   JMP s3FF6    ;unselect and un-reverse icon(s), 0 selected
+b416F   JMP s3FF6               ; unselect and un-reverse icon(s), 0 selected
 
-j4172   JSR s46ED    ;r9 = $77/$76, A=*(r9+Y)
+j4172   JSR s46ED               ; r9 = $77/$76, A=*(r9+Y)
         CMP #$0C
         BNE b417C
         JMP j510B
@@ -4249,10 +4010,7 @@ b4189   LDA r5H
         JSR s599C
         JSR j3A6D
         JSR s599C
-        LDA a77
-        STA r14H
-        LDA a76
-        STA r14L
+        MoveW a76, r14
         JSR s4449
         JSR s599C
         JSR s3F73
@@ -4261,8 +4019,7 @@ b4189   LDA r5H
         RTS 
 
 j41CC   JSR s34F7
-        LDA aFB
-        STA r10L
+        MoveB aFB, r10L
         STA a024E
         JSR GetFreeDirBlk
         JSR s599C
@@ -4318,20 +4075,14 @@ j4234   JSR s34F7
         BEQ b4245
         JMP j55FB
 
-b4245   LDA #$00
-        STA a7D
-        LDA curDrive
-        STA a79
-        LDA a72
-        STA a73
+b4245   LoadB a7D, $00
+        MoveB curDrive, a79
+        MoveB a72, a73
         LDA #$FF
         JSR s42A9
         TXA 
         BNE b42A0
-        LDA #>a0200
-        STA a03F9
-        LDA #<a0200
-        STA a03F8
+        LoadW a03F8, a0200
         LDA a73
         LDX #$06
         JSR s46B4
@@ -4346,14 +4097,12 @@ b4245   LDA #$00
         BCC b4283
         EOR #$01
 b4283   STA aFE
-        LDA aFB
-        STA aFC
+        MoveB aFB, aFC
         LDA #$00
-        JSR s19AB    ;search for and copy a file
+        JSR s19AB               ; search for and copy a file
         TXA 
         BNE b42A0
-        LDA aFC
-        STA aFB
+        MoveB aFC, aFB
         CMP aFD
         BCC b429B
         STA aFD
@@ -4371,21 +4120,18 @@ s42A9   STA a024A
         LDA a77
         ADC #$00
         STA r0H
-        LDA #>p8BD0
-        STA r1H
-        LDA #<p8BD0
-        STA r1L
+        LoadW r1, p8BD0
         LDX #$02
         LDY #$04
         JSR s2416
-        JSR s2562    ;load r6 with $8be4
+        JSR s2562               ;load r6 with $8be4
         LDX #$02
         LDY #$0E
         JSR s2416
         JSR FindFile
         CPX #$05
         BEQ b434D
-        JSR s253B    ;transfer X to A, if A=0 return, else pull from stack
+        JSR s253B               ;transfer X to A, if A=0 return, else pull from stack
         JSR GetDirHead
         LDA a82BD
         BEQ b42E7
@@ -4393,63 +4139,49 @@ s42A9   STA a024A
 
 b42E7   LDA a024A
         BEQ b4319
-        LDA #>dirEntryBuf
-        STA r6H
-        LDA #<dirEntryBuf
-        STA r6L
+        LoadW r6, dirEntryBuf
         JSR s45BC
         TXA 
         BEQ b4301
-        LDA #$00
-        STA a024A
+        LoadB a024A, $00
         BEQ b4319
 b4301   JSR s4364
         CPX #$FF
         BEQ b4316
-        JSR s59F8    ;load $84be to r5
+        JSR s59F8               ;load $84be to r5
         LDX #$43
         LDA #$B7
-        JSR s2483    ;COMMON DIALOG BOX ROUTINE ============================
+        JSR s2483               ;COMMON DIALOG BOX ROUTINE ============================
         LDX #$0C
         BNE b4363
 b4316   STA a024A
-b4319   JSR s59F8    ;load $84be to r5
+b4319   JSR s59F8               ;load $84be to r5
         LDX #$43
         LDA #$9C
-        JSR s2483    ;COMMON DIALOG BOX ROUTINE ============================
+        JSR s2483               ;COMMON DIALOG BOX ROUTINE ============================
         LDA r0L
         LDX #$0C
         CMP #$04
         BEQ b4363
-        JSR GetDirHead ;     read directory header and BAM from disk
+        JSR GetDirHead          ; read directory header and BAM from disk
         TXA 
         BNE b4363
-        LDA #>p8BE4
-        STA r0H      ;hi byte of filename to delete
-        LDA #<p8BE4
-        STA r0L      ;lo byte of filename to delete
+        LoadW r0, p8BE4         ; filename to delete
         JSR DeleteFile
         TXA 
         BNE b4363
         LDA a024A
         BEQ b4347
         JSR s458A
-b4347   JSR PutDirHead ;     write directory header and BAM to disk
+b4347   JSR PutDirHead          ; write directory header and BAM to disk
         TXA 
         BNE b4363
-b434D   LDA #>p8BD0
-        STA a03FB
-        LDA #<p8BD0
-        STA a03FA
-        LDA #>p8BE4
-        STA a03FD
-        LDA #<p8BE4
-        STA a03FC
+b434D   LoadW a03FA, p8BD0
+        LoadW a03FC, p8BE4
         LDX #$00
 b4363   RTS 
 
-s4364   LDA #$08
-        STA r10L
+s4364   LoadB r10L, $08
         LDA r7H
         STA r11H
         LDA r7L
@@ -4466,7 +4198,7 @@ s4364   LDA #$08
         LDY #$18
         LDA #$1E
         JSR CmpFString
-        BNE b4393    ;this code appears to break, unless self modifying
+        BNE b4393               ; this code appears to break, unless self modifying
         LDA r10L
         JMP s3FD5
 
@@ -4481,10 +4213,9 @@ b4393   .BYTE $E6,$16,$A5,$16,$C9,$10,$D0,$D5
         .BYTE $2D,$01,$11,$48,$00
 
 ; 
-s43CF   JSR s59C9    ;load $0334 to r1
+s43CF   JSR s59C9               ; load $0334 to r1
         LDY #$00
-        LDA #$08
-        STA a75
+        LoadB a75, $08
 b43D8   LDA (r1L),Y
         BEQ b4402
         INC a75
@@ -4492,12 +4223,11 @@ b43D8   LDA (r1L),Y
         BCC b43D8
         LDX #$02
         JSR s384F
-        JSR s59C9    ;load $0334 to r1
-        LDA #$08
-        STA a75
-b43EF   LDX #$02     ;zero page address of pointer to source string
-        LDY #$04     ;zero page address of pointer to dest buffer
-        LDA #$12     ;length of strings to compare (18 bytes)
+        JSR s59C9               ; load $0334 to r1
+        LoadB a75, $08
+b43EF   LDX #$02                ; zero page address of pointer to source string
+        LDY #$04                ; zero page address of pointer to dest buffer
+        LDA #$12                ; length of strings to compare (18 bytes)
         JSR CmpFString
         BNE b4402
         INC a75
@@ -4529,10 +4259,7 @@ b4424   CLC
         RTS 
 
 s4426   LDY #$02
-        LDA #>f7F00
-        STA r5H
-        LDA #<f7F00
-        STA r5L
+        LoadW r5, f7F00
 b4430   LDA (r5L),Y
         BEQ b443D
         TYA 
@@ -4554,16 +4281,16 @@ s4449   LDY #$00
         LDA (r14L),Y
         BEQ b4495
         JSR s43CF
-        LDX #$1E        ; zero page address of pointer to source string
-        LDY #$0C        ; zero page address of pointer to dest buffer
-        LDA #$1E        ; length of string to copy (30 bytes)
-        JSR CopyFString ; Copy a fixed-length string
+        LDX #$1E                ; zero page address of pointer to source string
+        LDY #$0C                ; zero page address of pointer to dest buffer
+        LDA #$1E                ; length of string to copy (30 bytes)
+        JSR CopyFString         ; Copy a fixed-length string
         LDX #$02
         JSR s384F
-        LDX #$02        ; zero page address of pointer to source string
-        LDY #$04        ; zero page address of pointer to dest buffer
-        LDA #$12        ; length of string to copy (18 bytes)
-        JSR CopyFString ; Copy a fixed-length string
+        LDX #$02                ; zero page address of pointer to source string
+        LDY #$04                ; zero page address of pointer to dest buffer
+        LDA #$12                ; length of string to copy (18 bytes)
+        JSR CopyFString         ; Copy a fixed-length string
         LDY #$16
         LDA (r14L),Y
         BEQ b4490
@@ -4579,10 +4306,10 @@ s4449   LDY #$00
         LDA a75
         LDX #$0C
         JSR s464D
-        LDX #$0A        ; zero page address of pointer to source string
-        LDY #$0C        ; zero page address of pointer to dest buffer
-        LDA #$44        ; length of string to copy (68 bytes)
-        JSR CopyFString ; Copy a fixed-length string
+        LDX #$0A                ; zero page address of pointer to source string
+        LDY #$0C                ; zero page address of pointer to dest buffer
+        LDA #$44                ; length of string to copy (68 bytes)
+        JSR CopyFString         ; Copy a fixed-length string
 b4490   LDA a75
         JSR s44C4
 b4495   LDX #$00
@@ -4646,7 +4373,7 @@ b44F3   LDA r3L
         STA r0H
         PLA 
         PHA 
-        JSR s47D3    ;push A, shift A left (x2), LDA r0, STA as index into $03C4, pull A
+        JSR s47D3               ; push A, shift A left (x2), LDA r0, STA as index into $03C4, pull A
         JSR s452F
 b4508   PLA 
         RTS 
@@ -4731,15 +4458,12 @@ b45B3   STA (r0L),Y
         PLA 
         RTS 
 
-s45BC   LDA #>p7F02
-        STA r7H
-        LDA #<p7F02
-        STA r7L
-b45C4   LDX #$0E     ;zp address of pointer to source string
-        LDY #$10     ;zp address of pointer to dest string
-        LDA #$1E     ;length of strings to compare
+s45BC   LoadW r7, p7F02
+b45C4   LDX #$0E                ; zp address of pointer to source string
+        LDY #$10                ; zp address of pointer to dest string
+        LDA #$1E                ; length of strings to compare
         JSR CmpFString
-        BEQ b45E4    ;if strings match, jump ahead to exit (X=0)
+        BEQ b45E4               ; if strings match, jump ahead to exit (X=0)
         CLC 
         LDA #$20
         ADC r7L
@@ -4790,30 +4514,23 @@ b460A   ASL
 b4618   PLA 
         RTS 
 
-s461A   LDA #>p010E
-        STA rightMarginHi
-        LDA #<p010E
-        STA rightMarginLo
-        LDA #$08
-        STA r13L
+s461A   LoadW rightMargin, p010E
+        LoadB r13L, $08
         LDA #$08
         JSR s49D0
         LDA #$10
-        JSR s49CC    ;draw a pad file icon and filename
-        LDA #>p013F
-        STA rightMarginHi
-        LDA #<p013F
-        STA rightMarginLo
+        JSR s49CC               ; draw a pad file icon and filename
+        LoadW rightMargin, p013F
         RTS 
 
 ; Clear desktop border
 s4639   JSR s244A
-        JSR i_Rectangle ;Erase border contents
-        .BYTE $90,$C7,$3E,$00 ;y1=144, y2=199, x1=62, x2=270
+        JSR i_Rectangle         ; Erase border contents
+        .BYTE $90,$C7,$3E,$00   ; y1=144, y2=199, x1=62, x2=270
         .BYTE $0E,$01
 s4645   JSR s58B2
         LDA #$11
-        JMP j4752    ;after disk icons loaded
+        JMP j4752               ; after disk icons loaded
 
 s464D   PHA 
         TXA 
@@ -4853,8 +4570,7 @@ b467B   LDA #$26
 b4688   PLA 
         RTS 
 
-s468A   LDA a77
-        CMP #$6D
+s468A   CmpBI a77, $6D
         BCC b4694
         CMP #$7F
         BCC b46B1
@@ -4887,8 +4603,7 @@ s46B4   PHA
 b46BE   SEC 
         SBC #$08
         STA r14L
-        LDA #$12
-        STA r15L
+        LoadB r15L, $12
         TXA 
         PHA 
         LDY #$1E
@@ -4915,10 +4630,7 @@ s46E1   LDA #$02
         RTS 
 
 ; r9 = $77/$76, A=*(r9+Y)
-s46ED   LDA a77
-        STA r9H
-        LDA a76
-        STA r9L
+s46ED   MoveW a76, r9
         LDY #$16
         LDA (r9L),Y
         RTS 
@@ -4926,37 +4638,29 @@ s46ED   LDA a77
 ; Display trash and printer icons and activate handlers
 s46FA   LDX #$BC
         LDA #$00
-b46FE   STA f0423,X  ;loop to clear main icon table data
-        DEX          ;counting backwards from $bc to $0 (1059-1247)
+b46FE   STA f0423,X             ; loop to clear main icon table data
+        DEX                     ; counting backwards from $bc to $0 (1059-1247)
         BNE b46FE
         LDX #$2E
         LDA #$00
-b4708   STA f03C3,X  ;loop to clear $03c3-$03f1
+b4708   STA f03C3,X             ; loop to clear $03c3-$03f1
         DEX 
-        BNE b4708    ;repeat loop
-        LDA #$17
-        STA a0424
+        BNE b4708               ; repeat loop
+        LoadB a0424, $17
         JSR s4731
-        LDA #>a0424  ;still trying to find out how these icons get here.  doesnt seem to be from desktop code. dummy icon tbl?
-        STA r0H      ;hi byte of icon table
-        LDA #<a0424
-        STA r0L      ;lo byte of icon table
+        LoadW r0, a0424         ; still trying to find out how these icons get here.  doesnt seem to be from desktop code. dummy icon tbl?
         JSR DoIcons
         JSR s58B2
         LDA #$00
-b4726   JSR j4752    ;after disk icons loaded
+b4726   JSR j4752               ; after disk icons loaded
         CLC 
         ADC #$01
         CMP #$17
         BCC b4726
         RTS 
 
-s4731   LDA #>p4742
-        STA r0H
-        LDA #<p4742
-        STA r0L
-        LDA #$02
-        STA r13L
+s4731   LoadW r0, p4742
+        LoadB r13L, $02
         LDA #$10
         JMP j49AA
 
@@ -4979,19 +4683,16 @@ j4752   TAY
         STA leftMarginHi
         LDA #<r3H
         STA leftMarginLo
-        LDA #>p0105
-        STA rightMarginHi
-        LDA #<p0105
-        STA rightMarginLo
+        LoadW rightMargin, p0105
 b4773   TYA 
         PHA 
         JSR s497F
         ORA r0L
         BEQ b47A8
-        JSR s5793    ;Write single icon filename on pad
+        JSR s5793               ;Write single icon filename on pad
         PLA 
         PHA 
-        JSR s4932    ;called many times during icons draw routine
+        JSR s4932               ;called many times during icons draw routine
         CLC 
         ADC r3L
         STA r3L
@@ -5005,9 +4706,9 @@ b478D   LDA r3H
         LDA r2H
         ADC #$08
         STA r1H
-        JSR s47B8    ;change fonts
-        JSR s59C0    ;load $8b80 to r0
-        JSR s57D7    ;Print file names on pad (saved to 8b80)
+        JSR s47B8               ;change fonts
+        JSR s59C0               ;load $8b80 to r0
+        JSR s57D7               ;Print file names on pad (saved to 8b80)
         JSR UseSystemFont
 b47A8   PLA 
         TAY 
@@ -5023,11 +4724,8 @@ b47A8   PLA
         RTS 
 
 ; change fonts
-s47B8   LDA #>p2998
-        STA r0H      ;hi byte of new font
-        LDA #<p2998
-        STA r0L      ;lo byte of new font
-        JMP LoadCharSet ;begin using a new font
+s47B8   LoadW r0, p2998         ; address of new font
+        JMP LoadCharSet         ;begin using a new font
 
 s47C3   LDA curDrive
 s47C6   AND #$03
@@ -5058,13 +4756,13 @@ s47E3   PHA
         JSR s483A
         BEQ b4802
         PLA 
-        JSR s4846    ;set pattern based on index in A and $4850
+        JSR s4846               ;set pattern based on index in A and $4850
         PHA 
-        JSR s4932    ;called many times during icons draw routine
+        JSR s4932               ;called many times during icons draw routine
         JSR Rectangle
         PLA 
         PHA 
-        JSR s4866    ;clear / restore a rectangle (disk icons and pad) with pattern
+        JSR s4866               ;clear / restore a rectangle (disk icons and pad) with pattern
         PLA 
         PHA 
         CMP #$08
@@ -5129,7 +4827,7 @@ f4850   .BYTE $00,$00,$00,$00,$00,$00,$00,$00
         .BYTE $02,$02,$00,$09,$02,$02
 
 ; clear / restore a rectangle (disk icons and pad) with pattern
-s4866   JSR s4846    ;set pattern based on index in A and $4850
+s4866   JSR s4846               ;set pattern based on index in A and $4850
         PHA 
         JSR s4879
         BEQ b4877
@@ -5148,10 +4846,10 @@ s4879   ASL
         RTS 
 
 s4883   PHA 
-        JSR s47B8    ;change fonts
+        JSR s47B8               ;change fonts
         PLA 
         PHA 
-        JSR s4932    ;called many times during icons draw routine
+        JSR s4932               ;called many times during icons draw routine
         CLC 
         ADC r3L
         STA r3L
@@ -5160,8 +4858,8 @@ s4883   PHA
 b4895   PLA 
         PHA 
         JSR s497F
-        JSR s5793    ;Write single icon filename on pad
-        JSR s59C0    ;load $8b80 to r0
+        JSR s5793               ;Write single icon filename on pad
+        JSR s59C0               ;load $8b80 to r0
         JSR s57EE
         LDA r4L
         LSR 
@@ -5174,21 +4872,14 @@ b4895   PLA
         SBC #$00
         STA r3H
         BPL b48BD
-        LDA #$00
-        STA r3L
+        LoadB r3L, $00
         STA r3H
-b48BD   JSR s4971    ;r4 = r4 + r3
-        LDA #>p013F
-        STA r13H
-        LDA #<p013F
-        STA r13L
-        JSR s4921    ;if r4 != r13 then r4 = r13
+b48BD   JSR s4971               ;r4 = r4 + r3
+        LoadW r13, p013F
+        JSR s4921               ;if r4 != r13 then r4 = r13
         LDA r2H
         STA r2L
-        LDA r2L
-        CLC 
-        ADC #$04
-        STA r2L
+        AddVB $04, r2L
         LDA currentHeight
         CLC 
         ADC r2L
@@ -5198,11 +4889,8 @@ b48BD   JSR s4971    ;r4 = r4 + r3
         PLA 
         CMP #$14
         BCC b48F3
-        LDA #>p0108
-        STA r13H
-        LDA #<p0108
-        STA r13L
-        JSR s4910    ;if r3 != r13 then r3 = r13
+        LoadW r13, p0108
+        JSR s4910               ;if r3 != r13 then r3 = r13
         CLV 
         BVC b490D
 b48F3   CMP #$10
@@ -5211,12 +4899,9 @@ b48F3   CMP #$10
         STA r13H
         LDA #<r3H
         STA r13L
-        JSR s4910    ;if r3 != r13 then r3 = r13
-        LDA #>p0106
-        STA r13H
-        LDA #<p0106
-        STA r13L
-        JSR s4921    ;if r4 != r13 then r4 = r13
+        JSR s4910               ;if r3 != r13 then r3 = r13
+        LoadW r13, p0106
+        JSR s4921               ;if r4 != r13 then r4 = r13
 b490D   JMP UseSystemFont
 
 ; if r3 != r13 then r3 = r13
@@ -5244,8 +4929,7 @@ b4931   RTS
 ; called many times during icons draw routine
 s4932   LDX #$0C
         JSR s498D
-        LDA #$00
-        STA r3H
+        LoadB r3H, $00
         LDY #$02
         LDA (r5L),Y
         ASL 
@@ -5257,8 +4941,7 @@ s4932   LDX #$0C
         LDA (r5L),Y
         STA r2L
         INY 
-        LDA #$00
-        STA r4H
+        LoadB r4H, $00
         LDA (r5L),Y
         ASL 
         ASL 
@@ -5270,7 +4953,7 @@ s4932   LDX #$0C
         STA r4L
         BCS b4961
         DEC r4H
-b4961   JSR s4971    ;r4 = r4 + r3
+b4961   JSR s4971               ;r4 = r4 + r3
         INY 
         LDA (r5L),Y
         CLC 
@@ -5324,8 +5007,7 @@ j49AA   ASL
         ASL 
         TAX 
         LDY #$00
-b49B0   LDA #$08
-        STA r13H
+b49B0   LoadB r13H, $08
 b49B4   LDA (r0L),Y
         STA f0428,X
         INX 
@@ -5349,13 +5031,13 @@ s49D0   TAY
         JSR s4A16
         BEQ b4A08
         DEY 
-b49DC   LDA (r5L),Y  ;loop to load bitmap data from *0c to r0 ($02)
+b49DC   LDA (r5L),Y             ; loop to load bitmap data from *0c to r0 ($02)
         STA r0L,X
         INX 
         INY 
         CPY #$06
         BNE b49DC
-        JSR BitmapUp ;place a compacted bitmap on screen
+        JSR BitmapUp            ; place a compacted bitmap on screen
         PLA 
         PHA 
         CMP #$08
@@ -5365,13 +5047,13 @@ b49DC   LDA (r5L),Y  ;loop to load bitmap data from *0c to r0 ($02)
         JSR s4A3E
 b49F7   PLA 
         PHA 
-        JSR j4752    ;after disk icons loaded
+        JSR j4752               ;after disk icons loaded
         PLA 
         PHA 
         JSR s3FD5
         CPX #$FF
-        BEQ b4A08    ;do not invert icon if X=$FF
-        JSR s4824    ;invert icon
+        BEQ b4A08               ;do not invert icon if X=$FF
+        JSR s4824               ;invert icon
 b4A08   PLA 
         TAX 
         INX 
@@ -5425,9 +5107,9 @@ s4A3E   STA r0L
         BVC b4A65
 s4A61   TAY 
         LDA a8FF0
-b4A65   JSR s2533    ;compare version to 32
+b4A65   JSR s2533               ;compare version to 32
         BCC b4A96
-        JSR s5926    ;if pad view mode is icon, then CARRY=1, else CARRY=0
+        JSR s5926               ;if pad view mode is icon, then CARRY=1, else CARRY=0
         BCC b4A96
         STA r0L
         LDA f457A,Y
@@ -5441,10 +5123,7 @@ b4A81   STA (r5L),Y
         INY 
         CPY #$03
         BNE b4A81
-        LDA r5L
-        CLC 
-        ADC #$28
-        STA r5L
+        AddVB $28, r5L
         BCC b4A93
         INC r5H
 b4A93   DEX 
@@ -5475,10 +5154,10 @@ b4AA2   AND #$F0
 b4ABB   RTS 
 
 ; CLICK HANDLER - Pad Pager
-        JSR s4B03    ;called by CLICK HANDLER - Pager
+        JSR s4B03               ; called by CLICK HANDLER - Pager
 b4ABF   LDA r1L
         PHA 
-        JSR s4B1F    ;Pad pager clicked (next and prev)
+        JSR s4B1F               ; Pad pager clicked (next and prev)
         PLA 
         CLC 
         ADC aFB
@@ -5493,7 +5172,7 @@ b4AD5   CMP aFB
         STA aFB
         JSR s3426
         JSR s599C
-b4AE1   JMP j3B7C    ;Draw pad icons and increment / decrement page number on pad
+b4AE1   JMP j3B7C               ; Draw pad icons and increment / decrement page number on pad
 
 s4AE4   CMP aFD
         BEQ b4AEA
@@ -5502,12 +5181,10 @@ b4AEA   CMP aFB
         BEQ b4B02
         PHA 
         BCS b4AF7
-        LDA #$FF
-        STA r1L
+        LoadB r1L, $FF
         BNE b4AFB
-b4AF7   LDA #$01
-        STA r1L
-b4AFB   JSR s4B1F    ;Pad pager clicked (next and prev)
+b4AF7   LoadB r1L, $01
+b4AFB   JSR s4B1F               ; Pad pager clicked (next and prev)
         PLA 
         JSR b4AD5
 b4B02   RTS 
@@ -5534,13 +5211,12 @@ s4B1F   LDA r1L
         PHA 
         JSR s40F3
         JSR s237E
-        JSR s586C    ;changing pad page
+        JSR s586C               ; changing pad page
         LDA #>r11L
         STA r4H
         LDA #<r11L
         STA r4L
-        LDA #$7C
-        STA r11L
+        LoadB r11L, $7C
         PLA 
         PHA 
         STA r1L
@@ -5551,21 +5227,14 @@ s4B1F   LDA r1L
         STA r1L
         TYA 
         BPL b4B5B
-        LDA #>p68
-        STA r4H
-        LDA #<p68
-        STA r4L
-        LDA #$29
-        STA r11L
-        LDA #>pFFF8
-        STA r1H
-        LDA #<pFFF8
-        STA r1L
+        LoadW r4, p68
+        LoadB r11L, $29
+        LoadW r1, pFFF8
 b4B5B   LDA #<p0A00
         STA r0L
         LDA #>p0A00
         STA r0H
-b4B63   LDA #>r3H    ;start loop to draw pager animation
+b4B63   LDA #>r3H               ; start loop to draw pager animation
         STA r3H
         LDA #<r3H
         STA r3L
@@ -5573,14 +5242,13 @@ b4B63   LDA #>r3H    ;start loop to draw pager animation
         JSR HorizontalLine
         LDA r11L
         STA r3L
-        LDA #$8A
-        STA r3H
+        LoadB r3H, $8A
         LDA r0L
         JSR VerticalLine
         LDA r0L
         EOR #$FF
         STA r0L
-        BPL b4B63    ;end loop to draw pager animation
+        BPL b4B63               ;end loop to draw pager animation
         LDA r1L
         CLC 
         ADC r4L
@@ -5595,33 +5263,23 @@ b4B63   LDA #>r3H    ;start loop to draw pager animation
         DEC r0H
         BNE b4B63
         LDA #$12
-        JSR s49CC    ;draw a pad file icon and filename
+        JSR s49CC               ; draw a pad file icon and filename
         PLA 
         STA r1L
         RTS 
 
-s4BA6   LDA #>p4BDF
-        STA r0H
-        LDA #<p4BDF
-        STA r0L
+s4BA6   LoadW r0, p4BDF
         LDA padViewMode
         BEQ b4BC4
-        JSR i_FrameRectangle ;Draw rectangle (clear) bottom of pad to erase pager
-        .BYTE $7C,$8B,$08,$00,$07,$01,$FF ;y1=124, y2=139, x1=8, x2=263
-        LDA #>p4BE7
-        STA r0H
-        LDA #<p4BE7
-        STA r0L
+        JSR i_FrameRectangle    ;Draw rectangle (clear) bottom of pad to erase pager (y1=124, y2=139, x1=8, x2=263)
+        .BYTE $7C,$8B,$08,$00,$07,$01,$FF
+        LoadW r0, p4BE7
 b4BC4   LDA #$12
         JSR s49A6
-        LDA #>p4BEF
-        STA r0H
-        LDA #<p4BEF
-        STA r0L
+        LoadW r0, p4BEF
         LDA #$13
         JSR s49A6
-        LDA #$02
-        STA r13L
+        LoadB r13L, $02
         LDA #$12
         JMP s49D0
 
@@ -5630,9 +5288,9 @@ p4BE7   .BYTE $3F,$29,$10,$7C,$02,$10,$09,$55
 p4BEF   .BYTE $81,$29,$1E,$11,$02,$0B,$FC,$35
 
 ; MAIN MENU STRUCTURE ===============================
-mnuStruct .BYTE $00    ;y1=0
-        .BYTE $0C,$00,$00 ;y2=12, x1=0
-        .BYTE $C9,$00,$07 ;x2=201, attribute=HORIZONTAL | 7 items
+mnuStruct .BYTE $00             ;y1=0
+        .BYTE $0C,$00,$00       ;y2=12, x1=0
+        .BYTE $C9,$00,$07       ;x2=201, attribute=HORIZONTAL | 7 items
 
 ; 3rd byte = $40 = Dynamic submenu (all GEOS top level menus define submenus as dynamic)
 mnuStructGEOS .BYTE $10,$2F,$40,$24,$4D
@@ -5711,54 +5369,54 @@ f4D1A   .TEXT "GEOS BOOT", $A0
 
 ; GEOS submenu handler ====================
         LDX #$04
-        JSR s4DA4    ;before drawing menus or dialog boxes
-        LDA #$21     ;< address of submenu
-        LDY #$4C     ;> address of submenu
+        JSR s4DA4               ;before drawing menus or dialog boxes
+        LDA #$21                ;< address of submenu
+        LDY #$4C                ;> address of submenu
         BNE b4D6F
 
 ; file submenu handler ====================
         LDX #$08
-        JSR s4DA4    ;before drawing menus or dialog boxes
-        LDA #$64     ;< address of submenu
-        LDY #$4C     ;> address of submenu
+        JSR s4DA4               ;before drawing menus or dialog boxes
+        LDA #$64                ;< address of submenu
+        LDY #$4C                ;> address of submenu
         BNE b4D6F
 
 ; view submenu handler ====================
         LDX #$0C
-        JSR s4DA4    ;before drawing menus or dialog boxes
-        LDA #$8E     ;< address of submenu
-        LDY #$4C     ;> address of submenu
+        JSR s4DA4               ;before drawing menus or dialog boxes
+        LDA #$8E                ;< address of submenu
+        LDY #$4C                ;> address of submenu
         BNE b4D6F
 
 ; disk submenu handler ====================
         LDX #$10
-        JSR s4DA4    ;before drawing menus or dialog boxes
-        LDA #$AE     ;< address of submenu
-        LDY #$4C     ;> address of submenu
+        JSR s4DA4               ;before drawing menus or dialog boxes
+        LDA #$AE                ;< address of submenu
+        LDY #$4C                ;> address of submenu
         BNE b4D6F
 
 ; show select submenu
         LDX #$14
-        JSR s4DA4    ;before drawing menus or dialog boxes
-        LDA #$D8     ;< address of submenu
-        LDY #$4C     ;> address of submenu
+        JSR s4DA4               ;before drawing menus or dialog boxes
+        LDA #$D8                ;< address of submenu
+        LDY #$4C                ;> address of submenu
         BNE b4D6F
 
 ; page submenu handler ====================
         LDX #$18
-        JSR s4DA4    ;before drawing menus or dialog boxes
-        LDA #$EE     ;< address of submenu
-        LDY #$4C     ;> address of submenu
+        JSR s4DA4               ;before drawing menus or dialog boxes
+        LDA #$EE                ;< address of submenu
+        LDY #$4C                ;> address of submenu
         BNE b4D6F
 
 ; options submenu handler ====================
         LDX #$1C
-        JSR s4DA4    ;before drawing menus or dialog boxes
+        JSR s4DA4               ;before drawing menus or dialog boxes
         LDA #<_mnuStructOptions ;< address of submenu
         LDY #>_mnuStructOptions ;> address of submenu
 b4D6F   STY r0H
         STA r0L
-        JMP MainMenuHandler ;When user clicks on top level menu, this code executes before submenus displayed
+        JMP MainMenuHandler     ;When user clicks on top level menu, this code executes before submenus displayed
 
 a4D76   .BYTE $00
         LDX a4D76
@@ -5770,7 +5428,7 @@ a4D76   .BYTE $00
         LDX #$20
 b4D87   TXA 
         PHA 
-        JSR j26F4    ;comes here after drawing pad and disk info - seems to draw file icons
+        JSR j26F4               ;comes here after drawing pad and disk info - seems to draw file icons
         JSR s4A25
         PLA 
         TAX 
@@ -5779,23 +5437,22 @@ b4D87   TXA
         CPX #$20
         BNE b4D9E
         JSR s3BB1
-b4D9E   LDA #$FF
-        STA a4D76
+b4D9E   LoadB a4D76, $FF
 b4DA3   RTS 
 
 ; before drawing menus or dialog boxes
 s4DA4   STX a4D76
-        JSR s4E84    ;store $6600 in r1, copy table values from $fe9f+X to r2L, r2H, r3L, r4H
+        JSR s4E84               ;store $6600 in r1, copy table values from $fe9f+X to r2L, r2H, r3L, r4H
         JSR s4DF1
         LDY #$00
         TYA 
         STA (r7L),Y
         BEQ b4DBC
-s4DB4   JSR s4E84    ;store $6600 in r1, copy table values from $fe9f+X to r2L, r2H, r3L, r4H
+s4DB4   JSR s4E84               ;store $6600 in r1, copy table values from $fe9f+X to r2L, r2H, r3L, r4H
         JSR s4DF1
         LDA #$FF
 b4DBC   STA r4H
-b4DBE   LDX r2H      ;Y Coordinate of line to calculate memory address
+b4DBE   LDX r2H                 ;Y Coordinate of line to calculate memory address
         JSR GetScanLine
         LDA r2L
         ASL 
@@ -5808,7 +5465,7 @@ b4DCC   TAY
         STA r4L
 b4DD1   BIT r4H
         BPL b4DDB
-        JSR s4E4E    ;called during remove dialog box / screen restore
+        JSR s4E4E               ;called during remove dialog box / screen restore
         CLV 
         BVC b4DDE
 b4DDB   JSR s4E04
@@ -5824,7 +5481,7 @@ b4DE5   TAY
         BNE b4DBE
         RTS 
 
-s4DF1   JSR s4DFB    ;copy r1 to r7
+s4DF1   JSR s4DFB               ;copy r1 to r7
 
 ; increment r1 (word)
 s4DF4   INC r1L
@@ -5862,7 +5519,7 @@ b4E24   LDA (r7L),Y
         BEQ b4E35
 b4E2C   TXA 
         STA (r1L),Y
-        JSR s4DF4    ;increment r1 (word)
+        JSR s4DF4               ;increment r1 (word)
         CLV 
         BVC b4E45
 b4E35   JSR s4DF1
@@ -5900,7 +5557,7 @@ b4E5E   LDX #$00
         BEQ b4E75
 b4E6E   LDA (r1L),Y
         PHA 
-        JSR s4DF4    ;increment r1 (word)
+        JSR s4DF4               ;increment r1 (word)
         PLA 
 b4E75   TAX 
         LDA (r7L),Y
@@ -5917,10 +5574,7 @@ b4E7D   PLA
 ; store $6600 in r1, copy table values from $fe9f+X to r2L, r2H, r3L, r4H
 s4E84   TXA 
         PHA 
-        LDA #>p6600
-        STA r1H
-        LDA #<p6600
-        STA r1L
+        LoadW r1, p6600
         LDY #$00
 b4E90   LDA f4E9F,X
         STA r2L,Y
@@ -5952,42 +5606,41 @@ a4EA6   .BYTE $3A,$04,$0C,$0C,$64,$06,$0C,$07
         CLC 
         ADC r6L
         ADC #$66
-        STA r6L      ;filename pointer r6
+        STA r6L                 ;filename pointer r6
         LDA #$00
         ADC #$0A
-        STA r6H      ;filename pointer r6
+        STA r6H                 ;filename pointer r6
         JSR FindFile
         JSR s599C
 
 ; Load and run a desk accessory
-j4EE4   JSR s3FF6    ;unselect and un-reverse icon(s), 0 selected
-        JSR s5A01    ;Load directory entry buffer to r9
+j4EE4   JSR s3FF6               ;unselect and un-reverse icon(s), 0 selected
+        JSR s5A01               ;Load directory entry buffer to r9
         LDX #$00
-        STX r10L     ;always set to zero for desk accessory
+        STX r10L                ;always set to zero for desk accessory
         STX r0L
         LDA a4C96
         PHA 
         LDA mnuStructViewIcon
         PHA 
-        JSR LdDeskAcc
-        LDA #$80     ;draw on foreground screen
-        STA displayBufferOn
+        JSR LdDeskAcc  
+        LoadB displayBufferOn, $80      ; draw on foreground screen
         PLA 
         STA mnuStructViewIcon
         PLA 
         STA a4C96
         TXA 
         PHA 
-        LDA screencolors ;restore screen colors after desk accessory returns
+        LDA screencolors        ;restore screen colors after desk accessory returns
         STA a4F16
         JSR i_FillRam
-        .BYTE $E8,$03,$00,$8C ;count=1000 bytes, start=$8c00, fill= screencolors
+        .BYTE $E8,$03,$00,$8C   ;count=1000 bytes, start=$8c00, fill= screencolors
 a4F16   .BYTE $00
         PLA 
         BEQ b4F1E
         TAX 
         JSR s259A
-b4F1E   JMP p5175    ;DESKTOP MAIN ENTRY POINT ==================================
+b4F1E   JMP p5175               ;DESKTOP MAIN ENTRY POINT ==================================
 
 ; Disk->Open menu action
         JSR DoPreviousMenu
@@ -6003,7 +5656,7 @@ b4F36   JMP j5331
 
 b4F39   JSR s47C3
         JSR s47E3
-        JSR b316E    ;Open a disk
+        JSR b316E               ;Open a disk
         JMP b3164
 
 ; Disk->Copy Menu Action =========================
@@ -6013,7 +5666,7 @@ b4F39   JSR s47C3
         RTS 
 
 b4F4E   JSR s237E
-        JSR s3FF6    ;unselect and un-reverse icon(s), 0 selected
+        JSR s3FF6               ; unselect and un-reverse icon(s), 0 selected
         JSR GetDirHead
         TXA 
         BNE b4FD6
@@ -6022,7 +5675,7 @@ b4F4E   JSR s237E
         BEQ b4F63
         BCS b4FA8
 b4F63   STA a0520
-        JSR s338E    ;Calculate blocks free
+        JSR s338E               ;Calculate blocks free
         LDA r0L
         LDY isGEOS
         BEQ b4F72
@@ -6031,14 +5684,13 @@ b4F72   ORA r0H
         BNE b4F84
         LDX #$50
         LDA #$3A
-        JSR s2483    ;COMMON DIALOG BOX ROUTINE ============================
+        JSR s2483               ;COMMON DIALOG BOX ROUTINE ============================
         LDA r0L
         CMP #$03
         BEQ b4F84
         RTS 
 
-b4F84   LDA a82BD
-        CMP #$42
+b4F84   CmpBI a82BD, $42
         BNE b4F8E
         JMP j50DA
 
@@ -6071,7 +5723,7 @@ b4FBA   STA a0521
         STA a2E08
         LDX #$50
         LDA #$A8
-        JSR s2483    ;COMMON DIALOG BOX ROUTINE ============================
+        JSR s2483               ;COMMON DIALOG BOX ROUTINE ============================
         LDA r0L
         CMP #$02
         BNE b4FD7
@@ -6079,10 +5731,10 @@ b4FD6   RTS
 
 b4FD7   LDA a70
         JSR s1AF1
-        JSR NewDisk  ;     tell the turbo software that a new disk has been inserted into the drive
+        JSR NewDisk             ; tell the turbo software that a new disk has been inserted into the drive
         TXA 
         BNE b4FE8
-        JSR GetDirHead ;     read directory header and BAM from disk
+        JSR GetDirHead          ; read directory header and BAM from disk
         TXA 
         BEQ b5000
 b4FE8   JSR s5491
@@ -6102,29 +5754,28 @@ b5000   LDA a82BD
         JSR j50DA
         CLV 
         BVC j5034
-b500B   LDA a0521
-        CMP #$02
+b500B   CmpBI a0521, $02
         BNE b5021
         BIT a8203
         BMI b5021
-        LDA #$01
-        STA a0521
+        LoadB a0521, $01
         CMP a0520
         BNE b4FF8
 b5021   JSR s5060
         LDX #$50
         LDA #$BA
-        JSR s2483    ;COMMON DIALOG BOX ROUTINE ============================
+        JSR s2483               ;COMMON DIALOG BOX ROUTINE ============================
         LDA r0L
         CMP #$02
         BEQ j5034
         JSR s1956
 j5034   JSR s23DC
-        JMP p5175    ;DESKTOP MAIN ENTRY POINT ==================================
+        JMP p5175               ;DESKTOP MAIN ENTRY POINT ==================================
 
         .BYTE $81,$0B,$0C,$20,$CD,$30,$0B,$0C
         .BYTE $30,$DD,$30,$03,$01,$48,$04,$11
         .BYTE $48,$00
+
 s504C   LDY curDrive
         LDA f8486,Y
         AND #$0F
@@ -6135,37 +5786,22 @@ s504C   LDY curDrive
         LDA #$01
 b505F   RTS 
 
-s5060   JSR s59DB       ; load $8290 to r2
-        JSR s2562       ; load r6 with $8be4
+s5060   JSR s59DB               ; load $8290 to r2
+        JSR s2562               ; load r6 with $8be4
         LDY #$0E
         JSR s2416
-        LDX #$06        ; zero page address of pointer to source string
-        LDA #>p8BBC
-        STA r3H
-        LDA #<p8BBC
-        STA r3L
-        LDY #$08        ; zero page address of pointer to destination buffer
-        LDA #$12        ; length of string to copy
-        JSR CopyFString ; copy string
-        LDA #>a0200
-        STA r2H
-        LDA #<a0200
-        STA r2L
-        LDA #>p8BD0
-        STA r7H
-        LDA #<p8BD0
-        STA r7L
+        LDX #$06                ; zero page address of pointer to source string
+        LoadW r3, p8BBC
+        LDY #$08                ; zero page address of pointer to destination buffer
+        LDA #$12                ; length of string to copy
+        JSR CopyFString         ; copy string
+        LoadW r2, a0200
+        LoadW r7, p8BD0
         LDX #$06
         LDY #$10
         JSR s2416
-        LDA #>p8BBC
-        STA a03F9
-        LDA #<p8BBC
-        STA a03F8
-        LDA #>a0200
-        STA a03F7
-        LDA #<a0200
-        STA a03F6
+        LoadW a03F8, p8BBC
+        LoadW a03F6, a0200
         RTS 
 
         .BYTE $81,$0B,$10,$20,$C9,$2D,$0B,$10
@@ -6174,6 +5810,7 @@ s5060   JSR s59DB       ; load $8290 to r2
         .BYTE $0C,$10,$20,$0E,$0B,$10,$30,$39
         .BYTE $2E,$0C,$10,$40,$10,$03,$01,$48
         .BYTE $02,$11,$48,$00
+
 s50D4   .BYTE $A0
         .BYTE $97,$A2
         .BYTE $2B,$D0
@@ -6199,35 +5836,34 @@ s50F1   LDY #$9E
         LDY #$36
         LDX #$2C
         BNE b510F
-        JSR s46ED    ;r9 = $77/$76, A=*(r9+Y)
-        CMP #$04     ;is this a SYSTEM file type?
-        BEQ b5109    ;if so, skip ahead
+        JSR s46ED               ;r9 = $77/$76, A=*(r9+Y)
+        CMP #$04                ;is this a SYSTEM file type?
+        BEQ b5109               ;if so, skip ahead
         CMP #$0C
-        BEQ b5109    ;this is a SYSTEM file type
+        BEQ b5109               ;this is a SYSTEM file type
         RTS 
 
 ; this is a SYSTEM file type
 b5109   PLA 
         PLA 
-j510B   LDY #<p2CAE  ;Y = low byte pointer to "a System Boot file"
-        LDX #>p2CAE  ;X = low byte pointer to "a System Boot file"
+j510B   LDY #<p2CAE             ;Y = low byte pointer to "a System Boot file"
+        LDX #>p2CAE             ;X = low byte pointer to "a System Boot file"
 b510F   STY r5L
         STX r5H
         LDX #$51
         LDA #$1D
-        JSR s2483    ;COMMON DIALOG BOX ROUTINE ============================
+        JSR s2483               ;COMMON DIALOG BOX ROUTINE ============================
         LDX #$0C
         RTS 
 
         .BYTE $81,$0B,$18,$10,$4A,$2E,$0B,$10
         .BYTE $20,$63,$2E,$0C,$10,$30,$0C,$01
         .BYTE $11,$48,$00
-        LDA a76
-        STA r9L
+
+        MoveB a76, r9L
         STA r6L
         STA r7L
-        LDA a77
-        STA r9H
+        MoveB a77, r9H
         STA r6H
         STA r7H
         CMP #$6D
@@ -6236,19 +5872,19 @@ b510F   STY r5L
 b5147   RTS 
 
 ; View->All Menu Items Menu Action ======================
-        PHA          ;A= (0=icon, 1=size, 2=type, 3=date, 4=name)
+        PHA                     ;A= (0=icon, 1=size, 2=type, 3=date, 4=name)
         JSR DoPreviousMenu
         PLA 
-        CMP padViewMode ;is the selected view mode same as current?
-        BEQ b516B    ;exit if so
+        CMP padViewMode         ;is the selected view mode same as current?
+        BEQ b516B               ;exit if so
         LDX diskOpenFlg
         BEQ b516B
-        STA padViewMode ;save the new view mode
+        STA padViewMode         ;save the new view mode
         CMP #$00
         BNE b515F
         JSR s3426
-b515F   JSR s3FF6    ;unselect and un-reverse icon(s), 0 selected
-        JSR s586C    ;changing pad page
+b515F   JSR s3FF6               ;unselect and un-reverse icon(s), 0 selected
+        JSR s586C               ;changing pad page
         JSR s3B4C
         JSR s4BA6
 b516B   RTS 
@@ -6256,7 +5892,7 @@ b516B   RTS
 ; Options->Reset Menu Action ======================
         JSR DoPreviousMenu
         JSR s40F3
-        JMP p5175    ;DESKTOP MAIN ENTRY POINT ==================================
+        JMP p5175               ;DESKTOP MAIN ENTRY POINT ==================================
 
 ; DESKTOP MAIN ENTRY POINT ==================================
 p5175   LDX #$48
@@ -6279,37 +5915,29 @@ b518B   STA f0070,Y
         STA a0248
         STA a1872
         STA a0AF0
-        LDA #$FF
-        STA a024D
+        LoadB a024D, $FF
         STA a04EC
         JSR s51ED
-        LDA #>p5202
-        STA r0H
-        LDA #<p5202
-        STA r0L
+        LoadW r0, p5202
         JSR InitRam
         JSR s2515
-        JSR s2533    ;compare version to 32
-        BCS b51C4    ;Display main menu, icons, clock, activate handlers
+        JSR s2533               ; compare version to 32
+        BCS b51C4               ; Display main menu, icons, clock, activate handlers
         JSR s5557
 
 ; Display main menu, icons, clock, activate handlers
-b51C4   LDA #>mnuStruct
-        STA r0H
-        LDA #<mnuStruct
-        STA r0L
-        LDA #$02     ;POINTER_OVER=2 (2nd item)
-        JSR DoMenu   ;Draw and active the main menu
-        JSR s46FA    ;Display trash and printer icons and activate handlers
-        JSR s5606    ;Draw Clock Rectangle
-        JSR s5A0A    ;INITIALIZE DESK TOP (After menu built)
+b51C4   LoadW r0, mnuStruct
+        LDA #$02                ; POINTER_OVER=2 (2nd item)
+        JSR DoMenu              ; Draw and active the main menu
+        JSR s46FA               ; Display trash and printer icons and activate handlers
+        JSR s5606               ; Draw Clock Rectangle
+        JSR s5A0A               ; INITIALIZE DESK TOP (After menu built)
         CPX #$21
         BNE b51E1
         JSR s3601
 b51E1   JSR s599C
-        LDA #$FF
-        STA a0249
-        JSR s53D4    ;menu director code
+        LoadB a0249, $FF
+        JSR s53D4               ; menu director code
         RTS 
 
 s51ED   LDX #$90
@@ -6326,6 +5954,7 @@ b51FB   STA a0525,X
 
 p5202   .BYTE $A9,$84,$02,$C6,$40
         .BYTE $9B,$84,$02
+
         JSR eA352
         STY r0L
         EOR (p52,X)
@@ -6358,7 +5987,7 @@ p5202   .BYTE $A9,$84,$02,$C6,$40
 b5240   RTS 
 
         LDA a024C
-        ORA menuNumber ;depth of current menu
+        ORA menuNumber          ;depth of current menu
         BNE b5240
         LDA keyData
         LDX diskOpenFlg
@@ -6381,6 +6010,7 @@ f5279   .BYTE $32,$48,$3F,$70,$D3,$61,$9D,$EE
         .BYTE $F7,$B8,$C1,$CA,$25,$B0,$A5
 f5288   .BYTE $3C,$55,$55,$54,$54,$54,$54,$54
         .BYTE $54,$54,$54,$54,$41,$4A,$4A
+
 b5297   CMP #$30
         BNE b529F
         LDA #$09
@@ -6427,6 +6057,7 @@ f52EE   .BYTE $37,$37,$53,$53,$35,$54,$55,$4F
         .BYTE $4F,$54,$54,$54,$51
 f52FB   .BYTE $A2,$A6,$31,$34,$FC,$E5,$36,$48
         .BYTE $39,$A6,$7F,$88,$6F
+
 b5308   SEC 
         SBC #$99
         BNE b5310
@@ -6458,7 +6089,7 @@ j5334   =*+$01
         BIT sysRAMFlg
         BVC b5373
         PHA 
-        JSR s3FF6    ;unselect and un-reverse icon(s), 0 selected
+        JSR s3FF6               ;unselect and un-reverse icon(s), 0 selected
         PLA 
         STA r10L
         JSR s1AF1
@@ -6477,26 +6108,19 @@ j5334   =*+$01
         LDA r10L
         JSR s1AF1
         JSR j3AB8
-        JMP p5175    ;DESKTOP MAIN ENTRY POINT ==================================
+        JMP p5175               ; DESKTOP MAIN ENTRY POINT ==================================
 
 b5373   RTS 
 
 s5374   PHA 
         TAY 
         LDA f53C4,Y
-        STA r1L      ;stash to REM address - lo
+        STA r1L                 ;stash to REM address - lo
         LDA f53C8,Y
-        STA r1H      ;stash to REM address - hi
-        LDA #>p9000
-        STA r0H      ;copy from cbm $9000 (hi byte)
-        LDA #<p9000
-        STA r0L      ;copy from cbm $9000 (lo byte)
-        LDA #>p0D80
-        STA r2H      ;copy $d80 (3456) bytes - hi
-        LDA #<p0D80
-        STA r2L      ;copy $d80 (3456) bytes - lo
-        LDA #$00
-        STA r3L      ;stash to REU bank 0
+        STA r1H                 ;stash to REM address - hi
+        LoadW r0, p9000         ;copy from cbm $9000
+        LoadW r2, p0D80         ;copy $d80 (3456) bytes
+        LoadB r3L, $00          ;stash to REU bank 0
         JSR StashRAM
         PLA 
         STA r0L
@@ -6512,7 +6136,7 @@ s5374   PHA
         JSR s1AF1
         CLV 
         BVC b53B6
-b53B1   LDA r0L      ;change current drive number to A
+b53B1   LDA r0L                 ;change current drive number to A
         JSR ChangeDiskDevice
 b53B6   LDY curDrive
         PLA 
@@ -6530,51 +6154,48 @@ f53C8   STA f8486,Y
         .BYTE $00,$80,$00,$80,$83,$90,$9E,$AB
 
 ; menu director code
-s53D4   LDY #$01     ;falls through the BIT opcodes depending on which JSR - geos->desk acc selected
+s53D4   LDY #$01                ; falls through the BIT opcodes depending on which JSR - geos->desk acc selected
 s53D7   =*+$01
-        BIT a02A0    ;LDY #$02
+        BIT a02A0               ; LDY #$02
 s53DA   =*+$01
-        BIT a03A0    ;LDY #$03 -  geos->select printer or select input selected
+        BIT a03A0               ; LDY #$03 -  geos->select printer or select input selected
 s53DD   =*+$01
-        BIT a04A0    ;LDY #$04 - geos->info or geos->desktop info selected
+        BIT a04A0               ; LDY #$04 - geos->info or geos->desktop info selected
 s53E0   =*+$01
-        BIT a05A0    ;LDA #$05
+        BIT a05A0               ; LDA #$05
         CPY a7E
         BNE b53EC
-        JSR s5566    ;store $ff to $0248
-        JMP j5434    ;menus are directed here
+        JSR s5566               ;store $ff to $0248
+        JMP j5434               ;menus are directed here
 
 b53EC   LDA a7E
         PHA 
         STY a7E
         LDA curDrive
         PHA 
-b53F5   JSR s2574    ;set r10 to pointer of text "deskTop AM  V2.0"
-        JSR s3DA7    ;overlay buffer area
-        CPX #$0C     ;if X=12 (System Boot File), skip ahead
+b53F5   JSR s2574               ; set r10 to pointer of text "deskTop AM  V2.0"
+        JSR s3DA7               ; overlay buffer area
+        CPX #$0C                ; if X=12 (System Boot File), skip ahead
         BEQ b5438
         TXA 
         BNE b5429
-        JSR s59C0    ;load $8b80 to r0
-        JSR OpenRecordFile ;     Open "DESK TOP" VLIR file.  r1L=TRACK of VLIR index blk, r1H=SECTOR, r5=pointer to diskBlkBuf to start of dir entry
-        TXA          ;move error code to A
-        BNE b5429    ;skip ahead if error
-        LDA a7E      ;Record number to point to
+        JSR s59C0               ; load $8b80 to r0
+        JSR OpenRecordFile      ; Open "DESK TOP" VLIR file.  r1L=TRACK of VLIR index blk, r1H=SECTOR, r5=pointer to diskBlkBuf to start of dir entry
+        TXA                     ; move error code to A
+        BNE b5429               ; skip ahead if error
+        LDA a7E                 ; Record number to point to
         JSR PointRecord
-        TXA          ;move error code to A
-        BNE b5429    ;skip ahead if error
+        TXA                     ; move error code to A
+        BNE b5429               ; skip ahead if error
         LDY #>p5B1E
-        STY r7H      ;read VLIR record to $5B1E buffer (hi byte)
+        STY r7H                 ; read VLIR record to $5B1E buffer (hi byte)
         LDY #<p5B1E
-        STY r7L      ;read VLIR record to $5B1E buffer (lo byte)
-        LDA #>p0AE2
-        STA r2H      ;size of buffer -  2786 bytes (hi byte)
-        LDA #<p0AE2
-        STA r2L      ;size of buffer -  2786 bytes (lo byte)
+        STY r7L                 ; read VLIR record to $5B1E buffer (lo byte)
+        LoadW r2, p0AE2         ; size of buffer -  2786 bytes
         JSR ReadRecord
-        TXA          ;move error code to A
-        BEQ b542F    ;skip ahead if no error
-b5429   JSR s259A    ;handle error
+        TXA                     ; move error code to A
+        BEQ b542F               ; skip ahead if no error
+b5429   JSR s259A               ; handle error
         CLV 
         BVC b53F5
 b542F   PLA 
@@ -6588,7 +6209,7 @@ b5438   PLA
         JSR s1B16
         PLA 
         STA a7E
-        JSR s3FF6    ;unselect and un-reverse icon(s), 0 selected
+        JSR s3FF6               ;unselect and un-reverse icon(s), 0 selected
         LDA a7F
         BNE b5448
         PLA 
@@ -6599,8 +6220,7 @@ b544A   TXA
         LDA a0248
         BNE b5454
         JSR s3858
-b5454   LDA #$00
-        STA a7F
+b5454   LoadB a7F, $00
         STA a0248
         PLA 
         TAX 
@@ -6608,62 +6228,62 @@ b5454   LDA #$00
 
 ; File->Print Menu Action ======================
         JSR DoPreviousMenu
-        JSR s53D4    ;menu director code
+        JSR s53D4               ;menu director code
         JMP p5B1E
 
-        JSR s53D4    ;menu director code
+        JSR s53D4               ;menu director code
         JMP j5B21
 
 ; File->Delete Menu Action ======================
         JSR DoPreviousMenu
-        JSR s53D4    ;menu director code
+        JSR s53D4               ;menu director code
         JMP j5B24
 
-        JSR s53D4    ;menu director code
+        JSR s53D4               ;menu director code
         JMP j5B27
 
 ; Disk->Validate Menu Action ==========================
         JSR DoPreviousMenu
-        JSR s53D4    ;menu director code
+        JSR s53D4               ;menu director code
         JMP j5B2A
 
 ; Disk->Format Menu Action =====================
         JSR DoPreviousMenu
-        JSR s5566    ;store $ff to $0248
-        JSR s53D4    ;menu director code
+        JSR s5566               ;store $ff to $0248
+        JSR s53D4               ;menu director code
         JMP j5B2D
 
-s5491   JSR s5566    ;store $ff to $0248
-        JSR s53D4    ;menu director code
+s5491   JSR s5566               ;store $ff to $0248
+        JSR s53D4               ;menu director code
         JMP j5B30
 
 ; File->Undo Delete Menu Action ======================
         JSR DoPreviousMenu
-        JSR s53D4    ;menu director code
+        JSR s53D4               ;menu director code
         JMP j5B33
 
 ; Disk->Erase Menu Action ============================
         JSR DoPreviousMenu
-        JSR s5566    ;store $ff to $0248
-        JSR s53D4    ;menu director code
+        JSR s5566               ;store $ff to $0248
+        JSR s53D4               ;menu director code
         JMP j5B36
 
-j54AF   JSR s53D4    ;menu director code
+j54AF   JSR s53D4               ;menu director code
         JMP j5B39
 
 ; Select->All Pages Menu Action ======================
         JSR DoPreviousMenu
-        JSR s53D4    ;menu director code
+        JSR s53D4               ;menu director code
         JMP j5B3C
 
 ; Select->Page Files Menu Action ======================
         JSR DoPreviousMenu
-        JSR s53D4    ;menu director code
+        JSR s53D4               ;menu director code
         JMP j5B3F
 
 ; Select->Border Files Menu Action ======================
         JSR DoPreviousMenu
-        JSR s53D4    ;menu director code
+        JSR s53D4               ;menu director code
         JMP j5B42
 
 ; File->Info Menu Action ======================
@@ -6705,7 +6325,7 @@ p54F8   =*+$01
 
 ; Options->BASIC Menu Action ======================
         JSR DoPreviousMenu
-        JSR s5566    ;store $ff at $0248
+        JSR s5566               ;store $ff at $0248
         JSR s53DD
         JMP j5B2D
 
@@ -6751,8 +6371,7 @@ s5557   JSR s53E0
         JMP j5B24
 
 ; store $ff to $0248
-s5566   LDA #$FF
-        STA a0248
+s5566   LoadB a0248, $FF
         RTS 
 
 s556C   BIT a71
@@ -6787,18 +6406,14 @@ b558F   INC a024B
         PHA 
         LDA a1872
         BEQ b55BD
-        LDA a1873
-        STA mouseYPos
-        LDA a1875
-        STA mouseXPosHi
-        LDA a1874
-        STA mouseXPosLo
+        MoveB a1873, mouseYPos
+        MoveW a1874, mouseXPos
 b55BD   JSR MouseOff
         LDA a72
 a55C3   =*+$01
 a55C4   =*+$02
         JSR f0000
-        JSR MouseUp     ; Reenables the mouse pointer and GEOS mouse tracking.
+        JSR MouseUp             ; Reenables the mouse pointer and GEOS mouse tracking.
         PLA 
         STA r1L
         PLA 
@@ -6809,7 +6424,7 @@ a55C4   =*+$02
         STA r0H
         CPX #$FF
         BNE b55DF
-        JSR s3FF6    ;unselect and un-reverse icon(s), 0 selected
+        JSR s3FF6               ;unselect and un-reverse icon(s), 0 selected
         PLA 
 b55DC   LDX #$00
         RTS 
@@ -6824,21 +6439,21 @@ b55EA   JSR s597E
         PLA 
         CLV 
         BVC b558F
-b55F3   JSR s3FF6    ;unselect and un-reverse icon(s), 0 selected
+b55F3   JSR s3FF6               ;unselect and un-reverse icon(s), 0 selected
         JSR j3153
 b55F9   PLA 
         RTS 
 
 j55FB   LDY #$04
         JSR s246B
-        JSR s3FF6    ;unselect and un-reverse icon(s), 0 selected
+        JSR s3FF6               ;unselect and un-reverse icon(s), 0 selected
         LDX #$FF
         RTS 
 
 ; Draw Clock Rectangle
 s5606   LDA #$00
         STA a0250
-        JSR s2447    ;Set the rectangle pattern based on A
+        JSR s2447               ;Set the rectangle pattern based on A
         JSR i_Rectangle
         .BYTE $00,$0C,$DD,$00,$3F,$01
         JSR i_FrameRectangle
@@ -6846,14 +6461,11 @@ s5606   LDA #$00
         .BYTE $3F,$01,$FF
 
 ; Set up process to update the clock
-        LDA #>ClockProcStruct
-        STA r0H      ;Process data structure pointer HI
-        LDA #<ClockProcStruct
-        STA r0L      ;Process data structure LO
-        LDA #$01     ;1 Process
-        JSR InitProcesses ;Initialize and install a process
+        LoadW r0, ClockProcStruct       ;Process data structure pointer
+        LDA #$01                ;1 Process
+        JSR InitProcesses       ;Initialize and install a process
 s562E   JSR j5634
-        JMP j56A8    ;called after editing clock bar
+        JMP j56A8               ;called after editing clock bar
 
 j5634   LDX #$00
         JMP RestartProcess
@@ -6870,7 +6482,7 @@ s5642   CMP f194C,X
         STA f194C,X
         TXA 
         PHA 
-        JSR s572D    ;called from interrupt
+        JSR s572D               ;called from interrupt
         PLA 
         TAX 
 b5651   RTS 
@@ -6882,15 +6494,14 @@ b5651   RTS
         SEI 
         LDA a01
         PHA 
-        LDA #$35
-        STA a01
+        LoadB a01, $35
         LDA #$41
-        BIT $DC0B    ;CIA1: Time-of-Day Clock: Hours + AM/PM Flag
+        BIT $DC0B               ;CIA1: Time-of-Day Clock: Hours + AM/PM Flag
         BPL b5669
         LDA #$50
 b5669   LDX #$06
-        JSR s5642    ;called from interrupt for clock
-        LDA $DC0B    ;CIA1: Time-of-Day Clock: Hours + AM/PM Flag
+        JSR s5642               ;called from interrupt for clock
+        LDA $DC0B               ;CIA1: Time-of-Day Clock: Hours + AM/PM Flag
         AND #$7F
         BNE b5677
         LDA #$12
@@ -6898,26 +6509,26 @@ b5677   JSR s5772
         PHA 
         TXA 
         LDX #$00
-        JSR s5642    ;called from interrupt for clock
+        JSR s5642               ;called from interrupt for clock
         INX 
         PLA 
-        JSR s5642    ;called from interrupt for clock
-        LDA $DC0A    ;CIA1: Time-of-Day Clock: Minutes
+        JSR s5642               ;called from interrupt for clock
+        LDA $DC0A               ;CIA1: Time-of-Day Clock: Minutes
         JSR s5772
         PHA 
         TXA 
         LDX #$03
-        JSR s5642    ;called from interrupt for clock
+        JSR s5642               ;called from interrupt for clock
         INX 
         PLA 
-        JSR s5642    ;called from interrupt for clock
-        LDA $DC08    ;CIA1: Time-of-Day Clock: 1/10 Seconds
+        JSR s5642               ;called from interrupt for clock
+        LDA $DC08               ;CIA1: Time-of-Day Clock: 1/10 Seconds
         PLA 
         STA a01
         PLP 
         LDA hour
         ORA minutes
-        BEQ j56A8    ;called after editing clock bar
+        BEQ j56A8               ;called after editing clock bar
 b56A7   RTS 
 
 ; called after editing clock bar
@@ -6925,26 +6536,22 @@ j56A8   LDA #$00
         LDX #$09
         STA f194C,X
         STA f1942,X
-        LDA #$20
-        STA a1951
+        LoadB a1951, $20
         STA a1954
         STA a194A
         PHP 
         SEI 
         LDA a01
         PHA 
-        LDA #$35
-        STA a01
-        LDA #$4D
-        STA a1953
-        LDA #$3A
-        STA a194E
-        LDA $DC0A    ;CIA1: Time-of-Day Clock: Minutes
+        LoadB a01, $35
+        LoadB a1953, $4D
+        LoadB a194E, $3A
+        LDA $DC0A               ;CIA1: Time-of-Day Clock: Minutes
         JSR s5772
         STA a1950
         STX a194F
         LDX #$41
-        LDA $DC0B    ;CIA1: Time-of-Day Clock: Hours + AM/PM Flag
+        LDA $DC0B               ;CIA1: Time-of-Day Clock: Hours + AM/PM Flag
         BPL b56E5
         LDX #$50
 b56E5   AND #$7F
@@ -6954,7 +6561,7 @@ b56EB   STX a1952
         JSR s5772
         STA a194D
         STX f194C
-        BIT $DC08    ;CIA1: Time-of-Day Clock: 1/10 Seconds
+        BIT $DC08               ;CIA1: Time-of-Day Clock: 1/10 Seconds
         PLA 
         STA a01
         PLP 
@@ -6962,8 +6569,7 @@ b56EB   STX a1952
         JSR s5782
         STA a1949
         STX a1948
-        LDA #$2F
-        STA a1947
+        LoadB a1947, $2F
         STA a1944
         LDA day
         JSR s5782
@@ -6973,25 +6579,17 @@ b56EB   STX a1952
         JSR s5782
         STA a1943
         STX f1942
-        JSR s574D    ;called from interrupt 2 after editing clock
+        JSR s574D               ;called from interrupt 2 after editing clock
 
 ; called from interrupt
 s572D   PHP 
         SEI 
         LDA a01
         PHA 
-        LDA #$30
-        STA a01
-        LDA #>f194C
-        STA r0H
-        LDA #<f194C
-        STA r0L
-        LDA #>p0114
-        STA r11H
-        LDA #<p0114
-        STA r11L
-        LDA #$09
-        STA r1H
+        LoadB a01, $30
+        LoadW r0, f194C
+        LoadW r11, p0114
+        LoadB r1H, $09
         CLV 
         BVC b576A
 
@@ -7000,18 +6598,10 @@ s574D   PHP
         SEI 
         LDA a01
         PHA 
-        LDA #$30
-        STA a01
-        LDA #>f1942
-        STA r0H
-        LDA #<f1942
-        STA r0L
-        LDA #>pE3
-        STA r11H
-        LDA #<pE3
-        STA r11L
-        LDA #$09
-        STA r1H
+        LoadB a01, $30
+        LoadW r0, f1942
+        LoadW r11, pE3
+        LoadB r1H, $09
 b576A   JSR PutString
         PLA 
         STA a01
@@ -7117,7 +6707,7 @@ b580D   RTS
         JSR s57AF
         LDY r1L
         INY 
-        JSR s256B    ;load r6 with $8b80 address
+        JSR s256B               ;load r6 with $8b80 address
         LDA #$00
         STA (r6L),Y
         RTS 
@@ -7131,11 +6721,11 @@ s581E   LDY #$00
         STA f00,X
         RTS 
 
-s582A   JSR s583E    ;Retrieve the return address for inline call and JMP to it
+s582A   JSR s583E               ;Retrieve the return address for inline call and JMP to it
         BCC b57F6
         .BYTE $2F,$00,$18
         ORA (p60,X)
-s5834   JSR s583E    ;Retrieve the return address for inline call and JMP to it
+s5834   JSR s583E               ;Retrieve the return address for inline call and JMP to it
         AND #$8A
         ORA #$00
         ASL a01
@@ -7173,8 +6763,8 @@ s583E   PLA
 s586C   JSR s2447               ; Set the rectangle pattern based on A
         LDA #$80                ; draw to the foreground screen
         STA displayBufferOn
-        JSR i_Rectangle         ; draw file icon pad rectangle
-        .BYTE $29,$8A,$09,$00,$06,$01 ;y1=29, y2=138, x1=9, x2=262
+        JSR i_Rectangle         ; draw file icon pad rectangle (y1=29, y2=138, x1=9, x2=262)
+        .BYTE $29,$8A,$09,$00,$06,$01
         JMP j26F4               ;comes here after drawing pad and disk info - seems to draw file icons
 
 ; print chars for top of pad (x files, 0 selected, etc) from 2ec0
@@ -7184,22 +6774,16 @@ s587F   STX r0H
 
 ; Draw rectangle in pad for icons before displaying file icons
 s5886   JSR s2447               ; Set the rectangle pattern based on A
-        JSR i_Rectangle         ; This draws just for the file icons in the pad
-        .BYTE $29,$76,$09,$00,$06,$01 ;y1=41, y2=118, x1=9, x2=262
+        JSR i_Rectangle         ; This draws just for the file icons in the pad (y1=41, y2=118, x1=9, x2=262)
+        .BYTE $29,$76,$09,$00,$06,$01 
         JMP j26F4               ; comes here after drawing pad and disk info - seems to draw file icons
 
-        LDA #>f0406  ; 
-        STA r5H
-        LDA #<f0406
-        STA r5L
-s589D   LDA a77
-        STA r4H
-        LDA a76
-        STA r4L
+        LoadW r5, f0406
+        
+s589D   MoveW a76, r4
         RTS 
 
-        LDA #$00
-        STA r0L
+        LoadB r0L, $00
         LDA aFB
         CLC 
         ADC #$6D
@@ -7217,51 +6801,44 @@ b58BF   STY a03E7
         RTS 
 
 s58C6   LDA a03E6
-        STA r6L      ;lo byte of filename
+        STA r6L                 ;lo byte of filename
         LDA a03E7
-        STA r6H      ;hi byte of filename
+        STA r6H                 ;hi byte of filename
         JSR FindFile
         TXA 
-        CMP #$05     ;if error...
-        BEQ b58FB    ;jump ahead to print "NOT ON DISK"
+        CMP #$05                ;if error...
+        BEQ b58FB               ;jump ahead to print "NOT ON DISK"
         LDY #$16
         LDA (r5L),Y
         CMP #$09
         BNE b58E0
 b58E0   LDA #<pC7B7
-        STA r2L      ;Y1 coord for rectangle
+        STA r2L                 ;Y1 coord for rectangle
         LDA #>pC7B7
-        STA r2H      ;Y2 coord for rectangle
+        STA r2H                 ;Y2 coord for rectangle
         LDA #>r0H
-        STA r3H      ;hi byte of X1 coord for rectangle
+        STA r3H                 ;hi byte of X1 coord for rectangle
         LDA #<r0H
-        STA r3L      ;lo byte of X1 coord for rectangle
+        STA r3L                 ;lo byte of X1 coord for rectangle
         LDA #>p3F
-        STA r4H      ;hi byte of X2 coord for rectangle
+        STA r4H                 ;hi byte of X2 coord for rectangle
         LDA #<p3F
-        STA r4L      ;lo byte of X2 coord for rectangle
-        JMP j5920    ;draw rectangle
+        STA r4L                 ;lo byte of X2 coord for rectangle
+        JMP j5920               ;draw rectangle
 
-b58FB   LDA #>p2C83  ;hi byte of " NOT ON DISK"
-        STA r2H
-        LDA #<p2C83  ; lo byte of " NOT ON DISK"
-        STA r2L
-        LDA #$BB
-        STA r1H
-        LDA #>p23
-        STA r11H
-        LDA #<p23
-        STA r11L
-j590F   JSR s47B8    ;change fonts
+b58FB   LoadW r2, p2C83         ; " NOT ON DISK"
+        LoadB r1H, $BB
+        LoadW r11, p23
+j590F   JSR s47B8               ;change fonts
         LDA r2H
         STA r0H
         LDA r2L
         STA r0L
-        JSR s57D7    ;Print file names on pad (saved to 8b80)
+        JSR s57D7               ;Print file names on pad (saved to 8b80)
         JMP UseSystemFont
 
 ; set pattern and draw rectangle
-j5920   JSR s244A    ;set the rectange pattern
+j5920   JSR s244A               ;set the rectange pattern
         JMP Rectangle
 
 ; if pad view mode is icon, then CARRY=1, else CARRY=0
@@ -7282,33 +6859,26 @@ s5931   CLC
         STA r0L
         BCC b593C
         INC r0H
-b593C   JSR s5793    ;Write single icon filename on pad
-        LDA #>p8B80
-        STA r2H
-        LDA #<p8B80
-        STA r2L
-        LDA #$B4
-        STA r1H
-        LDA #>p0123
-        STA r11H
-        LDA #<p0123
-        STA r11L
+b593C   JSR s5793               ;Write single icon filename on pad
+        LoadW r2, p8B80
+        LoadB r1H, $B4
+        LoadW r11, p0123
         JMP j590F
 
 ; set coords and draw rectangle
 s5956   LDA #<pB9B0
-        STA r2L      ;Y1 coord of rectangle
+        STA r2L                 ;Y1 coord of rectangle
         LDA #>pB9B0
-        STA r2H      ;Y2 coord of rectangle
+        STA r2H                 ;Y2 coord of rectangle
         LDA #>pFD
-        STA r3H      ;hi byte of X1 coord of rectange
+        STA r3H                 ;hi byte of X1 coord of rectange
         LDA #<pFD
-        STA r3L      ;lo byte of X1 coord of rectange
+        STA r3L                 ;lo byte of X1 coord of rectange
         LDA #>p0147
-        STA r4H      ;hi byte of X2 coord of rectangle
+        STA r4H                 ;hi byte of X2 coord of rectangle
         LDA #<p0147
-        STA r4L      ;lo byte of X2 coord of rectange
-        JMP j5920    ;set pattern and draw rectangle
+        STA r4L                 ;lo byte of X2 coord of rectange
+        JMP j5920               ;set pattern and draw rectangle
 
 ; copy r1 to r0
 s5971   LDA r1H
@@ -7328,8 +6898,8 @@ b5980   STA r15L
         LDA #>p357F
         STA a01
         LDA #<p357F
-        STA $DC00    ;CIA1: Data Port Register A
-        LDX $DC01    ;CIA1: Data Port Register B
+        STA $DC00               ;CIA1: Data Port Register A
+        LDX $DC01               ;CIA1: Data Port Register B
         PLA 
         STA a01
         PLP 
@@ -7362,61 +6932,36 @@ s59B9   LDY curDrive
         RTS 
 
 ; load $8b80 to r0
-s59C0   LDA #>p8B80
-        STA r0H
-        LDA #<p8B80
-        STA r0L
+s59C0   LoadW r0, p8B80
         RTS 
 
 ; load $0334 to r1
-s59C9   LDA #>p0334
-        STA r1H
-        LDA #<p0334
-        STA r1L
+s59C9   LoadW r1, p0334
         RTS 
 
 ; load $8bbc to r2
-s59D2   LDA #>p8BBC
-        STA r2H
-        LDA #<p8BBC
-        STA r2L
+s59D2   LoadW r2, p8BBC
         RTS 
 
 ; load $8290 to r2
-s59DB   LDA #>p8290
-        STA r2H
-        LDA #<p8290
-        STA r2L
+s59DB   LoadW r2, p8290
         LDX #$06
         RTS 
 
 ; load $8bd0 to r3
-s59E6   LDA #>p8BD0
-        STA r3H
-        LDA #<p8BD0
-        STA r3L
+s59E6   LoadW r3, p8BD0
         RTS 
 
 ; load spr2pic to r4
-s59EF
-        LDA #>spr2pic
-        STA r4H
-        LDA #<spr2pic
-        STA r4L
+s59EF   LoadW r4, spr2pic
         RTS 
 
 ; load $84be to r5
-s59F8   LDA #>p8BE4
-        STA r5H
-        LDA #<p8BE4
-        STA r5L
+s59F8   LoadW r5, p8BE4
         RTS 
 
 ; Load directory entry buffer to r9
-s5A01   LDA #>dirEntryBuf
-        STA r9H
-        LDA #<dirEntryBuf
-        STA r9L
+s5A01   LoadW r9, dirEntryBuf
         RTS 
 
 ; INITIALIZE DESK TOP (After menu built)
@@ -7433,25 +6978,24 @@ s5A0A   LDA a0AF0
         BEQ b5A8E
         STA r5H
         INC numDrives
-        LDA ramExpSize  ; 2=128k. 4=256k, 8=512k; 16=1MB, 32=1MB+
-        BNE b5A41       ; jump ahead if REU is present
+        LDA ramExpSize          ; 2=128k. 4=256k, 8=512k; 16=1MB, 32=1MB+
+        BNE b5A41               ; jump ahead if REU is present
         LDA r5H
         CMP #$03
         BEQ b5A3B
         BCS b5A4E
         CMP r5L
         BEQ b5A41
-b5A3B   JSR s5AAD       ; Find "CONFIGURE"
+b5A3B   JSR s5AAD               ; Find "CONFIGURE"
         TXA 
         BNE b5A4E
-b5A41   JSR s1AEC       ; seems to set drive A or drive B type
-        JSR OpenDisk    ; Open the disk in the current drive
+b5A41   JSR s1AEC               ; seems to set drive A or drive B type
+        JSR OpenDisk            ; Open the disk in the current drive
         CPX #$0D
         BNE b5A58
-        JSR s1AEC       ; seems to set drive A or drive B type
+        JSR s1AEC               ; seems to set drive A or drive B type
 b5A4E   DEC numDrives
-        LDA #$00
-        STA a0AF0
+        LoadB a0AF0, $00
         BEQ b5A8E
 b5A58   TXA 
         BNE b5A61
@@ -7459,8 +7003,8 @@ b5A58   TXA
         CLV 
         BVC b5A64
 b5A61   JSR s361E
-b5A64   LDA ramExpSize ; 2=128k. 4=256k, 8=512k; 16=1MB, 32=1MB+
-        BEQ b5A8B       ; skip ahead if no ram expansion
+b5A64   LDA ramExpSize          ; 2=128k. 4=256k, 8=512k; 16=1MB, 32=1MB+
+        BEQ b5A8B               ; skip ahead if no ram expansion
         LDA curDrive
         PHA 
         LDA #$0A
@@ -7477,16 +7021,16 @@ b5A7F   LDA curType
         JSR s5A91
 b5A87   PLA 
         JSR s1B16
-b5A8B   JSR s1AEC       ; seems to set drive A or drive B type
-b5A8E   JMP b316E       ; Open a disk
+b5A8B   JSR s1AEC               ; seems to set drive A or drive B type
+b5A8E   JMP b316E               ; Open a disk
 
 s5A91   LDX #$04
         JSR s3829
         LDY #$04
-        JSR s59DB       ; load $8290 to r2
-        LDA #$12        ; 18 bytes to copy
-        JSR CopyFString ; Copy a fixed-length string
-        JSR s5971       ; copy r1 to r0
+        JSR s59DB               ; load $8290 to r2
+        LDA #$12                ; 18 bytes to copy
+        JSR CopyFString         ; Copy a fixed-length string
+        JSR s5971               ; copy r1 to r0
         JSR s47C3
         LDX #$40
         STX r1L
@@ -7494,46 +7038,30 @@ s5A91   LDX #$04
 
 ; Find "CONFIGURE"
 s5AAD   STA r12L
-        LDA #>p6600     ; Hi byte of buffer to store file list
-        STA r6H
-        LDA #<p6600     ; Lo byte of buffer to store file list
-        STA r6L
+        LoadW r6, p6600         ; buffer to store file list
         LDA #<p010E
-        STA r7L         ; File type to search for
+        STA r7L                 ; File type to search for
         LDA #>p010E
-        STA r7H         ; Max # files to search for
-        LDA #>p5B08     ; Hi byte of "CONFIGURE" filename
-        STA r10H
-        LDA #<p5B08     ; Lo byte of "CONFIGURE" filename
-        STA r10L
-        JSR FindFTypes  ; Builds a list of files of a particular GEOS type from the current directory
-        JSR s253B       ; transfer X to A, if A=0 return, else pull from stack
+        STA r7H                 ; Max # files to search for
+        LoadW r10, p5B08        ; "CONFIGURE" filename
+        JSR FindFTypes          ; Builds a list of files of a particular GEOS type from the current directory
+        JSR s253B               ; transfer X to A, if A=0 return, else pull from stack
         LDX #$05
         LDA r7H
         BNE b5AFF
-        LDA #>p6600
-        STA r0H         ; Hi byte of filename to open
-        LDA #<p6600
-        STA r0L         ; Lo byte of filename to open
+        LoadW r0, p6600         ; filename to open
         JSR OpenRecordFile
-        JSR s253B       ; transfer X to A, if A=0 return, else pull from stack
+        JSR s253B               ; transfer X to A, if A=0 return, else pull from stack
         LDA r12L
         CLC 
-        ADC #$01        ; Increase the record number (read next record)
-        JSR PointRecord ; Make a particular record the current record (A=RECORD number)
-        JSR s253B       ; transfer X to A, if A=0 return, else pull from stack
-        LDA #>p0AF2
-        STA r7H         ; read record into $0af2
-        LDA #<p0AF2
-        STA r7L         ; read record into $0af2
-        LDA #>p0D80
-        STA r2H         ; size of the buffer (0d80 = 3456 bytes)
-        LDA #<p0D80
-        STA r2L         ; size of the buffer (0d80 = 3456 bytes)
-        JSR ReadRecord  ; read the record into $0af2
-b5AFF   JSR s253B       ; transfer X to A, if A=0 return, else pull from stack
-        LDA #$FF
-        STA a0AF0
+        ADC #$01                ; Increase the record number (read next record)
+        JSR PointRecord         ; Make a particular record the current record (A=RECORD number)
+        JSR s253B               ; transfer X to A, if A=0 return, else pull from stack
+        LoadW r7, p0AF2         ; read record into $0af2
+        LoadW r2, p0D80         ;size of the buffer (0d80 = 3456 bytes)
+        JSR ReadRecord          ; read the record into $0af2
+b5AFF   JSR s253B               ; transfer X to A, if A=0 return, else pull from stack
+        LoadB a0AF0, $FF
         RTS 
 
 p5B08   .TEXT "Configure", $00

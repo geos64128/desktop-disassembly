@@ -45,6 +45,23 @@ r14H = $1F
 r15L = $20
 r15H = $21
 
+r0 = $02
+r1 = $04
+r2 = $06
+r3 = $08
+r4 = $0A
+r5 = $0c
+r6 = $0E 
+r7 = $10
+r8 = $12
+r9 = $14
+r10 = $16
+r11 = $18
+r12 = $1A
+r13 = $1C 
+r14 = $1E 
+r15 = $20
+
 ;Zero Page variables for use by applications ONLY! Not to be used by
 ;GEOS or desk accessories.
 
@@ -81,10 +98,13 @@ a9H	= $7f
 
 currentHeight   = $29
 displayBufferOn = $2F
+leftMargin      = $35
 leftMarginLo    = $35
 leftMarginHi    = $36
+rightMargin     = $37
 rightMarginLo   = $37
 rightMarginHi   = $38
+mouseXPos       = $3A
 mouseXPosLo     = $3A
 mouseXPosHi     = $3B
 mouseYPos       = $3C
@@ -141,12 +161,14 @@ driveType_9     = $848F
 driveType_10    = $8490
 driveType_11    = $8491
 fileWritten     = $8498
+RecoverVector   = $84B1
 RecoverVector_LO= $84B1
 RecoverVector_HI= $84B2
 iconSelFlag     = $84B5
 menuNumber      = $84B7
 mouseTop        = $84B8
 mouseBottom     = $84B9
+mouseLeft       = $84BA
 mouseLeft_LO    = $84BA
 mouseLeft_HI    = $84BB
 mouseRight_LO   = $84BC
